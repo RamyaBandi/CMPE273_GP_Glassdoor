@@ -13,7 +13,6 @@ app.set('view engine', 'ejs');
 let mongo = require('./config/mongoConnection')
 
 
-//Company One branch created
 var passport = require('passport');
 var jwt = require('jwt-simple');
 app.use(passport.initialize());
