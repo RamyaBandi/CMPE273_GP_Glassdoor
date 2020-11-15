@@ -1,0 +1,43 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.786.0",
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "client-sessions": "^0.8.0",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "express": "^4.16.3",
+    "express-formidable": "^1.2.0",
+    "express-session": "^1.15.6",
+    "express-sessions": "^1.0.6",
+    "formidable": "^1.2.2",
+    "jwt-simple": "^0.5.6",
+    "kafka-node": "^3.0.1",
+    "mocha": "^5.2.0",
+    "mongoose": "^5.10.10",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "request": "^2.88.2",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4"
+  }
+}
