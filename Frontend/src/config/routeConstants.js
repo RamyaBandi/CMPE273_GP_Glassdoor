@@ -4,6 +4,9 @@ module.exports = {
     // BACKEND_URL: 'http://13.52.213.227:3001',
     // BACKEND_URL: 'http://54.67.58.148:3001',
 
+    //Input validation
+
+    FETCH_VALIDATIONDETAILS : '/validateroute/validationinput',
 
     // Registration Routes
     POST_REGISTRATION : '/registerroute/register',

@@ -68,10 +68,11 @@
 .navbar{
   z-index:1;
   background-color: #0caa41;
+  height: 4rem;
 } 
   .landingPageContainer{
-    background-image:url(./images/glassdoor_main.jpg);
-  min-height: 500px;
+    background: linear-gradient(rgba(255,255,255,.2), rgba(255,255,255,.2)), url(./images/glassdoor_main.jpg);
+  min-height: 400px;
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -79,6 +80,58 @@
   background-size: cover; 
   position: relative;
 }
+
+.landingPageBody1{
+  background-image: url(./images/glassdoor_body1.PNG);
+  min-height: 250px;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover; 
+position: relative;
+}
+.landingPageBody2{
+  background-image: url(./images/glassdoor_body2.PNG);
+  min-height: 600px;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover; 
+position: relative;
+}
+
+footer{
+  min-height: 100px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.RegistrationContainer{
+  background: linear-gradient(rgba(255,255,255,.2), rgba(255,255,255,.2)), url(./images/glassdoor_main.jpg);
+min-height: 500px;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover; 
+position: relative;
+}
+
+
+.landingPageBody1{
+  background-image: url(./images/glassdoor_body1.PNG);
+  min-height: 250px;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover; 
+position: relative;
+}
+
+
 .landingPageSearch{
 
   position: absolute;

@@ -88,7 +88,7 @@ class Login extends Component {
                             <button class="btn btn-success" onClick={this.submitLogin} >Sign In </button>
 
                         </form>
-                        {this.loginFlag === false && <p> Invalid Credentials. Please try again</p>}
+                        {this.state.loginFlag === false && <p class = "validationAlert"> Invalid Credentials. Please try again</p>}
                     </div>
                 </div>
             </div>

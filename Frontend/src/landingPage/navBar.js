@@ -35,7 +35,7 @@ class Navbar extends Component {
             console.log("Able to read local session storage details");
             navLogin = (
                 <ul class="nav navbar-nav navbar-right">
-                    <li><Link to="/home" onClick={this.handleRestaurantLogout}><span class="glyphicon glyphicon-user"></span>Logout</Link></li>
+                    <li><Link to="/home" onClick={this.handleRestaurantLogout}><span className="glyphicon glyphicon-user"></span>Logout</Link></li>
                 </ul>
             );
         } else {
@@ -46,11 +46,11 @@ class Navbar extends Component {
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <Link to="/register"
-                                onClick={this.handleLandingPageDesc} style={{ color: "white", fontFamily: "sans-serif", fontSize: "16px" }}><span class="glyphicon glyphicon-log-in"> Register </span> </Link>
+                                onClick={this.handleLandingPageDesc} style={{ color: "white", fontFamily: "sans-serif", fontSize: "16px", padding: "7px" }}><span className="glyphicon glyphicon-log-in" /> Register </Link>
                         </li>
                         <li class="nav-item">
                             <Link to="/login"
-                                onClick={this.handleLandingPageDesc} style={{ color: "white", fontFamily: "sans-serif", fontSize: "16px" }}><span class="glyphicon glyphicon-log-in"> Sign In </span> </Link>
+                                onClick={this.handleLandingPageDesc} style={{ color: "white", fontFamily: "sans-serif", fontSize: "16px", padding: "7px" }}><span className="glyphicon glyphicon-log-in" /> Sign In </Link>
                         </li>
                     </ul>
                 </ul>
@@ -84,23 +84,23 @@ class Navbar extends Component {
         }
         else {
             customerFeatures = (
-                <ul class="nav navbar-nav">
-                    <ul class="navbar-nav">
+                <ul className="nav navbar-nav">
+                    <ul className="navbar-nav">
 
                         <li class="nav-item active">
-                            <a class="nav-link" href="#"
-                                style={{ color: "white", fontFamily: "sans-serif", fontSize: "16px", fontWeight: "bold" }}>
-                                glassdoor<span class="sr-only">(current)</span></a>
+                            <Link to='/home'
+                                style={{ color: "white", fontFamily: "sans-serif", fontSize: "16px", fontWeight: "bold", padding: "7px" }}>
+                                glassdoor<span className="sr-only">(current)</span></Link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"
-                                style={{ color: "white", fontFamily: "sans-serif", fontSize: "16px" }}>
-                                Find a Job</a>
+                            <Link to='/home'
+                                style={{ color: "white", fontFamily: "sans-serif", fontSize: "16px", padding: "7px" }}>
+                                Find a Job</Link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"
-                                style={{ color: "white", fontFamily: "sans-serif", fontSize: "16px" }}>
-                                For Employers</a>
+                            <Link to='/home'
+                                style={{ color: "white", fontFamily: "sans-serif", fontSize: "16px", padding: "7px" }}>
+                                For Employers</Link>
                         </li>
                     </ul>
                 </ul>

@@ -1,12 +1,12 @@
 .center {
     position: absolute;
     top: 50%;
-    left: 45%;
+    left: 50%;
     transform: translate(-50%, -50%);
   }
 
   .RegistrationInfo{
-      width: 200%;
+      width: 80%;
 
   }
 .loginCenter{
@@ -38,9 +38,10 @@
 }
 
 .radiotext{
-    text-align: center;
+    text-align:center;
     display: block;
-    color: white;
+    color: black;
+    font-weight: 700;
     height: 30px;
     justify-content:space-evenly
 }
@@ -48,3 +49,15 @@
     min-height: 500px;
     background-color: #f5f6f7;
 }
+.validationAlert{
+    color: red;
+    font-weight: 600;
+    line-height: 25px;
+    padding-top: 5px;
+    text-align : center;
+}
+
+mark {
+    background-color: white;
+    color: red;
+  }
