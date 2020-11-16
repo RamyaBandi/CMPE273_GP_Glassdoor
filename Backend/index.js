@@ -8,12 +8,11 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var cors = require('cors');
 app.set('view engine', 'ejs');
-const path = require('path');
+// const path = require('path');
 // var kafka = require('./kafka/client');
 let mongo = require('./config/mongoConnection')
 
 
-//Company One branch created
 var passport = require('passport');
 var jwt = require('jwt-simple');
 app.use(passport.initialize());
