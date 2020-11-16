@@ -6,5 +6,4 @@ const { POST_LOGIN } = require('../config/routeConstants');
 
 loginRouter.route(POST_LOGIN).post(loginServices.login);
 
-
 module.exports = loginRouter;
