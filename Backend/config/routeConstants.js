@@ -5,6 +5,10 @@ module.exports = {
     //Login Routes
     POST_LOGIN: '/login',
 
+    //Company Routes
+    PUT_COMPANY_SIGNUP: "/signup",
+    
+
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
 
