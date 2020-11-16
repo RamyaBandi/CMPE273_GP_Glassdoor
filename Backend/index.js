@@ -12,7 +12,6 @@ app.set('view engine', 'ejs');
 // var kafka = require('./kafka/client');
 let mongo = require('./config/mongoConnection')
 
-//Company Two branch created
 
 var passport = require('passport');
 var jwt = require('jwt-simple');
