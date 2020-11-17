@@ -7,7 +7,10 @@ module.exports = {
 
     //Company Routes
     PUT_COMPANY_SIGNUP: "/company/profile",
-
+    GET_COMPANY_SIGNUP: "/company/profile",
+    POST_COMPANY_SIGNUP:"/company/profile",
+    GET_COMPANY_REVIEWS: "/company/reviews",
+    POST_COMPANY_REVIEWS:"/company/reviews",
     
     
 

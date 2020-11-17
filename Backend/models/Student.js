@@ -13,6 +13,9 @@ const Student_schema = new mongoose.Schema({
     imageUrl: {
         type: String,   
     },
+    accpetedReviewcount:{
+        type: Number,
+    },
     primaryResume:{
         type: mongoose.Schema.Types.ObjectId
     },
