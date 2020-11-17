@@ -22,11 +22,6 @@ class Reviews extends Component {
           {this.state.redirect}
         Reviews tab
         <Row>
-            <Button class="btn btn-primary float-right" style={{ width : "20%" }} onClick = {this.addReview}>
-                    Add a Review
-            </Button>
-        </Row>
-        <Row>
           {this.state.reviews.map((item) => {
             return <reviewCard {...item} />;
           })}
