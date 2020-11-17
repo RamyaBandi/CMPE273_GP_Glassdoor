@@ -1,14 +1,28 @@
-/* 
+ 
 .form-heading { color:#fff; font-size:23px;}
-.panel h2{ color:#444444; font-size:18px; margin:0 0 8px 0;}
+.panel h2{ text-align: center; color:#444444; font-size:18px; margin:0 0 8px 0;}
 .panel p { color:#777777; font-size:14px; margin-bottom:30px; line-height:24px;}
-.login-form .form-control {
+.authHeader{
+  display: flex;
+  justify-content:center;
+}
+.authlinks{
+  display: flex;
+  justify-content:space-around;
+}
+.yelpLogo{
+  top: inherit;
+  height: 50px;
+}
+.form-control {
   background: #f7f7f7 none repeat scroll 0 0;
   border: 1px solid #d4d4d4;
   border-radius: 4px;
   font-size: 14px;
   height: 50px;
   line-height: 50px;
+  width: 50%;
+  align-content: center;
 }
 .main-div {
   background: #ffffff none repeat scroll 0 0;
@@ -47,15 +61,24 @@
   margin: auto;
 }
 .back { text-align: left; margin-top:10px;}
-.back a {color: #444444; font-size: 13px;text-decoration: none;} */
+.back a {color: #444444; font-size: 13px;text-decoration: none;}
+.navbar-brand{
+  padding: 0px;
+}
+.navbar{
+  z-index:1;
+  background-color: #0caa41;
+  height: 4rem;
+} 
+  .landingPageContainer{
+    background: linear-gradient(rgba(255,255,255,.2), rgba(255,255,255,.2)), url(./images/glassdoor_main.jpg);
+  min-height: 400px;
 
-.cell.vline {
-  padding: 0;
-  background: #eaeaea;
-  position: absolute;
-  height: 80% !important;
-  margin-bottom: 12px;
-  margin-top: 12px;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+  position: relative;
 }
 
 .box-content {
@@ -74,4 +97,86 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.landingPageBody1{
+  background-image: url(./images/glassdoor_body1.PNG);
+  min-height: 250px;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover; 
+position: relative;
+}
+.landingPageBody2{
+  background-image: url(./images/glassdoor_body2.PNG);
+  min-height: 600px;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover; 
+position: relative;
+}
+
+footer{
+  min-height: 100px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.RegistrationContainer{
+  background: linear-gradient(rgba(255,255,255,.2), rgba(255,255,255,.2)), url(./images/glassdoor_main.jpg);
+min-height: 500px;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover; 
+position: relative;
+}
+
+
+.landingPageBody1{
+  background-image: url(./images/glassdoor_body1.PNG);
+  min-height: 250px;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover; 
+position: relative;
+}
+
+
+.landingPageSearch{
+
+  position: absolute;
+  left: 50%;
+  bottom: 60%;
+  transform: translatex(-50%);
+  }
+.regColumn{
+  margin: auto;
+  float:left;
+  width: 50%;
+  padding: 10px;
+}
+.regRow:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+.customerFeatures{
+  padding: 12px;
+  position: relative;
+  background: none!important;
+  border: none;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color:white;
+  cursor: pointer;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }

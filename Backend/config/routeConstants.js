@@ -4,9 +4,16 @@ module.exports = {
 
     //Login Routes
     POST_LOGIN: '/login',
+    POST_REGISTER : '/register',
+    FETCH_CUSTOMERINPUT : '/validationinput',
 
     //Company Routes
-    PUT_COMPANY_SIGNUP: "/signup",
+    PUT_COMPANY_SIGNUP: "/company/profile",
+    GET_COMPANY_SIGNUP: "/company/profile",
+    POST_COMPANY_SIGNUP:"/company/profile",
+    GET_COMPANY_REVIEWS: "/company/reviews",
+    POST_COMPANY_REVIEWS:"/company/reviews",
+    
     
 
     //KAFKA TOPICS
