@@ -60,11 +60,18 @@
 
 .box-content {
   display: inline-block;
-  width: 110px;
+  width: 100px;
   height: 50px;
   padding: 20px;
 }
 
 .right {
   border-right: 1px solid #ccc;
+}
+
+.truncate {
+  width: 200;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

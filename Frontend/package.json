@@ -10,6 +10,8 @@
     "enzyme-adapter-react-16": "^1.15.5",
     "google-maps-react": "^2.0.6",
     "jwt-decode": "^2.2.0",
+    "mdbreact": "^4.27.0",
+    "multiline-ellipsis-react": "^1.0.4",
     "react": "^16.13.1",
     "react-bootstrap": "^1.4.0",
     "react-cookie": "^3.1.2",
