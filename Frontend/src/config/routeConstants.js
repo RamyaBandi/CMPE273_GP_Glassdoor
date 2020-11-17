@@ -1,19 +1,21 @@
 module.exports = {
     FRONTEND_URL: "http://localhost:3000",
-    // BACKEND_URL: "http://localhost:3001",
+    BACKEND_URL: "http://localhost:3001",
     // BACKEND_URL: 'http://13.52.213.227:3001',
-    BACKEND_URL: 'http://54.67.58.148:3001',
+    // BACKEND_URL: 'http://54.67.58.148:3001',
 
-    //CustomerRoutes
-    GET_CUSTOMER_PROFILE: '/profile',
-    GET_ALL_CUSTOMER_PROFILES: '/allcustomers',
-    POST_CUSTOMER_SIGNUP: '/signup',
-    UPDATE_CUSTOMER_PROFILE: '/profile',
+    //Input validation
 
+    FETCH_VALIDATIONDETAILS : '/validateroute/validationinput',
 
+    // Registration Routes
+    POST_REGISTRATION : '/registerroute/register',
 
     //Login Routes
-    POST_LOGIN: '/login',
+    POST_LOGIN : '/loginroute/login',
+    //CustomerRoutes
+
+
 
     //RestaurantRoutes
     // GET_RESTAURANT_BY_ID:'/restaurant/id/',

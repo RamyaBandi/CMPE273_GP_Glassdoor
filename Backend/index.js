@@ -8,8 +8,9 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var cors = require('cors');
 app.set('view engine', 'ejs');
-const path = require('path');
+// const path = require('path');
 // var kafka = require('./kafka/client');
+
 let mongo = require('./config/mongoConnection')
 
 //Company Two branch created
@@ -21,6 +22,8 @@ app.use(passport.initialize());
 
 app.use(cors({ origin: `${routeConstants.FRONTEND_URL}`, credentials: true }));
 
+const validateroutes = require('./routes/inputValidationRoute');
+const registerRoutes = require('./routes/registerRoute');
 const loginRoutes = require('./routes/loginRoute');
 
 //use express session to maintain session data
@@ -45,7 +48,9 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/', loginRoutes);
+app.use('/validateroute', validateroutes)
+app.use('/registerroute', registerRoutes);
+app.use('/loginroute', loginRoutes);
 
 
 //start your server on port 3001

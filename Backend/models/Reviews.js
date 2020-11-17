@@ -16,6 +16,10 @@ const Reviews = new mongoose.Schema({
         type: String,
         required: true
     },
+    approvalstatus: {
+        type: String,
+        enum: ['Accpeted', 'Rejected'],
+    },
     helpfulCount: {
         type: Number,
         required: true
@@ -31,7 +35,18 @@ const Reviews = new mongoose.Schema({
     ceoRating: {
         type: Number,
         required: true
+<<<<<<< HEAD
     }
 }, { versionKey: false })
+=======
+    },
+    reply:{
+        type: String,
+    },
+    replytimestamp:{
+        type: Date,
+    },
+    }, { versionKey: false })
+>>>>>>> 98360e5c4e91839e06b8bca889aad793bcc7ba6b
 
 module.exports = mongoose.model('Reviews', Reviews)
