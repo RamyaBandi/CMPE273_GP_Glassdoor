@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import './Entrystyling.css'
 import { withRouter } from 'react-router-dom'
-import { BACKEND_URL, FETCH_VALIDATIONDETAILS, POST_REGISTRATION } from '../config/routeConstants'
+import { BACKEND_URL, FETCH_VALIDATIONDETAILS, POST_REGISTRATION } from '../../config/routeConstants'
 
 class Registration extends Component {
     constructor() {
