@@ -4,6 +4,8 @@ module.exports = {
 
     //Login Routes
     POST_LOGIN: '/login',
+    POST_REGISTER : '/register',
+    FETCH_CUSTOMERINPUT : '/validationinput',
 
     //Company Routes
     PUT_COMPANY_SIGNUP: "/signup",

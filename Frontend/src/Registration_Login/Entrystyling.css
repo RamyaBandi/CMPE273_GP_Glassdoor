@@ -1,0 +1,63 @@
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .RegistrationInfo{
+      width: 80%;
+
+  }
+.loginCenter{
+    position: absolute;
+    top: 40%;
+    left: 55%;
+    transform: translate(-50%, -50%); 
+}
+.loginHeader{
+    line-height: 30px;
+    text-align: center;
+    font-family: sans-serif;
+
+}
+.loginInfo{
+    width: 60%
+}
+
+.form-control {
+ width: 100%;
+}
+.btn{
+    /* height:20px; */
+    width:100px; 
+    margin: -20px -50px; 
+    position:relative;
+    top:50%; 
+    left:50%;
+}
+
+.radiotext{
+    text-align:center;
+    display: block;
+    color: black;
+    font-weight: 700;
+    height: 30px;
+    justify-content:space-evenly
+}
+.loginContainer{
+    min-height: 500px;
+    background-color: #f5f6f7;
+}
+.validationAlert{
+    color: red;
+    font-weight: 600;
+    line-height: 25px;
+    padding-top: 5px;
+    text-align : center;
+}
+
+mark {
+    background-color: white;
+    color: red;
+  }
