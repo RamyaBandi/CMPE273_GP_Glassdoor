@@ -7,6 +7,10 @@ module.exports = {
     POST_REGISTER : '/register',
     FETCH_CUSTOMERINPUT : '/validationinput',
 
+    //Company Routes
+    PUT_COMPANY_SIGNUP: "/signup",
+    
+
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
 
