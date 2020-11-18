@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-
-import NavBar from './landingPage/navBar'
-import LandingPageDesc from './landingPage/landingPageDescription'
-import Register from './Registration_Login/Registration'
-import Login from './Registration_Login/Login'
-import StudentHomePage from './student/studentHomePage'
-import AdminHomePage from './admin/adminHomePage'
-import EmployerHomePage from './employer/employerHomePage'
-
-import companyNavBar from './components/companyNavBar';
+import companyOverview from './components/companyOverview';
+import NavBar from './components/landingPage/navBar'
+import LandingPageDesc from './components/landingPage/landingPageDescription'
+import Register from './components/Registration_Login/Registration'
+import Login from './components/Registration_Login/Login'
+import StudentHomePage from './components/student/studentHomePage'
+import AdminHomePage from './components/admin/adminHomePage'
+import EmployerHomePage from './components/employer/employerHomePage'
 import reviews from './components/reviews/reviews';
 
 class Main extends Component {
@@ -24,12 +22,10 @@ class Main extends Component {
                     <Route exact path="/studenthomepage" render={props => <StudentHomePage {...props} />} />
                     <Route exact path="/adminhomepage" render={props => <AdminHomePage {...props} />} />
                     <Route exact path="/employerhomepage" render={props => <EmployerHomePage {...props} />} />
-                    <Route path="/reviews" component={reviews} />
-
-                    {/* </div> */}
+                    <Route exact path="/reviews" component={reviews} />
+                    <Route path = "/overview" component = {companyOverview} />
+                    </div>
                 </div>
-                <Route path="/" component={companyNavBar} /> */}
-            </div>
         )
     }
 }

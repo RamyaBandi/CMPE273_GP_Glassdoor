@@ -4,6 +4,7 @@ import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import reviewCard from "./reviewCard";
 import Axios from "axios";
+import { BACKEND_URL, POST_LOGIN } from '../../config/routeConstants';
 
 class Reviews extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class Reviews extends Component {
     return (
       <div>
           {this.state.redirect}
+          {this.state.loginFlag === false && <p class = "validationAlert"> Please login</p>}
         Reviews tab
         <Row>
           {this.state.reviews.map((item) => {
