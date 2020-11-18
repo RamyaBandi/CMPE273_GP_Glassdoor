@@ -7,7 +7,12 @@ module.exports = {
     POST_REGISTER: '/register',
     FETCH_CUSTOMERINPUT: '/validationinput',
 
+    //Student Routes
+    STUDENT_ROUTE: "/student",
+    POST_STUDENT_SIGNUP: "/student/profile",
+
     //Company Routes
+    COMPANY_ROUTE: "/company",
     PUT_COMPANY_SIGNUP: "/company/profile",
     GET_COMPANY_SIGNUP: "/company/profile",
     POST_COMPANY_SIGNUP: "/company/profile",
