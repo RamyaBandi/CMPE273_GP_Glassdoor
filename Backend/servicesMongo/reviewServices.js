@@ -12,7 +12,7 @@ const {
 } = require("../config/routeConstants");
 const Company = require('../models/Company');
 
-
+const Student = require('../models/Student')
 const Reviews = require('../models/Reviews')
 
 module.exports.postStudentReview = (req, res) => {
@@ -37,26 +37,30 @@ module.exports.postStudentReview = (req, res) => {
         if (err) {
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
-            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
         }
         else {
 
-            console.log("Review Doc created : " + JSON.stringify(result));
-            Company.findOneAndUpdate({ _id: data.company_id }, { $push: { "reviews": result._id } }, (err, res) => {
-                if (err) {
-                    console.log("Error adding review to company" + err)
+            // console.log("Review Doc created : " + JSON.stringify(result));
+            Company.findOneAndUpdate({ _id: data.company_id }, { $push: { "reviews": result._id } }, (error, results) => {
+                if (error) {
+                    console.log("Error adding review to company" + error)
                     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
-
                 }
                 else {
-                    //res.setHeader(CONTENT_TYPE, APP_JSON);
-                    console.log("Review inserted Successfully")
-                    res.status(RES_SUCCESS).send();
+                    Student.findOneAndUpdate({ _id: data.student_id }, { $push: { "companyReviews": result._id } }, (error2, results2) => {
+                        if (error2) {
+                            console.log("Error adding review to Student" + error2)
+                            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error2));
+                        }
+                        else {
+                            console.log("Review inserted Successfully")
+                            res.status(RES_SUCCESS).end(JSON.stringify(results2));
+                        }
+                    })
+
                 }
             })
-
-
-
         }
     })
 }
@@ -103,4 +107,4 @@ module.exports.getStudentReviews = (req, res) => {
             res.status(RES_SUCCESS).send(result);
         }
     })
-}
+    }
