@@ -59,7 +59,7 @@ class Registration extends Component {
 
         // Validating unique names for employers
         if (this.state.role === 'employer') {
-            this.state.validationdata.map(data => {
+            this.state.validationdata && this.state.validationdata.map(data => {
                 if (data.role === 'employer') {
                     if (data.name === this.state.name) {
                         validFlag = false
@@ -74,7 +74,7 @@ class Registration extends Component {
 
         // Validating unique email for users
         if (this.state.email) {
-            this.state.validationdata.map(data => {
+            this.state.validationdata && this.state.validationdata.map(data => {
                 if (data.email === this.state.email) {
                     validFlag = false
                     this.setState({
@@ -138,7 +138,6 @@ class Registration extends Component {
         // set the with credentials to true
         axios.defaults.withCredentials = true;
         // make a post request with the user data
-        console.log("validated flag", this.state.validated)
         if (valid === true) {
             axios.post(BACKEND_URL + POST_REGISTRATION, RegistrationData)
                 .then(response => {
