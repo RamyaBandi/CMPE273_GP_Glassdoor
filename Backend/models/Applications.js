@@ -13,7 +13,8 @@ const Applications = new mongoose.Schema({
         required: true
     },
     applicationstatus:{
-        type: Boolean,
+        type: String,
+        enum:['Applied','Selected','Rejected']
     },
     status: {
         type: String,
