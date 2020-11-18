@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import companyOverview from './components/companyOverview';
+import companyOverview from './components/student/companyOverview';
 import NavBar from './components/landingPage/navBar'
 import LandingPageDesc from './components/landingPage/landingPageDescription'
 import Register from './components/Registration_Login/Registration'
@@ -23,9 +23,9 @@ class Main extends Component {
                     <Route exact path="/adminhomepage" render={props => <AdminHomePage {...props} />} />
                     <Route exact path="/employerhomepage" render={props => <EmployerHomePage {...props} />} />
                     <Route exact path="/reviews" component={reviews} />
-                    <Route path = "/overview" component = {companyOverview} />
-                    </div>
+                    <Route exact path="/overview" component={companyOverview} />
                 </div>
+            </div>
         )
     }
 }
