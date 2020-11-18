@@ -12,8 +12,10 @@ const Applications = new mongoose.Schema({
         type: Date,
         required: true
     },
-    applicationstatus: {
-        type: Boolean,
+
+    applicationstatus:{
+        type: String,
+        enum:['Applied','Selected','Rejected']
     },
     status: {
         type: String,
