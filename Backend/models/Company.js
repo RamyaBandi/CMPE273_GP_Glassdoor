@@ -5,41 +5,36 @@ const Company = new mongoose.Schema({
         type: String,
         required: true
     },
-    website: {
+    email: {
         type: String,
         required: true
+    },
+    website: {
+        type: String,
     },
     companySize: {
         type: Number,
-        required: true,
     },
     companyType: {
         type: String,
-        required: true
     },
     revenue: {
         type: Number,
-        required: true
     },
     headquarters: {
         type: String,
-        required: true
     },
     industry: {
         type: String,
-        required: true
     },
     founded: {
         type: Date,
-        required: true
     },
     mission: {
         type: String,
-        required: true
     },
     description: {
         type: String,
-        required: true
     },
     ceoName: {
         type: String,
