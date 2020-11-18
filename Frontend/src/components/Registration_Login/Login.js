@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './Entrystyling.css'
-import { BACKEND_URL, POST_LOGIN } from '../config/routeConstants'
+import { BACKEND_URL, POST_LOGIN } from '../../config/routeConstants'
 
 // @ts-ignore  
 import jwt_decode from "jwt-decode";

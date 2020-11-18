@@ -15,17 +15,17 @@ class Reviews extends Component {
     return (
       <div>
         Add review
-        <Container style = {{width: "45%"}}>
-          <Row>
+        <Container style={{ marginLeft: "25%", width:"42%"}}>
+        <Row>
             <b>Rate a Company</b>
           </Row>
           <Row>
             It only takes a minute! And your anonymous review will help other
             job seekers.
           </Row>
-          <Row>
-            <br></br>
-          </Row>
+        </Container>
+
+        <Container style = {{marginTop: "20px", width: "45%"}}>
           <Row>
             <form style={{ marginTop: "0px", width:"42%"}}>
               <div class="form-group">
@@ -96,7 +96,7 @@ class Reviews extends Component {
             </div>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px" }}>
+            <form style={{ marginTop: "0px", width:"100%"  }}>
               <div class="form-group">
                 <label for="jobtitle">Your Job Title at this Company</label>
                 <input
@@ -111,7 +111,7 @@ class Reviews extends Component {
             </form>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px" }}>
+            <form style={{ marginTop: "0px" , width:"100%" }}>
               <div class="form-group">
                 <label for="reviewheadline">Review Headline</label>
                 <input
@@ -126,7 +126,7 @@ class Reviews extends Component {
             </form>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px" }}>
+            <form style={{ marginTop: "0px" , width:"100%" }}>
               <div class="form-group">
                 <label for="pros">Pros</label>
                 <textarea
@@ -140,7 +140,7 @@ class Reviews extends Component {
             </form>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px" }}>
+            <form style={{ marginTop: "0px", width:"100%"  }}>
               <div class="form-group">
                 <label for="cons">Cons</label>
                 <textarea
@@ -154,7 +154,7 @@ class Reviews extends Component {
             </form>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px" }}>
+            <form style={{ marginTop: "0px", width:"100%"  }}>
               <div class="form-group">
                 <label for="advicetomanagement">Advice to Management</label>
                 <textarea
@@ -168,6 +168,16 @@ class Reviews extends Component {
           </Row>
           <Row>
             By submitting I agree to the Glassdoor Terms of Use. This review of my experience at my current or former employer is truthful.
+          </Row>
+          <Row>
+          <div style={{ textAlign: "center", marginBottom: "50px", marginTop:"20px" }}>
+                                <Row>
+                                    <Col md={12}>
+                                        <Button onClick={this.onReviewSave}  block >Submit Review</Button>
+                                    </Col>
+                                </Row>
+                                
+            </div>
           </Row>
         </Container>
       </div>
