@@ -81,6 +81,24 @@
   position: relative;
 }
 
+.box-content {
+  display: inline-block;
+  width: 100px;
+  height: 50px;
+  padding: 20px;
+}
+
+.right {
+  border-right: 1px solid #ccc;
+}
+
+.truncate {
+  width: 200;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .landingPageBody1{
   background-image: url(./images/glassdoor_body1.PNG);
   min-height: 250px;

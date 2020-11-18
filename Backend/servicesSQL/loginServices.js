@@ -4,17 +4,17 @@ const saltRounds = 10;
 var mysqlConnection = require('../config/mysqlConnection');
 const jwt = require('jsonwebtoken')
 const { jwtsecret } = require('../config/mysqlinit')
-// const con = require('../config/dbConnection');
-// const {
-//     CONTENT_TYPE,
-//     APP_JSON,
-//     RES_SUCCESS,
-//     RES_BAD_REQUEST,
-//     RES_NOT_FOUND,
-//     RES_DUPLICATE_RESOURCE,
-//     TEXT_PLAIN,
-//     RES_INTERNAL_SERVER_ERROR
-// } = require("../config/routeConstants");
+
+const {
+    CONTENT_TYPE,
+    APP_JSON,
+    RES_SUCCESS,
+    RES_BAD_REQUEST,
+    RES_NOT_FOUND,
+    RES_DUPLICATE_RESOURCE,
+    TEXT_PLAIN,
+    RES_INTERNAL_SERVER_ERROR
+} = require("../config/routeConstants");
 
 
 
@@ -50,14 +50,15 @@ module.exports.login = (req, res) => {
                         const token = jwt.sign(payload, jwtsecret, {
                             expiresIn: 1008000
                         });
-                        returnObject.message = "success";
-                        returnObject.token = "JWT " + token
+                        res.status(RES_SUCCESS).send({token: "JWT " + token });
                     }
                     else {
-                        console.log("Invalid credentials")
-                        returnObject.message = "error"
+                        console.log("Inside err");
+                        res.json({
+                            status: "error",
+                            msg: "System Error, Try Again."
+                        })
                     }
-                    res.json(returnObject)
                 })
         })
 

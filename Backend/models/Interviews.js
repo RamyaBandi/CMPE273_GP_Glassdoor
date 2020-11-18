@@ -23,7 +23,7 @@ const Interviews = new mongoose.Schema({
     },
     offerStatus: {
         type: String,
-        enum: ["Rejected", "Accepted", "Difficult"],
+        enum: ["Rejected", "Accepted"],
     },
     qna: {
         type: String,
