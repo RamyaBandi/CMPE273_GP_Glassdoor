@@ -15,7 +15,8 @@ module.exports = {
     POST_LOGIN : '/loginroute/login',
 
     //Review Routes
-    POST_REVIEW_STUDENT : '/student/review',
+    POST_STUDENT_REVIEW: '/review/student/review',
+    GET_COMPANY_REVIEWS : '/review/company/reviews',
 
     //CustomerRoutes
 
