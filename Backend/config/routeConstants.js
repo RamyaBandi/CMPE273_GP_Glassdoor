@@ -4,17 +4,21 @@ module.exports = {
 
     //Login Routes
     POST_LOGIN: '/login',
-    POST_REGISTER : '/register',
-    FETCH_CUSTOMERINPUT : '/validationinput',
+    POST_REGISTER: '/register',
+    FETCH_CUSTOMERINPUT: '/validationinput',
 
     //Company Routes
     PUT_COMPANY_SIGNUP: "/company/profile",
     GET_COMPANY_SIGNUP: "/company/profile",
-    POST_COMPANY_SIGNUP:"/company/profile",
+    POST_COMPANY_SIGNUP: "/company/profile",
+
+    //Review Routes
+    REVIEW_ROUTE: "/review",
+    POST_STUDENT_REVIEW: "/student/review",
+    GET_STUDENT_REVIEWS: "/student/reviews",
+    GET_ALL_REVIEWS: "/company/reviews",
     GET_COMPANY_REVIEWS: "/company/reviews",
-    POST_COMPANY_REVIEWS:"/company/reviews",
-    
-    
+    POST_COMPANY_REPLY: "/company/reply",
 
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',

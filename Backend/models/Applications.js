@@ -12,7 +12,7 @@ const Applications = new mongoose.Schema({
         type: Date,
         required: true
     },
-    applicationstatus:{
+    applicationstatus: {
         type: Boolean,
     },
     status: {
