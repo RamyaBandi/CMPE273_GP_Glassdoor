@@ -21,6 +21,7 @@ module.exports.createCompanyProfile = (req, res) => {
     })
 }
 
+
 module.exports.updateCompanyProfile = (req, res) => {
     console.log("Inside Company Profile PUT service");
     console.log("req body" + JSON.stringify(req.body));
