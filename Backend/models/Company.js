@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Reviews = require('./Reviews')
+
 const Company = new mongoose.Schema({
     companyName: {
         type: String,
@@ -11,43 +12,33 @@ const Company = new mongoose.Schema({
     },
     website: {
         type: String,
-        // required: true
     },
     companySize: {
         type: Number,
-        // required: true,
     },
     companyType: {
         type: String,
-        // required: true
     },
     revenue: {
         type: Number,
-        // required: true
     },
     headquarters: {
         type: String,
-        // required: true
     },
     industry: {
         type: String,
-        // required: true
     },
     founded: {
         type: Date,
-        // required: true
     },
     mission: {
         type: String,
-        // required: true
     },
     description: {
         type: String,
-        // required: true
     },
     ceoName: {
         type: String,
-        // required: true
     },
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -67,19 +58,15 @@ const Company = new mongoose.Schema({
     },
     averageRating: {
         type: Number,
-        // required: true
     },
     overallRating: {
         type: Number,
-        // required: true
     },
     recommendedRating: {
         type: Number,
-        // required: true
     },
     revenue: {
         type: Number,
-        // required: true
     },
     jobs: [{
         type: mongoose.Schema.Types.ObjectId,

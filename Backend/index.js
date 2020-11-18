@@ -10,10 +10,9 @@ var cors = require('cors');
 app.set('view engine', 'ejs');
 // const path = require('path');
 // var kafka = require('./kafka/client');
-
 let mongo = require('./config/mongoConnection')
 
-
+//Company Two branch created
 
 var passport = require('passport');
 var jwt = require('jwt-simple');
@@ -25,6 +24,10 @@ app.use(cors({ origin: `${routeConstants.FRONTEND_URL}`, credentials: true }));
 const validateroutes = require('./routes/inputValidationRoute');
 const registerRoutes = require('./routes/registerRoute');
 const loginRoutes = require('./routes/loginRoute');
+const reviewRoutes = require('./routes/reviewRoutes');
+const companyRoutes = require('./routes/companyRoutes');
+const studentRoutes = require('./routes/studentRoutes');
+
 
 //use express session to maintain session data
 app.use(session({
@@ -51,6 +54,9 @@ app.use(function (req, res, next) {
 app.use('/validateroute', validateroutes)
 app.use('/registerroute', registerRoutes);
 app.use('/loginroute', loginRoutes);
+app.use(routeConstants.REVIEW_ROUTE, reviewRoutes)
+app.use(routeConstants.COMPANY_ROUTE, companyRoutes)
+app.use(routeConstants.STUDENT_ROUTE, studentRoutes)
 
 
 //start your server on port 3001

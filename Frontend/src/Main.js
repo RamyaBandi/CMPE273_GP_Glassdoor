@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-
+import companyOverview from './components/companyOverview';
 import NavBar from './components/landingPage/navBar'
 import LandingPageDesc from './components/landingPage/landingPageDescription'
 import Register from './components/Registration_Login/Registration'
@@ -8,8 +8,6 @@ import Login from './components/Registration_Login/Login'
 import StudentHomePage from './components/student/studentHomePage'
 import AdminHomePage from './components/admin/adminHomePage'
 import EmployerHomePage from './components/employer/employerHomePage'
-
-import companyNavBar from './components/companyNavBar';
 import reviews from './components/reviews/reviews';
 
 class Main extends Component {
@@ -25,11 +23,9 @@ class Main extends Component {
                     <Route exact path="/adminhomepage" render={props => <AdminHomePage {...props} />} />
                     <Route exact path="/employerhomepage" render={props => <EmployerHomePage {...props} />} />
                     <Route exact path="/reviews" component={reviews} />
-
-                    {/* </div> */}
+                    <Route path = "/overview" component = {companyOverview} />
+                    </div>
                 </div>
-                <Route path="/" component={companyNavBar} />
-            </div>
         )
     }
 }

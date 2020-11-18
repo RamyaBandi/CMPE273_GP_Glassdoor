@@ -12,6 +12,11 @@ const Applications = new mongoose.Schema({
         type: Date,
         required: true
     },
+
+    applicationstatus:{
+        type: String,
+        enum:['Applied','Selected','Rejected']
+    },
     status: {
         type: String,
         enum: ["Submitted", "Reviewed", "Initial Screening", "Interviewing", "Hired"],
