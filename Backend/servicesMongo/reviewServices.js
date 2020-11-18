@@ -62,23 +62,45 @@ module.exports.postStudentReview = (req, res) => {
 }
 
 
-// module.exports.getCompanyReviews = (req, res) => {
+module.exports.getCompanyReviews = (req, res) => {
 
-//     console.log("Inside Company Reviews GET service");
-//     console.log(req.query)
-//     let data = req.query
-//     let reviews = Reviews.findById({ _id: data.company_id }).select('reviews').populate('reviews').exec((
-//         reviews.save((err, res) => {
-//             if (err) {
-//                 console.log(err);
-//                 //res.setHeader(CONTENT_TYPE, APP_JSON);
-//                 res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
-//             }
-//             else {
-//                 // console.log(JSON.stringify(result));
-//                 //res.setHeader(CONTENT_TYPE, APP_JSON);
-//                 console.log("Review inserted Successfully")
-//                 res.status(RES_SUCCESS).send();
-//             }
-//         })
-// }
+    console.log("Inside Company Reviews GET service");
+    console.log(req.query)
+    let data = req.query
+    let reviews = Company.find({ _id: data.company_id }).select('reviews').populate('reviews').exec((err, result) => {
+
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+        }
+        else {
+            // console.log(JSON.stringify(result));
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            console.log("Reviews fetched Successfully")
+            res.status(RES_SUCCESS).send(result);
+        }
+    })
+}
+
+
+module.exports.getStudentReviews = (req, res) => {
+
+    console.log("Inside Student Reviews GET service");
+    console.log(req.query)
+    let data = req.query
+    let reviews = Student.find({ _id: data.student_id }).select('companyReviews').populate('companyReviews').exec((err, result) => {
+
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+        }
+        else {
+            // console.log(JSON.stringify(result));
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            console.log("Reviews fetched Successfully")
+            res.status(RES_SUCCESS).send(result);
+        }
+    })
+}

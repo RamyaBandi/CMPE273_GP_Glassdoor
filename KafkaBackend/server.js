@@ -4,6 +4,7 @@ require('dotenv').config({ path: __dirname + '/.env' })
 require('./config/mongoConnection');
 
 const login = require('./services/login')
+const reviews=require('./services/reviewServices')
 
 
 
@@ -62,3 +63,4 @@ function handleTopicRequest(topic_name, fname) {
 // handleTopicRequest("post_book", Books)
 
 handleTopicRequest("login", login)
+handleTopicRequest("reviews",reviews)

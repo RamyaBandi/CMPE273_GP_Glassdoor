@@ -3,22 +3,6 @@ const Company = require('../models/Company');
 
 
 
-// module.exports.createCompanyProfile = (req, res) => {
-//     console.log("Inside Company Profile PUT service");
-//     console.log("req body" + JSON.stringify(req.body));
-//     let data=req.body
-//     let company=Company({
-//         companyName:data.companyName,
-//         email:data.email
-//     })
-
-//     company.save(()=>{
-
-//     })
-
-
-
-// }
 
 module.exports.updateCompanyProfile = (req, res) => {
     console.log("Inside Company Profile PUT service");
