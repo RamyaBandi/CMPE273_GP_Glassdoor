@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Reviews = require('Reviews')
 const Company = new mongoose.Schema({
     companyName: {
         type: String,
@@ -38,7 +37,6 @@ const Company = new mongoose.Schema({
     },
     ceoName: {
         type: String,
-        required: true
     },
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -58,19 +56,15 @@ const Company = new mongoose.Schema({
     },
     averageRating: {
         type: Number,
-        required: true
     },
     overallRating: {
         type: Number,
-        required: true
     },
     recommendedRating: {
         type: Number,
-        required: true
     },
     revenue: {
         type: Number,
-        required: true
     },
     jobs: [{
         type: mongoose.Schema.Types.ObjectId,
