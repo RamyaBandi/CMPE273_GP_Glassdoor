@@ -107,4 +107,4 @@ module.exports.getStudentReviews = (req, res) => {
             res.status(RES_SUCCESS).send(result);
         }
     })
-}
+    }
