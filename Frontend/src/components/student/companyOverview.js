@@ -10,9 +10,11 @@ import { Container, Col, Row } from 'react-bootstrap';
 //import { BsSearch } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import { Redirect } from "react-router";
+import Axios from 'axios';
 
 class NavBar extends Component {
     state = {
+        companyDetails: [],
         redirect: null
     }
 
