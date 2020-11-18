@@ -1,14 +1,30 @@
 const { response } = require('express');
-const company = require("../models/Company");
+const Company = require('../models/Company');
 
 
 
+// module.exports.createCompanyProfile = (req, res) => {
+//     console.log("Inside Company Profile PUT service");
+//     console.log("req body" + JSON.stringify(req.body));
+//     let data=req.body
+//     let company=Company({
+//         companyName:data.companyName,
+//         email:data.email
+//     })
 
-module.exports.updatecompanyprofile = (req, res) => {
-    console.log("Inside Login POST service");
+//     company.save(()=>{
+
+//     })
+
+
+
+// }
+
+module.exports.updateCompanyProfile = (req, res) => {
+    console.log("Inside Company Profile PUT service");
     console.log("req body" + JSON.stringify(req.body));
 
-    let company_update={
+    let company_update = {
         companyName: req.body.companyName,
         website: req.body.website,
         companySize: req.body.companySize,
@@ -19,14 +35,13 @@ module.exports.updatecompanyprofile = (req, res) => {
         mission: req.body.mission,
         description: req.body.description,
         ceoName: req.body.ceoName,
-        
-
     }
-    company.findByIdAndUpdate({company_id:req.body.company_id},company_update,(err,result)=>{
-        if(err){
-            callback(err,'Error')
+    Company.findByIdAndUpdate({ company_id: req.body.company_id }, company_update, (err, result) => {
+        if (err) {
+            callback(err, 'Error')
         }
-        else{
+        else {
+            console.log("Update Company Profile : " + JSON.stringify(result))
             res.status(200).end(JSON.stringify(result))
         }
     })

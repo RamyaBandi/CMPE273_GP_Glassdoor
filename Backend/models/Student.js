@@ -4,73 +4,73 @@ const Student_schema = new mongoose.Schema({
     studentId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-  
+
     },
     studentName: {
         type: String,
         required: true
     },
     imageUrl: {
-        type: String,   
+        type: String,
     },
-    accpetedReviewcount:{
+    accpetedReviewCount: {
         type: Number,
     },
-    primaryResume:{
+    primaryResume: {
         type: mongoose.Schema.Types.ObjectId
     },
-    photos:[{
+    photos: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Photos' 
+        ref: 'Photos'
     }],
     resumes: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Resume'   
+        ref: 'Resume'
     }],
     applications: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Application'   
+        ref: 'Application'
     }],
-    favoriteJobs:[{
+    favoriteJobs: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Jobs'
     }],
     companyReviews: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Reviews'   
+        ref: 'Reviews'
     }],
     salaryReviews: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Salaries'   
+        ref: 'Salaries'
     }],
     interviewReviews: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Interviews'   
+        ref: 'Interviews'
     }],
-    jobSearchStatus:{
+    jobSearchStatus: {
         type: String,
-        enum:['Not Looking','Casually Looking','Actively Looking'],
+        enum: ['Not Looking', 'Casually Looking', 'Actively Looking'],
     },
-    targetedSalary:{
+    targetedSalary: {
         type: Number,
     },
-    relocationPreference:{
+    relocationPreference: {
         type: String,
-        enum:['yes','no']
+        enum: ['yes', 'no']
     },
-    industryPreference:{
-        type: String,
-    },
-    race:{
+    industryPreference: {
         type: String,
     },
-    gender:{
+    race: {
         type: String,
     },
-    disability:{
+    gender: {
         type: String,
     },
-    veteranStatus:{
+    disability: {
+        type: String,
+    },
+    veteranStatus: {
         type: String,
     }
 }, { versionKey: false })
