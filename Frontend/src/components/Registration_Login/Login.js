@@ -36,18 +36,22 @@ class Login extends Component {
         //make a post request with the user data
         axios.post(BACKEND_URL + POST_LOGIN, customerLoginData)
             .then(response => {
-                if (response.data.message === "success") {
+                console.log("Status Code : ", response.status);
+                if (response.status === 200) {
                     console.log("Token", response.data.token)
                     this.setState({
                         token: response.data.token,
                         loginFlag: true
                     })
                 }
-                else if (response.data.message === "error") {
-                    this.setState({
-                        loginFlag: false
-                    })
-                }
+            })
+            .catch(error => {
+                console.log(error.response.data.msg)
+                alert(error.response.data.msg)
+                this.setState({
+                    loginFlag: false
+                })
+                
             })
     }
     render() {

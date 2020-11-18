@@ -18,7 +18,7 @@ class Registration extends Component {
             emailFlag: false,
             passwordFlag: false,
             emailtypeFlag: false,
-            emptyFlag :  false
+            emptyFlag: false
         }
         this.ChangeHandler = this.ChangeHandler.bind(this)
         this.submitRegistration = this.submitRegistration.bind(this)
@@ -50,10 +50,10 @@ class Registration extends Component {
 
     validateFields() {
         let validFlag = true
-        if(this.state.role.length === 0 || this.state.email.length === 0 || this.state.email.length === 0 || this.state.password.length === 0){
+        if (this.state.role.length === 0 || this.state.email.length === 0 || this.state.email.length === 0 || this.state.password.length === 0) {
             validFlag = false
             this.setState({
-                emptyFlag : true
+                emptyFlag: true
             })
         }
 
@@ -63,7 +63,7 @@ class Registration extends Component {
                 if (data.role === 'employer') {
                     if (data.name === this.state.name) {
                         validFlag = false
-                       this.setState({
+                        this.setState({
                             nameFlag: true,
                         })
                     }
@@ -95,7 +95,7 @@ class Registration extends Component {
                     emailtypeFlag: true,
                 })
             }
-        
+
 
         }
 
@@ -121,7 +121,7 @@ class Registration extends Component {
         //prevent page from refresh
         event.preventDefault();
         this.setState({
-            validated : true
+            validated: true
         })
 
         //validate fields
@@ -142,25 +142,25 @@ class Registration extends Component {
             axios.post(BACKEND_URL + POST_REGISTRATION, RegistrationData)
                 .then(response => {
                     console.log("Status Code : ", response.status);
-                    if (response.data.message === "Registered Successfully") {
+                    if (response.status === 200) {
                         alert("User Registration successful")
                         this.props.history.push('/login');
                         // return <Redirect to='/login' />
                         // this.context.router.history.push(`/login`)
                     }
                 })
+                .catch(error => {
+                    console.log(error.response.data.msg)
+                    alert(error.response.data.msg)
+                })
         }
-        // .catch(error => {
-        //     console.log(error.response.data.msg)
-        //     alert(error.response.data.msg)
-        // })
     }
     render() {
         return (
             <div class="RegistrationContainer">
                 <div class="center">
                     <div class="RegistrationInfo">
-                    {this.state.passwordFlag && <p class="validationAlert"> <mark>All fields are mandatory</mark> </p>}
+                        {this.state.passwordFlag && <p class="validationAlert"> <mark>All fields are mandatory</mark> </p>}
                         <form>
                             <div class="radiotext">
                                 <input onChange={this.ChangeHandler} type="radio" value="student" name="role" checked={this.state.role === "student"} style={{ color: "black", fontSize: "bold" }} /> Student

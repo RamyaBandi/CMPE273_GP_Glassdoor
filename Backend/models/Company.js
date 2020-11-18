@@ -1,49 +1,53 @@
 const mongoose = require("mongoose");
-const Reviews = require('Reviews')
+const Reviews = require('./Reviews')
 const Company = new mongoose.Schema({
     companyName: {
         type: String,
         required: true
     },
-    website: {
+    email: {
         type: String,
         required: true
+    },
+    website: {
+        type: String,
+        // required: true
     },
     companySize: {
         type: Number,
-        required: true,
+        // required: true,
     },
     companyType: {
         type: String,
-        required: true
+        // required: true
     },
     revenue: {
         type: Number,
-        required: true
+        // required: true
     },
     headquarters: {
         type: String,
-        required: true
+        // required: true
     },
     industry: {
         type: String,
-        required: true
+        // required: true
     },
     founded: {
         type: Date,
-        required: true
+        // required: true
     },
     mission: {
         type: String,
-        required: true
+        // required: true
     },
     description: {
         type: String,
-        required: true
+        // required: true
     },
     ceoName: {
         type: String,
-        required: true
+        // required: true
     },
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -63,19 +67,19 @@ const Company = new mongoose.Schema({
     },
     averageRating: {
         type: Number,
-        required: true
+        // required: true
     },
     overallRating: {
         type: Number,
-        required: true
+        // required: true
     },
     recommendedRating: {
         type: Number,
-        required: true
+        // required: true
     },
     revenue: {
         type: Number,
-        required: true
+        // required: true
     },
     jobs: [{
         type: mongoose.Schema.Types.ObjectId,
