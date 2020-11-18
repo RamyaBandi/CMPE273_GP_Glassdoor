@@ -3,7 +3,7 @@ import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import reviewCard from "./reviewCard";
 import axios from "axios";
-import { BACKEND_URL, POST_REVIEW_STUDENT } from '../../config/routeConstants'
+import { BACKEND_URL, POST_STUDENT_REVIEW } from '../../config/routeConstants'
 
 class Reviews extends Component {
   constructor(props) {
@@ -13,9 +13,7 @@ class Reviews extends Component {
       redirect: null,
     };
   }
-  onChangeCompanyName = (e) => {
-    this.setState({ companyName: e.target.value });
-  };
+  
   onChangeOverallRating = (e) => {
     this.setState({ overallRating: e.target.value });
   };
@@ -25,8 +23,8 @@ class Reviews extends Component {
   onChangeCeoRating = (e) => {
     this.setState({ ceoRating: e.target.value });
   };
-  onChangeReviewHeadline = (e) => {
-    this.setState({ reviewHeadline: e.target.value });
+  onChangeHeadline = (e) => {
+    this.setState({ headline: e.target.value });
   };
   onChangePros = (e) => {
     this.setState({ pros: e.target.value });
@@ -39,20 +37,21 @@ class Reviews extends Component {
   };
   onReviewSave = async (e) => {
     this.reviewData = {
-      companyName: this.state.companyName,
+      
       overallRating: this.state.overallRating,
       recommendedRating: this.state.recommendedRating,
       ceoRating: this.state.ceoRating,
-      reviewHeadline: this.state.reviewHeadline,
+      headline: this.state.headline,
       pros: this.state.pros,
       cons: this.state.cons,
-      description: this.state.description
+      description: this.state.description,
+      company_id: "5fb4884acf339e3da0d5c31e",
+      student_id: "5fb48df63d242fa0842343f3"
     };
-    axios.post(BACKEND_URL + POST_REVIEW_STUDENT, this.reviewData)
+    axios.post(BACKEND_URL + POST_STUDENT_REVIEW, this.reviewData)
             .then(response => {
                 console.log("review posted successfully")
-            })
-            
+            })          
   };
 
   render = () => {
@@ -69,20 +68,7 @@ class Reviews extends Component {
           </Row>
         </Container>
         <Container style={{ marginTop: "20px", width: "45%" }}>
-          <Row>
-            <form style={{ marginTop: "0px", width: "42%" }}>
-              <div class="form-group">
-                <label for="companyname">Company</label>
-                <input
-                  type="text"
-                  onChange={this.onChangeCompanyName}
-                  value={this.state.companyName}
-                  class="form-control"
-                  id="company"
-                ></input>
-              </div>
-            </form>
-          </Row>
+          
           <Row>
             <Form.Group
               controlId="exampleForm.ControlSelect1"
@@ -141,48 +127,15 @@ class Reviews extends Component {
             </Form.Group>
           </Row>
           <Row>
-            <div class="form-group" style={{ marginTop: "0px", width: "42%" }}>
-              <label for="employmentstatus">Employment Status</label>
-              <select
-                class="form-control"
-                id="employmentstatus"
-                onChange={this.onChangeEmploymentStatus}
-                value={this.state.employmentStatus}
-                placeholder="Select"
-              >
-                <option>Full Time</option>
-                <option>Part Time</option>
-                <option>Contract</option>
-                <option>Intern</option>
-                <option>Freelance</option>
-              </select>
-            </div>
-          </Row>
-          <Row>
             <form style={{ marginTop: "0px", width: "100%" }}>
               <div class="form-group">
-                <label for="jobtitle">Your Job Title at this Company</label>
+                <label for="headline">Review Headline</label>
                 <input
                   type="text"
-                  onChange={this.onChangeJobTitle}
-                  value={this.state.jobTitle}
+                  onChange={this.onChangeHeadline}
+                  value={this.state.headline}
                   class="form-control"
-                  id="jobtitle"
-                  placeholder="Title"
-                ></input>
-              </div>
-            </form>
-          </Row>
-          <Row>
-            <form style={{ marginTop: "0px", width: "100%" }}>
-              <div class="form-group">
-                <label for="reviewheadline">Review Headline</label>
-                <input
-                  type="text"
-                  onChange={this.onChangeReviewHeadline}
-                  value={this.state.reviewHeadline}
-                  class="form-control"
-                  id="reviewheadline"
+                  id="headline"
                   required
                 ></input>
               </div>
