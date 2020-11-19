@@ -5,6 +5,7 @@ require('./config/mongoConnection');
 
 const login = require('./services/login')
 const reviews=require('./services/reviewServices')
+const company=require('./services/companyServices')
 
 
 
@@ -62,5 +63,6 @@ function handleTopicRequest(topic_name, fname) {
 //second argument is a function that will handle this topic request
 // handleTopicRequest("post_book", Books)
 
-handleTopicRequest("login", login)
+//handleTopicRequest("login", login)
 handleTopicRequest("reviews",reviews)
+handleTopicRequest("company",company)
