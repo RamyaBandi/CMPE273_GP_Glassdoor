@@ -17,6 +17,9 @@ module.exports = {
     GET_COMPANY_SIGNUP: "/company/profile",
     POST_COMPANY_SIGNUP: "/company/profile",
 
+    //Company Details Routes
+    GET_COMPANY_DETAILS: "/companyDetails",
+
     //Review Routes
     REVIEW_ROUTE: "/review",
     POST_STUDENT_REVIEW: "/student/review",
