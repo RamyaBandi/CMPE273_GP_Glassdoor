@@ -1,47 +1,51 @@
 import React, { Component } from 'react';
 import Nav from 'react-bootstrap/Nav';
-//import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
-//import Image from 'react-bootstrap/Image';
-//import Form from 'react-bootstrap/Form';
-//import Navbar from 'react-bootstrap/Navbar';
-//import FormControl from 'react-bootstrap/FormControl';
 import { Container, Col, Row } from 'react-bootstrap';
-//import { BsSearch } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import { Redirect } from "react-router";
-import Axios from 'axios';
+import axios from 'axios';
+import { BACKEND_URL, GET_COMPANY_DETAILS, GET_COMPANY_REVIEWS} from '../../config/routeConstants';
+import ReviewCard from "../reviews/reviewCard";
+import Reviews from "../reviews/reviews";
 
 class NavBar extends Component {
-    state = {
-        companyDetails: [],
-        redirect: null
-    }
-
-    profile = (e) => {
-        e.preventDefault();
-        sessionStorage.setItem('isLoggedIn', true);
-        this.props.onProfile();
-    }
-
-    logout = (e) => {
-        e.preventDefault();
-        sessionStorage.setItem('isLoggedIn', false);
-        this.props.onLogout();
+    constructor(props) {
+        super(props);
+        this.state = {
+            companyDetails: [],
+            reviews: [],
+            redirect: null
+        };
     }
 
     onReview = async (e) => {
-        this.setState({ redirect: <Redirect to="/reviews" /> })
+        this.setState({ redirect: <Redirect to="Reviews" /> })
+    }
+
+    componentDidMount() {
+        const company_id = '5fb4aefe6b61ea46245d5621'
+        axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?company_id=' + company_id)
+            .then(response => {
+                this.setState({ companyDetails: response.data[0], reviews: response.data[0].reviews });
+                console.log(response.data[0]);
+                console.log(this.state.companyDetails);
+                console.log(this.state.companyDetails.reviews);
+            })
+            .catch((error) => {
+                console.log(error);
+            }
+        )
     }
 
     render = () => {
         return (
-            <div style = {{backgroundColor: "#eaeaea"}}>
+            <div style={{ backgroundColor: "#eaeaea" }}>
                 {this.state.redirect}
                 <Container style={{ marginTop: "20px", width: "70%", backgroundColor: "white" }} className="block-example border">
                     <Row style={{ height: "50px", marginTop: "20px" }}>
                         <Col>
-                            <h5><b>Company Name</b></h5>
+                            <h5><b>{this.state.companyDetails.companyName}</b></h5>
                         </Col>
                     </Row>
                     <Row style={{ marginBottom: "10px" }}>
@@ -88,13 +92,13 @@ class NavBar extends Component {
                                 <p>Website:</p>
                             </Col>
                             <Col md="3">
-                                <p>Website</p>
+                                <p>{this.state.companyDetails.website}</p>
                             </Col>
                             <Col md="3">
                                 <p>Headquarters:</p>
                             </Col>
                             <Col md="3">
-                                <p>Headquarters</p>
+                                <p>{this.state.companyDetails.headquarters}</p>
                             </Col>
                         </Row>
                         <Row>
@@ -102,7 +106,7 @@ class NavBar extends Component {
                                 <p>Size:</p>
                             </Col>
                             <Col md="3">
-                                <p>Size</p>
+                                <p>{this.state.companyDetails.companySize}</p>
                             </Col>
                             <Col md="3">
                                 <p>Founded:</p>
@@ -116,13 +120,13 @@ class NavBar extends Component {
                                 <p>Type:</p>
                             </Col>
                             <Col md="3">
-                                <p>Type</p>
+                                <p>{this.state.companyDetails.companyType}</p>
                             </Col>
                             <Col md="3">
                                 <p>Industry:</p>
                             </Col>
                             <Col md="3">
-                                <p>Industry</p>
+                                <p>{this.state.companyDetails.industry}</p>
                             </Col>
                         </Row>
                         <Row>
@@ -130,12 +134,12 @@ class NavBar extends Component {
                                 <p>Revenue:</p>
                             </Col>
                             <Col md="3">
-                                <p>Revenue</p>
+                                <p>{this.state.companyDetails.revenue}</p>
                             </Col>
                         </Row>
                         <Row>
                             <Col md="12">
-                                <textarea style = {{width: "100%", border: "none", marginBottom: "10px"}}>Description</textarea>
+                                <p>{this.state.companyDetails.description}</p>
                             </Col>
                         </Row>
                     </Container>
@@ -145,6 +149,11 @@ class NavBar extends Component {
                         <Col>
                             <h5>Company Reviews</h5>
                         </Col>
+                    </Row>
+                    <Row>
+                        {this.state.companyDetails.reviews.map((item) => {
+                            return <ReviewCard {...item} />;
+                        })}
                     </Row>
                 </Container>
             </div>

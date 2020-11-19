@@ -1,4 +1,15 @@
 const { response } = require('express');
+const con = require('../config/mongoConnection');
+const {
+    CONTENT_TYPE,
+    APP_JSON,
+    RES_SUCCESS,
+    RES_BAD_REQUEST,
+    RES_NOT_FOUND,
+    RES_DUPLICATE_RESOURCE,
+    TEXT_PLAIN,
+    RES_INTERNAL_SERVER_ERROR
+} = require("../config/routeConstants");
 const Company = require('../models/Company');
 const {
     CONTENT_TYPE,
@@ -58,7 +69,26 @@ module.exports.updateCompanyProfile = (req, res) => {
             res.status(200).end(JSON.stringify(result))
         }
     })
+}
 
+module.exports.getCompanyProfile = (req, res) => {
 
+    console.log("Inside Company Profile GET service");
+    console.log(req.query)
+    let data = req.query
+    let companyDetails = Company.find({ _id: data.company_id }).exec((err, result) => {
 
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+        }
+        else {
+            // console.log(JSON.stringify(result));
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            console.log("Company Details fetched Successfully");
+            console.log(result);
+            res.status(RES_SUCCESS).send(result);
+        }
+    })
 }

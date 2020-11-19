@@ -18,8 +18,8 @@ module.exports = {
     POST_STUDENT_REVIEW: '/review/student/review',
     GET_COMPANY_REVIEWS : '/review/company/reviews',
 
-    //CustomerRoutes
-
+    //CompanyRoutes
+    GET_COMPANY_DETAILS: '/company/companyDetails',
 
 
     //RestaurantRoutes
