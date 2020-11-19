@@ -4,43 +4,43 @@ import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import ReviewCard from "./reviewCard";
 import axios from "axios";
-import { BACKEND_URL, GET_COMPANY_REVIEWS } from '../../config/routeConstants'
+import { BACKEND_URL, GET_COMPANY_REVIEWS } from "../../config/routeConstants";
 
 class Reviews extends Component {
   constructor(props) {
     super(props);
     this.state = {
       reviews: [],
-      redirect: null
+      redirect: null,
     };
   }
-  addReview = async (e)=> {
-    this.setState({ redirect: <Redirect to="/addReview" /> })
-  }
+  addReview = async (e) => {
+    this.setState({ redirect: <Redirect to="/addReview" /> });
+  };
   componentDidMount() {
-    const company_id = '5fb4884acf339e3da0d5c31e'
-    axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + '?company_id=' +company_id)
-      .then(response => {
-        this.setState({ reviews: response.data })
-        console.log(response.data)
+    const company_id = "5fb4884acf339e3da0d5c31e";
+    axios
+      .get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + company_id)
+      .then((response) => {
+        this.setState({ reviews: response.data[0].reviews });
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
   }
+
   render = () => {
     return (
       <div>
-          {this.state.redirect}
-          
-        Reviews tab
+        {this.state.redirect}
         <Row>
-          {this.state.reviews.map((item) => {
-            return <ReviewCard {...item} />;
-          })}
-          
+          <Container >
+            {this.state.reviews.map((item) => {
+              return <ReviewCard {...item} />;
+            })}
+          </Container>
         </Row>
-        
       </div>
     );
   };
