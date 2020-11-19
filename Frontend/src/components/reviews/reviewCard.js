@@ -5,57 +5,58 @@ import reviewCard from "./reviewCard";
 import Axios from "axios";
 
 export default class ReviewCard extends Component {
-    
-
-    render = () => {
-        return (
-            <div>
-                Review card
-                <Container style = {{marginTop: "20px", width: "45%"}}>
-                    container
-                    <Row>
-                        <p style={{color:"#3f76cc", fontSize:"22px"}}><b>Review headline</b></p>
-                    </Row>
-                    <Row>
-                        <Col md="3">
-                        <p>Overall rating</p>
-                        </Col>
-                        <Col>
-                        <p>Recommended to a Friend</p>
-                        </Col>
-                        <Col>
-                        <p>CEO approval</p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <p>
-                            Review Description
-                        </p>
-                    </Row>
-                    <Row>
-                        <p>
-                            Pros
-                        </p>
-                    </Row>
-                    <Row>
-                        <p>
-                            Cons
-                        </p>
-                    </Row>
-                    <Row>
-                    <div style={{ textAlign: "center", marginBottom: "50px", marginTop:"20px"}}>
-                                <Row>
-                                    <Col md={12} style={{alignContent: "right"}}>
-                                        <Button style={{ backgroundColor: "#1861bf"}} onClick={this.onReviewSave} block >Helpful ()</Button>
-                                    </Col>
-                                </Row>
-                                
-                    </div>
-                    </Row>
-                </Container>
-            </div>
-        )
-    }
+  render = () => {
+    //console.log(this.props.reviews);
+    return (
+      <div>
+        <Container style={{ marginTop: "20px", width: "100%" }}>
+          <Row>
+            <p style={{ color: "#3f76cc", fontSize: "22px" }}>
+              <b>"{this.props.headline}"</b>
+            </p>
+          </Row>
+          <Row>
+            <Col md="3">
+              <p>Overall Rating: {this.props.overallRating}</p>
+            </Col>
+            <Col md="3">
+              <p>Recommended to a Friend: {this.props.recommendedRating}</p>
+            </Col>
+            <Col md="3">
+              <p>CEO approval: {this.props.ceoRating}</p>
+            </Col>
+          </Row>
+          <Row>
+            <p>{this.props.description}</p>
+          </Row>
+          <Row>
+            <p>
+              <b>Pros</b>
+              <br />
+              {this.props.pros}
+            </p>
+          </Row>
+          <Row>
+            <p>
+              <b>Cons</b>
+              <br />
+              {this.props.cons}
+            </p>
+          </Row>
+          <Row>
+            <Button
+              style={{ backgroundColor: "#1861bf" }}
+              onClick={this.onReviewSave}
+              block
+              className="float-right"
+            >
+              Helpful (0)
+            </Button>
+          </Row>
+        </Container>
+      </div>
+    );
+  };
 }
 
 //export default Reviews
