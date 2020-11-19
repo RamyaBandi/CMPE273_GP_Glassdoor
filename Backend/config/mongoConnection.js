@@ -16,7 +16,7 @@ mongoose.connect(dbConfig.mongoURL, {
     .then(() => console.log('MongoDB Connected')).catch((err) => console.log(err))
 mongoose.Promise = global.Promise
 mongoose.set('useFindAndModify', false);
-mongoose.set('debug', true);
+// mongoose.set('debug', true);
 let mongo = mongoose.connection
 mongo.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
