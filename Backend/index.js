@@ -10,9 +10,10 @@ var cors = require('cors');
 app.set('view engine', 'ejs');
 // const path = require('path');
 // var kafka = require('./kafka/client');
+let redis = require('./config/redisConnection')
 let mongo = require('./config/mongoConnection')
 
-//Company Two branch created
+// redis.flushall();
 
 var passport = require('passport');
 var jwt = require('jwt-simple');

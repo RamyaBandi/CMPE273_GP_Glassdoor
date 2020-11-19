@@ -18,13 +18,13 @@ const {
 
   var kafka = require('../kafka/client');
   
-  module.exports.createCompanyProfile=(req,res)=>{
+  module.exports.postStudentReview=(req,res)=>{
     console.log("req.body"+JSON.stringify(req.body))
     data={
-      api:"POST_COMPANY_SIGNUP",
+      api:"POST_STUDENT_REVIEW",
       body: req.body
     }
-    kafka.make_request('company', data, function(err,results){
+    kafka.make_request('reviews', data, function(err,results){
       console.log('in result');
       console.log(results);
       if (err) {
@@ -38,13 +38,13 @@ const {
   });
   }
 
-  module.exports.updateCompanyProfile=(req,res)=>{
-    console.log("req.body"+JSON.stringify(req.body))
+  module.exports.getCompanyReviews=(req,res)=>{
+    console.log("req.body"+JSON.stringify(req.query))
     data={
-      api:"PUT_COMPANY_SIGNUP",
-      body: req.body
+      api:"GET_COMPANY_REVIEWS",
+      body: req.query
     }
-    kafka.make_request('company', data, function(err,results){
+    kafka.make_request('reviews', data, function(err,results){
       console.log('in result');
       console.log(results);
       if (err) {
@@ -58,7 +58,24 @@ const {
   });
   }
 
-  
-  
+  module.exports.getStudentReviews=(req,res)=>{
+    console.log("req.body"+JSON.stringify(req.query))
+    data={
+      api:"GET_STUDENT_REVIEWS",
+      body: req.query
+    }
+    kafka.make_request('reviews', data, function(err,results){
+      console.log('in result');
+      console.log(results);
+      if (err) {
+        console.log("In error");
+        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+    } else {
+        console.log("In else");
+        res.status(RES_SUCCESS).send(JSON.stringify(results));
+    }
+      
+  });
+  }
   
   

@@ -13,6 +13,11 @@ module.exports = {
 
     //Login Routes
     POST_LOGIN : '/loginroute/login',
+
+    //Review Routes
+    POST_STUDENT_REVIEW: '/review/student/review',
+    GET_COMPANY_REVIEWS : '/review/company/reviews',
+
     //CustomerRoutes
 
 

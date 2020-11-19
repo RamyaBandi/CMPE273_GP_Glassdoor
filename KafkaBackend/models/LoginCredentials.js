@@ -5,6 +5,7 @@ const LoginCredentials = new mongoose.Schema({
     email_id: {
         type: String,
         required: true,
+        unique: true
     },
     user_password: {
         type: String,

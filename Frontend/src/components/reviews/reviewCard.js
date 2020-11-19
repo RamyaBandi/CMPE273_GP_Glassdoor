@@ -43,10 +43,10 @@ export default class ReviewCard extends Component {
                         </p>
                     </Row>
                     <Row>
-                    <div style={{ textAlign: "center", marginBottom: "50px", marginTop:"20px", alignContent: "right"}}>
+                    <div style={{ textAlign: "center", marginBottom: "50px", marginTop:"20px"}}>
                                 <Row>
-                                    <Col md={12} alignContent= "right">
-                                        <Button style={{ backgroundColor: "#1861bf" }} onClick={this.onReviewSave} block >Helpful ()</Button>
+                                    <Col md={12} style={{alignContent: "right"}}>
+                                        <Button style={{ backgroundColor: "#1861bf"}} onClick={this.onReviewSave} block >Helpful ()</Button>
                                     </Col>
                                 </Row>
                                 

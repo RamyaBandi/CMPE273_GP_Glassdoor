@@ -1,6 +1,15 @@
 const { response } = require('express');
 const Company = require('../models/Company');
-
+const {
+    CONTENT_TYPE,
+    APP_JSON,
+    RES_SUCCESS,
+    RES_BAD_REQUEST,
+    RES_NOT_FOUND,
+    RES_DUPLICATE_RESOURCE,
+    TEXT_PLAIN,
+    RES_INTERNAL_SERVER_ERROR,
+} = require("../config/routeConstants");
 module.exports.createCompanyProfile = (req, res) => {
     console.log("Inside Company Profile POST service");
     console.log("req body" + JSON.stringify(req.body));
@@ -21,6 +30,7 @@ module.exports.createCompanyProfile = (req, res) => {
     })
 }
 
+
 module.exports.updateCompanyProfile = (req, res) => {
     console.log("Inside Company Profile PUT service");
     console.log("req body" + JSON.stringify(req.body));
@@ -38,7 +48,7 @@ module.exports.updateCompanyProfile = (req, res) => {
         description: data.description,
         ceoName: data.ceoName,
     }
-    Company.findByIdAndUpdate({ company_id: data.company_id }, company_update, (err, result) => {
+    Company.findByIdAndUpdate(data.company_id , company_update, (err, result) => {
         if (err) {
             console.log("Error updating company profile" + err)
             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
