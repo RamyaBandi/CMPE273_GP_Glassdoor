@@ -150,11 +150,11 @@ class NavBar extends Component {
                             <h5>Company Reviews</h5>
                         </Col>
                     </Row>
-                    <Row>
+                    {/* <Row>
                         {this.state.companyDetails.reviews.map((item) => {
                             return <ReviewCard {...item} />;
                         })}
-                    </Row>
+                    </Row> */}
                 </Container>
             </div>
         )
