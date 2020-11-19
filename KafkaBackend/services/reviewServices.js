@@ -67,19 +67,92 @@ function handle_request(msg, callback) {
         case "GET_COMPANY_REVIEWS":
     {
     let data = msg.body
-    let reviews = Company.find({ _id: data.company_id }).select('reviews').populate('reviews').exec((err, result) => {
+    if (process.env.REDIS_SWITCH == "true" && data.page == 1) {
+        try {
+            redisClient.get('topReviews', async (err, redisout) => {
+                // If value for key is available in Redis
+                console.log("in redis get")
+                console.log(err)
+                
 
-        if (err) {
-            console.log(err);
-    
-            callback(err, 'Error')
+                if (redisout !== null) {
+                    // send data as output
+                    console.log("Data exists in redis")
+                    console.log(redisout.length)
+                    Company.countDocuments({ type: 'reviews' }, (err, count) => {
+                        if (err) {
+                            console.log(err);
+                            
+                            callback(err, 'Error')
+                        }
+                        else {
+
+                            let output = {
+                                reviews: JSON.parse(redisout),
+                                totalPages: Math.ceil(count / data.limit),
+                                currentPage: data.page
+                            }
+                            callback(null, result)
+                        }
+                    })
+
+
+
+                }
+                // If value for given key is not available in Redis
+                else {
+                    // Fetch data from your database
+                    let reviews = Company.find({ _id: data.company_id }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((error, result) => {
+
+                        if (error) {
+                            console.log(error);
+                         
+                            callback(err, 'Error')
+                        }
+                        else {
+                      
+                            redisClient.setex('topReviews', 36000, JSON.stringify(result[0].reviews));
+                            console.log("Reviews fetched Successfully")
+                            callback(null, result)
+                        }
+                    })
+
+                }
+            })
+        } catch (error) {
+            // Handle error
+            console.log("Error while working with redis")
+            console.log(error);
+
+            let reviews = Company.find({ _id: data.company_id }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
+
+                if (err) {
+                    console.log(err);
+                    callback(err, 'Error')
+                }
+                else {
+
+                    console.log("Reviews fetched Successfully from DB")
+                    callback(null, result)
+                }
+            })
         }
-        else {
-    
-            console.log("Reviews fetched Successfully")
-            callback(null, result)
-        }
-    })
+
+    }
+    else {
+        let reviews = Company.find({ _id: data.company_id }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
+
+            if (err) {
+                console.log(err);
+                callback(err, 'Error')
+            }
+            else {
+
+                console.log("Reviews fetched Successfully from DB - page not 1 or redis off")
+                callback(null, result)
+            }
+        })
+    }
                     break;
     }
 
