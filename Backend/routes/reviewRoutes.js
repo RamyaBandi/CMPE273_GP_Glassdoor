@@ -6,10 +6,10 @@ const reviewKafkaServices = require("../servicesKafka/reviewServices");
 
 const { POST_STUDENT_REVIEW, GET_COMPANY_REVIEWS, GET_ALL_REVIEWS, GET_STUDENT_REVIEWS, POST_COMPANY_REPLY } = require('../config/routeConstants');
 
-
-if (process.env.KAFKA_SWITCH === true) {
+console.log(process.env.KAFKA_SWITCH)
+if (process.env.KAFKA_SWITCH === 'true') {
     console.log("in kafka service")
-    reviewRouter.route(POST_STUDENT_REVIEW).post(reviewServices.postStudentReview);
+    reviewRouter.route(POST_STUDENT_REVIEW).post(reviewKafkaServices.postStudentReview);
     reviewRouter.route(GET_COMPANY_REVIEWS).get(reviewKafkaServices.getCompanyReviews);
     reviewRouter.route(GET_STUDENT_REVIEWS).get(reviewKafkaServices.getStudentReviews);
 }
