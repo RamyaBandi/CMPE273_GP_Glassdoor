@@ -27,52 +27,52 @@ const {
     kafka.make_request('reviews', data, function(err,results){
       console.log('in result');
       console.log(results);
-      if (error) {
+      if (err) {
         console.log("In error");
-        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
     } else {
         console.log("In else");
-        res.status(RES_SUCCESS).send(JSON.stringify(result));
+        res.status(RES_SUCCESS).send(JSON.stringify(results));
     }
       
   });
   }
 
   module.exports.getCompanyReviews=(req,res)=>{
-    console.log("req.body"+JSON.stringify(req.body))
+    console.log("req.body"+JSON.stringify(req.query))
     data={
       api:"GET_COMPANY_REVIEWS",
-      body: req.body
+      body: req.query
     }
     kafka.make_request('reviews', data, function(err,results){
       console.log('in result');
       console.log(results);
-      if (error) {
+      if (err) {
         console.log("In error");
-        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
     } else {
         console.log("In else");
-        res.status(RES_SUCCESS).send(JSON.stringify(result));
+        res.status(RES_SUCCESS).send(JSON.stringify(results));
     }
       
   });
   }
 
   module.exports.getStudentReviews=(req,res)=>{
-    console.log("req.body"+JSON.stringify(req.body))
+    console.log("req.body"+JSON.stringify(req.query))
     data={
       api:"GET_STUDENT_REVIEWS",
-      body: req.body
+      body: req.query
     }
     kafka.make_request('reviews', data, function(err,results){
       console.log('in result');
       console.log(results);
-      if (error) {
+      if (err) {
         console.log("In error");
-        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
     } else {
         console.log("In else");
-        res.status(RES_SUCCESS).send(JSON.stringify(result));
+        res.status(RES_SUCCESS).send(JSON.stringify(results));
     }
       
   });

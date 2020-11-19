@@ -1,5 +1,6 @@
-const { response } = require('express');
-const con = require('../config/mongoConnection');
+//const { response } = require('express');
+const mongoose = require("mongoose");
+//const con = require('../config/mongoConnection');
 const {
     CONTENT_TYPE,
     APP_JSON,
@@ -10,17 +11,18 @@ const {
     TEXT_PLAIN,
     RES_INTERNAL_SERVER_ERROR
 } = require("../config/routeConstants");
-const Company = require('../../Backend/models/Company');
-const Reviews = require('../../Backend/models/Reviews')
+const Company = require('../models/Company');
+const Reviews = require('../models/Reviews');
+const Student = require('../models/Student')
 
 function handle_request(msg, callback) {
 
-    console.log("Inside Customer Services ->kafka backend");
+    console.log("Inside Review Services ->kafka backend");
     console.log(msg);
     switch (msg.api) {
         case "POST_STUDENT_REVIEW":
             {
-                let data = req.body
+                let data = msg.body
                 let reviews = Reviews({
                     company_id: data.company_id,
                     student_id: data.student_id,
@@ -63,8 +65,8 @@ function handle_request(msg, callback) {
                 break;
             }
         case "GET_COMPANY_REVIEWS":
-                {
-                    let data = req.query
+    {
+    let data = msg.body
     let reviews = Company.find({ _id: data.company_id }).select('reviews').populate('reviews').exec((err, result) => {
 
         if (err) {
@@ -84,12 +86,14 @@ function handle_request(msg, callback) {
 
     case "GET_STUDENT_REVIEWS":
     {
-    let data = req.query
+    console.log("inside get student reviews")
+    let data = msg.body
+    console.log(data)
     let reviews = Student.find({ _id: data.student_id }).select('companyReviews').populate('companyReviews').exec((err, result) => {
+        console.log("hitting mongo")
 
         if (err) {
             console.log(err);
-
             callback(err, 'Error')
         }
         else {
