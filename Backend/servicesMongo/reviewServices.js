@@ -72,7 +72,7 @@ module.exports.getCompanyReviews = (req, res) => {
     let data = req.query
     console.log(data)
 
-    if (data.page == 1) {
+    if (process.env.REDIS_SWITCH == "true" && data.page == 1) {
         try {
             redisClient.get('topReviews', async (err, redisout) => {
                 // If value for key is available in Redis
@@ -162,7 +162,7 @@ module.exports.getCompanyReviews = (req, res) => {
             else {
                 // console.log(JSON.stringify(result));
                 //res.setHeader(CONTENT_TYPE, APP_JSON);
-                console.log("Reviews fetched Successfully from DB - page not 1")
+                console.log("Reviews fetched Successfully from DB - page not 1 or redis off")
                 res.status(RES_SUCCESS).send(result);
             }
         })
