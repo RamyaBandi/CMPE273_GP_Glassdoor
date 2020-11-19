@@ -66,7 +66,7 @@ module.exports.postStudentReview = (req, res) => {
 }
 
 
-module.exports.getCompanyReviews = (req, res) => {
+module.exports.getCompanyReviews = async (req, res) => {
 
     console.log("Inside Company Reviews GET service");
     let data = req.query
@@ -152,20 +152,27 @@ module.exports.getCompanyReviews = (req, res) => {
 
     }
     else {
-        let reviews = Company.find({ _id: data.company_id }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
-
+        try{
+            const reviews = await Reviews.find({ company_id: data.company_id }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+            const count = await Reviews.countDocuments({company_id: data.company_id});
+            console.log("count" + count);
+    
+            const result = ({
+                reviews,
+                totalPages: Math.ceil(count / data.limit),
+                currentPage: data.page
+            });
+    
+            console.log("Reviews fetched Successfully from DB - page not 1 or redis off")
+            res.status(RES_SUCCESS).send(result);
+        }
+        catch {
             if (err) {
                 console.log(err);
                 //res.setHeader(CONTENT_TYPE, APP_JSON);
                 res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
             }
-            else {
-                // console.log(JSON.stringify(result));
-                //res.setHeader(CONTENT_TYPE, APP_JSON);
-                console.log("Reviews fetched Successfully from DB - page not 1 or redis off")
-                res.status(RES_SUCCESS).send(result);
-            }
-        })
+        }            
     }
 
 }

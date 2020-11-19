@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 let redis = require('./config/redisConnection')
 let mongo = require('./config/mongoConnection')
 
-// redis.flushall();
+redis.flushall();
 
 var passport = require('passport');
 var jwt = require('jwt-simple');
