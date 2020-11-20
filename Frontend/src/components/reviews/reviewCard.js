@@ -9,20 +9,21 @@ export default class ReviewCard extends Component {
     //console.log(this.props.reviews);
     return (
       <div>
-        <Container style={{ marginTop: "20px", width: "100%" }}>
+        <Container className= "block-example border" style={{ marginTop: "20px", width: "80%" }}>
+            <Col>
           <Row>
             <p style={{ color: "#3f76cc", fontSize: "22px" }}>
               <b>"{this.props.headline}"</b>
             </p>
           </Row>
           <Row>
-            <Col md="3">
+            <Col md="4">
               <p>Overall Rating: {this.props.overallRating}</p>
             </Col>
-            <Col md="3">
+            <Col md="4">
               <p>Recommended to a Friend: {this.props.recommendedRating}</p>
             </Col>
-            <Col md="3">
+            <Col md="4">
               <p>CEO approval: {this.props.ceoRating}</p>
             </Col>
           </Row>
@@ -45,14 +46,14 @@ export default class ReviewCard extends Component {
           </Row>
           <Row>
             <Button
-              style={{ backgroundColor: "#1861bf" }}
+              style={{ backgroundColor: "#1861bf", marginBottom: "10px" }}
               onClick={this.onReviewSave}
-              block
               className="float-right"
             >
               Helpful (0)
             </Button>
           </Row>
+          </Col>
         </Container>
       </div>
     );

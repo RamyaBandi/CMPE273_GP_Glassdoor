@@ -153,6 +153,8 @@ module.exports.getCompanyReviews = async (req, res) => {
     }
     else {
         try{
+            data.page = 1;
+            data.limit = 10;
             const reviews = await Reviews.find({ company_id: data.company_id }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
             const count = await Reviews.countDocuments({company_id: data.company_id});
             console.log("count" + count);
