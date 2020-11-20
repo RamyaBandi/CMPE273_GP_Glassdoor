@@ -12,7 +12,7 @@ import InterviewsTab from './components/student/HomePageTabs/interviews'
 import JobsTab from './components/student/HomePageTabs/jobs'
 import AdminHomePage from './components/admin/adminHomePage'
 import EmployerHomePage from './components/employer/employerHomePage'
-import reviews from './components/reviews/reviews';
+import Reviews from './components/reviews/reviews';
 
 class Main extends Component {
     render() {
@@ -30,7 +30,7 @@ class Main extends Component {
                     <Route exact path="/interviewstab" render={props => <InterviewsTab {...props} />} />
                     <Route exact path="/adminhomepage" render={props => <AdminHomePage {...props} />} />
                     <Route exact path="/employerhomepage" render={props => <EmployerHomePage {...props} />} />
-                    <Route exact path="/reviews" component={reviews} />
+                    <Route exact path="/reviews" component={(props) => <Reviews {...props}/>} />
                     <Route exact path="/overview" component={companyOverview} />
                 </div>
             </div>

@@ -20,14 +20,17 @@ class NavBar extends Component {
     }
 
     onReview = async (e) => {
-        this.setState({ redirect: <Redirect to="Reviews" /> })
+        const companyid = "";
+        this.setState({ companyid :  this.state.companyDetails._id});
+        console.log("companyid in overview "+ this.state.companyid);
     }
 
     componentDidMount() {
-        const company_id = '5fb4aefe6b61ea46245d5621'
+        const company_id = '5fb4884acf339e3da0d5c31e'
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?company_id=' + company_id)
             .then(response => {
                 this.setState({ companyDetails: response.data[0], reviews: response.data[0].reviews });
+                
                 console.log(response.data[0]);
                 console.log(this.state.companyDetails);
                 console.log(this.state.companyDetails.reviews);
@@ -39,6 +42,8 @@ class NavBar extends Component {
     }
 
     render = () => {
+        const companyid = this.state.companyDetails._id;
+        console.log(companyid);
         return (
             <div style={{ backgroundColor: "#eaeaea" }}>
                 {this.state.redirect}
@@ -56,7 +61,7 @@ class NavBar extends Component {
                                         <Link to="/overview" style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
                                     </div>
                                     <div class="box-content right">
-                                        <Link to="/reviews" onClick={this.onReview} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
+                                        <Link to={{pathname: "/reviews", state: companyid}} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
                                     </div>
                                     <div class="box-content right">
                                         <Link to="/jobs" style={{ textDecoration: 'none', color: '#1861bf' }}>Jobs</Link>
