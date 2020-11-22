@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import { Redirect } from "react-router";
 import axios from 'axios';
 import { BACKEND_URL, GET_COMPANY_DETAILS, GET_COMPANY_REVIEWS} from '../../config/routeConstants';
-import ReviewCard from "../reviews/reviewCard";
-import Reviews from "../reviews/reviews";
+//import ReviewCard from "../reviews/reviewCard";
+//import Reviews from "../reviews/reviews";
 
 class NavBar extends Component {
     constructor(props) {
