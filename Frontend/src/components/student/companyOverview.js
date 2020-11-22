@@ -79,9 +79,13 @@ class NavBar extends Component {
                             </div>
                         </Col>
                         <Col md="4">
-                            <Button className="float-right" style={{ backgroundColor: "#1861bf" }}>
+                            {/* <Button className="float-right" style={{ backgroundColor: "#1861bf" }} onClick = {this.onAddReview}>
                                 <p style={{ color: "#ffffff", marginTop: "5px", marginBottom: "5px" }}>+ Add a Review</p>
-                            </Button>
+                            </Button> */}
+                            <div>
+                            <Link to={{pathname: "/addreview", state: companyid}} className="btn btn-primary" 
+                            style={{ color: "#ffffff", marginTop: "5px", marginBottom: "5px" }}>Add a Review</Link>
+                            </div>
                         </Col>
                     </Row>
                 </Container>
