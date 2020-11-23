@@ -28,6 +28,12 @@ module.exports = {
     GET_COMPANY_REVIEWS: "/company/reviews",
     POST_COMPANY_REPLY: "/company/reply",
 
+    //Salary Routes
+    SALARY_ROUTE: "/salary",
+    POST_STUDENT_SALARY: "/student/salary",
+    GET_STUDENT_SALARIES: "/student/salaries",
+    GET_COMPANY_SALARIES: "/company/salaries",
+
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
 
