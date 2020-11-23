@@ -28,7 +28,7 @@ const loginRoutes = require('./routes/loginRoute');
 const reviewRoutes = require('./routes/reviewRoutes');
 const companyRoutes = require('./routes/companyRoutes');
 const studentRoutes = require('./routes/studentRoutes');
-
+const salaryRoutes = require('./routes/salaryRoutes');
 
 //use express session to maintain session data
 app.use(session({
@@ -58,6 +58,7 @@ app.use('/loginroute', loginRoutes);
 app.use(routeConstants.REVIEW_ROUTE, reviewRoutes)
 app.use(routeConstants.COMPANY_ROUTE, companyRoutes)
 app.use(routeConstants.STUDENT_ROUTE, studentRoutes)
+app.use(routeConstants.SALARY_ROUTE, salaryRoutes)
 
 
 //start your server on port 3001
