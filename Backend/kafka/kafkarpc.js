@@ -1,7 +1,7 @@
 var crypto = require('crypto');
 var conn = require('./connection');
 
-var TIMEOUT = 8000; //time to wait for response in ms
+var TIMEOUT = 60000; //time to wait for response in ms
 var self;
 
 exports = module.exports = KafkaRPC;
@@ -70,7 +70,7 @@ KafkaRPC.prototype.setupResponseQueue = function (producer, topic_name, next) {
     //don't mess around if we have a queue
     if (this.response_queue) return next();
 
-    console.log('1');
+    // console.log('1');
 
     self = this;
 
