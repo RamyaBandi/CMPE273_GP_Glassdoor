@@ -72,18 +72,18 @@ module.exports.getCompanyReviews = async (req, res) => {
     let data = req.query
     console.log(data)
 
-    if (process.env.REDIS_SWITCH == "true" && data.page == 1) {
+    if (process.env.REDIS_SWITCH == "true" && data.page == '1') {
         try {
             redisClient.get('topReviews', async (err, redisout) => {
                 // If value for key is available in Redis
-                console.log("in redis get")
-                console.log(err)
+                //console.log("in redis get")
+                //console.log(err)
                 // console.log(redisout)
 
                 if (redisout !== null) {
                     // send data as output
                     console.log("Data exists in redis")
-                    console.log(redisout.length)
+                    //console.log(redisout.length)
                     Company.countDocuments({ type: 'reviews' }, (err, count) => {
                         if (err) {
                             console.log(err);
@@ -110,7 +110,7 @@ module.exports.getCompanyReviews = async (req, res) => {
                     let reviews = Company.find({ _id: data.company_id }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((error, result) => {
 
                         if (error) {
-                            console.log(error);
+                            //console.log(error);
                             //res.setHeader(CONTENT_TYPE, APP_JSON);
                             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
                         }
@@ -122,7 +122,7 @@ module.exports.getCompanyReviews = async (req, res) => {
 
                             // send data as output
                             //res.setHeader(CONTENT_TYPE, APP_JSON);
-                            console.log("Reviews fetched Successfully")
+                            //console.log("Reviews fetched Successfully")
                             res.status(RES_SUCCESS).send(result[0].reviews);
                         }
                     })
@@ -131,13 +131,13 @@ module.exports.getCompanyReviews = async (req, res) => {
             })
         } catch (error) {
             // Handle error
-            console.log("Error while working with redis")
-            console.log(error);
+           // console.log("Error while working with redis")
+            //console.log(error);
 
             let reviews = Company.find({ _id: data.company_id }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
 
                 if (err) {
-                    console.log(err);
+                    //console.log(err);
                     //res.setHeader(CONTENT_TYPE, APP_JSON);
                     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
                 }
