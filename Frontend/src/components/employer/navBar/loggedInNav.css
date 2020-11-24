@@ -1,0 +1,82 @@
+.navbar{
+    background: white;
+    height: 40px;
+}
+.inputSearch{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Lato,sans-serif;
+    height: 40px;
+    color: #505863;
+    line-height: normal;
+    border-radius: 3px;
+    border: 1px solid #c4c7cc;
+    -webkit-border-image: initial;
+    -o-border-image: initial;
+    border-image: initial;
+}
+.submitSearch{
+    border-radius: 3px;
+    border: 1px solid transparent;
+    font-family: Lato,sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1.6;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    -webkit-transition: color .2s ease-out,background-color .2s ease-out;
+    -o-transition: color .2s ease-out,background-color .2s ease-out;
+    transition: color .2s ease-out,background-color .2s ease-out;
+    font-family: Lato;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 88px;
+    background-color: #0caa41;
+    padding: 7px 16px;
+    padding-left:20px
+}
+
+#logOut{
+    border: none;
+    background-color: white;
+    font-size: 40px;
+    /* font-family: Lato,sans-serif; */
+    height: 40px;
+    /* color: #505863 */
+    /* line-height: normal;
+    border-radius: 3px;
+    border: 1px solid #c4c7cc;
+    -webkit-border-image: initial;
+    -o-border-image: initial;
+    border-image: initial;*/
+}
+.logoutText{
+    font-size: 40px;
+    font-family: Lato,sans-serif;
+    height: 40px;
+}
+
+.navbar2{
+    width: 100%;
+}
+
+.navWidth{
+    width: 15%;
+}
+
+.navTab{
+    background-color: white;
+}
+
+.navTab:hover{
+    background-color:#cfd1d3;
+    color: white;
+}

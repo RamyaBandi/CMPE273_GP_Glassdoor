@@ -40,7 +40,7 @@ module.exports.updateCompanyProfile = (req, res) => {
         description: data.description,
         ceoName: data.ceoName,
     }
-    Company.findByIdAndUpdate(data.company_id , company_update, (err, result) => {
+    Company.findByIdAndUpdate(data.company_id, company_update, (err, result) => {
         if (err) {
             console.log("Error updating company profile" + err)
             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));

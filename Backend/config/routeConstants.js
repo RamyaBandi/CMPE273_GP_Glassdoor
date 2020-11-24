@@ -20,6 +20,14 @@ module.exports = {
     //Company Details Routes
     GET_COMPANY_DETAILS: "/companyDetails",
 
+    //Jobs Routes
+    JOB_ROUTE: '/jobs',
+    POST_COMPANY_JOB: "/job",
+    GET_COMPANY_JOBS: '/jobs',
+    GET_COMPANY_JOB: '/job',
+    PUT_COMPANY_JOB: '/job',
+    GET_ALL_JOBS: '/jobList',
+
     //Review Routes
     REVIEW_ROUTE: "/review",
     POST_STUDENT_REVIEW: "/student/review",

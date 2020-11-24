@@ -51,7 +51,7 @@ class Login extends Component {
                 this.setState({
                     loginFlag: false
                 })
-                
+
             })
     }
     render() {
@@ -70,7 +70,7 @@ class Login extends Component {
                 this.props.history.replace(`/studenthomepage`);
             }
             else if (localStorage.getItem('role') === "employer") {
-                this.props.history.replace(`/employerhomepage`);
+                this.props.history.replace(`/employer/home`);
             }
 
         }
@@ -92,7 +92,7 @@ class Login extends Component {
                             <button class="btn btn-success" onClick={this.submitLogin} >Sign In </button>
 
                         </form>
-                        {this.state.loginFlag === false && <p class = "validationAlert"> Invalid Credentials. Please try again</p>}
+                        {this.state.loginFlag === false && <p class="validationAlert"> Invalid Credentials. Please try again</p>}
                     </div>
                 </div>
             </div>
