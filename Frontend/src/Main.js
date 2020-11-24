@@ -16,6 +16,7 @@ import Reviews from './components/reviews/reviews';
 import AddReview from './components/reviews/addReview';
 import Salaries from './components/salaries/salaries';
 import AddSalary from './components/salaries/addSalary';
+import AddInterview from './components/interviews/addInterview';
 
 class Main extends Component {
     render() {
@@ -38,6 +39,7 @@ class Main extends Component {
                     <Route exact path="/overview" component={companyOverview} />
                     <Route exact path="/salaries" component={(props) => <Salaries {...props} />} />
                     <Route exact path="/addsalary" component={(props) => <AddSalary {...props} />} />
+                    <Route exact path="/addinterview" component={(props) => <AddInterview {...props} />} />
                 </div>
             </div>
         )
