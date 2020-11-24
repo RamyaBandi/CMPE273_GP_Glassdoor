@@ -11,7 +11,7 @@ render(){
                     <div style={{ width: "100%" }}>
                         <div style={{ width: "30%", float: "left" }}>
                             <div style={{ display: "flex", justifyContent: "normal" }}>
-                                <Link to="#" class="companyName"> Company Name</Link>
+                                <Link to="/overview" class="companyName"> Company Name</Link>
                                 <p class="companyRating"> 4.3 <i class="fas fa-star"></i></p>
                             </div>
                             <h2> Job title</h2>
