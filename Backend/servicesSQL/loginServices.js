@@ -44,6 +44,7 @@ module.exports.login = (req, res) => {
             })
                 .then((value) => {
                     console.log("Val", value)
+                    console.log("val[0]", value[0])
                     if (value[0]) {
                         const payload = { id: value[1].id,name:value[1].name, email: value[1].email, role: value[1].role, user_id: value[1].user_id };
                         console.log(payload)
