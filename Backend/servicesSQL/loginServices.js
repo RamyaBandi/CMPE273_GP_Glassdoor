@@ -3,7 +3,7 @@ var bcrypt = require('bcryptjs');
 const saltRounds = 10;
 var mysqlConnection = require('../config/mysqlConnection');
 const jwt = require('jsonwebtoken')
-const { jwtsecret } = require('../config/mysqlinit')
+// const { jwtsecret } = require('../config/mysqlinit')
 
 const {
     CONTENT_TYPE,
@@ -44,10 +44,11 @@ module.exports.login = (req, res) => {
             })
                 .then((value) => {
                     console.log("Val", value)
+                    console.log("val[0]", value[0])
                     if (value[0]) {
-                        const payload = { id: value[1].id,name:value[1].name, email: value[1].email, role: value[1].role };
+                        const payload = { id: value[1].id,name:value[1].name, email: value[1].email, role: value[1].role, user_id: value[1].user_id };
                         console.log(payload)
-                        const token = jwt.sign(payload, jwtsecret, {
+                        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
                             expiresIn: 1008000
                         });
                         res.status(RES_SUCCESS).send({token: "JWT " + token });
