@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // import '../../App.css'
 import './loggedInNav.css'
 import glassdoor_font from '../../images/glassdoor_font.PNG'
-// var FontAwesome = require('react-fontawesome');
+var FontAwesome = require('react-fontawesome');
 
 class loggedInNav extends React.Component {
     render() {
