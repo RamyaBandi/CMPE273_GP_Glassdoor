@@ -24,6 +24,11 @@ module.exports = {
     GET_COMPANY_SALARIES : '/salaries/company/salaries',
     GET_STUDENT_SALARIES : '/salaries/student/salaries',
 
+    //Interview Routes
+    POST_STUDENT_INTERVIEW: '/interview/student/interview',
+    GET_COMPANY_INTERVIEWS : '/interview/company/interviews',
+    GET_STUDENT_INTERVIEWS : '/interview/student/interviews',
+
     //CompanyRoutes
     GET_COMPANY_DETAILS: '/company/companyDetails',
 

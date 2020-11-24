@@ -78,6 +78,7 @@ class AddReviews extends Component {
                 value={this.state.overallRating}
                 as="select"
               >
+                <option selected>Select</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -97,6 +98,7 @@ class AddReviews extends Component {
                 value={this.state.recommendedRating}
                 as="select"
               >
+                <option selected>Select</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -116,6 +118,7 @@ class AddReviews extends Component {
                 value={this.state.ceoRating}
                 as="select"
               >
+                <option selected>Select</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
