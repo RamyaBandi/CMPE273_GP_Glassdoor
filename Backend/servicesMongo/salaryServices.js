@@ -14,15 +14,14 @@ const {
 const Company = require('../models/Company');
 const Student = require('../models/Student')
 const Salaries = require('../models/Salaries')
-const redisClient = require('../config/redisConnection')
 
 module.exports.postStudentSalary = (req, res) => {
     console.log("Inside Salaries POST service");
     console.log(req.body)
     let data = req.body
     let salaries = Salaries({
-        company_id: data.company_id,
-        student_id: data.student_id,
+        companyId: data.companyId,
+        studentId: data.studentId,
         jobTitle: data.jobTitle,
         baseSalary: data.baseSalary,
         bonuses: data.bonuses,
@@ -38,14 +37,14 @@ module.exports.postStudentSalary = (req, res) => {
         }
         else {
 
-            // console.log("Review Doc created : " + JSON.stringify(result));
-            Company.findOneAndUpdate({ _id: data.company_id }, { $push: { "salaries": result._id } }, (error, results) => {
+            // console.log("Salary Doc created : " + JSON.stringify(result));
+            Company.findOneAndUpdate({ _id: data.companyId }, { $push: { "salaries": result._id } }, (error, results) => {
                 if (error) {
                     console.log("Error adding salary to company" + error)
                     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
                 }
                 else {
-                    Student.findOneAndUpdate({ _id: data.student_id }, { $push: { "companySalaries": result._id } }, (error2, results2) => {
+                    Student.findOneAndUpdate({ _id: data.studentId }, { $push: { "salaries": result._id } }, (error2, results2) => {
                         if (error2) {
                             console.log("Error adding salary to Student" + error2)
                             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error2));
@@ -71,8 +70,8 @@ module.exports.getCompanySalaries = async (req, res) => {
         try{
             data.page = 1;
             data.limit = 10;
-            const salaries = await Salaries.find({ company_id: data.company_id }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
-            const count = await Salaries.countDocuments({company_id: data.company_id});    
+            const salaries = await Salaries.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+            const count = await Salaries.countDocuments({companyId: data.companyId});    
             const result = ({
                 salaries,
                 totalPages: Math.ceil(count / data.limit),
@@ -96,7 +95,7 @@ module.exports.getStudentSalaries = (req, res) => {
     console.log("Inside Student Salaries GET service");
     console.log(req.query)
     let data = req.query
-    let salaries = Student.find({ _id: data.student_id }).select('companySalaries').populate('companySalaries').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
+    let salaries = Student.find({ _id: data.studentId }).select('salaries').populate('salaries').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
 
         if (err) {
             console.log(err);
