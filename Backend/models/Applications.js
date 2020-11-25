@@ -29,4 +29,4 @@ const Applications = new mongoose.Schema({
     }
 }, { versionKey: false })
 
-module.exports = mongoose.model('Reviews', Reviews)
+module.exports = mongoose.model('Applications', Applications);

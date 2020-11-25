@@ -10,7 +10,7 @@ const dbConfig = {
 mongoose.connect(dbConfig.mongoURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    poolSize: 500,
+    poolSize: 350,
     bufferMaxEntries: 0
 })
     .then(() => console.log('MongoDB Connected')).catch((err) => console.log(err))
