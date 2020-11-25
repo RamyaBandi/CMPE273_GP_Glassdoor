@@ -5,11 +5,11 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Redirect } from "react-router";
 import axios from 'axios';
-import { BACKEND_URL, GET_COMPANY_DETAILS, GET_COMPANY_REVIEWS} from '../../config/routeConstants';
-//import ReviewCard from "../reviews/reviewCard";
-//import Reviews from "../reviews/reviews";
+import { BACKEND_URL, GET_COMPANY_DETAILS, GET_COMPANY_REVIEWS } from '../../../config/routeConstants';
+import ReviewCard from "../../reviews/reviewCard";
+import Reviews from "../../reviews/reviews";
 
-class NavBar extends Component {
+class CompanyOverview extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,17 +20,17 @@ class NavBar extends Component {
     }
 
     onReview = async (e) => {
-        const companyid = "";
-        this.setState({ companyid :  this.state.companyDetails._id});
-        console.log("companyid in overview "+ this.state.companyid);
+        const company_id = "";
+        this.setState({ company_id: this.state.companyDetails._id });
+        //console.log("company_id in overview "+ this.state.company_id);
     }
 
     componentDidMount() {
-        const company_id = '5fb4884acf339e3da0d5c31e'
+        const company_id = '5fb4884acf339e3da0d5c31e';
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?company_id=' + company_id)
             .then(response => {
-                this.setState({ companyDetails: response.data[0], reviews: response.data[0].reviews });
-                
+                this.setState({ companyDetails: response.data[0] });
+                console.log("In componentDidMount");
                 console.log(response.data[0]);
                 console.log(this.state.companyDetails);
                 console.log(this.state.companyDetails.reviews);
@@ -38,12 +38,22 @@ class NavBar extends Component {
             .catch((error) => {
                 console.log(error);
             }
-        )
+            )
+        axios
+            .get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + company_id)
+            .then((response) => {
+                console.log("response")
+                console.log(response.data.reviews);
+                this.setState({ reviews: response.data.reviews });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     render = () => {
-        const companyid = this.state.companyDetails._id;
-        console.log(companyid);
+        //const company_id = this.state.companyDetails._id;
+        console.log(this.state.companyDetails);
         return (
             <div style={{ backgroundColor: "#eaeaea" }}>
                 {this.state.redirect}
@@ -61,7 +71,7 @@ class NavBar extends Component {
                                         <Link to="/overview" style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
                                     </div>
                                     <div class="box-content right">
-                                        <Link to={{pathname: "/reviews", state: companyid}} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
+                                        <Link to={{ pathname: "/reviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
                                     </div>
                                     <div class="box-content right">
                                         <Link to="/jobs" style={{ textDecoration: 'none', color: '#1861bf' }}>Jobs</Link>
@@ -82,9 +92,9 @@ class NavBar extends Component {
                             {/* <Button className="float-right" style={{ backgroundColor: "#1861bf" }} onClick = {this.onAddReview}>
                                 <p style={{ color: "#ffffff", marginTop: "5px", marginBottom: "5px" }}>+ Add a Review</p>
                             </Button> */}
-                            <div>
-                            <Link to={{pathname: "/addreview", state: companyid}} className="btn btn-primary" 
-                            style={{ color: "#ffffff", marginTop: "5px", marginBottom: "5px" }}>Add a Review</Link>
+                            <div className="float-right" style={{ paddingRight: "70px" }}>
+                                <Link to={{ pathname: "/addreview", state: this.state.companyDetails._id }} className="btn gd-btn-med gd-btn-icon"
+                                    style={{ color: "#ffffff", backgroundColor: "#1861bf", marginTop: "5px", marginBottom: "5px", width: "370%" }}>+ Add a Review</Link>
                             </div>
                         </Col>
                     </Row>
@@ -159,15 +169,15 @@ class NavBar extends Component {
                             <h5>Company Reviews</h5>
                         </Col>
                     </Row>
-                    {/* <Row>
-                        {this.state.companyDetails.reviews.map((item) => {
+                    <Row style = {{width: "100%"}}>
+                        {this.state.reviews.map((item) => {
                             return <ReviewCard {...item} />;
                         })}
-                    </Row> */}
+                    </Row>
                 </Container>
             </div>
         )
     }
 }
 
-export default NavBar;
+export default CompanyOverview;

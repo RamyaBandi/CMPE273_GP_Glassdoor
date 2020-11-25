@@ -17,6 +17,17 @@ module.exports = {
     //Review Routes
     POST_STUDENT_REVIEW: '/review/student/review',
     GET_COMPANY_REVIEWS : '/review/company/reviews',
+    GET_STUDENT_REVIEWS : '/review/student/reviews',
+
+    //Salary Routes
+    POST_STUDENT_SALARY: '/salary/student/salary',
+    GET_COMPANY_SALARIES : '/salaries/company/salaries',
+    GET_STUDENT_SALARIES : '/salaries/student/salaries',
+
+    //Interview Routes
+    POST_STUDENT_INTERVIEW: '/interview/student/interview',
+    GET_COMPANY_INTERVIEWS : '/interview/company/interviews',
+    GET_STUDENT_INTERVIEWS : '/interview/student/interviews',
 
     //CompanyRoutes
     GET_COMPANY_DETAILS: '/company/companyDetails',

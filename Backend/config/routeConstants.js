@@ -28,6 +28,23 @@ module.exports = {
     GET_COMPANY_REVIEWS: "/company/reviews",
     POST_COMPANY_REPLY: "/company/reply",
 
+    //Job Routes
+    JOB_ROUTE: "/job",
+    POST_COMPANY_JOB: "/company/job",
+    GET_COMPANY_JOBS: "/company/jobs",
+
+    //Salary Routes
+    SALARY_ROUTE: "/salary",
+    POST_STUDENT_SALARY: "/student/salary",
+    GET_STUDENT_SALARIES: "/student/salaries",
+    GET_COMPANY_SALARIES: "/company/salaries",
+
+    //Interview Routes
+    INTERVIEW_ROUTE: "/interview",
+    POST_STUDENT_INTERVIEW: "/student/interview",
+    GET_STUDENT_INTERVIEWS: "/student/interviews",
+    GET_COMPANY_INTERVIEWS: "/company/interviews",
+
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
 

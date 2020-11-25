@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import reviewCard from "./reviewCard";
 import axios from "axios";
 import { BACKEND_URL, POST_STUDENT_REVIEW } from '../../config/routeConstants'
 
-class Reviews extends Component {
+class AddReviews extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,8 +36,7 @@ class Reviews extends Component {
     this.setState({ description: e.target.value });
   };
   onReviewSave = async (e) => {
-    this.reviewData = {
-      
+    this.reviewData = {   
       overallRating: this.state.overallRating,
       recommendedRating: this.state.recommendedRating,
       ceoRating: this.state.ceoRating,
@@ -45,7 +44,7 @@ class Reviews extends Component {
       pros: this.state.pros,
       cons: this.state.cons,
       description: this.state.description,
-      company_id: "5fb4884acf339e3da0d5c31e",
+      company_id: this.props.location.state,
       student_id: "5fb48df63d242fa0842343f3"
     };
     axios.post(BACKEND_URL + POST_STUDENT_REVIEW, this.reviewData)
@@ -57,7 +56,6 @@ class Reviews extends Component {
   render = () => {
     return (
       <div>
-        Add review
         <Container style={{ marginLeft: "25%", width: "42%" }}>
           <Row>
             <b>Rate a Company</b>
@@ -80,6 +78,7 @@ class Reviews extends Component {
                 value={this.state.overallRating}
                 as="select"
               >
+                <option selected>Select</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -99,6 +98,7 @@ class Reviews extends Component {
                 value={this.state.recommendedRating}
                 as="select"
               >
+                <option selected>Select</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -118,6 +118,7 @@ class Reviews extends Component {
                 value={this.state.ceoRating}
                 as="select"
               >
+                <option selected>Select</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -196,9 +197,8 @@ class Reviews extends Component {
             >
               <Row>
                 <Col md={12}>
-                  <Button onClick={this.onReviewSave} block>
-                    Submit Review
-                  </Button>
+                  <Link to={{pathname: "/reviews", state: this.props.location.state}} className="btn btn-primary" 
+                            style={{ color: "#ffffff", marginTop: "5px", marginBottom: "5px" }} onClick={this.onReviewSave}>Submit Review</Link>
                 </Col>
               </Row>
             </div>
@@ -209,4 +209,4 @@ class Reviews extends Component {
   };
 }
 
-export default Reviews;
+export default AddReviews;

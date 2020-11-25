@@ -76,7 +76,15 @@ const Student_schema = new mongoose.Schema({
     },
     veteranStatus: {
         type: String,
-    }
+    },
+    salaries: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Salaries'
+    }],
+    interviews: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Interviews'
+    }],
 }, { versionKey: false })
 
 module.exports = mongoose.model('Student', Student_schema)

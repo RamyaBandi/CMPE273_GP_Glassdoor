@@ -21,8 +21,8 @@ module.exports.postStudentReview = (req, res) => {
     console.log(req.body)
     let data = req.body
     let reviews = Reviews({
-        company_id: data.company_id,
-        student_id: data.student_id,
+        companyId: data.companyId,
+        studentId: data.studentId,
         headline: data.headline,
         description: data.description,
         pros: data.pros,
@@ -42,13 +42,13 @@ module.exports.postStudentReview = (req, res) => {
         else {
 
             // console.log("Review Doc created : " + JSON.stringify(result));
-            Company.findOneAndUpdate({ _id: data.company_id }, { $push: { "reviews": result._id } }, (error, results) => {
+            Company.findOneAndUpdate({ _id: data.companyId }, { $push: { "reviews": result._id } }, (error, results) => {
                 if (error) {
                     console.log("Error adding review to company" + error)
                     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
                 }
                 else {
-                    Student.findOneAndUpdate({ _id: data.student_id }, { $push: { "companyReviews": result._id } }, (error2, results2) => {
+                    Student.findOneAndUpdate({ _id: data.studentId }, { $push: { "companyReviews": result._id } }, (error2, results2) => {
                         if (error2) {
                             console.log("Error adding review to Student" + error2)
                             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error2));
@@ -72,18 +72,18 @@ module.exports.getCompanyReviews = async (req, res) => {
     let data = req.query
     console.log(data)
 
-    if (process.env.REDIS_SWITCH == "true" && data.page == 1) {
+    if (process.env.REDIS_SWITCH == "true" && data.page == '1') {
         try {
             redisClient.get('topReviews', async (err, redisout) => {
                 // If value for key is available in Redis
-                console.log("in redis get")
-                console.log(err)
+                //console.log("in redis get")
+                //console.log(err)
                 // console.log(redisout)
 
                 if (redisout !== null) {
                     // send data as output
                     console.log("Data exists in redis")
-                    console.log(redisout.length)
+                    //console.log(redisout.length)
                     Company.countDocuments({ type: 'reviews' }, (err, count) => {
                         if (err) {
                             console.log(err);
@@ -107,10 +107,10 @@ module.exports.getCompanyReviews = async (req, res) => {
                 // If value for given key is not available in Redis
                 else {
                     // Fetch data from your database
-                    let reviews = Company.find({ _id: data.company_id }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((error, result) => {
+                    let reviews = Company.find({ _id: data.companyId }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((error, result) => {
 
                         if (error) {
-                            console.log(error);
+                            //console.log(error);
                             //res.setHeader(CONTENT_TYPE, APP_JSON);
                             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
                         }
@@ -122,7 +122,7 @@ module.exports.getCompanyReviews = async (req, res) => {
 
                             // send data as output
                             //res.setHeader(CONTENT_TYPE, APP_JSON);
-                            console.log("Reviews fetched Successfully")
+                            //console.log("Reviews fetched Successfully")
                             res.status(RES_SUCCESS).send(result[0].reviews);
                         }
                     })
@@ -131,13 +131,13 @@ module.exports.getCompanyReviews = async (req, res) => {
             })
         } catch (error) {
             // Handle error
-            console.log("Error while working with redis")
-            console.log(error);
+           // console.log("Error while working with redis")
+            //console.log(error);
 
-            let reviews = Company.find({ _id: data.company_id }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
+            let reviews = Company.find({ _id: data.companyId }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
 
                 if (err) {
-                    console.log(err);
+                    //console.log(err);
                     //res.setHeader(CONTENT_TYPE, APP_JSON);
                     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
                 }
@@ -155,8 +155,8 @@ module.exports.getCompanyReviews = async (req, res) => {
         try{
             data.page = 1;
             data.limit = 10;
-            const reviews = await Reviews.find({ company_id: data.company_id }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
-            const count = await Reviews.countDocuments({company_id: data.company_id});
+            const reviews = await Reviews.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+            const count = await Reviews.countDocuments({companyId: data.companyId});
             console.log("count" + count);
     
             const result = ({
@@ -185,7 +185,7 @@ module.exports.getStudentReviews = (req, res) => {
     console.log("Inside Student Reviews GET service");
     console.log(req.query)
     let data = req.query
-    let reviews = Student.find({ _id: data.student_id }).select('companyReviews').populate('companyReviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
+    let reviews = Student.find({ _id: data.studentId }).select('companyReviews').populate('companyReviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
 
         if (err) {
             console.log(err);

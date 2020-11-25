@@ -1,5 +1,6 @@
 const { response } = require('express');
 const con = require('../config/mongoConnection');
+const Company = require('../models/Company');
 const {
     CONTENT_TYPE,
     APP_JSON,
@@ -10,7 +11,6 @@ const {
     TEXT_PLAIN,
     RES_INTERNAL_SERVER_ERROR
 } = require("../config/routeConstants");
-const Company = require('../models/Company');
 
 module.exports.createCompanyProfile = (req, res) => {
     console.log("Inside Company Profile POST service");

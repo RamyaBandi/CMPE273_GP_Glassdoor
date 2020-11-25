@@ -13,6 +13,11 @@ import JobsTab from './components/student/HomePageTabs/jobs'
 import AdminHomePage from './components/admin/adminHomePage'
 import EmployerHomePage from './components/employer/employerHomePage'
 import Reviews from './components/reviews/reviews';
+import AddReview from './components/reviews/addReview';
+import Salaries from './components/salaries/salaries';
+import AddSalary from './components/salaries/addSalary';
+import Interviews from './components/interviews/interviews';
+import AddInterview from './components/interviews/addInterview';
 
 class Main extends Component {
     render() {
@@ -31,7 +36,12 @@ class Main extends Component {
                     <Route exact path="/adminhomepage" render={props => <AdminHomePage {...props} />} />
                     <Route exact path="/employerhomepage" render={props => <EmployerHomePage {...props} />} />
                     <Route exact path="/reviews" component={(props) => <Reviews {...props}/>} />
+                    <Route exact path="/addreview" component={(props) => <AddReview {...props}/>} />
                     <Route exact path="/overview" component={companyOverview} />
+                    <Route exact path="/salaries" component={(props) => <Salaries {...props} />} />
+                    <Route exact path="/addsalary" component={(props) => <AddSalary {...props} />} />
+                    <Route exact path="/interviews" component={(props) => <Interviews {...props} />} />
+                    <Route exact path="/addinterview" component={(props) => <AddInterview {...props} />} />
                 </div>
             </div>
         )

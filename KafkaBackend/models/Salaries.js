@@ -1,8 +1,16 @@
 
 const mongoose = require("mongoose");
 const Salaries = new mongoose.Schema({
-    jobTitle: {
+    companyId: {
         type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
+    studentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
+    jobTitle: {
+        type: String,
         required: true,
     },
     baseSalary: {
@@ -22,7 +30,7 @@ const Salaries = new mongoose.Schema({
         required: true
     },
     employerName: {
-        type: Number,
+        type: String,
         required: true
     },
 
