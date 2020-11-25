@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
-
-const Reviews = require('./Reviews')
-
+const Reviews = require('./Reviews');
 
 const Company = new mongoose.Schema({
     companyName: {

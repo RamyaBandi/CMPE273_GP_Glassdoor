@@ -28,6 +28,11 @@ module.exports = {
     GET_COMPANY_REVIEWS: "/company/reviews",
     POST_COMPANY_REPLY: "/company/reply",
 
+    //Job Routes
+    JOB_ROUTE: "/job",
+    POST_COMPANY_JOB: "/company/job",
+    GET_COMPANY_JOBS: "/company/jobs",
+
     //Salary Routes
     SALARY_ROUTE: "/salary",
     POST_STUDENT_SALARY: "/student/salary",
