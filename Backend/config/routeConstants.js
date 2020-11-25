@@ -39,6 +39,12 @@ module.exports = {
     GET_STUDENT_SALARIES: "/student/salaries",
     GET_COMPANY_SALARIES: "/company/salaries",
 
+    //Interview Routes
+    INTERVIEW_ROUTE: "/interview",
+    POST_STUDENT_INTERVIEW: "/student/interview",
+    GET_STUDENT_INTERVIEWS: "/student/interviews",
+    GET_COMPANY_INTERVIEWS: "/company/interviews",
+
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
 
