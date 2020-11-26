@@ -37,6 +37,8 @@ class PostJobs extends Component {
         console.log(data);
         Axios.post(`${routeConstants.BACKEND_URL}${routeConstants.JOB_ROUTE}${routeConstants.POST_COMPANY_JOB}`, data).then((res) => {
             console.log(res);
+            window.alert("Job created Successfully")
+            this.props.history.push('/employer/jobs/list')
         }).catch((err) => {
             console.log("Error Posting Job");
             window.alert("Error posting job")

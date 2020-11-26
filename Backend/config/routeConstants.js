@@ -24,9 +24,9 @@ module.exports = {
     JOB_ROUTE: "/job",
     POST_COMPANY_JOB: "/company/job",
     GET_COMPANY_JOBS: "/company/jobs",
-    GET_COMPANY_JOB: '/job',
-    PUT_COMPANY_JOB: '/job',
-    GET_ALL_JOBS: '/jobList',
+    GET_COMPANY_JOB: '/company/job',
+    PUT_COMPANY_JOB: '/company/job',
+    GET_ALL_JOBS: '/company/jobList',
 
 
     //Review Routes

@@ -15,6 +15,7 @@ if (process.env.KAFKA_SWITCH === 'true') {
 }
 else {
     jobRouter.route(POST_COMPANY_JOB).post(jobServices.postCompanyJob);
+    jobRouter.route(PUT_COMPANY_JOB).put(jobServices.updateCompanyJob);
     jobRouter.route(GET_COMPANY_JOBS).get(jobServices.getCompanyJobs);
     jobRouter.route(GET_ALL_JOBS).get(jobServices.getAllJobs);
 
