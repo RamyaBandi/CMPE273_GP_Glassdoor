@@ -1,3 +1,5 @@
+const Jobs = require('../models/Jobs');
+const Company = require('../models/Company')
 const { response } = require('express');
 const con = require('../config/mongoConnection');
 const {
@@ -8,19 +10,17 @@ const {
     RES_NOT_FOUND,
     RES_DUPLICATE_RESOURCE,
     TEXT_PLAIN,
-    RES_INTERNAL_SERVER_ERROR
+    RES_INTERNAL_SERVER_ERROR,
+    POST_LOGIN
 } = require("../config/routeConstants");
 
-const Company = require('../models/Company');
-const Student = require('../models/Student');
-const Jobs = require('../models/Jobs');
-const redisClient = require('../config/redisConnection');
+// const redisClient = require('../config/redisConnection');
 
 module.exports.postCompanyJob = (req, res) => {
     console.log("Inside Jobs POST service");
     console.log(req.body)
     let data = req.body
-    let jobs = Jobs({
+    let job = Jobs({
         companyId: data.companyId,
         companyName: data.companyName,
         jobTitle: data.jobTitle,
@@ -34,23 +34,58 @@ module.exports.postCompanyJob = (req, res) => {
         state: data.state,
         zip: data.zip
     })
-    jobs.save((err, result) => {
+    job.save((err, result) => {
+
         if (err) {
+            console.log("Error creating job")
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
-            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
         }
         else {
-            Company.findOneAndUpdate({ _id: data.companyId }, { $push: { "jobs": result._id } }, (error, results) => {
+            // console.log(JSON.stringify(result));
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            Company.findOneAndUpdate({ _id: data.companyId }, { $push: { 'jobs': result._id } }, (error, res) => {
                 if (error) {
-                    console.log("Error adding job to company" + error)
+                    console.log("Error Updating Company with job id")
+                    console.log(error);
+                    //res.setHeader(CONTENT_TYPE, APP_JSON);
                     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
                 }
                 else {
-                    console.log("Job inserted successfully");
-                    res.status(RES_SUCCESS).end(JSON.stringify(results));
+                    // console.log(JSON.stringify(result));
+                    //res.setHeader(CONTENT_TYPE, APP_JSON);
+                    console.log("Job created Successfully");
+                    console.log(result);
+                    res.status(RES_SUCCESS).send(result);
                 }
             })
+
+        }
+    })
+}
+
+
+module.exports.getAllJobs = (req, res) => {
+
+    console.log("Inside Job GET all service");
+    console.log(req.query)
+    let data = req.body
+    Jobs.find((err, result) => {
+
+        if (err) {
+            console.log("Error fetching job")
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+        }
+        else {
+            // console.log(JSON.stringify(result));
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            console.log("Jobs fetched Successfully");
+            console.log(result);
+            res.status(RES_SUCCESS).send(result);
+
         }
     })
 }

@@ -6,7 +6,7 @@ const salaryKafkaServices = require("../servicesKafka/salaryServices.js");
 
 const { POST_STUDENT_SALARY, GET_COMPANY_SALARIES, GET_STUDENT_SALARIES } = require('../config/routeConstants');
 
-console.log(process.env.KAFKA_SWITCH)
+// console.log(process.env.KAFKA_SWITCH)
 if (process.env.KAFKA_SWITCH === 'true') {
     console.log("in kafka service")
     salaryRouter.route(POST_STUDENT_SALARY).post(salaryKafkaServices.postStudentSalary);

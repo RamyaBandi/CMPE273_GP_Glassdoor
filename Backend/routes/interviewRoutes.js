@@ -6,7 +6,7 @@ const interviewKafkaServices = require("../servicesKafka/interviewServices.js");
 
 const { POST_STUDENT_INTERVIEW, GET_COMPANY_INTERVIEWS, GET_STUDENT_INTERVIEWS } = require('../config/routeConstants');
 
-console.log(process.env.KAFKA_SWITCH)
+// console.log(process.env.KAFKA_SWITCH)
 if (process.env.KAFKA_SWITCH === 'true') {
     console.log("in kafka service")
     interviewRouter.route(POST_STUDENT_INTERVIEW).post(interviewKafkaServices.postStudentInterview);

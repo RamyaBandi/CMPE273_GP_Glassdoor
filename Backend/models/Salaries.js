@@ -5,6 +5,10 @@ const Salaries = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     },
+    jobId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
     studentId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
