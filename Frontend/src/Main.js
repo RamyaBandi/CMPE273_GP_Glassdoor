@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import companyOverview from './components/student/companyOverview';
+import companyOverview from './components/student/companyTabs/companyOverview';
 import NavBar from './components/landingPage/navBar'
 import LandingPageDesc from './components/landingPage/landingPageDescription'
 import Register from './components/Registration_Login/Registration'
