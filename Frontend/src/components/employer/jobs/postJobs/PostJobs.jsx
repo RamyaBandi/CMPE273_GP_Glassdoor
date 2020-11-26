@@ -25,7 +25,7 @@ class PostJobs extends Component {
         e.preventDefault();
         let data = {
             ...this.state,
-            companyId: localStorage.getItem('mongo_id'),
+            companyId: localStorage.getItem('mongoId'),
             companyName: localStorage.getItem('name'),
         }
         if (this.state.remote) {

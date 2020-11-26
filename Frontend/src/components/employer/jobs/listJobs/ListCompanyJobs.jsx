@@ -7,7 +7,7 @@ class ListCompanyJobs extends Component {
     componentDidMount = () => {
         console.log(`${BACKEND_URL}${JOB_ROUTE}${GET_COMPANY_JOB}`)
         Axios.get(`${BACKEND_URL}${JOB_ROUTE}${GET_COMPANY_JOB}`, {
-            companyId: localStorage.getItem('mongo_id')
+            companyId: localStorage.getItem('mongoId')
         })
             .then((res) => {
                 console.log(res)

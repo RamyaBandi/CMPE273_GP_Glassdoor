@@ -32,18 +32,13 @@ module.exports = {
     //CompanyRoutes
     GET_COMPANY_DETAILS: '/company/companyDetails',
 
-
-    //Jobs Routes
-    JOB_ROUTE: '/jobs',
-    POST_COMPANY_JOB: "/job",
-    GET_COMPANY_JOBS: '/jobs',
+    //Job Routes
+    JOB_ROUTE: "/job",
+    POST_COMPANY_JOB: "/company/job",
+    GET_COMPANY_JOBS: "/company/jobs",
     GET_COMPANY_JOB: '/job',
     PUT_COMPANY_JOB: '/job',
     GET_ALL_JOBS: '/jobList',
-
-
-
-
 
     //KAFKA TOPICS
     TOPIC_RESTAURANT: 'restaurant',
