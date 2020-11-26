@@ -8,6 +8,10 @@ const Interviews = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     },
+    studentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
     overallExperience: {
         type: Number,
         enum: [-1, 0, 1],

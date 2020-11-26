@@ -29,6 +29,7 @@ const reviewRoutes = require('./routes/reviewRoutes');
 const companyRoutes = require('./routes/companyRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 const salaryRoutes = require('./routes/salaryRoutes');
+const interviewRoutes = require('./routes/interviewRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 
 //use express session to maintain session data
@@ -60,8 +61,8 @@ app.use(routeConstants.REVIEW_ROUTE, reviewRoutes)
 app.use(routeConstants.COMPANY_ROUTE, companyRoutes)
 app.use(routeConstants.STUDENT_ROUTE, studentRoutes)
 app.use(routeConstants.SALARY_ROUTE, salaryRoutes)
-app.use(routeConstants.JOB_ROUTE, jobRoutes)
-
+app.use(routeConstants.INTERVIEW_ROUTE, interviewRoutes)
+app.use(routeConstants.JOB_ROUTE, jobRoutes);
 
 //start your server on port 3001
 app.listen(3001);

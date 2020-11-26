@@ -16,6 +16,7 @@ import Reviews from './components/reviews/reviews';
 import AddReview from './components/reviews/addReview';
 import Salaries from './components/salaries/salaries';
 import AddSalary from './components/salaries/addSalary';
+import Interviews from './components/interviews/interviews';
 import AddInterview from './components/interviews/addInterview';
 import JobsHome from './components/employer/jobs/jobsHome/JobsHome';
 import PostJobs from './components/employer/jobs/postJobs/PostJobs';
@@ -43,6 +44,7 @@ class Main extends Component {
                     <Route exact path="/overview" component={companyOverview} />
                     <Route exact path="/salaries" component={(props) => <Salaries {...props} />} />
                     <Route exact path="/addsalary" component={(props) => <AddSalary {...props} />} />
+                    <Route exact path="/interviews" component={(props) => <Interviews {...props} />} />
                     <Route exact path="/addinterview" component={(props) => <AddInterview {...props} />} />
 
                     {//Employer Routes

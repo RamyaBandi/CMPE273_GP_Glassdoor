@@ -75,6 +75,14 @@ const Company = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Photos'
     }],
+    salaries: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Salaries'
+    }],
+    interviews: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Interviews'
+    }],
 
 }, { versionKey: false })
 

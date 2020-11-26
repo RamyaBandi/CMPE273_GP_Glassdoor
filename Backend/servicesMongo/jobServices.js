@@ -1,5 +1,7 @@
 const Jobs = require('../models/Jobs');
 const Company = require('../models/Company')
+const { response } = require('express');
+const con = require('../config/mongoConnection');
 const {
     CONTENT_TYPE,
     APP_JSON,
@@ -12,16 +14,17 @@ const {
     POST_LOGIN
 } = require("../config/routeConstants");
 
-module.exports.postJob = (req, res) => {
+// const redisClient = require('../config/redisConnection');
 
-    console.log("Inside Job POST service");
+module.exports.postCompanyJob = (req, res) => {
+    console.log("Inside Jobs POST service");
     console.log(req.body)
     let data = req.body
     let job = Jobs({
         companyId: data.companyId,
         companyName: data.companyName,
         jobTitle: data.jobTitle,
-        postedDate: Date.now(),
+        postedDate: data.postedDate,
         industry: data.industry,
         responsibilities: data.responsibilities,
         country: data.country,
@@ -82,29 +85,34 @@ module.exports.getAllJobs = (req, res) => {
             console.log("Jobs fetched Successfully");
             console.log(result);
             res.status(RES_SUCCESS).send(result);
+
         }
     })
 }
 
+module.exports.getCompanyJobs = async (req, res) => {
 
-module.exports.getJobById = (req, res) => {
-    console.log("Inside Job GET by ID service");
-    console.log(req.query)
+    console.log("Inside Company Jobs GET service");
     let data = req.query
-    Jobs.find({ companyId: data.companyId }, (err, result) => {
-
+    console.log(data)
+    try {
+        data.page = 1;
+        data.limit = 10;
+        const jobs = await Jobs.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+        const count = await Jobs.countDocuments({ companyId: data.companyId });
+        const result = ({
+            jobs,
+            totalPages: Math.ceil(count / data.limit),
+            currentPage: data.page
+        });
+        console.log("Jobs fetched successfully from DB - page not 1 or redis off")
+        res.status(RES_SUCCESS).send(result);
+    }
+    catch {
         if (err) {
-            console.log("Error fetching job")
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
-            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
         }
-        else {
-            // console.log(JSON.stringify(result));
-            //res.setHeader(CONTENT_TYPE, APP_JSON);
-            console.log("Jobs fetched Successfully");
-            console.log(result);
-            res.status(RES_SUCCESS).send(result);
-        }
-    })
+    }
 }

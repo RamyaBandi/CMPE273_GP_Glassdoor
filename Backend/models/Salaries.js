@@ -9,6 +9,14 @@ const Salaries = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     },
+    studentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
+    jobTitle: {
+        type: String,
+        required: true,
+    },
     baseSalary: {
         type: Number,
         required: true
