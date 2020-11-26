@@ -8,8 +8,8 @@ const {
 
 // jobRouter.route(GET_COMPANY_JOBS).get(jobServices.updateCompanyProfile);
 jobRouter.route(POST_COMPANY_JOB).post(jobServices.postJob);
-// jobRouter.route(GET_COMPANY_JOB).get(jobServices.getJobById);
-// jobRouter.route(GET_ALL_JOBS).get(jobServices.getAllJobs);
+jobRouter.route(GET_COMPANY_JOB).get(jobServices.getJobById);
+jobRouter.route(GET_ALL_JOBS).get(jobServices.getAllJobs);
 // jobRouter.route(PUT_COMPANY_JOB).get(jobServices.updateJobById);
 
 

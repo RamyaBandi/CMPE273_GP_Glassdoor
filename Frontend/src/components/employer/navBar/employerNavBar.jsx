@@ -6,6 +6,13 @@ import glassdoor_font from '../../../images/glassdoor_font.PNG'
 // var FontAwesome = require('react-fontawesome');
 
 class EmployerNavBar extends React.Component {
+    handleLogout = () => {
+
+        localStorage.clear();
+        // console.log(this.props)
+        this.props.props.history.push('/')
+
+    }
     render() {
         return (
             <div>
@@ -21,7 +28,7 @@ class EmployerNavBar extends React.Component {
                                         <td style={{ width: "75%" }} >
                                         </td>
                                         <td style={{ width: "10%", marginLeft: "0%" }} >
-                                            <button type="button" className="btn btn-success" title="Log Out">Logout</button>
+                                            <button type="button" className="btn btn-success" onClick={this.handleLogout} title="Log Out">Logout</button>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const Interviews = new mongoose.Schema({
-    employerName: {
+    companyId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
+    studentId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     },

@@ -62,6 +62,7 @@ class Login extends Component {
             localStorage.setItem("name", decoded.name);
             localStorage.setItem("email", decoded.email);
             localStorage.setItem("role", decoded.role);
+            localStorage.setItem("mongo_id", decoded.user_id);
 
             if (localStorage.getItem('role') === "admin") {
                 this.props.history.replace(`/adminhomepage`);

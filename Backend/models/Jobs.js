@@ -33,7 +33,7 @@ const Jobs = new mongoose.Schema({
         required: true
     },
     streetAddress: {
-        type: Number,
+        type: String,
         required: true
     },
     city: {

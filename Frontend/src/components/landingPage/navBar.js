@@ -11,10 +11,10 @@ class Navbar extends Component {
         let renderVar
         if (localStorage.getItem('id')) {
             if (localStorage.getItem('role') === 'employer') {
-                renderVar = <EmployerNavBar />
+                renderVar = <EmployerNavBar props={this.props} />
             }
             else {
-                renderVar = <LoggedInNav />
+                renderVar = <LoggedInNav props={this.props} />
             }
         }
         else {

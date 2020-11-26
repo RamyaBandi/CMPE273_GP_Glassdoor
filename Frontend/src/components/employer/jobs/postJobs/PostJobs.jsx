@@ -4,8 +4,9 @@ import Axios from 'axios'
 import routeConstants from '../../../../config/routeConstants';
 class PostJobs extends Component {
     state = {
+        companyId: "",
+        companyName: "",
         jobTitle: "",
-        postedDate: "",
         industry: "",
         responsibilities: "",
         country: "",
@@ -22,7 +23,11 @@ class PostJobs extends Component {
     };
     handleSubmit = (e) => {
         e.preventDefault();
-        let data = { ...this.state }
+        let data = {
+            ...this.state,
+            companyId: localStorage.getItem('mongo_id'),
+            companyName: localStorage.getItem('name'),
+        }
         if (this.state.remote) {
             data.remote = true;
         }
@@ -30,7 +35,7 @@ class PostJobs extends Component {
             data.remote = false;
         }
         console.log(data);
-        Axios.post(`${routeConstants.BACKEND_URL}/${routeConstants.JOB_ROUTE}${routeConstants.POST_COMPANY_JOB}`, data).then((res) => {
+        Axios.post(`${routeConstants.BACKEND_URL}${routeConstants.JOB_ROUTE}${routeConstants.POST_COMPANY_JOB}`, data).then((res) => {
             console.log(res);
         }).catch((err) => {
             console.log("Error Posting Job");
