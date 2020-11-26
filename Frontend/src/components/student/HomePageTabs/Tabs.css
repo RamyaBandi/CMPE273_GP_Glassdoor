@@ -1,0 +1,136 @@
+.body{
+    padding-top: 1rem;
+    background-color: #eaeaea;
+    width: 100%; 
+    height: 100%; 
+    min-width: 1000px; 
+    min-height: 1000px;
+    left: 5%;
+    right: 5%;
+}
+.card{
+    margin-bottom: 1rem;
+    background-color: white;
+    width: "18rem";
+}
+.card-img-top{
+    width: 100%;
+    height: 200px;
+}
+
+.card-body{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.companyRating{
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #0caa41;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 12px;
+    font-weight: 700;
+    top: -2px;
+    padding-top: 2.5px;
+    position: relative;
+    font-family: 'Lato', sans-serif;
+}
+
+.companyName{
+    font-size: 15px;
+    color: #404040;
+    line-height: 1.33;
+     padding-right: 10px;
+     top: -1px;
+     position: relative;
+     font-family: 'Lato', sans-serif;
+
+}
+.companyLocation{
+    font-size: 12px;
+    line-height: 20px;
+    color: #858c94;
+    font-family: 'Lato', sans-serif;
+}
+.companySite{
+    border: 1px solid transparent;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1.6;
+    user-select: none;
+    vertical-align: middle;
+    transition: color 0.2s ease-out 0s, background-color 0.2s ease-out 0s;
+    font-family: Lato;
+    white-space: nowrap;
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
+    min-width: 88px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(24, 97, 191);
+    padding: 7px 16px;
+    margin-left: 50%;
+    font-family: 'Lato', sans-serif;
+}
+
+.companyInsights{
+    width: 100%;
+     display:inline-block;
+      justify-content: space-between; 
+      box-sizing: inherit;
+}
+.companyReviewsHeading{
+    font-size: 15px;
+    line-height: 10px;
+    /* overflow: hidden; */
+    padding-top: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 15px;
+    color: #404040;
+    font-weight: 540;
+    font-family: 'Lato', sans-serif;
+    /* padding-right: 5px; */
+}
+
+.companyReviewsContent{
+    font-size: 14px;
+    line-height: 10px;
+    /* overflow: hidden; */
+    padding-top: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 15px;
+    color: #404040;
+    font-family: 'Lato', sans-serif;
+    position: relative;
+    /* padding-top: 5px; */
+}
+.card-text{
+    display: flex;
+}
+.insightHeading{
+    font-size: 16px;
+    line-height: 15px;
+    overflow: hidden;
+    padding-top: 2px;
+    padding-bottom: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 15px;
+    color: #404040;
+    font-weight: bolder;
+    font-family: 'Lato', sans-serif;
+}
+.insights{
+    width: 350px;
+    border: 1px solid #dee0e3;
+    padding: 10px;
+    /* margin: 10px; */
+}

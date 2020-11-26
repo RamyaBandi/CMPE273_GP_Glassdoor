@@ -1,19 +1,41 @@
 module.exports = {
     FRONTEND_URL: "http://localhost:3000",
-    // BACKEND_URL: "http://localhost:3001",
+    BACKEND_URL: "http://localhost:3001",
     // BACKEND_URL: 'http://13.52.213.227:3001',
-    BACKEND_URL: 'http://54.67.58.148:3001',
+    // BACKEND_URL: 'http://54.67.58.148:3001',
 
-    //CustomerRoutes
-    GET_CUSTOMER_PROFILE: '/profile',
-    GET_ALL_CUSTOMER_PROFILES: '/allcustomers',
-    POST_CUSTOMER_SIGNUP: '/signup',
-    UPDATE_CUSTOMER_PROFILE: '/profile',
+    //Input validation
 
+    FETCH_VALIDATIONDETAILS : '/validateroute/validationinput',
 
+    // Registration Routes
+    POST_REGISTRATION : '/registerroute/register',
 
     //Login Routes
-    POST_LOGIN: '/login',
+    POST_LOGIN : '/loginroute/login',
+
+    //Review Routes
+    POST_STUDENT_REVIEW: '/review/student/review',
+    GET_COMPANY_REVIEWS : '/review/company/reviews',
+    GET_STUDENT_REVIEWS : '/review/student/reviews',
+
+    //Salary Routes
+    POST_STUDENT_SALARY: '/salary/student/salary',
+    GET_COMPANY_SALARIES : '/salaries/company/salaries',
+    GET_STUDENT_SALARIES : '/salaries/student/salaries',
+
+    //Interview Routes
+    POST_STUDENT_INTERVIEW: '/interview/student/interview',
+    GET_COMPANY_INTERVIEWS : '/interview/company/interviews',
+    GET_STUDENT_INTERVIEWS : '/interview/student/interviews',
+
+    //CompanyRoutes
+    GET_COMPANY_DETAILS: '/company/companyDetails',
+    COMPANY_ROUTE: "/company",
+    PUT_COMPANY_SIGNUP: "/company/profile",
+    GET_COMPANY_SIGNUP: "/company/profile",
+    POST_COMPANY_SIGNUP: "/company/profile",
+
 
     //RestaurantRoutes
     // GET_RESTAURANT_BY_ID:'/restaurant/id/',
