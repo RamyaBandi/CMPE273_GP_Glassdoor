@@ -11,6 +11,17 @@ module.exports = {
     STUDENT_ROUTE: "/student",
     POST_STUDENT_SIGNUP: "/student/profile",
 
+    //Student Search Routes
+    GET_SEARCH_RESULTS: "/search",
+    GET_JOB_SEARCH : "/search/jobsearch",
+    GET_COMPANY_SEARCH : "/search/companysearch",
+    GET_SALARY_SEARCH : "/search/salarysearch",
+    GET_INTERVIEW_SEARCH : "/search/interviewsearch",
+
+    //Student Jobs Home Page
+
+    GET_JOBS_HOMEPAGE : "/jobshomepage",
+
     //Company Routes
     COMPANY_ROUTE: "/company",
     PUT_COMPANY_SIGNUP: "/company/profile",
