@@ -6,12 +6,12 @@ const Interviews = new mongoose.Schema({
     },
     studentId: {
         type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
+    studentId: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    // employerName: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     required: true,
-    // },
     overallExperience: {
         type: Number,
         enum: [-1, 0, 1],

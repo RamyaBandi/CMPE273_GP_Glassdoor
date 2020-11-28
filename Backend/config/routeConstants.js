@@ -31,6 +31,15 @@ module.exports = {
     //Company Details Routes
     GET_COMPANY_DETAILS: "/companyDetails",
 
+    //Job Routes
+    JOB_ROUTE: "/job",
+    POST_COMPANY_JOB: "/company/job",
+    GET_COMPANY_JOBS: "/company/jobs",
+    GET_COMPANY_JOB: '/company/job',
+    PUT_COMPANY_JOB: '/company/job',
+    GET_ALL_JOBS: '/company/jobList',
+
+
     //Review Routes
     REVIEW_ROUTE: "/review",
     POST_STUDENT_REVIEW: "/student/review",
@@ -38,11 +47,6 @@ module.exports = {
     GET_ALL_REVIEWS: "/company/reviews",
     GET_COMPANY_REVIEWS: "/company/reviews",
     POST_COMPANY_REPLY: "/company/reply",
-
-    //Job Routes
-    JOB_ROUTE: "/job",
-    POST_COMPANY_JOB: "/company/job",
-    GET_COMPANY_JOBS: "/company/jobs",
 
     //Salary Routes
     SALARY_ROUTE: "/salary",

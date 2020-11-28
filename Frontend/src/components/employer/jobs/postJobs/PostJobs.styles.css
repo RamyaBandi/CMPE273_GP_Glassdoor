@@ -1,0 +1,7 @@
+.postJobs{
+    width: 70%;
+}
+.postJobContainer{
+    display: flex;
+    justify-content: center;
+}
