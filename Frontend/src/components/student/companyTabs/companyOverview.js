@@ -77,10 +77,10 @@ class CompanyOverview extends Component {
                                         <Link to="/jobs" style={{ textDecoration: 'none', color: '#1861bf' }}>Jobs</Link>
                                     </div>
                                     <div class="box-content right">
-                                        <Link to="/salaries" style={{ textDecoration: 'none', color: '#1861bf' }}>Salaries</Link>
+                                        <Link to={{ pathname: "/salaries", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Salaries</Link>
                                     </div>
                                     <div class="box-content right">
-                                        <Link to="/interviews" style={{ textDecoration: 'none', color: '#1861bf' }}>Interviews</Link>
+                                        <Link to={{ pathname: "/interviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Interviews</Link>
                                     </div>
                                     <div class="box-content">
                                         <Link to="/photos" style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
