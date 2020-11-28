@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 
-const Reviews = require('./Reviews')
-
-
 const Company = new mongoose.Schema({
     companyName: {
         type: String,
@@ -77,6 +74,14 @@ const Company = new mongoose.Schema({
     photos: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Photos'
+    }],
+    salaries: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Salaries'
+    }],
+    interviews: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Interviews'
     }],
 
 }, { versionKey: false })

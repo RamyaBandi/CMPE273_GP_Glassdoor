@@ -20,6 +20,15 @@ module.exports = {
     //Company Details Routes
     GET_COMPANY_DETAILS: "/companyDetails",
 
+    //Job Routes
+    JOB_ROUTE: "/job",
+    POST_COMPANY_JOB: "/company/job",
+    GET_COMPANY_JOBS: "/company/jobs",
+    GET_COMPANY_JOB: '/job',
+    PUT_COMPANY_JOB: '/job',
+    GET_ALL_JOBS: '/jobList',
+
+
     //Review Routes
     REVIEW_ROUTE: "/review",
     POST_STUDENT_REVIEW: "/student/review",
@@ -33,6 +42,12 @@ module.exports = {
     POST_STUDENT_SALARY: "/student/salary",
     GET_STUDENT_SALARIES: "/student/salaries",
     GET_COMPANY_SALARIES: "/company/salaries",
+
+    //Interview Routes
+    INTERVIEW_ROUTE: "/interview",
+    POST_STUDENT_INTERVIEW: "/student/interview",
+    GET_STUDENT_INTERVIEWS: "/student/interviews",
+    GET_COMPANY_INTERVIEWS: "/company/interviews",
 
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
