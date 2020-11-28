@@ -6,6 +6,32 @@ import glassdoor_font from '../../images/glassdoor_font.PNG'
 var FontAwesome = require('react-fontawesome');
 
 class loggedInNav extends React.Component {
+    constructor(){
+        super()
+        this.state = {
+            searchParameter : '',
+            selectedOption : '',
+            searchLocation : ''
+        }
+        this.handleChange = this.handleChange.bind(this)
+        this.handleCategoryChange = this.handleCategoryChange.bind(this)
+    }
+    handleChange(event){
+        event.preventDefault()
+        this.setState({
+            [event.target.name] : event.target.value
+        })
+       
+    }
+
+    handleCategoryChange(event){
+        event.preventDefault();
+        this.setState({
+            selectedOption : event.target.value
+        })
+
+    }
+
     render() {
         return (
             <header style={{ boxShadow: "inset 0 -1px 0 0 #dee0e3", background: "#fff", height: "178px", width: "100%" }}>
@@ -18,14 +44,14 @@ class loggedInNav extends React.Component {
                                 </td>
                                 <td style={{ width: "75%" }} >
                                     <form class="form-inline">
-                                        <input class="inputSearch" style={{ width: "30%", marginLeft: "15px" }} type="search" placeholder="Search" aria-label="Search" />
-                                        <select class="inputSearch" style={{ width: "10%", marginLeft: "15px" }} name="cars" id="cars">
-                                            <option value="volvo">Jobs</option>
-                                            <option value="saab">Companies</option>
-                                            <option value="mercedes">Salaries</option>
-                                            <option value="audi">Interviews</option>
+                                        <input class="inputSearch" style={{ width: "30%", marginLeft: "15px" }}  name = "searchParameter" onChange= {this.handleChange} type="search" placeholder="Search" aria-label="Search" />
+                                        <select class="inputSearch" value = {this.state.selectedOption} style={{ width: "10%", marginLeft: "15px" }} onChange= {this.handleCategoryChange} name="cars" id="cars">
+                                            <option value="jobs">Jobs</option>
+                                            <option value="companies">Companies</option>
+                                            <option value="salaries">Salaries</option>
+                                            <option value="interviews">Interviews</option>
                                         </select>
-                                        <input class="inputSearch" style={{ width: "30%", marginLeft: "15px" }} type="search" placeholder="location" aria-label="Search" />
+                                        <input class="inputSearch" style={{ width: "30%", marginLeft: "15px" }} name = "searchLocation" onChange= {this.handleChange} type="search" placeholder="location" aria-label="Search" />
                                         <button class="submitSearch" style={{ marginLeft: "15px" }} type="submit">Search</button>
                                     </form>
                                 </td>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import companyOverview from './components/student/companyOverview';
+import companyOverview from './components/student/companyTabs/companyOverview';
 import NavBar from './components/landingPage/navBar'
 import LandingPageDesc from './components/landingPage/landingPageDescription'
 import Register from './components/Registration_Login/Registration'
@@ -14,10 +14,10 @@ import AdminHomePage from './components/admin/adminHomePage'
 import EmployerHomePage from './components/employer/homePage/EmployerHome'
 import Reviews from './components/reviews/reviews';
 import AddReview from './components/reviews/addReview';
-import Salaries from './components/salaries/salaries';
-import AddSalary from './components/salaries/addSalary';
-import Interviews from './components/interviews/interviews';
-import AddInterview from './components/interviews/addInterview';
+import Salaries from './components/student/salaries/salaries';
+import AddSalary from './components/student/salaries/addSalary';
+import Interviews from './components/student/interviews/interviews';
+import AddInterview from './components/student/interviews/addInterview';
 import JobsHome from './components/employer/jobs/jobsHome/JobsHome';
 import PostJobs from './components/employer/jobs/postJobs/PostJobs';
 import ListJobs from './components/employer/jobs/listJobs/ListJobs';

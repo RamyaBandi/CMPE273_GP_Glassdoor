@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import axios from "axios";
-import { BACKEND_URL, POST_STUDENT_INTERVIEW } from '../../config/routeConstants'
+import { BACKEND_URL, POST_STUDENT_INTERVIEW } from '../../../config/routeConstants'
 
 class AddInterview extends Component {
   constructor(props) {
@@ -67,10 +67,10 @@ class AddInterview extends Component {
             </form>
           </Row>
           <Row>
-          <p>Rate Overall Experience</p><br></br>
+          <p>Rate Overall Experience</p>
           </Row>
           <Row>             
-          <div class="btn-group btn-group-toggle" data-toggle="buttons" style={{ marginTop: "20px", width: "50%" , marginLeft: "0px", marginRight: "0px" }}>             
+          <div class="btn-group btn-group-toggle" data-toggle="buttons" style={{ marginTop: "0px", width: "50%" , marginLeft: "0px", marginRight: "0px" }}>             
             <label class="btn btn-secondary active" for="positive">
             <input type="radio" onChange={this.onChangeOverallExperience} value={this.state.overallExperience} name="overallExperience" id="positive"/> Positive  
             </label>      
@@ -83,7 +83,7 @@ class AddInterview extends Component {
           </div>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "50%" }}>
+            <form style={{ marginTop: "10px", width: "50%" }}>
               <div class="form-group">
                 <label for="jobtitle">Job Title</label>
                 <input
