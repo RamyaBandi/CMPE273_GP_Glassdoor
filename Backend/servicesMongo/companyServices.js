@@ -50,7 +50,7 @@ module.exports.updateCompanyProfile = (req, res) => {
         description: data.description,
         ceoName: data.ceoName,
     }
-    Company.findByIdAndUpdate(data.company_id, company_update, (err, result) => {
+    Company.findByIdAndUpdate(data.companyId, company_update, (err, result) => {
         if (err) {
             console.log("Error updating company profile" + err)
             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
@@ -67,7 +67,7 @@ module.exports.getCompanyProfile = (req, res) => {
     console.log("Inside Company Profile GET service");
     console.log(req.query)
     let data = req.query
-    let companyDetails = Company.find({ _id: data.company_id }).exec((err, result) => {
+    let companyDetails = Company.find({ _id: data.companyId }).exec((err, result) => {
 
         if (err) {
             console.log(err);
