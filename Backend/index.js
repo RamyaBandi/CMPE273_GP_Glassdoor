@@ -25,11 +25,13 @@ app.use(cors({ origin: `${routeConstants.FRONTEND_URL}`, credentials: true }));
 const validateroutes = require('./routes/inputValidationRoute');
 const registerRoutes = require('./routes/registerRoute');
 const loginRoutes = require('./routes/loginRoute');
+const searchRoutes = require('./routes/searchRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const companyRoutes = require('./routes/companyRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 const salaryRoutes = require('./routes/salaryRoutes');
 const interviewRoutes = require('./routes/interviewRoutes');
+const jobsHomePageRoutes = require('./routes/jobsHomePageRoutes')
 const jobRoutes = require('./routes/jobRoutes');
 
 //use express session to maintain session data
@@ -57,11 +59,13 @@ app.use(function (req, res, next) {
 app.use('/validateroute', validateroutes)
 app.use('/registerroute', registerRoutes);
 app.use('/loginroute', loginRoutes);
-app.use(routeConstants.REVIEW_ROUTE, reviewRoutes)
-app.use(routeConstants.COMPANY_ROUTE, companyRoutes)
-app.use(routeConstants.STUDENT_ROUTE, studentRoutes)
-app.use(routeConstants.SALARY_ROUTE, salaryRoutes)
-app.use(routeConstants.INTERVIEW_ROUTE, interviewRoutes)
+app.use(routeConstants.GET_SEARCH_RESULTS, searchRoutes);
+app.use(routeConstants.REVIEW_ROUTE, reviewRoutes);
+app.use(routeConstants.COMPANY_ROUTE, companyRoutes);
+app.use(routeConstants.STUDENT_ROUTE, studentRoutes);
+app.use(routeConstants.SALARY_ROUTE, salaryRoutes);
+app.use(routeConstants.INTERVIEW_ROUTE, interviewRoutes);
+app.use(routeConstants.GET_JOBS_HOMEPAGE, jobsHomePageRoutes);
 app.use(routeConstants.JOB_ROUTE, jobRoutes);
 
 //start your server on port 3001

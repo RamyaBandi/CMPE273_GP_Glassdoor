@@ -24,7 +24,7 @@ module.exports.postCompanyJob = (req, res) => {
         companyId: data.companyId,
         companyName: data.companyName,
         jobTitle: data.jobTitle,
-        postedDate: data.postedDate,
+        postedDate: Date.now(),
         industry: data.industry,
         responsibilities: data.responsibilities,
         country: data.country,
@@ -32,7 +32,8 @@ module.exports.postCompanyJob = (req, res) => {
         streetAddress: data.streetAddress,
         city: data.city,
         state: data.state,
-        zip: data.zip
+        zip: data.zip,
+        averageSalary: data.averageSalary
     })
     job.save((err, result) => {
 
@@ -40,12 +41,12 @@ module.exports.postCompanyJob = (req, res) => {
             console.log("Error creating job")
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
-            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
         }
         else {
             // console.log(JSON.stringify(result));
             //res.setHeader(CONTENT_TYPE, APP_JSON);
-            Company.findOneAndUpdate({ _id: data.companyId }, { $push: { 'jobs': result._id } }, (error, res) => {
+            Company.findOneAndUpdate({ _id: data.companyId }, { $push: { 'jobs': result._id } }, (error, results) => {
                 if (error) {
                     console.log("Error Updating Company with job id")
                     console.log(error);
@@ -66,6 +67,46 @@ module.exports.postCompanyJob = (req, res) => {
 }
 
 
+module.exports.updateCompanyJob = (req, res) => {
+    console.log("Inside Jobs PUT service");
+    console.log(req.body)
+    let data = req.body
+
+    Jobs.findOneAndUpdate({ _id: data.jobId }, {
+        jobTitle: data.jobTitle,
+        postedDate: Date.now(),
+        industry: data.industry,
+        responsibilities: data.responsibilities,
+        country: data.country,
+        remote: data.remote,
+        streetAddress: data.streetAddress,
+        city: data.city,
+        state: data.state,
+        zip: data.zip,
+        averageSalary: data.averageSalary
+    }, (err, result) => {
+
+        if (err) {
+            console.log("Error creating job")
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            // console.log(JSON.stringify(result));
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+
+            console.log("Job updated Successfully");
+            console.log(result);
+            res.status(RES_SUCCESS).send(result);
+        }
+
+
+
+    })
+}
+
+
 module.exports.getAllJobs = (req, res) => {
 
     console.log("Inside Job GET all service");
@@ -77,7 +118,7 @@ module.exports.getAllJobs = (req, res) => {
             console.log("Error fetching job")
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
-            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
         }
         else {
             // console.log(JSON.stringify(result));
@@ -105,7 +146,7 @@ module.exports.getCompanyJobs = async (req, res) => {
             totalPages: Math.ceil(count / data.limit),
             currentPage: data.page
         });
-        console.log("Jobs fetched successfully from DB - page not 1 or redis off")
+        console.log("Jobs fetched successfully from DB")
         res.status(RES_SUCCESS).send(result);
     }
     catch {

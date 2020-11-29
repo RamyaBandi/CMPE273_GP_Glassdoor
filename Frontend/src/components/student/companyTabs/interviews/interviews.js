@@ -4,6 +4,7 @@ import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import axios from "axios";
 import InterviewCard from "./interviewCard";
+import { BACKEND_URL, GET_COMPANY_INTERVIEWS } from "../../../../config/routeConstants";
 
 class Interviews extends Component {
   constructor(props) {
@@ -17,17 +18,14 @@ class Interviews extends Component {
     const company_id = this.props.location.state;
     //const {data} = this.props.location.state;
     console.log(company_id);
-    // axios
-    //   .get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + company_id)
-    //   .then((response) => {
-    //     console.log("response")
-    //     console.log(response.data.reviews);
-    //     this.setState({ reviews: response.data.reviews });
-        
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    axios
+      .get(BACKEND_URL + GET_COMPANY_INTERVIEWS + "?companyId=" + company_id)
+      .then((response) => {
+        this.setState({ interviews: response.data.interviews });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render = () => {
