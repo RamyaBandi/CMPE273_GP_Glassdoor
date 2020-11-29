@@ -32,8 +32,8 @@ class employerUpdateProfile extends Component {
 
     componentWillMount() {
 
-        console.log(this.props)
-        console.log(localStorage.getItem('mongoId'))
+        //console.log(this.props)
+        //console.log(localStorage.getItem('mongoId'))
         let company_id=localStorage.getItem('mongoId')
         axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
         axios.get(`${routeConstants.BACKEND_URL}/company${routeConstants.GET_COMPANY_SIGNUP}`,
