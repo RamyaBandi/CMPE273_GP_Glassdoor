@@ -4,7 +4,7 @@ import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import ReviewCard from "./reviewCard";
 import axios from "axios";
-import { BACKEND_URL, GET_COMPANY_REVIEWS } from "../../config/routeConstants";
+import { BACKEND_URL, GET_COMPANY_REVIEWS } from "../../../../config/routeConstants";
 
 class Reviews extends Component {
   constructor(props) {
