@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import axios from "axios";
-import { BACKEND_URL, POST_STUDENT_REVIEW } from '../../config/routeConstants'
+import { BACKEND_URL, POST_STUDENT_REVIEW } from '../../../../config/routeConstants'
 
 class AddReviews extends Component {
   constructor(props) {

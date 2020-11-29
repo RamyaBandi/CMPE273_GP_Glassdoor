@@ -4,7 +4,7 @@ import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import axios from "axios";
 import InterviewCard from "./interviewCard";
-import { BACKEND_URL, GET_COMPANY_INTERVIEWS } from "../../../config/routeConstants";
+import { BACKEND_URL, GET_COMPANY_INTERVIEWS } from "../../../../config/routeConstants";
 
 class Interviews extends Component {
   constructor(props) {
