@@ -44,6 +44,10 @@ const Reviews = new mongoose.Schema({
         type: Number,
         required: true
     },
+    reviewDate : {
+        type : Date, 
+        default: Date.now
+    }, 
     reply: {
         type: String,
     },

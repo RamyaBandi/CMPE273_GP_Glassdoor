@@ -13,7 +13,7 @@ class Navbar extends Component {
             if (localStorage.getItem('role') === 'employer') {
                 renderVar = <EmployerNavBar props={this.props} />
             }
-            else {
+            else if (localStorage.getItem('role') === 'student')  {
                 renderVar = <LoggedInNav props={this.props} />
             }
         }

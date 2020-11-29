@@ -14,6 +14,13 @@ module.exports = {
     //Login Routes
     POST_LOGIN: '/loginroute/login',
 
+    //Student Search Routes
+    GET_SEARCH_JOBS : '/search/search/jobsearch',
+    GET_SEARCH_COMPANY : '/search/search/companysearch',
+    GET_SEARCH_SALARY : "/search/search/salarysearch",
+    GET_SEARCH_INTERVIEW : "/search/search/interviewsearch",
+    GET_JOBS_HOMEPAGE : '/jobshomepage/jobshomepage',
+
     //Review Routes
     POST_STUDENT_REVIEW: '/review/student/review',
     GET_COMPANY_REVIEWS: '/review/company/reviews',
