@@ -32,7 +32,8 @@ module.exports.postCompanyJob = (req, res) => {
         streetAddress: data.streetAddress,
         city: data.city,
         state: data.state,
-        zip: data.zip
+        zip: data.zip,
+        averageSalary: data.averageSalary
     })
     job.save((err, result) => {
 
@@ -72,7 +73,6 @@ module.exports.updateCompanyJob = (req, res) => {
     let data = req.body
 
     Jobs.findOneAndUpdate({ _id: data.jobId }, {
-
         jobTitle: data.jobTitle,
         postedDate: Date.now(),
         industry: data.industry,
@@ -82,7 +82,8 @@ module.exports.updateCompanyJob = (req, res) => {
         streetAddress: data.streetAddress,
         city: data.city,
         state: data.state,
-        zip: data.zip
+        zip: data.zip,
+        averageSalary: data.averageSalary
     }, (err, result) => {
 
         if (err) {

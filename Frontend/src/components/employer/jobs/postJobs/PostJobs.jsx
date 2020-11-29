@@ -14,7 +14,8 @@ class PostJobs extends Component {
         streetAddress: "",
         city: "",
         state: "",
-        zip: 0
+        zip: 0,
+        averageSalary: ""
     }
     handleChange = (e) => {
         //  console.log(this.state);
@@ -65,13 +66,17 @@ class PostJobs extends Component {
                             <textarea type="text" className="form-control" id="responsibilities" placeholder="" onChange={this.handleChange} />
                         </div>
                         <div className="form-row">
-                            <div className="form-group  col-md-6">
-                                <label >Street Address</label>
-                                <input type="text" className="form-control" id="streetAddress" placeholder="" onChange={this.handleChange} />
+                            <div className="form-group  col-md-3">
+                                <label >Average Salary</label>
+                                <input type="number" className="form-control" id="averageSalary" placeholder="" onChange={this.handleChange} />
                             </div>
-                            <div className="form-group col-md-6">
+                            <div className="form-group  col-md-5">
+                                <label >Street Address</label>
+                                <input type="text" className="form-control" id="streetAddress" value={this.state.streetAddress} onChange={this.handleChange} />
+                            </div>
+                            <div className="form-group col-md-4">
                                 <label >City</label>
-                                <input type="text" className="form-control" id="city" onChange={this.handleChange} />
+                                <input type="text" className="form-control" id="city" value={this.state.city} onChange={this.handleChange} />
                             </div>
 
                         </div>

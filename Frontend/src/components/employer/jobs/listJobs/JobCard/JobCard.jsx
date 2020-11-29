@@ -63,7 +63,7 @@ class JobCard extends Component {
 
 
                         <button onClick={this.handleJobDetails} class="btn btn-success">Edit Job</button>
-                        <button onClick={this.handleViewApplicants} class="btn btn-success">Edit Job</button>
+                        <button onClick={this.handleViewApplicants} class="btn btn-success">View Applications</button>
 
                     </div>
                 </div>
