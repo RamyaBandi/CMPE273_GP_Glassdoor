@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import { Redirect } from "react-router";
 import axios from 'axios';
 import { BACKEND_URL, GET_COMPANY_DETAILS, GET_COMPANY_REVIEWS } from '../../../config/routeConstants';
-import ReviewCard from "../../reviews/reviewCard";
-import Reviews from "../../reviews/reviews";
+import ReviewCard from "../../student/companyTabs/reviews/reviewCard"
+import Reviews from "../../student/companyTabs/reviews/reviews";
 
 class CompanyOverview extends Component {
     constructor(props) {
@@ -77,10 +77,10 @@ class CompanyOverview extends Component {
                                         <Link to={{ pathname: "/jobs", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Jobs</Link>
                                     </div>
                                     <div class="box-content right">
-                                        <Link to="/salaries" style={{ textDecoration: 'none', color: '#1861bf' }}>Salaries</Link>
+                                        <Link to={{ pathname: "/salaries", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Salaries</Link>
                                     </div>
                                     <div class="box-content right">
-                                        <Link to="/interviews" style={{ textDecoration: 'none', color: '#1861bf' }}>Interviews</Link>
+                                        <Link to={{ pathname: "/interviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Interviews</Link>
                                     </div>
                                     <div class="box-content">
                                         <Link to="/photos" style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
