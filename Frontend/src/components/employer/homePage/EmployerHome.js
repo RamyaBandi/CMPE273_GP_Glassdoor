@@ -10,7 +10,7 @@ class EmployerHomePage extends Component {
                 <h2> employer Home Page</h2>
                 <a href="/employer/jobs">Jobs</a>
                 <a href="/employer/candidates">Candidates</a>
-                <a href="/employer/profile">Employer Profile</a>
+                <a href="/company/profile">Employer Profile</a>
                 <a href="/employer/analytics">Analytics</a>
 
             </div>

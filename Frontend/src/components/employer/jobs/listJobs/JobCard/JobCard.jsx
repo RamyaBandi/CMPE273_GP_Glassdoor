@@ -8,7 +8,7 @@ class JobCard extends Component {
     componentDidMount() {
         console.log(this.props)
     }
-    handleClick = () => {
+    handleJobDetails = () => {
         localStorage.setItem("jobId", this.props.props.job._id);
         // console.log(this.props.props.props)
         this.props.props.props.history.push(
@@ -21,6 +21,19 @@ class JobCard extends Component {
         //     redirect: true
         // })
 
+    }
+    handleViewApplicants = () => {
+        localStorage.setItem("jobId", this.props.props.job._id);
+        // console.log(this.props.props.props)
+        this.props.props.props.history.push(
+            {
+                pathname: '/employer/jobs/applicants',
+                state: { job: { ...this.props.props.job } }
+            }
+        )
+        // this.setState({
+        //     redirect: true
+        // })
     }
     renderRedirect = () => {
         if (this.state.redirect) {
@@ -49,7 +62,9 @@ class JobCard extends Component {
                         <p class="card-text"><small class="text-muted">{data.postedDate}</small></p>
 
 
-                        <button onClick={this.handleClick} class="btn btn-success">Edit Job</button>
+                        <button onClick={this.handleJobDetails} class="btn btn-success">Edit Job</button>
+                        <button onClick={this.handleViewApplicants} class="btn btn-success">View Applications</button>
+
                     </div>
                 </div>
             </div>

@@ -48,6 +48,10 @@ const Jobs = new mongoose.Schema({
         type: Number,
         required: true
     },
+    averageSalary: {
+        type: Number,
+        required: true
+    },
     applications: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Applications'

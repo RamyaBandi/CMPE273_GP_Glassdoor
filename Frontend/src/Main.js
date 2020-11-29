@@ -12,17 +12,19 @@ import InterviewsTab from './components/student/HomePageTabs/interviews'
 import JobsTab from './components/student/HomePageTabs/jobs'
 import AdminHomePage from './components/admin/adminHomePage'
 import EmployerHomePage from './components/employer/homePage/EmployerHome'
-import Reviews from './components/reviews/reviews';
-import AddReview from './components/reviews/addReview';
-import Salaries from './components/salaries/salaries';
-import AddSalary from './components/salaries/addSalary';
-import Interviews from './components/interviews/interviews';
-import AddInterview from './components/interviews/addInterview';
+import Reviews from './components/student/companyTabs/reviews/reviews';
+import AddReview from './components/student/companyTabs/reviews/addReview';
+import Salaries from './components/student/companyTabs/salaries/salaries';
+import AddSalary from './components/student/companyTabs/salaries/addSalary';
+import Interviews from './components/student/companyTabs/interviews/interviews';
+import AddInterview from './components/student/companyTabs/interviews/addInterview';
 import JobsHome from './components/employer/jobs/jobsHome/JobsHome';
 import PostJobs from './components/employer/jobs/postJobs/PostJobs';
 import ListJobs from './components/employer/jobs/listJobs/ListJobs';
 import ListCompanyJobs from './components/employer/jobs/listJobs/ListCompanyJobs';
 import EditJobs from './components/employer/jobs/editJobs/EditJobs';
+import ListApplications from './components/employer/jobs/applications/listApplications/listApplications';
+import EmployerUpdateProfile from './components/employer/updateProfile/employerUpdateProfile';
 
 class Main extends Component {
     render() {
@@ -48,6 +50,7 @@ class Main extends Component {
                     <Route exact path="/interviews" component={(props) => <Interviews {...props} />} />
                     <Route exact path="/addinterview" component={(props) => <AddInterview {...props} />} />
 
+
                     {//Employer Routes
                     }
 
@@ -56,7 +59,8 @@ class Main extends Component {
                     <Route exact path="/employer/jobs/post" render={props => <PostJobs {...props} />} />
                     <Route exact path="/employer/jobs/list" render={props => <ListCompanyJobs {...props} />} />
                     <Route exact path="/employer/jobs/edit" render={props => <EditJobs {...props} />} />
-                    <Route exact path="/employer/profile" render={props => <EmployerHomePage {...props} />} />
+                    <Route exact path="/employer/jobs/applicants" render={props => <ListApplications {...props} />} />
+                    <Route exact path="/company/profile" render={props => <EmployerUpdateProfile{...props} />} />
                     <Route exact path="/employer/reviews" render={props => <EmployerHomePage {...props} />} />
                     <Route exact path="/employer/analytics" render={props => <EmployerHomePage {...props} />} />
                 </div>
