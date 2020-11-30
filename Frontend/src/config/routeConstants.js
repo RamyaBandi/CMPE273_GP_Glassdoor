@@ -40,6 +40,14 @@ module.exports = {
     PUT_COMPANY_JOB: '/company/job',
     GET_ALL_JOBS: '/company/jobList',
 
+    //Application Routes
+    APPLICATION_ROUTE: "/applications",
+    POST_APPLICATION: '/',
+    PUT_APPLICATION: '/',
+    GET_APPLICATIONS_JOBID: '/jobId',
+    GET_APPLICATIONS_STUDENTID: '/studentId',
+    GET_APPLICATIONS_ALL: '/',
+
     //KAFKA TOPICS
     TOPIC_RESTAURANT: 'restaurant',
     TOPIC_CUSTOMER: 'customer',

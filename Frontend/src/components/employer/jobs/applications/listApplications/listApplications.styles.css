@@ -1,0 +1,11 @@
+.applicationsList{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.containerList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
