@@ -27,7 +27,7 @@ class JobCard extends Component {
         // console.log(this.props.props.props)
         this.props.props.props.history.push(
             {
-                pathname: '/employer/jobs/applicants',
+                pathname: '/employer/jobs/applications',
                 state: { job: { ...this.props.props.job } }
             }
         )
@@ -54,6 +54,7 @@ class JobCard extends Component {
                     <div class="card-body">
                         <h5 class="card-title">{data.jobTitle}</h5>
                         <p class="card-text">Industry : {data.industry}</p>
+                        <p class="card-text">Average Salary : {data.averageSalary}</p>
                         {/* <p class="card-text">Responsibilities : {data.responsibilities}</p> */}
                         {/* <p class="card-text">Location : {data.streetAddress},{data.city},{data.state},{data.country},{data.zip}</p> */}
                         <p class="card-text">Location :{data.city},{data.state},{data.country}</p>

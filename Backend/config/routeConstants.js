@@ -13,14 +13,14 @@ module.exports = {
 
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",
-    GET_JOB_SEARCH : "/search/jobsearch",
-    GET_COMPANY_SEARCH : "/search/companysearch",
-    GET_SALARY_SEARCH : "/search/salarysearch",
-    GET_INTERVIEW_SEARCH : "/search/interviewsearch",
+    GET_JOB_SEARCH: "/search/jobsearch",
+    GET_COMPANY_SEARCH: "/search/companysearch",
+    GET_SALARY_SEARCH: "/search/salarysearch",
+    GET_INTERVIEW_SEARCH: "/search/interviewsearch",
 
     //Student Jobs Home Page
 
-    GET_JOBS_HOMEPAGE : "/jobshomepage",
+    GET_JOBS_HOMEPAGE: "/jobshomepage",
 
     // Admin Analytics Dashboard
     ADMIN_ROUTES : "/admin",
@@ -49,6 +49,13 @@ module.exports = {
     PUT_COMPANY_JOB: '/company/job',
     GET_ALL_JOBS: '/company/jobList',
 
+    //Application Routes
+    APPLICATION_ROUTE: "/applications",
+    POST_APPLICATION: '/',
+    PUT_APPLICATION: '/',
+    GET_APPLICATIONS_JOBID: '/jobId',
+    GET_APPLICATIONS_STUDENTID: '/studentId',
+    GET_APPLICATIONS_ALL: '/',
 
     //Review Routes
     REVIEW_ROUTE: "/review",

@@ -7,11 +7,6 @@ module.exports = {
     POST_REGISTER: '/register',
     FETCH_CUSTOMERINPUT: '/validationinput',
 
-<<<<<<< HEAD
-    //Student Routes
-    STUDENT_ROUTE: "/student",
-    POST_STUDENT_SIGNUP: "/student/profile",
-=======
     //Student Search Routes
     GET_SEARCH_JOBS : '/search/search/jobsearch',
     GET_SEARCH_COMPANY : '/search/search/companysearch',
@@ -23,7 +18,6 @@ module.exports = {
     POST_STUDENT_REVIEW: '/review/student/review',
     GET_COMPANY_REVIEWS: '/review/company/reviews',
     GET_STUDENT_REVIEWS: '/review/student/reviews',
->>>>>>> f7308429799bf65b9a609c527594f248bda8f8d4
 
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",
@@ -54,26 +48,13 @@ module.exports = {
     PUT_COMPANY_JOB: '/company/job',
     GET_ALL_JOBS: '/company/jobList',
 
-
-    //Review Routes
-    REVIEW_ROUTE: "/review",
-    POST_STUDENT_REVIEW: "/student/review",
-    GET_STUDENT_REVIEWS: "/student/reviews",
-    GET_ALL_REVIEWS: "/company/reviews",
-    GET_COMPANY_REVIEWS: "/company/reviews",
-    POST_COMPANY_REPLY: "/company/reply",
-
-    //Salary Routes
-    SALARY_ROUTE: "/salary",
-    POST_STUDENT_SALARY: "/student/salary",
-    GET_STUDENT_SALARIES: "/student/salaries",
-    GET_COMPANY_SALARIES: "/company/salaries",
-
-    //Interview Routes
-    INTERVIEW_ROUTE: "/interview",
-    POST_STUDENT_INTERVIEW: "/student/interview",
-    GET_STUDENT_INTERVIEWS: "/student/interviews",
-    GET_COMPANY_INTERVIEWS: "/company/interviews",
+    //Application Routes
+    APPLICATION_ROUTE: "/applications",
+    POST_APPLICATION: '/',
+    PUT_APPLICATION: '/',
+    GET_APPLICATIONS_JOBID: '/jobId',
+    GET_APPLICATIONS_STUDENTID: '/studentId',
+    GET_APPLICATIONS_ALL: '/',
 
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
