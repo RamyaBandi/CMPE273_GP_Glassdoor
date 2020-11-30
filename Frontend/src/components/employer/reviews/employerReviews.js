@@ -14,7 +14,7 @@ class EmployerReview extends Component {
         axios.get(`${routeConstants.BACKEND_URL}/review${routeConstants.GET_COMPANY_REVIEWS}`,
         {
             params: {
-                companyId: company_id
+                companyId: '5fb4884acf339e3da0d5c31e'
             }
         }).then((res) => {
             console.log(res)
