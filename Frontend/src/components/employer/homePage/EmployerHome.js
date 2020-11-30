@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 class EmployerHomePage extends Component {
-    render() {
+    render() {                       
         console.log(this.props)
         console.log("HomePage")
         return (
@@ -12,6 +12,7 @@ class EmployerHomePage extends Component {
                 <a href="/employer/candidates">Candidates</a>
                 <a href="/company/profile">Employer Profile</a>
                 <a href="/employer/analytics">Analytics</a>
+                <a href="/employer/reviews">Reviews</a>
 
             </div>
         )

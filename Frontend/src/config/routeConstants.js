@@ -1,40 +1,36 @@
 module.exports = {
     FRONTEND_URL: "http://localhost:3000",
     BACKEND_URL: "http://localhost:3001",
-    // BACKEND_URL: 'http://13.52.213.227:3001',
-    // BACKEND_URL: 'http://54.67.58.148:3001',
-
-    //Input validation
-
-    FETCH_VALIDATIONDETAILS: '/validateroute/validationinput',
-
-    // Registration Routes
-    POST_REGISTRATION: '/registerroute/register',
 
     //Login Routes
-    POST_LOGIN: '/loginroute/login',
+    POST_LOGIN: '/login',
+    POST_REGISTER: '/register',
+    FETCH_CUSTOMERINPUT: '/validationinput',
 
-    //Review Routes
-    POST_STUDENT_REVIEW: '/review/student/review',
-    GET_COMPANY_REVIEWS: '/review/company/reviews',
-    GET_STUDENT_REVIEWS: '/review/student/reviews',
+    //Student Routes
+    STUDENT_ROUTE: "/student",
+    POST_STUDENT_SIGNUP: "/student/profile",
 
-    //Salary Routes
-    POST_STUDENT_SALARY: '/salary/student/salary',
-    GET_COMPANY_SALARIES: '/salaries/company/salaries',
-    GET_STUDENT_SALARIES: '/salaries/student/salaries',
+    //Student Search Routes
+    GET_SEARCH_RESULTS: "/search",
+    GET_JOB_SEARCH : "/search/jobsearch",
+    GET_COMPANY_SEARCH : "/search/companysearch",
+    GET_SALARY_SEARCH : "/search/salarysearch",
+    GET_INTERVIEW_SEARCH : "/search/interviewsearch",
 
-    //Interview Routes
-    POST_STUDENT_INTERVIEW: '/interview/student/interview',
-    GET_COMPANY_INTERVIEWS: '/interview/company/interviews',
-    GET_STUDENT_INTERVIEWS: '/interview/student/interviews',
+    //Student Jobs Home Page
 
-    //CompanyRoutes
-    GET_COMPANY_DETAILS: '/company/companyDetails',
+    GET_JOBS_HOMEPAGE : "/jobshomepage",
+
+    //Company Routes
     COMPANY_ROUTE: "/company",
     PUT_COMPANY_SIGNUP: "/company/profile",
     GET_COMPANY_SIGNUP: "/company/profile",
     POST_COMPANY_SIGNUP: "/company/profile",
+
+    
+    //Company Details Routes
+    GET_COMPANY_DETAILS: "/companyDetails",
 
     //Job Routes
     JOB_ROUTE: "/job",
@@ -44,14 +40,29 @@ module.exports = {
     PUT_COMPANY_JOB: '/company/job',
     GET_ALL_JOBS: '/company/jobList',
 
+
+    //Review Routes
+    REVIEW_ROUTE: "/review",
+    POST_STUDENT_REVIEW: "/student/review",
+    GET_STUDENT_REVIEWS: "/student/reviews",
+    GET_ALL_REVIEWS: "/company/reviews",
+    GET_COMPANY_REVIEWS: "/company/reviews",
+    POST_COMPANY_REPLY: "/company/reply",
+
+    //Salary Routes
+    SALARY_ROUTE: "/salary",
+    POST_STUDENT_SALARY: "/student/salary",
+    GET_STUDENT_SALARIES: "/student/salaries",
+    GET_COMPANY_SALARIES: "/company/salaries",
+
+    //Interview Routes
+    INTERVIEW_ROUTE: "/interview",
+    POST_STUDENT_INTERVIEW: "/student/interview",
+    GET_STUDENT_INTERVIEWS: "/student/interviews",
+    GET_COMPANY_INTERVIEWS: "/company/interviews",
+
     //KAFKA TOPICS
-    TOPIC_RESTAURANT: 'restaurant',
-    TOPIC_CUSTOMER: 'customer',
-    TOPIC_ORDERS: 'order',
-    TOPIC_REVIEWS: 'review',
-    TOPIC_EVENTS: 'event',
     TOPIC_LOGIN: 'login',
-    TOPIC_IMAGES: 'image',
 
     /**Response status codes */
     RES_UNKNOWN_ERROR: 502,

@@ -25,6 +25,7 @@ import ListCompanyJobs from './components/employer/jobs/listJobs/ListCompanyJobs
 import EditJobs from './components/employer/jobs/editJobs/EditJobs';
 import ListApplications from './components/employer/jobs/applications/listApplications/listApplications';
 import EmployerUpdateProfile from './components/employer/updateProfile/employerUpdateProfile';
+import EmployerReview   from './components/employer/reviews/employerReviews'
 
 class Main extends Component {
     render() {
@@ -61,7 +62,7 @@ class Main extends Component {
                     <Route exact path="/employer/jobs/edit" render={props => <EditJobs {...props} />} />
                     <Route exact path="/employer/jobs/applicants" render={props => <ListApplications {...props} />} />
                     <Route exact path="/company/profile" render={props => <EmployerUpdateProfile{...props} />} />
-                    <Route exact path="/employer/reviews" render={props => <EmployerHomePage {...props} />} />
+                    <Route exact path="/employer/reviews" render={props => <EmployerReview {...props} />} />
                     <Route exact path="/employer/analytics" render={props => <EmployerHomePage {...props} />} />
                 </div>
             </div>
