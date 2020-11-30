@@ -18,10 +18,13 @@ const Interviews = require('../models/Interviews')
 const Reviews = require('../models/Reviews');
 const salaryRouter = require('../routes/salaryRoutes');
 
+
 module.exports.jobSearch = async (req, res) => {
     console.log("Search",req.query.searchParameter)
+    console.log("Search",req.query.page)
+    console.log("Search",req.query.limit)
     let jobsData = await Jobs.find({ jobTitle: { '$regex': req.query.searchParameter, '$options': 'i' } }, 
-    { 'companyId': 1, 'jobTitle': 1, 'streetAddress':1, 'city' : 1, 'state':1, 'zip' : 1});
+    { 'companyId': 1, 'jobTitle': 1, 'streetAddress':1, 'city' : 1, 'state':1, 'zip' : 1}).limit(req.query.limit * 1).skip((req.query.page - 1) * req.query.limit);
     console.log("Jobs Data", jobsData)
 
     let datasets = await Promise.all(jobsData.map(async (data) => {
@@ -86,7 +89,7 @@ module.exports.companySearch = async (req, res) => {
             }]).exec();
 
     let averageRating = await Reviews.aggregate([
-        { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).exec();
+        { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(req.query.limit * 1).skip((req.query.page - 1) * req.query.limit).exec();
     console.log("Average Rating", averageRating)
 
     companyResults[0].averageRating = Math.round(averageRating[0].averageRating*Math.pow(10, 2)) / Math.pow(10, 2);
@@ -113,7 +116,7 @@ module.exports.salarySearch = async (req, res) => {
             }]).exec();
 
     let averageRating = await Reviews.aggregate([
-        { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).exec();
+        { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(req.query.limit * 1).skip((req.query.page - 1) * req.query.limit).exec();
     console.log("Average Rating", averageRating)
 
     let datasets = await Promise.all(companyResults[0].salaries.map(async (data) => {
@@ -160,13 +163,14 @@ module.exports.interviewSearch = async (req, res) => {
             }]).exec();
 
     let averageRating = await Reviews.aggregate([
-        { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).exec();
+        { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(req.query.limit * 1).skip((req.query.page - 1) * req.query.limit).exec();
     console.log("Average Rating", averageRating)
 
     let datasets = await Promise.all(companyResults[0].interviews.map(async (data) => {
         let products = {};
 
         let last = await Interviews.find({ _id: data }, { jobTitle: 1, description: 1 })
+        console.log("Last", last)
 
         products._id = companyResults[0]._id;
         products.companyName = companyResults[0].companyName
