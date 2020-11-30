@@ -7,9 +7,23 @@ module.exports = {
     POST_REGISTER: '/register',
     FETCH_CUSTOMERINPUT: '/validationinput',
 
+<<<<<<< HEAD
     //Student Routes
     STUDENT_ROUTE: "/student",
     POST_STUDENT_SIGNUP: "/student/profile",
+=======
+    //Student Search Routes
+    GET_SEARCH_JOBS : '/search/search/jobsearch',
+    GET_SEARCH_COMPANY : '/search/search/companysearch',
+    GET_SEARCH_SALARY : "/search/search/salarysearch",
+    GET_SEARCH_INTERVIEW : "/search/search/interviewsearch",
+    GET_JOBS_HOMEPAGE : '/jobshomepage/jobshomepage',
+
+    //Review Routes
+    POST_STUDENT_REVIEW: '/review/student/review',
+    GET_COMPANY_REVIEWS: '/review/company/reviews',
+    GET_STUDENT_REVIEWS: '/review/student/reviews',
+>>>>>>> f7308429799bf65b9a609c527594f248bda8f8d4
 
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",

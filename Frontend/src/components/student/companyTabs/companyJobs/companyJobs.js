@@ -5,15 +5,44 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Redirect } from "react-router";
 import axios from 'axios';
-import { BACKEND_URL, GET_COMPANY_DETAILS, GET_COMPANY_REVIEWS} from '../../../../config/routeConstants';
+import { BACKEND_URL, JOB_ROUTE, GET_COMPANY_DETAILS, GET_COMPANY_JOBS } from '../../../../config/routeConstants';
+import JobCard from './jobCard';
 
 class CompanyJobs extends Component {
     constructor(props) {
         super(props);
         this.state = {
             companyDetails: [],
+            jobs: [],
             redirect: null
         };
+    }
+
+    addReview = async (e) => {
+        this.setState({ redirect: <Redirect to="/addReview" /> });
+    };
+
+    componentDidMount() {
+        const companyId = this.props.location.state;
+        axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
+            .then(response => {
+                this.setState({ companyDetails: response.data[0] });
+                console.log("In componentDidMount");
+                console.log(response.data[0]);
+                console.log(this.state.companyDetails);
+            })
+            .catch((error) => {
+                console.log(error);
+            }
+        )
+        console.log(companyId);
+        axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOBS + "?companyId=" + companyId)
+        .then(response => {
+            this.setState({ jobs: response.data.jobs});
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }
 
     render = () => {
@@ -34,7 +63,7 @@ class CompanyJobs extends Component {
                                         <Link to="/overview" style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
                                     </div>
                                     <div class="box-content right">
-                                        <Link to={{pathname: "/reviews", state: companyid}} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
+                                        <Link to={{pathname: "/reviews", state: this.state.companyDetails._id}} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
                                     </div>
                                     <div class="box-content right">
                                         <Link to="/jobs" style={{ textDecoration: 'none', color: '#1861bf' }}>Jobs</Link>
@@ -56,16 +85,20 @@ class CompanyJobs extends Component {
                                 <p style={{ color: "#ffffff", marginTop: "5px", marginBottom: "5px" }}>+ Add a Review</p>
                             </Button> */}
                             <div className = "float-right" style = {{paddingRight: "70px"}}>
-                            <Link to={{pathname: "/addreview", state: companyid}} className="btn gd-btn-med gd-btn-icon" 
-                            style={{ color: "#ffffff", backgroundColor: "#1861bf" , marginTop: "5px", marginBottom: "5px", width: "370%" }}>+ Add a Review</Link>
+                            <Link to={{pathname: "/addreview", state: this.state.companyDetails._id}} className="btn gd-btn-med gd-btn-icon" 
+                            style={{ color: "#ffffff", backgroundColor: "#1861bf" , marginTop: "5px", marginBottom: "5px", width: "100%" }}>+ Add a Review</Link>
                             </div>
                         </Col>
                     </Row>
                 </Container>
-                <Container style={{ marginTop: "20px", width: "70%", backgroundColor: "white" }} className="block-example border">
-                    
+                <Container style={{ marginTop: "20px", marginBottom: "20px", width: "70%", backgroundColor: "white" }} className="block-example border">
+                    {this.state.jobs.map((item) => {
+                        return <JobCard {...item} />
+                    })}
                 </Container>
             </div>
         )
     }
 }
+
+export default CompanyJobs;

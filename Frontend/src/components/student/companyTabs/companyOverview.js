@@ -20,27 +20,28 @@ class CompanyOverview extends Component {
     }
 
     onReview = async (e) => {
-        const company_id = "";
-        this.setState({ company_id: this.state.companyDetails._id });
-        //console.log("company_id in overview "+ this.state.company_id);
+        const companyId = '';
+        this.setState({ companyId: this.state.companyDetails._id });
+        //console.log("companyId in overview "+ this.state.companyId);
     }
 
     componentDidMount() {
-        const company_id = '5fb4884acf339e3da0d5c31e';
-        axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?company_id=' + company_id)
+        // const company_id = '5fb4884acf339e3da0d5c31e';
+        const company_id = this.props.location.state.companyId
+        console.log("Fetched company Id", company_id)
+        axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + company_id)
             .then(response => {
                 this.setState({ companyDetails: response.data[0] });
                 console.log("In componentDidMount");
-                console.log(response.data[0]);
+                console.log("Company details",response.data[0]);
                 console.log(this.state.companyDetails);
                 console.log(this.state.companyDetails.reviews);
             })
             .catch((error) => {
                 console.log(error);
             }
-            )
-        axios
-            .get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + company_id)
+        )
+        axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + companyId)
             .then((response) => {
                 console.log("response")
                 console.log(response.data.reviews);
@@ -48,11 +49,12 @@ class CompanyOverview extends Component {
             })
             .catch((error) => {
                 console.log(error);
-            });
+            }
+        )
     }
 
     render = () => {
-        //const company_id = this.state.companyDetails._id;
+        //const companyId = this.state.companyDetails._id;
         console.log(this.state.companyDetails);
         return (
             <div style={{ backgroundColor: "#eaeaea" }}>
@@ -74,7 +76,7 @@ class CompanyOverview extends Component {
                                         <Link to={{ pathname: "/reviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
                                     </div>
                                     <div class="box-content right">
-                                        <Link to="/jobs" style={{ textDecoration: 'none', color: '#1861bf' }}>Jobs</Link>
+                                        <Link to={{ pathname: "/jobs", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Jobs</Link>
                                     </div>
                                     <div class="box-content right">
                                         <Link to={{ pathname: "/salaries", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Salaries</Link>
@@ -94,7 +96,7 @@ class CompanyOverview extends Component {
                             </Button> */}
                             <div className="float-right" style={{ paddingRight: "70px" }}>
                                 <Link to={{ pathname: "/addreview", state: this.state.companyDetails._id }} className="btn gd-btn-med gd-btn-icon"
-                                    style={{ color: "#ffffff", backgroundColor: "#1861bf", marginTop: "5px", marginBottom: "5px", width: "370%" }}>+ Add a Review</Link>
+                                    style={{ color: "#ffffff", backgroundColor: "#1861bf", marginTop: "5px", marginBottom: "5px", width: "100%" }}>+ Add a Review</Link>
                             </div>
                         </Col>
                     </Row>
@@ -169,7 +171,7 @@ class CompanyOverview extends Component {
                             <h5>Company Reviews</h5>
                         </Col>
                     </Row>
-                    <Row style = {{width: "100%"}}>
+                    <Row style={{ width: "100%" }}>
                         {this.state.reviews.map((item) => {
                             return <ReviewCard {...item} />;
                         })}
