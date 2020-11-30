@@ -41,16 +41,16 @@ class CompanyOverview extends Component {
                 console.log(error);
             }
         )
-        axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + companyId)
-            .then((response) => {
-                console.log("response")
-                console.log(response.data.reviews);
-                this.setState({ reviews: response.data.reviews });
-            })
-            .catch((error) => {
-                console.log(error);
-            }
-        )
+        // axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + companyId)
+        //     .then((response) => {
+        //         console.log("response")
+        //         console.log(response.data.reviews);
+        //         this.setState({ reviews: response.data.reviews });
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     }
+        // )
     }
 
     render = () => {
