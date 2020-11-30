@@ -3,40 +3,61 @@ import './Tabs.css'
 import { Link } from 'react-router-dom';
 import { BACKEND_URL, GET_SEARCH_INTERVIEW } from '../../../config/routeConstants'
 import axios from 'axios'
-
+import ReactPaginate from 'react-paginate';
+import './Paginate.css'
 
 class InterviewsTab extends Component {
     constructor() {
         super();
         this.state = {
-            interviewData: []
+            interviewData: [],
+            page: 1,
+            limit: 10
         }
+        this.handlePageClick = this.handlePageClick.bind(this)
+        this.getInterviewSearchResults = this.getInterviewSearchResults.bind(this)
     }
     componentDidMount() {
-        if (this.props.location.state.detail) {
-            let searchParameter = this.props.location.state.detail
-            axios.get(BACKEND_URL + GET_SEARCH_INTERVIEW, {
-                params: {
-                    searchParameter: this.props.location.state.detail
+        // if (this.props.location.state.detail) {
+            this.getInterviewSearchResults()
+    }
+
+    getInterviewSearchResults(){
+        axios.get(BACKEND_URL + GET_SEARCH_INTERVIEW, {
+            params: {
+                // searchParameter: this.props.location.state.detail,
+                searchParameter: "Test Company",
+                page: this.state.page,
+                limit: this.state.limit
+            }
+        })
+            .then(response => {
+                console.log("Status Code : ", response.status);
+                if (response.status === 200) {
+                    console.log("Company Data", response.data)
+                    this.setState({
+                        interviewData: response.data
+                    })
                 }
             })
-                .then(response => {
-                    console.log("Status Code : ", response.status);
-                    if (response.status === 200) {
-                        console.log("Company Data", response.data)
-                        this.setState({
-                            interviewData: response.data
-                        })
-                    }
-                })
-                .catch(error => {
-                    console.log(error.response.data.msg)
-                })
-        }
+            .catch(error => {
+                console.log(error.response.data.msg)
+            })
     }
+
+    handlePageClick = (e) => {
+        // console.log("Page number",e.selected)
+        this.setState({
+            page: e.selected + 1,
+        }, () => {
+            this.getInterviewSearchResults()
+        });
+    }
+    
     render() {
         return (
             <div class="body">
+            <React.Fragment>
                 {this.state.interviewData.map((interview, i) => {
                     return <div class="card" style={{ width: "50%", left: "25%", right: "25%", height: "400px" }}>
                         <div class="card-body">
@@ -68,6 +89,19 @@ class InterviewsTab extends Component {
                         </div>
                     </div>
                 })}
+                </React.Fragment>
+                <ReactPaginate
+                previousLabel={"<<"}
+                nextLabel={">>"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={this.state.pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={this.handlePageClick}
+                containerClassName={"pagination"}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"} />
             </div>
         )
     }
