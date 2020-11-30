@@ -180,3 +180,12 @@ position: relative;
   cursor: pointer;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
+.FavouriteIcon {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
