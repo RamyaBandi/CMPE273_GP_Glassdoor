@@ -1,0 +1,64 @@
+.userdetails {
+  display: flex;
+  width: 60%;
+  position: relative;
+  left: 20%;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 800px;
+  align-content: center;
+}
+.userdetails .addressOptions {
+  display: flex;
+  width: 60%;
+
+  justify-content: space-around;
+  flex-direction: column;
+  align-content: center;
+}
+
+.option {
+  width: 600px;
+  display: flex;
+  padding: 15px;
+  justify-content: flex-end;
+}
+
+.profile input {
+  width: 250px;
+  /* margin-left: 10px; */
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  background-color: #fff;
+  text-align: center;
+}
+input {
+  width: 250px;
+  /* margin-left: 10px; */
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  background-color: #fff;
+  text-align: center;
+}
+.profile {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageCont {
+  /* grid-area: 1/1 / span; */
+  border-radius: 50%;
+}
+.imageDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 70%;
+}

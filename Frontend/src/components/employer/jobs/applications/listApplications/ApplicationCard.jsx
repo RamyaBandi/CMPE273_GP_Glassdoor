@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 class ApplicationCard extends Component {
-    state = {}
+    state = {
+        applicationtatus: ""
+    }
     render() {
         console.log(this.props.props)
         let data = this.props.props
@@ -17,7 +19,8 @@ class ApplicationCard extends Component {
                         <p className="card-text">{data.studentId.email}</p>
                         <p className="card-text">Applied on : {date}</p>
                         <p className="card-text">Application Status : {data.applicationstatus}</p>
-                        <p className="card-text">Resume : {data.resumeId}</p>
+                        <p className="card-text">Resume : {data.resume}</p>
+
 
                         <a href="#" className="btn btn-primary">Go somewhere</a>
                     </div>

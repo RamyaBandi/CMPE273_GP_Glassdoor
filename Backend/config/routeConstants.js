@@ -22,6 +22,15 @@ module.exports = {
 
     GET_JOBS_HOMEPAGE: "/jobshomepage",
 
+    // Admin Analytics Dashboard
+    ADMIN_ROUTES : "/admin",
+    GET_REVIEWS_PER_DAY : "/reviewsperday",
+    GET_TOP_REVIEWED_COMPANIES : "/topreviewedcompanies",
+    GET_TOP_AVERAGE_RATED_COMPANIES : "/topaverageratedcompanies",
+    GET_TOP_STUDENTS_ON_RATING : "/topstudentsratings",
+    GET_TOP_CEO_RATING : "/topceorating",
+    GET_TOP_COMPANY_VIEWS : "/topcompanyviews",
+
     //Company Routes
     COMPANY_ROUTE: "/company",
     PUT_COMPANY_SIGNUP: "/company/profile",

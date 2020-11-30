@@ -34,6 +34,7 @@ const interviewRoutes = require('./routes/interviewRoutes');
 const jobsHomePageRoutes = require('./routes/jobsHomePageRoutes')
 const jobRoutes = require('./routes/jobRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
+const adminAnalyticsRoutes = require('./routes/adminDashboardRoutes')
 
 //use express session to maintain session data
 app.use(session({
@@ -69,6 +70,7 @@ app.use(routeConstants.INTERVIEW_ROUTE, interviewRoutes);
 app.use(routeConstants.GET_JOBS_HOMEPAGE, jobsHomePageRoutes);
 app.use(routeConstants.JOB_ROUTE, jobRoutes);
 app.use(routeConstants.APPLICATION_ROUTE, applicationRoutes);
+app.use(routeConstants.ADMIN_ROUTES, adminAnalyticsRoutes)
 
 //start your server on port 3001
 app.listen(3001);
