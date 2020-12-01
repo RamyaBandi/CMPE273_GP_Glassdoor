@@ -18,8 +18,27 @@ const {
 
 module.exports.jobsHomePage = async (req, res) => {
 //Salary needs to be present, most rated
-    let jobsData = await Jobs.find({}, 
-    { 'companyId': 1, 'jobTitle': 1, 'postedDate': 1, 'industry': 1,'streetAddress':1, 'city' : 1, 'state':1, 'zip' : 1});
+let jobsData = await Jobs.aggregate([
+    {
+        $project: {
+            companyId: 1,
+            jobTitle: 1,
+            postedDate: 1,
+            industry: 1,
+            streetAddress : 1,
+            city : 1,
+            state : 1,
+            zip : 1,
+            averageSalary : 1,
+            mostRated: { $size: "$applications" },
+            // salaryReviews:  { $size: "$salaries" },
+            // interviewReviews: { $size: "$interviews" }
+        }
+    },
+    {$sort: {postedDate: -1}}
+]).exec();
+    // let jobsData = await Jobs.find({}, 
+    // { 'companyId': 1, 'jobTitle': 1, 'postedDate': 1, 'industry': 1,'streetAddress':1, 'city' : 1, 'state':1, 'zip' : 1});
     console.log("Jobs Data", jobsData)
 
     let datasets = await Promise.all(jobsData.map(async (data) => {
@@ -38,6 +57,7 @@ module.exports.jobsHomePage = async (req, res) => {
                     // interviewReviews: "$interviews" ? { $size: "$interviews" } : null
                 }
             }]).exec();
+            console.log("Company Results", companyResults[0])
 
 
         let averageRating = await Reviews.aggregate([
@@ -45,19 +65,22 @@ module.exports.jobsHomePage = async (req, res) => {
 
 
         products._id = companyResults[0]._id;
+        products.jobId = data._id
         products.companyName = companyResults[0].companyName
         // products.headquarters = companyResults[0].headquarters
         // products.website = companyResults[0].website
-        // products.NumberOfReviews = companyResults[0].NumberOfReviews
+        products.NumberOfReviews = companyResults[0].NumberOfReviews
         // products.salaryReviews = companyResults[0].salaryReviews
         // products.interviewReviews = companyResults[0].interviewReviews
-        products.averageRating = averageRating[0].averageRating
+        products.averageRating = Math.round(averageRating[0].averageRating*Math.pow(10, 2)) / Math.pow(10, 2);
         products.jobTitle = data.jobTitle;
+        products.mostRated = data.mostRated
         products.streetAddress = data.streetAddress;
         products.city = data.city;
         products.state = data.state;
         products.zip = data.zip;
         products.postedDate = data.postedDate;
+        products.averageSalary = data.averageSalary;
         products.industry = data.industry;
 
 
@@ -66,4 +89,6 @@ module.exports.jobsHomePage = async (req, res) => {
 
     console.log("Outside jobs", datasets)
     res.status(RES_SUCCESS).end(JSON.stringify(datasets));
+    // res.status(RES_SUCCESS).end(JSON.stringify(jobsData));
 }
+
