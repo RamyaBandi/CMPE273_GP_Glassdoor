@@ -64,7 +64,7 @@ module.exports = {
     GET_ALL_REVIEWS: "/company/reviews",
     GET_COMPANY_REVIEWS: "/company/reviews",
 
-    POST_COMPANY_REPLY: "/company/reply",
+    PUT_COMPANY_REPLY: "/company/reply",
     PUT_COMPANY_REVIEW_HELPFUL: "/student/review/helpful",
 
 
@@ -80,8 +80,14 @@ module.exports = {
     GET_STUDENT_INTERVIEWS: "/student/interviews",
     GET_COMPANY_INTERVIEWS: "/company/interviews",
 
+
+    //Image Routes
+    IMAGE_ROUTES:"/image",
+    POST_IMAGE_USER_PROFILE: "/company/image",
+
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
+
 
     /**Response status codes */
     RES_UNKNOWN_ERROR: 502,
