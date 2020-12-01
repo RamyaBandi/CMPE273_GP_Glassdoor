@@ -42,7 +42,7 @@ class CompanyOverview extends Component {
         axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + companyId)
             .then((response) => {
                 console.log("response")
-                console.log(response.data.reviews);
+                //console.log(response.data.reviews);
                 this.setState({ reviews: response.data.reviews });
             })
             .catch((error) => {
