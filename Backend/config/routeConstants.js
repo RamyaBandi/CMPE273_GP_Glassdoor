@@ -89,7 +89,7 @@ module.exports = {
     POST_STUDENT_INTERVIEW: "/student/interview",
     GET_STUDENT_INTERVIEWS: "/student/interviews",
     GET_COMPANY_INTERVIEWS: "/company/interviews",
-
+    GET_INTERVIEW_EXP_PERCENTAGE: '/company/interview/expPercentage',
 
     //Image Routes
     IMAGE_ROUTES:"/image",

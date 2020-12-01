@@ -6,7 +6,7 @@ import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import axios from "axios";
 import InterviewCard from "./interviewCard";
-import { BACKEND_URL, GET_COMPANY_INTERVIEWS, GET_COMPANY_DETAILS } from "../../../../config/routeConstants";
+import { BACKEND_URL, GET_COMPANY_INTERVIEWS, GET_COMPANY_DETAILS, GET_INTERVIEW_EXP_PERCENTAGE } from "../../../../config/routeConstants";
 
 class Interviews extends Component {
   constructor(props) {
@@ -14,13 +14,13 @@ class Interviews extends Component {
     this.state = {
       companyDetails: [],
       interviews: [],
+      interviewExpPercentage: {},
       redirect: null,
     };
   }
   componentDidMount() {
     const company_id = "5fb4884acf339e3da0d5c31e";
     //const company_id = this.props.location.state;
-    //const {data} = this.props.location.state;
     console.log(company_id);
     axios
       .get(BACKEND_URL + GET_COMPANY_INTERVIEWS + "?companyId=" + company_id)
@@ -38,6 +38,18 @@ class Interviews extends Component {
         console.log("company overview response");
         console.log(response.data[0]);
         console.log(this.state.companyDetails);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+      axios
+      .get(BACKEND_URL + GET_INTERVIEW_EXP_PERCENTAGE + "?companyId=" + company_id)
+      .then((response) => {
+        this.setState({ interviewExpPercentage: response.data });
+        console.log("Interviews Experience Rating in Percentage response");
+        //console.log(response.data);
+        //console.log(this.state.interviewExpPercentage);
       })
       .catch((error) => {
         console.log(error);
@@ -92,6 +104,28 @@ class Interviews extends Component {
                         </Col>
                     </Row>
         </Container>
+
+        <Row>
+          <Container className="block-example border" style={{ marginBottom: "10px", marginTop: "10px", width: "62%" }}>
+            <Col>
+            <Row>
+              <p>Experience Rating in Percentage</p>
+            </Row>
+            <Row>
+              <Col md="4">
+                Positive: {this.state.interviewExpPercentage.positivePercentage}%
+              </Col>
+              <Col md="4">
+                Neutral: {this.state.interviewExpPercentage.negativePercentage}%
+              </Col>
+              <Col md="4">
+                Negative: {this.state.interviewExpPercentage.neutralPercentage}%
+              </Col>
+            </Row>
+            </Col>
+          </Container>
+        </Row>
+
         <Row>
           <Container style={{ marginBottom: "30px" }}>
             {this.state.interviews.map((item) => {
