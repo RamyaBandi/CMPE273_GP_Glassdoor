@@ -128,6 +128,11 @@ class loggedInNav extends React.Component {
                                         <i class="fas fa-money-check-alt">Salaries</i></Link>
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
+                                <li class="nav-item navWidth">
+                                    <Link to='/student/profile' class="nav-link navTab">
+                                        <i class="fas fa-money-check-alt">Profile</i></Link>
+                                    <a class="nav-link navTab" href="#"></a>
+                                </li>
                             </ul>
                         </div>
                     </nav>

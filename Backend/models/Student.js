@@ -17,6 +17,27 @@ const Student_schema = new mongoose.Schema({
     imageUrl: {
         type: String,
     },
+    interestedJobtitle: {
+        type: String,
+    },
+    phoneNumber: {
+        type: String,
+    },
+    website:{
+        type: String,
+    },
+    location: {
+        type: String,
+    },
+    degree:{
+        type: String,
+    },
+    yearsOfExperience:{
+        type: String,
+    },
+    aboutMe:{
+        type: String,
+    },
     accpetedReviewCount: {
         type: Number,
     },

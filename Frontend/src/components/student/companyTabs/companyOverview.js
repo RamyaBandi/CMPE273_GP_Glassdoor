@@ -30,6 +30,7 @@ class CompanyOverview extends Component {
         const company_id = this.props.location.state.companyId
         console.log("Fetched company Id", company_id)
         await axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + company_id)
+
             .then(response => {
                 this.setState({ companyDetails: response.data[0] });
                 console.log("In componentDidMount");
@@ -40,6 +41,7 @@ class CompanyOverview extends Component {
             .catch((error) => {
                 console.log(error);
             }
+
             )
 
         //Capture number of times a company is viewed
@@ -61,12 +63,15 @@ class CompanyOverview extends Component {
             .then((response) => {
                 console.log("response")
                 //console.log(response.data.reviews);
+
                 this.setState({ reviews: response.data.reviews });
             })
             .catch((error) => {
                 console.log(error);
+
             })
       })
+
 
     render = () => {
         //const companyId = this.state.companyDetails._id;

@@ -1,0 +1,8 @@
+a {
+  color: #138d37;
+}
+
+a:hover {
+  color: rgb(13, 15, 138);
+  text-decoration: underline;
+}
