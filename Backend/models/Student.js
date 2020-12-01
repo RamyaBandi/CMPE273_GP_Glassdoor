@@ -82,6 +82,9 @@ const Student_schema = new mongoose.Schema({
         type: String,
         enum: ['Not Looking', 'Casually Looking', 'Actively Looking'],
     },
+    jobTitle:{
+    type: String,
+    },
     targetedSalary: {
         type: Number,
     },

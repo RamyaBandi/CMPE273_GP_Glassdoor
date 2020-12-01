@@ -104,3 +104,26 @@ module.exports.updateStudentDemographics = (req, res) => {
         }
     })
 }
+
+module.exports.updateStudentJobPreferences = (req, res) => {
+    console.log("Inside Student Job Preferences PUT service");
+    console.log("req body" + JSON.stringify(req.body));
+    let data = req.body
+    let jobPreference_update = {
+        jobSearchStatus: data.jobSearchStatus,
+        jobTitle: data.jobTitle,
+        targetedSalary: data.targetedSalary,
+        relocationPreference: data.relocationPreference,
+        industryPreference: data.industryPreference,
+    }
+    Student.findByIdAndUpdate(data.studentId, jobPreference_update, (err, result) => {
+        if (err) {
+            console.log("Error updating student profile" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update student jobPreference : " + JSON.stringify(result))
+            res.status(200).end(JSON.stringify(result))
+        }
+    })
+}
