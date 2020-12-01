@@ -54,6 +54,7 @@ module.exports = {
     POST_STUDENT_INTERVIEW: '/interview/student/interview',
     GET_COMPANY_INTERVIEWS: '/interview/company/interviews',
     GET_STUDENT_interviewS: '/interview/student/interviews',
+    GET_INTERVIEW_EXP_PERCENTAGE: '/interview/company/interview/expPercentage',
 
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",

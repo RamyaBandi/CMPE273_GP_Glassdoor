@@ -120,3 +120,37 @@ module.exports.getStudentInterviews = (req, res) => {
             }
         });
 };
+
+module.exports.getInterviewExpRatingInPercentage = async (req, res) => {
+    console.log("Inside Company Interviews Experience Rating in Percentage GET service");
+    let data = req.query;
+    console.log(data);
+    try {
+        const interviews = await Interviews.find({ companyId: data.companyId })
+            .exec();
+        const totalCount = await Interviews.countDocuments({
+            companyId: data.companyId,
+        });
+        const positiveCount = await Interviews.countDocuments({ companyId: data.companyId, overallExperience: +1 }).exec();
+        const positivePercentage = (positiveCount / totalCount) * 100;
+        const negativeCount = await Interviews.countDocuments({ companyId: data.companyId, overallExperience: -1 }).exec();
+        const negativePercentage = (negativeCount / totalCount) * 100;
+        const neutralCount = await Interviews.countDocuments({ companyId: data.companyId, overallExperience: 0 }).exec();
+        const neutralPercentage = (neutralCount / totalCount) * 100;
+        const result = {
+            positivePercentage,
+            neutralPercentage,
+            negativePercentage,
+        };
+        res.status(RES_SUCCESS).send(result);
+        console.log(totalCount);
+        console.log(positiveCount);
+        console.log(positivePercentage);
+    } catch {
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+    }
+};
