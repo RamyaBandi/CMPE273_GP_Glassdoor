@@ -121,7 +121,7 @@ module.exports.getStudentInterviews = (req, res) => {
         });
 };
 
-module.exports.getInterviewExpRatingInPercentage = async (req, res) => {
+module.exports.getInterviewStatistics = async (req, res) => {
     console.log("Inside Company Interviews Experience Rating in Percentage GET service");
     let data = req.query;
     console.log(data);
@@ -137,15 +137,31 @@ module.exports.getInterviewExpRatingInPercentage = async (req, res) => {
         const negativePercentage = (negativeCount / totalCount) * 100;
         const neutralCount = await Interviews.countDocuments({ companyId: data.companyId, overallExperience: 0 }).exec();
         const neutralPercentage = (neutralCount / totalCount) * 100;
+
+        const easyCount = await Interviews.countDocuments({ companyId: data.companyId, difficulty: "Easy" }).exec();
+        const easyPercentage = (easyCount / totalCount) * 100;
+        const averageCount = await Interviews.countDocuments({ companyId: data.companyId, difficulty: "Average" }).exec();
+        const averagePercentage = (averageCount / totalCount) * 100;
+        const difficultCount = await Interviews.countDocuments({ companyId: data.companyId, difficulty: "Difficult" }).exec();
+        const difficultPercentage = (difficultCount / totalCount) * 100;
+
+        const acceptedCount = await Interviews.countDocuments({ companyId: data.companyId, offerStatus: "Accepted" }).exec();
+        const acceptedPercentage = (acceptedCount / totalCount) * 100;
+        const rejectedCount = await Interviews.countDocuments({ companyId: data.companyId, offerStatus: "Rejected" }).exec();
+        const rejectedPercentage = (rejectedCount / totalCount) * 100;
+
         const result = {
             positivePercentage,
             neutralPercentage,
             negativePercentage,
+            easyPercentage,
+            averagePercentage,
+            difficultPercentage,
+            acceptedPercentage,
+            rejectedPercentage
         };
         res.status(RES_SUCCESS).send(result);
-        console.log(totalCount);
-        console.log(positiveCount);
-        console.log(positivePercentage);
+        console.log(result);
     } catch {
         if (err) {
             console.log(err);

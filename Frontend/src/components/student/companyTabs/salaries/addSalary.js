@@ -108,13 +108,13 @@ class AddSalary extends Component {
                         </Col>
                     </Row>
         </Container>
-        
-        <Container style={{ marginLeft: "25%", width: "42%" }}>
+        <Container style={{ marginLeft: "25%", width: "100%" }}>
+        <Container style={{ width: "100%" }}>
           <Row>
             <b>Add a Salary</b>
           </Row>
         </Container>
-        <Container style={{ marginTop: "20px", width: "45%" }}>
+        <Container style={{ marginTop: "20px", width: "100%" }}>
             <Row>
             <p>Salary Details</p>
           </Row>
@@ -233,6 +233,7 @@ class AddSalary extends Component {
               </Row>
             </div>
           </Row>
+        </Container>
         </Container>
       </div>
     );
