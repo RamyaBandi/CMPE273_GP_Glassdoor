@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import LoggedInNav from './loggedInNav';
+import StudentNavBar from './StudentNavBar';
 import LoggedOutNav from './loggedOutNav';
-import EmployerNavBar from '../employer/navBar/employerNavBar'
+import EmployerNavBar from '../employer/navBar/employerNavBar';
+import AdminNavBar from './AdminNavBar';
 //create the Navbar Component
 class Navbar extends Component {
     // handle logout to destroy the cookie
@@ -14,7 +15,10 @@ class Navbar extends Component {
                 renderVar = <EmployerNavBar props={this.props} />
             }
             else if (localStorage.getItem('role') === 'student')  {
-                renderVar = <LoggedInNav props={this.props} />
+                renderVar = <StudentNavBar props={this.props} />
+            }
+            else if (localStorage.getItem('role') === 'admin')  {
+                renderVar = <AdminNavBar props={this.props} />
             }
         }
         else {

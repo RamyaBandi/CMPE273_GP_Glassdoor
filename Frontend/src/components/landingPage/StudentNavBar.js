@@ -5,7 +5,7 @@ import './loggedInNav.css'
 import glassdoor_font from '../../images/glassdoor_font.PNG'
 var FontAwesome = require('react-fontawesome');
 
-class loggedInNav extends React.Component {
+class StudentNavBar extends React.Component {
     constructor(){
         super()
         this.state = {
@@ -16,7 +16,15 @@ class loggedInNav extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleCategoryChange = this.handleCategoryChange.bind(this)
         this.submitSearch = this.submitSearch.bind(this)
+        this.handleLogout = this.handleLogout.bind(this)
     }
+
+    handleLogout(event){
+        event.preventDefault();
+        localStorage.clear();
+        this.props.history.push('/')
+    }
+
     handleChange(event){
         event.preventDefault()
         this.setState({
@@ -90,7 +98,7 @@ class loggedInNav extends React.Component {
                                 </td>
                                 <td style={{ width: "10%", marginLeft: "0%" }} >
 
-                                    <button className="fas fa-user-circle" id="logOut" style={{ color: "grey" }} title="Log Out"></button>
+                                    <button className="fas fa-user-circle" id="logOut" onClick={this.handleLogout} style={{ color: "grey" }} title="Log Out"></button>
                                 </td>
                             </tr>
                         </table>
@@ -142,4 +150,4 @@ class loggedInNav extends React.Component {
 
     }
 }
-export default withRouter(loggedInNav);
+export default withRouter(StudentNavBar);

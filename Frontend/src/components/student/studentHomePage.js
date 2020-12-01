@@ -32,11 +32,10 @@ class studentHomePage extends Component {
         this.getRatingsBasedJobResults = this.getRatingsBasedJobResults.bind(this)
         this.getDateBasedJobResults = this.getDateBasedJobResults.bind(this)
     }
+
+
     async componentDidMount() {
-        // this.setState({
-        //     page : 1
-        // })
-        // if (this.props.location.state.detail !== "") {
+
         await this.getJobSearchResults()
 
         await this.setState({
@@ -50,6 +49,8 @@ class studentHomePage extends Component {
         console.log("Job Type", this.state.jobTypeFilter)
         this.receivedData()
     }
+
+    // Prepare Data for Pagination
 
     receivedData() {
         let count = 0
@@ -101,6 +102,7 @@ class studentHomePage extends Component {
         })
     }
 
+    // Capture change in select options and filter results accordingly
 
     handleCategoryChange(event) {
         event.preventDefault();
@@ -172,6 +174,8 @@ class studentHomePage extends Component {
 
     }
 
+    // Function to handle change in data when a different page is clicked
+
     handlePageClick = (e) => {
         const selectedPage = e.selected;
         const offset = selectedPage * this.state.perPage;
@@ -183,6 +187,8 @@ class studentHomePage extends Component {
             this.receivedData()
         });
     }
+
+    // Initial function to get the jobs result from the backend
 
     async getJobSearchResults() {
         await axios.get(BACKEND_URL + GET_STUDENTS_JOBS_HOMEPAGE,
@@ -201,6 +207,8 @@ class studentHomePage extends Component {
             })
     }
 
+    //Filter the jobs based on the most recent date
+
     async getDateBasedJobResults() {
         this.setState({
             jobsData: this.state.originaljobsData
@@ -209,6 +217,8 @@ class studentHomePage extends Component {
         })
     }
 
+    //Filter the jobs based on the most Rated Job
+
     async getRatingsBasedJobResults() {
         this.setState({
             jobsData: this.state.originaljobsData.sort(function (a, b) { return b.mostRated - a.mostRated; })
@@ -216,6 +226,8 @@ class studentHomePage extends Component {
             this.receivedData()
         })
     }
+
+    //Convert Date to the format YYYY-MM-DD
 
     formatDate(date) {
         var d = new Date(date),
