@@ -36,7 +36,7 @@ module.exports = {
     PUT_COMPANY_SIGNUP: "/company/profile",
     GET_COMPANY_SIGNUP: "/company/profile",
     POST_COMPANY_SIGNUP: "/company/profile",
-
+    PUT_FEATURED_REVIEWS: "/review/featured",
     
     //Company Details Routes
     GET_COMPANY_DETAILS: "/companyDetails",
@@ -63,8 +63,10 @@ module.exports = {
     GET_STUDENT_REVIEWS: "/student/reviews",
     GET_ALL_REVIEWS: "/company/reviews",
     GET_COMPANY_REVIEWS: "/company/reviews",
+
     POST_COMPANY_REPLY: "/company/reply",
     PUT_COMPANY_REVIEW_HELPFUL: "/student/review/helpful",
+
 
     //Salary Routes
     SALARY_ROUTE: "/salary",

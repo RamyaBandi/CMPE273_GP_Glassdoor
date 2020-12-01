@@ -12,7 +12,8 @@ const {
     GET_STUDENT_REVIEWS,
     GET_ALL_REVIEWS,
     GET_COMPANY_REVIEWS,
-    POST_COMPANY_REPLY,
+    PUT_COMPANY_REPLY,
+
   } = require("../config/routeConstants");
   
 
@@ -78,6 +79,7 @@ const {
   });
   }
   
+
   module.exports.updateReviewHelpfulCount=(req,res)=>{
     console.log("req.body"+JSON.stringify(req.body))
     data={
