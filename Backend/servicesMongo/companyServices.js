@@ -33,6 +33,7 @@ module.exports.createCompanyProfile = (req, res) => {
 }
 
 
+
 module.exports.updateCompanyProfile = (req, res) => {
     console.log("Inside Company Profile PUT service");
     console.log("req body" + JSON.stringify(req.body));
@@ -102,6 +103,32 @@ module.exports.getUpdatedCompanyProfile = (req, res) => {
             console.log("Company Details fetched Successfully");
             console.log(result);
             res.status(RES_SUCCESS).send(result);
+        }
+    })
+}
+
+
+
+module.exports.updateCompanyFeatured = (req, res) => {
+    console.log("Inside Company Featured review PUT service");
+    console.log("req body" + JSON.stringify(req.body));
+    let data = req.body
+
+    let featured_update = {
+        
+        featuredReview: data.featuredId
+    }
+    //console.log(featured_update)
+    Company.findByIdAndUpdate(data.companyId, {$push:featured_update}, (err, result) => {
+        //console.log(result.featuredReview)
+        //console.log(result._id)
+        if (err) {
+            console.log("Error updating company profile" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update Company Featured Reviews : " + JSON.stringify(result.featuredReview))
+            res.status(200).end(JSON.stringify(result.featuredReview))
         }
     })
 }

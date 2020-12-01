@@ -1,9 +1,20 @@
 module.exports = {
     FRONTEND_URL: "http://localhost:3000",
     BACKEND_URL: "http://localhost:3001",
+    // BACKEND_URL: 'http://13.52.213.227:3001',
+    // BACKEND_URL: 'http://54.67.58.148:3001',
+
+    //Input validation
+
+    FETCH_VALIDATIONDETAILS: '/validateroute/validationinput',
+
+    // Registration Routes
+    POST_REGISTRATION: '/registerroute/register',
 
     //Login Routes
-    POST_LOGIN: '/login',
+    POST_LOGIN: '/loginroute/login',
+    //Login Routes
+    
     POST_REGISTER: '/register',
     FETCH_CUSTOMERINPUT: '/validationinput',
 
@@ -21,6 +32,8 @@ module.exports = {
     PUT_STUDENT_REVIEW_HELPFUL: '/review/student/review/helpful',
     GET_POSITIVE_REVIEW: '/review/positive/review',
     GET_NEGATIVE_REVIEW: '/review/negative/review',
+    PUT_FEATURED_REVIEWS: '/review/featured',
+    PUT_COMPANY_REPLY: '/company/reply',
 
     //Salary Routes
     POST_STUDENT_SALARY: '/salary/student/salary',
@@ -43,7 +56,9 @@ module.exports = {
 
     GET_JOBS_HOMEPAGE : "/jobshomepage",
 
-    //Company Routes
+    //CompanyRoutes
+    GET_COMPANY_DETAILS: '/company/companyDetails',
+    GET_JOBS_HOMEPAGE : "/jobshomepage",
     COMPANY_ROUTE: "/company",
     PUT_COMPANY_SIGNUP: "/company/profile",
     GET_COMPANY_SIGNUP: "/company/profile",
@@ -69,8 +84,16 @@ module.exports = {
     GET_APPLICATIONS_STUDENTID: '/studentId',
     GET_APPLICATIONS_ALL: '/',
 
+    //Image Routes
+    POST_IMAGE_USER_PROFILE: "/company/image",
+
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
+    TOPIC_RESTAURANT: 'restaurant',
+    TOPIC_CUSTOMER: 'customer',
+    TOPIC_ORDERS: 'order',
+    TOPIC_REVIEWS: 'review',
+    TOPIC_EVENTS: 'event',
 
     /**Response status codes */
     RES_UNKNOWN_ERROR: 502,

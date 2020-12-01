@@ -36,7 +36,7 @@ module.exports = {
     PUT_COMPANY_SIGNUP: "/company/profile",
     GET_COMPANY_SIGNUP: "/company/profile",
     POST_COMPANY_SIGNUP: "/company/profile",
-
+    PUT_FEATURED_REVIEWS: "/review/featured",
     
     //Company Details Routes
     GET_COMPANY_DETAILS: "/companyDetails",
@@ -63,10 +63,12 @@ module.exports = {
     GET_STUDENT_REVIEWS: "/student/reviews",
     GET_ALL_REVIEWS: "/company/reviews",
     GET_COMPANY_REVIEWS: "/company/reviews",
-    POST_COMPANY_REPLY: "/company/reply",
+
+    PUT_COMPANY_REPLY: "/company/reply",
     PUT_COMPANY_REVIEW_HELPFUL: "/student/review/helpful",
     GET_POSITIVE_REVIEW: "/positive/review",
     GET_NEGATIVE_REVIEW: "/negative/review",
+
 
     //Salary Routes
     SALARY_ROUTE: "/salary",
@@ -80,8 +82,14 @@ module.exports = {
     GET_STUDENT_INTERVIEWS: "/student/interviews",
     GET_COMPANY_INTERVIEWS: "/company/interviews",
 
+
+    //Image Routes
+    IMAGE_ROUTES:"/image",
+    POST_IMAGE_USER_PROFILE: "/company/image",
+
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
+
 
     /**Response status codes */
     RES_UNKNOWN_ERROR: 502,

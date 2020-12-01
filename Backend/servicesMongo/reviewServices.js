@@ -175,7 +175,7 @@ module.exports.getCompanyReviews = async (req, res) => {
             const reviews = await Reviews.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
             const count = await Reviews.countDocuments({companyId: data.companyId});
             console.log("count" + count);
-    
+            console.log(reviews)
             const result = ({
                 reviews,
                 totalPages: Math.ceil(count / data.limit),
@@ -290,4 +290,30 @@ module.exports.getMostNegativeReview = async (req, res) => {
                 res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
             }
         }
+
+module.exports.postReplyFromCompany = (req, res) => {
+
+    console.log("Inside Reply Post service");
+    console.log(req.body)
+    let data = req.body
+
+    let reply = {
+        
+        reply: data.reply,
+        replyTimeStamp: Date.now()
+    }
+    //console.log(featured_update)
+    Reviews.findByIdAndUpdate(data.reviewId, reply, (err, result) => {
+        console.log(result.reply)
+        console.log(result)
+        if (err) {
+            console.log("Error updating company profile" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update Company Featured Reviews : " + JSON.stringify(result))
+            res.status(200).end(JSON.stringify(result))
+        }
+    })
+
 }
