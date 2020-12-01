@@ -70,9 +70,7 @@ class CompanyOverview extends Component {
                 console.log(error);
 
             })
-      }
-
-
+    }
     render = () => {
         //const companyId = this.state.companyDetails._id;
         console.log(this.state.companyDetails);

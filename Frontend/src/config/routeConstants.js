@@ -23,7 +23,7 @@ module.exports = {
     GET_SEARCH_COMPANY : '/search/search/companysearch',
     GET_SEARCH_SALARY : "/search/search/salarysearch",
     GET_SEARCH_INTERVIEW : "/search/search/interviewsearch",
-    GET_JOBS_HOMEPAGE : '/jobshomepage/jobshomepage',
+    // GET_JOBS_HOMEPAGE : "/jobshomepage/jobshomepage",
 
 
     //Admin Analytics Dashboard Routes
@@ -64,7 +64,7 @@ module.exports = {
 
     //Student Jobs Home Page
 
-    GET_JOBS_HOMEPAGE : "/jobshomepage",
+    GET_STUDENTS_JOBS_HOMEPAGE : "/jobshomepage/jobshomepage",
 
 
     //Student SignUp
