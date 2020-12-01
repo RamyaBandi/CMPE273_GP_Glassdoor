@@ -18,7 +18,8 @@ class Interviews extends Component {
     };
   }
   componentDidMount() {
-    const company_id = this.props.location.state;
+    const company_id = "5fb4884acf339e3da0d5c31e";
+    //const company_id = this.props.location.state;
     //const {data} = this.props.location.state;
     console.log(company_id);
     axios

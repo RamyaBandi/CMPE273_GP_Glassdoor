@@ -43,6 +43,7 @@ module.exports = {
     GET_NEGATIVE_REVIEW: '/review/negative/review',
     PUT_FEATURED_REVIEWS: '/review/featured',
     PUT_COMPANY_REPLY: '/company/reply',
+    GET_REVIEW_AVERAGE: '/review/average/review',
 
     //Salary Routes
     POST_STUDENT_SALARY: '/salary/student/salary',
