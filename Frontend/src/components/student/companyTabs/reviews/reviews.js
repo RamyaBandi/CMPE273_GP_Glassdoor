@@ -25,8 +25,8 @@ class Reviews extends Component {
     this.setState({ redirect: <Redirect to="/addReview" /> });
   };
   componentDidMount() {
+    //const company_id = '5fb4884acf339e3da0d5c31e';
     const company_id = this.props.location.state;
-    //const {data} = this.props.location.state;
     console.log(company_id);
     axios
       .get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + company_id)
