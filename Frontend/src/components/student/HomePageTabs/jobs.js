@@ -40,8 +40,8 @@ class JobsTab extends Component {
     async getJobSearchResults(){
         await axios.get(BACKEND_URL + GET_SEARCH_JOBS, {
             params: {
-                searchParameter: this.props.location.state.detail,
-                // searchParameter : "Software Engineer",
+                // searchParameter: this.props.location.state.detail,
+                searchParameter : "Software Engineer",
                 page : this.state.page,
                 limit : this.state.limit
             }

@@ -25,11 +25,22 @@ module.exports = {
     GET_SEARCH_INTERVIEW : "/search/search/interviewsearch",
     GET_JOBS_HOMEPAGE : '/jobshomepage/jobshomepage',
 
+
+    //Admin Analytics Dashboard Routes
+    GET_REVIEWS_PER_DAY : "/admin/reviewsperday",
+    GET_TOP_REVIEWED_COMPANIES : "/admin/topreviewedcompanies",
+    GET_TOP_AVERAGE_RATED_COMPANIES : "/admin/topaverageratedcompanies",
+    GET_TOP_STUDENTS_ON_RATING : "/admin/topstudentsratings",
+    GET_TOP_CEO_RATING : "/admin/topceorating",
+    GET_TOP_COMPANY_VIEWS : "/admin/topcompanyviews",
+
     //Review Routes
     POST_STUDENT_REVIEW: '/review/student/review',
     GET_COMPANY_REVIEWS: '/review/company/reviews',
     GET_STUDENT_REVIEWS: '/review/student/reviews',
     PUT_STUDENT_REVIEW_HELPFUL: '/review/student/review/helpful',
+    GET_POSITIVE_REVIEW: '/review/positive/review',
+    GET_NEGATIVE_REVIEW: '/review/negative/review',
     PUT_FEATURED_REVIEWS: '/review/featured',
     PUT_COMPANY_REPLY: '/company/reply',
 
@@ -61,6 +72,7 @@ module.exports = {
     PUT_COMPANY_SIGNUP: "/company/profile",
     GET_COMPANY_SIGNUP: "/company/profile",
     POST_COMPANY_SIGNUP: "/company/profile",
+    POST_COMPANYVIEWS : "/company/viewsperday",
 
     
     //Company Details Routes

@@ -5,7 +5,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Redirect } from "react-router";
 import axios from 'axios';
-import { BACKEND_URL, GET_COMPANY_DETAILS, GET_COMPANY_REVIEWS } from '../../../config/routeConstants';
+import { BACKEND_URL, GET_COMPANY_DETAILS, GET_COMPANY_REVIEWS, POST_COMPANYVIEWS } from '../../../config/routeConstants';
 import ReviewCard from "../../student/companyTabs/reviews/reviewCard"
 import Reviews from "../../student/companyTabs/reviews/reviews";
 
@@ -25,33 +25,53 @@ class CompanyOverview extends Component {
         //console.log("companyId in overview "+ this.state.companyId);
     }
 
-    componentDidMount() {
-        const company_id = '5fb4884acf339e3da0d5c31e';
-        const companyId = this.props.location.state.companyId
+    async componentDidMount() {
+        // const company_id = '5fb4884acf339e3da0d5c31e';
+        const company_id = this.props.location.state.companyId
         console.log("Fetched company Id", company_id)
-        axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
+        await axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + company_id)
+
             .then(response => {
                 this.setState({ companyDetails: response.data[0] });
                 console.log("In componentDidMount");
-                console.log("Company details",response.data[0]);
+                console.log("Company details", response.data[0]);
                 console.log(this.state.companyDetails);
                 console.log(this.state.companyDetails.reviews);
             })
             .catch((error) => {
                 console.log(error);
             }
-        )
-        axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + companyId)
+
+            )
+
+        //Capture number of times a company is viewed
+
+        let views = {
+            companyId: this.props.location.state.companyId,
+            companyName: this.state.companyDetails.companyName
+        }
+        await axios.post(BACKEND_URL + POST_COMPANYVIEWS, views)
             .then((response) => {
-                console.log("response")
-                console.log(response.data.reviews);
-                this.setState({ reviews: response.data.reviews });
+                console.log("response for company views", response)
             })
             .catch((error) => {
                 console.log(error);
             }
-        )
-    }
+            )
+
+        await axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + company_id)
+            .then((response) => {
+                console.log("response")
+                //console.log(response.data.reviews);
+
+                this.setState({ reviews: response.data.reviews });
+            })
+            .catch((error) => {
+                console.log(error);
+
+            })
+      })
+
 
     render = () => {
         //const companyId = this.state.companyDetails._id;

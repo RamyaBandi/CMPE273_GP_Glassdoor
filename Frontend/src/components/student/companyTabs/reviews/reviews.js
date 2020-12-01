@@ -10,6 +10,8 @@ import {
   BACKEND_URL,
   GET_COMPANY_REVIEWS,
   GET_COMPANY_DETAILS,
+  GET_POSITIVE_REVIEW,
+  GET_NEGATIVE_REVIEW
 } from "../../../../config/routeConstants";
 
 class Reviews extends Component {
@@ -18,6 +20,8 @@ class Reviews extends Component {
     this.state = {
       companyDetails: [],
       reviews: [],
+      positiveReviews: {},
+      negativeReviews: {},
       redirect: null,
     };
   }
@@ -25,14 +29,14 @@ class Reviews extends Component {
     this.setState({ redirect: <Redirect to="/addReview" /> });
   };
   componentDidMount() {
-    //const company_id = '5fb4884acf339e3da0d5c31e';
-    const company_id = this.props.location.state;
-    console.log(company_id);
+    const company_id = '5fb4884acf339e3da0d5c31e';
+    //const company_id = this.props.location.state;
+    //console.log(company_id);
     axios
       .get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + company_id)
       .then((response) => {
-        console.log("reviews response");
-        console.log(response.data.reviews);
+        // console.log("reviews response");
+        // console.log(response.data.reviews);
         this.setState({ reviews: response.data.reviews });
       })
       .catch((error) => {
@@ -43,9 +47,31 @@ class Reviews extends Component {
       .get(BACKEND_URL + GET_COMPANY_DETAILS + "?companyId=" + company_id)
       .then((response) => {
         this.setState({ companyDetails: response.data[0] });
-        console.log("company overview response");
-        console.log(response.data[0]);
-        console.log(this.state.companyDetails);
+        // console.log("company overview response");
+        // console.log(response.data[0]);
+        // console.log(this.state.companyDetails);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+      axios
+      .get(BACKEND_URL + GET_POSITIVE_REVIEW + "?companyId=" + company_id)
+      .then((response) => {
+        console.log("positive review");
+        this.setState({ positiveReviews: response.data.positiveReviews[0] });
+        //console.log(this.state.positiveReviews);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+      axios
+      .get(BACKEND_URL + GET_NEGATIVE_REVIEW + "?companyId=" + company_id)
+      .then((response) => {
+        console.log("negative review");
+        this.setState({ negativeReviews: response.data.negativeReviews[0] });
+        //console.log(this.state.negativeReviews);
       })
       .catch((error) => {
         console.log(error);
@@ -101,6 +127,88 @@ class Reviews extends Component {
                     </Row>
         </Container>
         <Row>
+        <Container className="block-example border" style={{ marginTop: "20px", width: "61%" }}>
+          <Col>
+          <Row>
+            <p>Most Positive Review</p>
+          </Row>
+            <Row>
+              <p style={{ color: "#3f76cc", fontSize: "22px" }}>
+                <b>{this.state.positiveReviews.headline}</b>
+              </p>          
+            </Row>
+            <Row>
+              <Col md="4">
+                <p>Overall Rating: {this.state.positiveReviews.overallRating}</p>
+              </Col>
+              <Col md="4">
+                <p>Recommended to a Friend: {this.state.positiveReviews.recommendedRating}</p>
+              </Col>
+              <Col md="4">
+                <p>CEO approval: {this.state.positiveReviews.ceoRating}</p>
+              </Col>
+            </Row>
+            <Row>
+              <p>{this.state.positiveReviews.description}</p>
+            </Row>
+            <Row>
+              <p>
+                <b>Pros</b>
+                <br />
+                {this.state.positiveReviews.pros}
+              </p>
+            </Row>
+            <Row>
+              <p>
+                <b>Cons</b>
+                <br />
+                {this.state.positiveReviews.cons}
+              </p>
+            </Row>
+          </Col>
+        </Container>
+
+        <Container className="block-example border" style={{ marginTop: "20px", width: "61%" }}>
+          <Col>
+          <Row>
+            <p>Most Negative Review</p>
+          </Row>
+            <Row>
+              <p style={{ color: "#3f76cc", fontSize: "22px" }}>
+                <b>{this.state.negativeReviews.headline}</b>
+              </p>          
+            </Row>
+            <Row>
+              <Col md="4">
+                <p>Overall Rating: {this.state.negativeReviews.overallRating}</p>
+              </Col>
+              <Col md="4">
+                <p>Recommended to a Friend: {this.state.negativeReviews.recommendedRating}</p>
+              </Col>
+              <Col md="4">
+                <p>CEO approval: {this.state.negativeReviews.ceoRating}</p>
+              </Col>
+            </Row>
+            <Row>
+              <p>{this.state.negativeReviews.description}</p>
+            </Row>
+            <Row>
+              <p>
+                <b>Pros</b>
+                <br />
+                {this.state.negativeReviews.pros}
+              </p>
+            </Row>
+            <Row>
+              <p>
+                <b>Cons</b>
+                <br />
+                {this.state.negativeReviews.cons}
+              </p>
+            </Row>
+          </Col>
+        </Container>
+
           <Container style={{ marginBottom: "30px" }}>
             {this.state.reviews.map((item) => {
               return <ReviewCard {...item} />;
