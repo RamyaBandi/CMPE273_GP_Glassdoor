@@ -69,6 +69,7 @@ module.exports = {
     //Student SignUp
     GET_STUDENT_SIGNUP: "/student/profile",
     PUT_STUDENT_SIGNUP: "/student/profile",
+    PUT_STUDENT_DEMOGRAPHICS:"/student/demographics",
 
     //CompanyRoutes
     GET_COMPANY_DETAILS: '/company/companyDetails',

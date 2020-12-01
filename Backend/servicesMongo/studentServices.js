@@ -82,3 +82,25 @@ module.exports.updateStudentDetails = (req, res) => {
         }
     })
 }
+
+module.exports.updateStudentDemographics = (req, res) => {
+    console.log("Inside Student demographics PUT service");
+    console.log("req body" + JSON.stringify(req.body));
+    let data = req.body
+    let demographics_update = {
+        race:data.race,
+        gender:data.gender,
+        disability:data.disability,
+        veteranStatus:data.veteranStatus,
+    }
+    Student.findByIdAndUpdate(data.studentId, demographics_update, (err, result) => {
+        if (err) {
+            console.log("Error updating student profile" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update student demographics : " + JSON.stringify(result))
+            res.status(200).end(JSON.stringify(result))
+        }
+    })
+}

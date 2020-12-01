@@ -12,7 +12,9 @@ module.exports = {
     POST_STUDENT_SIGNUP: "/student/profile",
     GET_STUDENT_SIGNUP: "/student/profile",
     PUT_STUDENT_SIGNUP: "/student/profile",
+    PUT_STUDENT_DEMOGRAPHICS:"/student/demographics",
 
+    
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",
     GET_JOB_SEARCH: "/search/jobsearch",
