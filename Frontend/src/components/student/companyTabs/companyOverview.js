@@ -26,10 +26,10 @@ class CompanyOverview extends Component {
     }
 
     componentDidMount() {
-        // const company_id = '5fb4884acf339e3da0d5c31e';
-        const company_id = this.props.location.state.companyId
+        const company_id = '5fb4884acf339e3da0d5c31e';
+        const companyId = this.props.location.state.companyId
         console.log("Fetched company Id", company_id)
-        axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + company_id)
+        axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
             .then(response => {
                 this.setState({ companyDetails: response.data[0] });
                 console.log("In componentDidMount");
@@ -41,16 +41,16 @@ class CompanyOverview extends Component {
                 console.log(error);
             }
         )
-        // axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + companyId)
-        //     .then((response) => {
-        //         console.log("response")
-        //         console.log(response.data.reviews);
-        //         this.setState({ reviews: response.data.reviews });
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     }
-        // )
+        axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + companyId)
+            .then((response) => {
+                console.log("response")
+                console.log(response.data.reviews);
+                this.setState({ reviews: response.data.reviews });
+            })
+            .catch((error) => {
+                console.log(error);
+            }
+        )
     }
 
     render = () => {
