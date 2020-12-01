@@ -78,4 +78,23 @@ const {
   });
   }
   
+  module.exports.updateReviewHelpfulCount=(req,res)=>{
+    console.log("req.body"+JSON.stringify(req.body))
+    data={
+      api:"PUT_COMPANY_REVIEW_HELPFUL",
+      body: req.body
+    }
+    kafka.make_request('reviews', data, function(err,results){
+      console.log('in result');
+      console.log(results);
+      if (err) {
+        console.log("In error");
+        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+    } else {
+        console.log("In else");
+        res.status(RES_SUCCESS).send(JSON.stringify(results));
+    }
+      
+  });
+  }
   

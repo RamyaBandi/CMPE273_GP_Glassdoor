@@ -2,11 +2,25 @@ import React, { Component } from "react";
 import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import reviewCard from "./reviewCard";
-import Axios from "axios";
+import axios from "axios";
+import { BACKEND_URL, PUT_STUDENT_REVIEW_HELPFUL } from '../../../../config/routeConstants'
 
 export default class ReviewCard extends Component {
+
+  onClickHelpful = async (e) => {
+    this.reviewData = {   
+      reviewId: this.props._id,
+    };
+    axios.put(BACKEND_URL + PUT_STUDENT_REVIEW_HELPFUL, this.reviewData)
+            .then(response => {
+                console.log("review helpful count updated successfully")
+                console.log(this.props._id);
+            })          
+  };
+
   render = () => {
     //console.log(this.props.reviews);
+
     return (
       <div>
         <Container className="block-example border" style={{ marginTop: "20px", width: "80%" }}>
@@ -47,10 +61,10 @@ export default class ReviewCard extends Component {
             <Row>
               <Button
                 style={{ backgroundColor: "#1861bf", marginBottom: "10px" }}
-                onClick={this.onReviewSave}
+                onClick={this.onClickHelpful}
                 className="float-right"
               >
-                Helpful (0)
+                Helpful ({this.props.helpfulCount})
             </Button>
             </Row>
           </Col>

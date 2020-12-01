@@ -30,6 +30,7 @@ const Reviews = new mongoose.Schema({
     },
     helpfulCount: {
         type: Number,
+        default: 0,
         required: true
     },
     overallRating: {
