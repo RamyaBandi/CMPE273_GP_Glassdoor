@@ -82,6 +82,9 @@ module.exports = {
     GET_APPLICATIONS_STUDENTID: '/studentId',
     GET_APPLICATIONS_ALL: '/',
 
+    //Image Routes
+    POST_IMAGE_USER_PROFILE: "/company/image",
+
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
     TOPIC_RESTAURANT: 'restaurant',

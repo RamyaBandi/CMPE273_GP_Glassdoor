@@ -11,10 +11,11 @@ class EmployerReview extends Component {
 
     componentWillMount(){
         let company_id=localStorage.getItem('mongoId')
+        console.log(company_id)
         axios.get(`${routeConstants.BACKEND_URL}${routeConstants.GET_COMPANY_REVIEWS}`,
         {
             params: {
-                companyId: '5fb4884acf339e3da0d5c31e'
+                companyId: company_id
             }
         }).then((res) => {
             console.log(res)
