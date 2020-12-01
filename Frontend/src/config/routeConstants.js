@@ -25,23 +25,23 @@ module.exports = {
     GET_SEARCH_INTERVIEW : "/search/search/interviewsearch",
     GET_JOBS_HOMEPAGE : '/jobshomepage/jobshomepage',
 
-        //Review Routes
-        POST_STUDENT_REVIEW: '/review/student/review',
-        GET_COMPANY_REVIEWS: '/review/company/reviews',
-        GET_STUDENT_REVIEWS: '/review/student/reviews',
+    //Review Routes
+    POST_STUDENT_REVIEW: '/review/student/review',
+    GET_COMPANY_REVIEWS: '/review/company/reviews',
+    GET_STUDENT_REVIEWS: '/review/student/reviews',
+    PUT_STUDENT_REVIEW_HELPFUL: '/review/student/review/helpful',
     PUT_FEATURED_REVIEWS: '/review/featured',
     PUT_COMPANY_REPLY: '/company/reply',
 
-
     //Salary Routes
     POST_STUDENT_SALARY: '/salary/student/salary',
-    GET_COMPANY_SALARIES: '/salaries/company/salaries',
-    GET_STUDENT_SALARIES: '/salaries/student/salaries',
+    GET_COMPANY_SALARIES: '/salary/company/salaries',
+    GET_STUDENT_SALARIES: '/salary/student/salaries',
 
-       //Interview Routes
-       POST_STUDENT_INTERVIEW: '/interview/student/interview',
-       GET_COMPANY_INTERVIEWS: '/interview/company/interviews',
-       GET_STUDENT_INTERVIEWS: '/interview/student/interviews',
+    //Interview Routes
+    POST_STUDENT_INTERVIEW: '/interview/student/interview',
+    GET_COMPANY_INTERVIEWS: '/interview/company/interviews',
+    GET_STUDENT_interviewS: '/interview/student/interviews',
 
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",

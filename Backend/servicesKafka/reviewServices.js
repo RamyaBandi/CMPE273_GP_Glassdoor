@@ -80,10 +80,10 @@ const {
   }
   
 
-  module.exports.postReplyFromCompany=(req,res)=>{
+  module.exports.updateReviewHelpfulCount=(req,res)=>{
     console.log("req.body"+JSON.stringify(req.body))
     data={
-      api:"PUT_COMPANY_REPLY",
+      api:"PUT_COMPANY_REVIEW_HELPFUL",
       body: req.body
     }
     kafka.make_request('reviews', data, function(err,results){

@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import Nav from "react-bootstrap/Nav";
 import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import axios from "axios";
-import { BACKEND_URL, POST_STUDENT_SALARY } from '../../../../config/routeConstants'
+import { BACKEND_URL, POST_STUDENT_SALARY, GET_COMPANY_DETAILS } from '../../../../config/routeConstants'
 
 class AddSalary extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      companyDetails: [],
       salaries: [],
       redirect: null,
     };
@@ -41,7 +43,7 @@ class AddSalary extends Component {
       yearsOfExperience: this.state.yearsOfExperience,
       location : this.state.location,
       employerName: this.state.employerName,
-      company_id: this.props.location.state,
+      company_id: "5fb4884acf339e3da0d5c31e",
       student_id: "5fb48df63d242fa0842343f3"
     };
     axios.post(BACKEND_URL + POST_STUDENT_SALARY, this.salaryData)
@@ -50,9 +52,63 @@ class AddSalary extends Component {
             })          
   };
 
+  componentDidMount() {
+    const company_id = this.props.location.state;
+    console.log(company_id);
+
+    axios
+      .get(BACKEND_URL + GET_COMPANY_DETAILS + "?companyId=" + company_id)
+      .then((response) => {
+        this.setState({ companyDetails: response.data[0] });
+        console.log("company overview response");
+        console.log(response.data[0]);
+        console.log(this.state.companyDetails);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   render = () => {
     return (
       <div>
+        {this.state.redirect}
+        <Container style={{ marginTop: "20px", width: "70%", backgroundColor: "white" }} className="block-example border">
+          <Row style={{ height: "50px", marginTop: "20px" }}>
+            <Col>
+              <h5>
+                <b>{this.state.companyDetails.companyName}</b>
+              </h5>
+            </Col>
+          </Row>
+          <Row style={{ marginBottom: "10px" }}>
+                        <Col md="8">
+                            <div>
+                                <Nav className="mr-auto">
+                                    <div className="box-content right">
+                                        <Link to="/overview" style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
+                                    </div>
+                                    <div class="box-content right">
+                                        <Link to={{ pathname: "/reviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
+                                    </div>
+                                    <div class="box-content right">
+                                        <Link to={{ pathname: "/jobs", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Jobs</Link>
+                                    </div>
+                                    <div class="box-content right">
+                                        <Link to={{ pathname: "/salaries", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Salaries</Link>
+                                    </div>
+                                    <div class="box-content right">
+                                        <Link to={{ pathname: "/interviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Interviews</Link>
+                                    </div>
+                                    <div class="box-content">
+                                        <Link to="/photos" style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
+                                    </div>
+                                </Nav>
+                            </div>
+                        </Col>
+                    </Row>
+        </Container>
+        
         <Container style={{ marginLeft: "25%", width: "42%" }}>
           <Row>
             <b>Add a Salary</b>

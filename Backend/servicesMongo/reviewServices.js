@@ -15,6 +15,23 @@ const Company = require('../models/Company');
 const Student = require('../models/Student')
 const Reviews = require('../models/Reviews')
 const redisClient = require('../config/redisConnection')
+
+module.exports.updateReviewHelpfulCount = (req, res) => {
+    console.log("Inside Review PUT service");
+    console.log("req body" + JSON.stringify(req.body));
+    let data = req.body
+    Reviews.findByIdAndUpdate(data.reviewId, { $inc: { helpfulCount: 1 } }, (err, result) => {
+        if (err) {
+            console.log("Error updating review" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update Helpful count for Review : " + JSON.stringify(result))
+            res.status(200).end(JSON.stringify(result))
+        }
+    })
+}
+
 module.exports.postStudentReview = (req, res) => {
 
     console.log("Inside Reviews POST service");
