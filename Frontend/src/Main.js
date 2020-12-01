@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import companyOverview from './components/student/companyOverview';
+import CompanyOverview from './components/student/companyTabs/companyOverview';
+import CompanyJobs from './components/student/companyTabs/companyJobs/companyJobs';
 import NavBar from './components/landingPage/navBar'
 import LandingPageDesc from './components/landingPage/landingPageDescription'
 import Register from './components/Registration_Login/Registration'
@@ -11,20 +12,28 @@ import CompaniesTab from './components/student/HomePageTabs/companies'
 import InterviewsTab from './components/student/HomePageTabs/interviews'
 import JobsTab from './components/student/HomePageTabs/jobs'
 import AdminHomePage from './components/admin/adminHomePage'
-import EmployerHomePage from './components/employer/employerHomePage'
-import Reviews from './components/reviews/reviews';
-import AddReview from './components/reviews/addReview';
-import Salaries from './components/salaries/salaries';
-import AddSalary from './components/salaries/addSalary';
-import AddInterview from './components/interviews/addInterview';
-import EmployeeUpdateProfile from './components/employer/employerUpdateProfile'
+import EmployerHomePage from './components/employer/homePage/EmployerHome'
+import Reviews from './components/student/companyTabs/reviews/reviews';
+import AddReview from './components/student/companyTabs/reviews/addReview';
+import Salaries from './components/student/companyTabs/salaries/salaries';
+import AddSalary from './components/student/companyTabs/salaries/addSalary';
+import Interviews from './components/student/companyTabs/interviews/interviews';
+import AddInterview from './components/student/companyTabs/interviews/addInterview';
+import JobsHome from './components/employer/jobs/jobsHome/JobsHome';
+import PostJobs from './components/employer/jobs/postJobs/PostJobs';
+import ListJobs from './components/employer/jobs/listJobs/ListJobs';
+import ListCompanyJobs from './components/employer/jobs/listJobs/ListCompanyJobs';
+import EditJobs from './components/employer/jobs/editJobs/EditJobs';
+import ListApplications from './components/employer/jobs/applications/listApplications/listApplications';
+import EmployerUpdateProfile from './components/employer/updateProfile/employerUpdateProfile';
+import EmployerReview   from './components/employer/reviews/employerReviews'
 
 class Main extends Component {
     render() {
         return (
             <div className="homepage">
                 <div id="site-content">
-                <Route path="/" render={props => <NavBar {...props} />} />
+                    <Route path="/" render={props => <NavBar {...props} />} />
                     <Route path="/home" render={props => <LandingPageDesc {...props} />} />
                     <Route exact path="/register" render={props => <Register {...props} />} />
                     <Route exact path="/login" render={props => <Login {...props} />} />
@@ -34,14 +43,29 @@ class Main extends Component {
                     <Route exact path="/salariestab" render={props => <SalariesTab {...props} />} />
                     <Route exact path="/interviewstab" render={props => <InterviewsTab {...props} />} />
                     <Route exact path="/adminhomepage" render={props => <AdminHomePage {...props} />} />
-                    <Route exact path="/employerhomepage" render={props => <EmployerHomePage {...props} />} />
-                    <Route exact path="/reviews" component={(props) => <Reviews {...props}/>} />
-                    <Route exact path="/addreview" component={(props) => <AddReview {...props}/>} />
-                    <Route exact path="/overview" component={companyOverview} />
+
+                    <Route exact path="/reviews" component={(props) => <Reviews {...props} />} />
+                    <Route exact path="/addreview" component={(props) => <AddReview {...props} />} />
+                    <Route exact path="/overview" component={CompanyOverview} />
+                    <Route exact path="/jobs" component={(props) => <CompanyJobs {...props} />} />
                     <Route exact path="/salaries" component={(props) => <Salaries {...props} />} />
                     <Route exact path="/addsalary" component={(props) => <AddSalary {...props} />} />
+                    <Route exact path="/interviews" component={(props) => <Interviews {...props} />} />
                     <Route exact path="/addinterview" component={(props) => <AddInterview {...props} />} />
-                    <Route exact path="/company/profile" component={(props)=> <EmployeeUpdateProfile{...props}/>}/>
+
+
+                    {//Employer Routes
+                    }
+
+                    <Route exact path="/employer/home" render={props => <EmployerHomePage {...props} />} />
+                    <Route exact path="/employer/jobs" render={props => <JobsHome {...props} />} />
+                    <Route exact path="/employer/jobs/post" render={props => <PostJobs {...props} />} />
+                    <Route exact path="/employer/jobs/list" render={props => <ListCompanyJobs {...props} />} />
+                    <Route exact path="/employer/jobs/edit" render={props => <EditJobs {...props} />} />
+                    <Route exact path="/employer/jobs/applicants" render={props => <ListApplications {...props} />} />
+                    <Route exact path="/company/profile" render={props => <EmployerUpdateProfile{...props} />} />
+                    <Route exact path="/employer/reviews" render={props => <EmployerReview {...props} />} />
+                    <Route exact path="/employer/analytics" render={props => <EmployerHomePage {...props} />} />
                 </div>
             </div>
         )

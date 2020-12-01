@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const Reviews = new mongoose.Schema({
-    company_id: {
+    companyId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    student_id: {
+    studentId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
@@ -44,6 +44,10 @@ const Reviews = new mongoose.Schema({
         type: Number,
         required: true
     },
+    reviewDate : {
+        type : Date, 
+        default: Date.now
+    }, 
     reply: {
         type: String,
     },

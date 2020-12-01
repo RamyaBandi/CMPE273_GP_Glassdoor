@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 const Jobs = new mongoose.Schema({
+    companyId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
     companyName: {
         type: String,
         required: true,
@@ -29,7 +33,7 @@ const Jobs = new mongoose.Schema({
         required: true
     },
     streetAddress: {
-        type: Number,
+        type: String,
         required: true
     },
     city: {
@@ -41,6 +45,10 @@ const Jobs = new mongoose.Schema({
         required: true
     },
     zip: {
+        type: Number,
+        required: true
+    },
+    averageSalary: {
         type: Number,
         required: true
     },

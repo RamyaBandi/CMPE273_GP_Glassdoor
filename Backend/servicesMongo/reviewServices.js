@@ -21,8 +21,8 @@ module.exports.postStudentReview = (req, res) => {
     console.log(req.body)
     let data = req.body
     let reviews = Reviews({
-        company_id: data.company_id,
-        student_id: data.student_id,
+        companyId: data.companyId,
+        studentId: data.studentId,
         headline: data.headline,
         description: data.description,
         pros: data.pros,
@@ -42,13 +42,13 @@ module.exports.postStudentReview = (req, res) => {
         else {
 
             // console.log("Review Doc created : " + JSON.stringify(result));
-            Company.findOneAndUpdate({ _id: data.company_id }, { $push: { "reviews": result._id } }, (error, results) => {
+            Company.findOneAndUpdate({ _id: data.companyId }, { $push: { "reviews": result._id } }, (error, results) => {
                 if (error) {
                     console.log("Error adding review to company" + error)
                     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
                 }
                 else {
-                    Student.findOneAndUpdate({ _id: data.student_id }, { $push: { "companyReviews": result._id } }, (error2, results2) => {
+                    Student.findOneAndUpdate({ _id: data.studentId }, { $push: { "companyReviews": result._id } }, (error2, results2) => {
                         if (error2) {
                             console.log("Error adding review to Student" + error2)
                             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error2));
@@ -107,7 +107,7 @@ module.exports.getCompanyReviews = async (req, res) => {
                 // If value for given key is not available in Redis
                 else {
                     // Fetch data from your database
-                    let reviews = Company.find({ _id: data.company_id }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((error, result) => {
+                    let reviews = Company.find({ _id: data.companyId }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((error, result) => {
 
                         if (error) {
                             //console.log(error);
@@ -134,7 +134,7 @@ module.exports.getCompanyReviews = async (req, res) => {
            // console.log("Error while working with redis")
             //console.log(error);
 
-            let reviews = Company.find({ _id: data.company_id }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
+            let reviews = Company.find({ _id: data.companyId }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
 
                 if (err) {
                     //console.log(err);
@@ -155,10 +155,10 @@ module.exports.getCompanyReviews = async (req, res) => {
         try{
             data.page = 1;
             data.limit = 10;
-            const reviews = await Reviews.find({ company_id: data.company_id }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
-            const count = await Reviews.countDocuments({company_id: data.company_id});
+            const reviews = await Reviews.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+            const count = await Reviews.countDocuments({companyId: data.companyId});
             console.log("count" + count);
-    
+            console.log(reviews)
             const result = ({
                 reviews,
                 totalPages: Math.ceil(count / data.limit),
@@ -185,7 +185,7 @@ module.exports.getStudentReviews = (req, res) => {
     console.log("Inside Student Reviews GET service");
     console.log(req.query)
     let data = req.query
-    let reviews = Student.find({ _id: data.student_id }).select('companyReviews').populate('companyReviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
+    let reviews = Student.find({ _id: data.studentId }).select('companyReviews').populate('companyReviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
 
         if (err) {
             console.log(err);
@@ -197,6 +197,33 @@ module.exports.getStudentReviews = (req, res) => {
             //res.setHeader(CONTENT_TYPE, APP_JSON);
             console.log("Reviews fetched Successfully")
             res.status(RES_SUCCESS).send(result);
+        }
+    })
+}
+
+
+module.exports.postReplyFromCompany = (req, res) => {
+
+    console.log("Inside Reply Post service");
+    console.log(req.body)
+    let data = req.body
+
+    let reply = {
+        
+        reply: data.reply,
+        replyTimeStamp: Date.now()
+    }
+    //console.log(featured_update)
+    Reviews.findByIdAndUpdate(data.reviewId, reply, (err, result) => {
+        console.log(result.reply)
+        console.log(result)
+        if (err) {
+            console.log("Error updating company profile" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update Company Featured Reviews : " + JSON.stringify(result))
+            res.status(200).end(JSON.stringify(result))
         }
     })
 }

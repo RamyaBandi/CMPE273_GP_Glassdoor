@@ -1,6 +1,16 @@
 const { response } = require('express');
 const con = require('../config/mongoConnection');
 const Company = require('../models/Company');
+const {
+    CONTENT_TYPE,
+    APP_JSON,
+    RES_SUCCESS,
+    RES_BAD_REQUEST,
+    RES_NOT_FOUND,
+    RES_DUPLICATE_RESOURCE,
+    TEXT_PLAIN,
+    RES_INTERNAL_SERVER_ERROR
+} = require("../config/routeConstants");
 
 module.exports.createCompanyProfile = (req, res) => {
     console.log("Inside Company Profile POST service");
@@ -23,6 +33,7 @@ module.exports.createCompanyProfile = (req, res) => {
 }
 
 
+
 module.exports.updateCompanyProfile = (req, res) => {
     console.log("Inside Company Profile PUT service");
     console.log("req body" + JSON.stringify(req.body));
@@ -30,7 +41,7 @@ module.exports.updateCompanyProfile = (req, res) => {
 
     let company_update = {
         companyName: data.companyName,
-        website: data.website,
+        website: data.Website,
         companySize: data.companySize,
         companyType: data.companyType,
         revenue: data.revenue,
@@ -40,7 +51,7 @@ module.exports.updateCompanyProfile = (req, res) => {
         description: data.description,
         ceoName: data.ceoName,
     }
-    Company.findByIdAndUpdate(data.company_id , company_update, (err, result) => {
+    Company.findByIdAndUpdate(data.companyId, company_update, (err, result) => {
         if (err) {
             console.log("Error updating company profile" + err)
             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
@@ -54,10 +65,10 @@ module.exports.updateCompanyProfile = (req, res) => {
 
 module.exports.getCompanyProfile = (req, res) => {
 
-    console.log("Inside Company Profile GET service");
+    console.log("Inside Company Updated Profile GET service");
     console.log(req.query)
     let data = req.query
-    let companyDetails = Company.find({ _id: data.company_id }).exec((err, result) => {
+    let companyDetails = Company.find({ _id: data.companyId }).exec((err, result) => {
 
         if (err) {
             console.log(err);
@@ -70,6 +81,54 @@ module.exports.getCompanyProfile = (req, res) => {
             console.log("Company Details fetched Successfully");
             console.log(result);
             res.status(RES_SUCCESS).send(result);
+        }
+    })
+}
+
+module.exports.getUpdatedCompanyProfile = (req, res) => {
+
+    console.log("Inside Company Profile GET service");
+    console.log(req.query)
+    let data = req.query
+    let companyDetails = Company.find({ _id: data.companyId }).exec((err, result) => {
+
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+        }
+        else {
+            // console.log(JSON.stringify(result));
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            console.log("Company Details fetched Successfully");
+            console.log(result);
+            res.status(RES_SUCCESS).send(result);
+        }
+    })
+}
+
+
+
+module.exports.updateCompanyFeatured = (req, res) => {
+    console.log("Inside Company Featured review PUT service");
+    console.log("req body" + JSON.stringify(req.body));
+    let data = req.body
+
+    let featured_update = {
+        
+        featuredReview: data.featuredId
+    }
+    //console.log(featured_update)
+    Company.findByIdAndUpdate(data.companyId, {$push:featured_update}, (err, result) => {
+        //console.log(result.featuredReview)
+        //console.log(result._id)
+        if (err) {
+            console.log("Error updating company profile" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update Company Featured Reviews : " + JSON.stringify(result.featuredReview))
+            res.status(200).end(JSON.stringify(result.featuredReview))
         }
     })
 }
