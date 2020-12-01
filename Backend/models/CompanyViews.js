@@ -10,8 +10,8 @@ const CompanyViews = new mongoose.Schema({
         required: true
     },
     Date: {
-        type: Date,
-        default : new Date()
+        type: String,
+        // default : new Date()
     }
 
 }, { versionKey: false })
