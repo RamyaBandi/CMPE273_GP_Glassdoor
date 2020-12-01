@@ -27,6 +27,7 @@ module.exports.postStudentInterview = (req, res) => {
         description: data.description,
         difficulty: data.difficulty,
         offerStatus: data.offerStatus,
+        interviewQnA: data.interviewQnA,
     });
     interviews.save((err, result) => {
         if (err) {

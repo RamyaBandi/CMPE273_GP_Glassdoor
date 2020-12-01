@@ -26,12 +26,14 @@ class CompanyOverview extends Component {
     }
 
     componentDidMount() {
-        const companyId = '5fb4aefe6b61ea46245d5621';
-        axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
+        // const company_id = '5fb4884acf339e3da0d5c31e';
+        const company_id = this.props.location.state.companyId
+        console.log("Fetched company Id", company_id)
+        axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + company_id)
             .then(response => {
                 this.setState({ companyDetails: response.data[0] });
                 console.log("In componentDidMount");
-                console.log(response.data[0]);
+                console.log("Company details",response.data[0]);
                 console.log(this.state.companyDetails);
                 console.log(this.state.companyDetails.reviews);
             })
@@ -49,7 +51,6 @@ class CompanyOverview extends Component {
                 console.log(error);
             }
         )
-    }
 
     render = () => {
         //const companyId = this.state.companyDetails._id;
