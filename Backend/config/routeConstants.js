@@ -10,6 +10,8 @@ module.exports = {
     //Student Routes
     STUDENT_ROUTE: "/student",
     POST_STUDENT_SIGNUP: "/student/profile",
+    GET_STUDENT_SIGNUP: "/student/profile",
+    PUT_STUDENT_SIGNUP: "/student/profile",
 
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",
@@ -21,6 +23,9 @@ module.exports = {
     //Student Jobs Home Page
 
     GET_JOBS_HOMEPAGE: "/jobshomepage",
+
+
+    
 
     // Admin Analytics Dashboard
     ADMIN_ROUTES : "/admin",
@@ -87,7 +92,8 @@ module.exports = {
     //Image Routes
     IMAGE_ROUTES:"/image",
     POST_IMAGE_USER_PROFILE: "/company/image",
-
+    POST_IMAGE_STUDENT_PROFILE: "/student/image",
+    
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
 
