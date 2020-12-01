@@ -13,6 +13,10 @@ module.exports = {
 
     //Login Routes
     POST_LOGIN: '/loginroute/login',
+    //Login Routes
+    
+    POST_REGISTER: '/register',
+    FETCH_CUSTOMERINPUT: '/validationinput',
 
     //Student Search Routes
     GET_SEARCH_JOBS : '/search/search/jobsearch',
@@ -34,24 +38,45 @@ module.exports = {
     POST_STUDENT_REVIEW: '/review/student/review',
     GET_COMPANY_REVIEWS: '/review/company/reviews',
     GET_STUDENT_REVIEWS: '/review/student/reviews',
+    PUT_STUDENT_REVIEW_HELPFUL: '/review/student/review/helpful',
+    GET_POSITIVE_REVIEW: '/review/positive/review',
+    GET_NEGATIVE_REVIEW: '/review/negative/review',
+    PUT_FEATURED_REVIEWS: '/review/featured',
+    PUT_COMPANY_REPLY: '/company/reply',
 
     //Salary Routes
     POST_STUDENT_SALARY: '/salary/student/salary',
-    GET_COMPANY_SALARIES: '/salaries/company/salaries',
-    GET_STUDENT_SALARIES: '/salaries/student/salaries',
+    GET_COMPANY_SALARIES: '/salary/company/salaries',
+    GET_STUDENT_SALARIES: '/salary/student/salaries',
 
     //Interview Routes
     POST_STUDENT_INTERVIEW: '/interview/student/interview',
     GET_COMPANY_INTERVIEWS: '/interview/company/interviews',
-    GET_STUDENT_INTERVIEWS: '/interview/student/interviews',
+    GET_STUDENT_interviewS: '/interview/student/interviews',
+
+    //Student Search Routes
+    GET_SEARCH_RESULTS: "/search",
+    GET_JOB_SEARCH : "/search/jobsearch",
+    GET_COMPANY_SEARCH : "/search/companysearch",
+    GET_SALARY_SEARCH : "/search/salarysearch",
+    GET_INTERVIEW_SEARCH : "/search/interviewsearch",
+
+    //Student Jobs Home Page
+
+    GET_JOBS_HOMEPAGE : "/jobshomepage",
 
     //CompanyRoutes
     GET_COMPANY_DETAILS: '/company/companyDetails',
+    GET_JOBS_HOMEPAGE : "/jobshomepage",
     COMPANY_ROUTE: "/company",
     PUT_COMPANY_SIGNUP: "/company/profile",
     GET_COMPANY_SIGNUP: "/company/profile",
     POST_COMPANY_SIGNUP: "/company/profile",
     POST_COMPANYVIEWS : "/company/viewsperday",
+
+    
+    //Company Details Routes
+    GET_COMPANY_DETAILS: "/companyDetails",
 
     //Job Routes
     JOB_ROUTE: "/job",
@@ -61,14 +86,24 @@ module.exports = {
     PUT_COMPANY_JOB: '/company/job',
     GET_ALL_JOBS: '/company/jobList',
 
+    //Application Routes
+    APPLICATION_ROUTE: "/applications",
+    POST_APPLICATION: '/',
+    PUT_APPLICATION: '/',
+    GET_APPLICATIONS_JOBID: '/jobId',
+    GET_APPLICATIONS_STUDENTID: '/studentId',
+    GET_APPLICATIONS_ALL: '/',
+
+    //Image Routes
+    POST_IMAGE_USER_PROFILE: "/company/image",
+
     //KAFKA TOPICS
+    TOPIC_LOGIN: 'login',
     TOPIC_RESTAURANT: 'restaurant',
     TOPIC_CUSTOMER: 'customer',
     TOPIC_ORDERS: 'order',
     TOPIC_REVIEWS: 'review',
     TOPIC_EVENTS: 'event',
-    TOPIC_LOGIN: 'login',
-    TOPIC_IMAGES: 'image',
 
     /**Response status codes */
     RES_UNKNOWN_ERROR: 502,

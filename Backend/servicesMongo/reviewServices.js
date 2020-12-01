@@ -15,6 +15,23 @@ const Company = require('../models/Company');
 const Student = require('../models/Student')
 const Reviews = require('../models/Reviews')
 const redisClient = require('../config/redisConnection')
+
+module.exports.updateReviewHelpfulCount = (req, res) => {
+    console.log("Inside Review PUT service");
+    console.log("req body" + JSON.stringify(req.body));
+    let data = req.body
+    Reviews.findByIdAndUpdate(data.reviewId, { $inc: { helpfulCount: 1 } }, (err, result) => {
+        if (err) {
+            console.log("Error updating review" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update Helpful count for Review : " + JSON.stringify(result))
+            res.status(200).end(JSON.stringify(result))
+        }
+    })
+}
+
 module.exports.postStudentReview = (req, res) => {
 
     console.log("Inside Reviews POST service");
@@ -131,7 +148,7 @@ module.exports.getCompanyReviews = async (req, res) => {
             })
         } catch (error) {
             // Handle error
-           // console.log("Error while working with redis")
+            // console.log("Error while working with redis")
             //console.log(error);
 
             let reviews = Company.find({ _id: data.companyId }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
@@ -152,19 +169,19 @@ module.exports.getCompanyReviews = async (req, res) => {
 
     }
     else {
-        try{
+        try {
             data.page = 1;
             data.limit = 10;
             const reviews = await Reviews.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
-            const count = await Reviews.countDocuments({companyId: data.companyId});
+            const count = await Reviews.countDocuments({ companyId: data.companyId });
             console.log("count" + count);
-    
+            console.log(reviews)
             const result = ({
                 reviews,
                 totalPages: Math.ceil(count / data.limit),
                 currentPage: data.page
             });
-    
+
             console.log("Reviews fetched Successfully from DB - page not 1 or redis off")
             res.status(RES_SUCCESS).send(result);
         }
@@ -174,7 +191,7 @@ module.exports.getCompanyReviews = async (req, res) => {
                 //res.setHeader(CONTENT_TYPE, APP_JSON);
                 res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
             }
-        }            
+        }
     }
 
 }
@@ -199,4 +216,105 @@ module.exports.getStudentReviews = (req, res) => {
             res.status(RES_SUCCESS).send(result);
         }
     })
+}
+
+module.exports.getMostPositiveReview = async (req, res) => {
+
+    console.log("Inside Positive Review GET service");
+    let data = req.query
+    console.log(data)
+    try {
+        const reviews = await Reviews.find({ companyId: data.companyId }).sort('-helpfulCount').exec();
+        const result = ({
+            reviews
+        });
+        //res.status(RES_SUCCESS).send(result);
+        const maxHelpfulCount = result.reviews[0].helpfulCount;
+        console.log(maxHelpfulCount);
+        try {
+            const positiveReviews = await Reviews.find({ helpfulCount: maxHelpfulCount }).sort('-overallRating').exec();
+            const result2 = ({
+                positiveReviews
+            });
+            res.status(RES_SUCCESS).send(result2);
+        }
+        catch {
+            if (err) {
+                console.log(err);
+                //res.setHeader(CONTENT_TYPE, APP_JSON);
+                res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+            }
+        }
+    }
+    catch {
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+    }
+}
+
+module.exports.getMostNegativeReview = async (req, res) => {
+
+    console.log("Inside Negative Review GET service");
+    let data = req.query
+    console.log(data)
+    try {
+        const reviews = await Reviews.find({ companyId: data.companyId }).sort('-helpfulCount').exec();
+        const result = ({
+            reviews
+        });
+        //res.status(RES_SUCCESS).send(result);
+        const maxHelpfulCount = result.reviews[0].helpfulCount;
+        console.log(maxHelpfulCount);
+        try {
+            const negativeReviews = await Reviews.find({ helpfulCount: maxHelpfulCount }).sort('overallRating').exec();
+            const result2 = ({
+                negativeReviews
+            });
+            res.status(RES_SUCCESS).send(result2);
+        }
+        catch {
+            if (err) {
+                console.log(err);
+                //res.setHeader(CONTENT_TYPE, APP_JSON);
+                res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+            }
+        }
+    }
+    catch {
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+    }
+}
+
+module.exports.postReplyFromCompany = (req, res) => {
+
+    console.log("Inside Reply Post service");
+    console.log(req.body)
+    let data = req.body
+
+    let reply = {
+
+        reply: data.reply,
+        replyTimeStamp: Date.now()
+    }
+    //console.log(featured_update)
+    Reviews.findByIdAndUpdate(data.reviewId, reply, (err, result) => {
+        console.log(result.reply)
+        console.log(result)
+        if (err) {
+            console.log("Error updating company profile" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update Company Featured Reviews : " + JSON.stringify(result))
+            res.status(200).end(JSON.stringify(result))
+        }
+    })
+
 }
