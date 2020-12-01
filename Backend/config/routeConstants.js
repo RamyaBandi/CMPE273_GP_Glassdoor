@@ -66,6 +66,8 @@ module.exports = {
 
     PUT_COMPANY_REPLY: "/company/reply",
     PUT_COMPANY_REVIEW_HELPFUL: "/student/review/helpful",
+    GET_POSITIVE_REVIEW: "/positive/review",
+    GET_NEGATIVE_REVIEW: "/negative/review",
 
 
     //Salary Routes
