@@ -70,7 +70,7 @@ class CompanyOverview extends Component {
                 console.log(error);
 
             })
-      })
+      }
 
 
     render = () => {

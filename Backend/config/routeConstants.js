@@ -65,13 +65,12 @@ module.exports = {
     GET_STUDENT_REVIEWS: "/student/reviews",
     GET_ALL_REVIEWS: "/company/reviews",
     GET_COMPANY_REVIEWS: "/company/reviews",
-
+    GET_REVIEW_AVERAGE: "/average/review",
     PUT_COMPANY_REPLY: "/company/reply",
     PUT_COMPANY_REVIEW_HELPFUL: "/student/review/helpful",
     GET_POSITIVE_REVIEW: "/positive/review",
     GET_NEGATIVE_REVIEW: "/negative/review",
-
-
+    
     //Salary Routes
     SALARY_ROUTE: "/salary",
     POST_STUDENT_SALARY: "/student/salary",
