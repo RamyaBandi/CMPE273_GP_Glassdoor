@@ -217,3 +217,77 @@ module.exports.getStudentReviews = (req, res) => {
         }
     })
 }
+
+module.exports.getMostPositiveReview = async (req, res) => {
+
+    console.log("Inside Positive Review GET service");
+    let data = req.query
+    console.log(data)
+        try{
+            const reviews = await Reviews.find({ companyId: data.companyId }).sort('-helpfulCount').exec();
+            const result = ({
+                reviews
+            });
+            //res.status(RES_SUCCESS).send(result);
+            const maxHelpfulCount = result.reviews[0].helpfulCount;
+            console.log(maxHelpfulCount);
+            try {
+                const positiveReviews = await Reviews.find({ helpfulCount:  maxHelpfulCount}).sort('-overallRating').exec();
+                const result2 = ({
+                    positiveReviews
+                });
+                res.status(RES_SUCCESS).send(result2);
+            }
+            catch {
+                if (err) {
+                    console.log(err);
+                    //res.setHeader(CONTENT_TYPE, APP_JSON);
+                    res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+                }
+            }
+        }
+        catch {
+            if (err) {
+                console.log(err);
+                //res.setHeader(CONTENT_TYPE, APP_JSON);
+                res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+            }
+        }
+}
+
+module.exports.getMostNegativeReview = async (req, res) => {
+
+    console.log("Inside Negative Review GET service");
+    let data = req.query
+    console.log(data)
+        try{
+            const reviews = await Reviews.find({ companyId: data.companyId }).sort('-helpfulCount').exec();
+            const result = ({
+                reviews
+            });
+            //res.status(RES_SUCCESS).send(result);
+            const maxHelpfulCount = result.reviews[0].helpfulCount;
+            console.log(maxHelpfulCount);
+            try {
+                const negativeReviews = await Reviews.find({ helpfulCount:  maxHelpfulCount}).sort('overallRating').exec();
+                const result2 = ({
+                    negativeReviews
+                });
+                res.status(RES_SUCCESS).send(result2);
+            }
+            catch {
+                if (err) {
+                    console.log(err);
+                    //res.setHeader(CONTENT_TYPE, APP_JSON);
+                    res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+                }
+            }
+        }
+        catch {
+            if (err) {
+                console.log(err);
+                //res.setHeader(CONTENT_TYPE, APP_JSON);
+                res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+            }
+        }
+}

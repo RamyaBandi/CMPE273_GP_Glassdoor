@@ -19,6 +19,8 @@ module.exports = {
     GET_COMPANY_REVIEWS: '/review/company/reviews',
     GET_STUDENT_REVIEWS: '/review/student/reviews',
     PUT_STUDENT_REVIEW_HELPFUL: '/review/student/review/helpful',
+    GET_POSITIVE_REVIEW: '/review/positive/review',
+    GET_NEGATIVE_REVIEW: '/review/negative/review',
 
     //Salary Routes
     POST_STUDENT_SALARY: '/salary/student/salary',
