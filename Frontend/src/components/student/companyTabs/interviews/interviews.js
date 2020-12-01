@@ -6,7 +6,7 @@ import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import axios from "axios";
 import InterviewCard from "./interviewCard";
-import { BACKEND_URL, GET_COMPANY_INTERVIEWS, GET_COMPANY_DETAILS, GET_INTERVIEW_EXP_PERCENTAGE } from "../../../../config/routeConstants";
+import { BACKEND_URL, GET_COMPANY_INTERVIEWS, GET_COMPANY_DETAILS, GET_COMPANY_INTERVIEW_STATISTICS } from "../../../../config/routeConstants";
 
 class Interviews extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Interviews extends Component {
     this.state = {
       companyDetails: [],
       interviews: [],
-      interviewExpPercentage: {},
+      interviewStatistics: {},
       redirect: null,
     };
   }
@@ -44,12 +44,12 @@ class Interviews extends Component {
       });
 
       axios
-      .get(BACKEND_URL + GET_INTERVIEW_EXP_PERCENTAGE + "?companyId=" + company_id)
+      .get(BACKEND_URL + GET_COMPANY_INTERVIEW_STATISTICS + "?companyId=" + company_id)
       .then((response) => {
-        this.setState({ interviewExpPercentage: response.data });
+        this.setState({ interviewStatistics: response.data });
         console.log("Interviews Experience Rating in Percentage response");
-        //console.log(response.data);
-        //console.log(this.state.interviewExpPercentage);
+        console.log(response.data);
+        //console.log(this.state.interviewStatistics);
       })
       .catch((error) => {
         console.log(error);
@@ -109,17 +109,56 @@ class Interviews extends Component {
           <Container className="block-example border" style={{ marginBottom: "10px", marginTop: "10px", width: "62%" }}>
             <Col>
             <Row>
-              <p>Experience Rating in Percentage</p>
+              <p>Interview Experience Statistics</p>
             </Row>
             <Row>
               <Col md="4">
-                Positive: {this.state.interviewExpPercentage.positivePercentage}%
+                Positive: {this.state.interviewStatistics.positivePercentage}%
               </Col>
               <Col md="4">
-                Neutral: {this.state.interviewExpPercentage.negativePercentage}%
+                Neutral: {this.state.interviewStatistics.neutralPercentage}%
               </Col>
               <Col md="4">
-                Negative: {this.state.interviewExpPercentage.neutralPercentage}%
+                Negative: {this.state.interviewStatistics.negativePercentage}%
+              </Col>
+            </Row>
+            </Col>
+          </Container>
+        </Row>
+
+        <Row>
+          <Container className="block-example border" style={{ marginBottom: "10px", marginTop: "10px", width: "62%" }}>
+            <Col>
+            <Row>
+              <p>Offer Status Statistics</p>
+            </Row>
+            <Row>
+              <Col md="4">
+                Accepted: {this.state.interviewStatistics.acceptedPercentage}%
+              </Col>
+              <Col md="4">
+                Rejected: {this.state.interviewStatistics.rejectedPercentage}%
+              </Col>
+            </Row>
+            </Col>
+          </Container>
+        </Row>
+
+        <Row>
+          <Container className="block-example border" style={{ marginBottom: "10px", marginTop: "10px", width: "62%" }}>
+            <Col>
+            <Row>
+              <p>Interview Difficulty Statistics</p>
+            </Row>
+            <Row>
+              <Col md="4">
+                Easy: {this.state.interviewStatistics.easyPercentage}%
+              </Col>
+              <Col md="4">
+                Average: {this.state.interviewStatistics.averagePercentage}%
+              </Col>
+              <Col md="4">
+                Difficult: {this.state.interviewStatistics.difficultPercentage}%
               </Col>
             </Row>
             </Col>

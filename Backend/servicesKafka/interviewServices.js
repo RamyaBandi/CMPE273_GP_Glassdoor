@@ -76,10 +76,10 @@ const {
   });
   }
 
-  module.exports.getInterviewExpRatingInPercentage=(req,res)=>{
+  module.exports.getInterviewStatistics=(req,res)=>{
     console.log("req.body"+JSON.stringify(req.query))
     data={
-      api:"GET_INTERVIEW_EXP_PERCENTAGE",
+      api:"GET_COMPANY_INTERVIEW_STATISTICS",
       body: req.query
     }
     kafka.make_request('interviews', data, function(err,results){
