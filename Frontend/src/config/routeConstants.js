@@ -43,6 +43,7 @@ module.exports = {
     GET_NEGATIVE_REVIEW: '/review/negative/review',
     PUT_FEATURED_REVIEWS: '/review/featured',
     PUT_COMPANY_REPLY: '/company/reply',
+    GET_REVIEW_AVERAGE: '/review/average/review',
 
     //Salary Routes
     POST_STUDENT_SALARY: '/salary/student/salary',
@@ -64,6 +65,11 @@ module.exports = {
     //Student Jobs Home Page
 
     GET_STUDENTS_JOBS_HOMEPAGE : "/jobshomepage/jobshomepage",
+
+
+    //Student SignUp
+    GET_STUDENT_SIGNUP: "/student/profile",
+    PUT_STUDENT_SIGNUP: "/student/profile",
 
     //CompanyRoutes
     GET_COMPANY_DETAILS: '/company/companyDetails',
@@ -96,6 +102,7 @@ module.exports = {
 
     //Image Routes
     POST_IMAGE_USER_PROFILE: "/company/image",
+    POST_IMAGE_STUDENT_PROFILE: "/student/image",
 
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',

@@ -11,7 +11,8 @@ import {
   GET_COMPANY_REVIEWS,
   GET_COMPANY_DETAILS,
   GET_POSITIVE_REVIEW,
-  GET_NEGATIVE_REVIEW
+  GET_NEGATIVE_REVIEW,
+  GET_REVIEW_AVERAGE
 } from "../../../../config/routeConstants";
 
 class Reviews extends Component {
@@ -22,6 +23,7 @@ class Reviews extends Component {
       reviews: [],
       positiveReviews: {},
       negativeReviews: {},
+      avgReviews: {},
       redirect: null,
     };
   }
@@ -76,6 +78,17 @@ class Reviews extends Component {
       .catch((error) => {
         console.log(error);
       });
+
+      axios
+      .get(BACKEND_URL + GET_REVIEW_AVERAGE + "?companyId=" + company_id)
+      .then((response) => {
+        console.log("review average");
+        this.setState({ avgReviews: response.data.avgReviews[0] });
+        console.log(this.state.avgReviews);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render = () => {
@@ -126,6 +139,23 @@ class Reviews extends Component {
                         </Col>
                     </Row>
         </Container>
+
+        
+          <Container style={{ marginTop: "30px", width: "61%" }}>
+            <Row>
+            <Col md="4">
+              Average Overall Rating: {this.state.avgReviews.averageOverallRating}
+            </Col>
+            <Col md="4">
+              Average Recommended Rating: {this.state.avgReviews.averageRecommendedRating}
+            </Col>
+            <Col md="4">
+              Average CEO Rating: {this.state.avgReviews.averageCeoRating}
+            </Col>
+            </Row>
+          </Container>
+       
+
         <Row>
         <Container className="block-example border" style={{ marginTop: "20px", width: "61%" }}>
           <Col>

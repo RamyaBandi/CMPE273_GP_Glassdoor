@@ -318,3 +318,38 @@ module.exports.postReplyFromCompany = (req, res) => {
     })
 
 }
+
+module.exports.getReviewAverage = async (req, res) => {
+
+    console.log("Inside Review Average GET service");
+    let data = req.query
+    console.log(data.companyId)
+    try {
+        //const reviews = await Reviews.find({ companyId: data.companyId }).sort('-helpfulCount').exec();
+        const avgReviews = await Reviews.aggregate([
+            
+                //{$match: {companyId: data.companyId}},
+                {$match: {pros: "test"}},
+                {$group:  {
+                    _id: null,
+                    averageOverallRating:{$avg: "$overallRating"},
+                    averageRecommendedRating:{$avg: "$recommendedRating"},
+                    averageCeoRating:{$avg: "$ceoRating"}
+                }}
+            
+        ]).exec();
+        const result = ({
+            avgReviews
+        });
+        res.status(RES_SUCCESS).send(result);
+        console.log(result);
+    }
+    catch {
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+    }
+}
+

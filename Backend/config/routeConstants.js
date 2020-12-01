@@ -10,6 +10,8 @@ module.exports = {
     //Student Routes
     STUDENT_ROUTE: "/student",
     POST_STUDENT_SIGNUP: "/student/profile",
+    GET_STUDENT_SIGNUP: "/student/profile",
+    PUT_STUDENT_SIGNUP: "/student/profile",
 
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",
@@ -21,6 +23,9 @@ module.exports = {
     //Student Jobs Home Page
 
     GET_JOBS_HOMEPAGE: "/jobshomepage",
+
+
+    
 
     // Admin Analytics Dashboard
     ADMIN_ROUTES : "/admin",
@@ -46,7 +51,8 @@ module.exports = {
     JOB_ROUTE: "/job",
     POST_COMPANY_JOB: "/company/job",
     GET_COMPANY_JOBS: "/company/jobs",
-    GET_COMPANY_JOB: '/company/job',
+    GET_COMPANY_JOBS_BY_JOBTITLE: '/company/jobs/jobTitle',
+    GET_COMPANY_JOBS_BY_CITY: '/company/jobs/city',
     PUT_COMPANY_JOB: '/company/job',
     GET_ALL_JOBS: '/company/jobList',
 
@@ -64,13 +70,12 @@ module.exports = {
     GET_STUDENT_REVIEWS: "/student/reviews",
     GET_ALL_REVIEWS: "/company/reviews",
     GET_COMPANY_REVIEWS: "/company/reviews",
-
+    GET_REVIEW_AVERAGE: "/average/review",
     PUT_COMPANY_REPLY: "/company/reply",
     PUT_COMPANY_REVIEW_HELPFUL: "/student/review/helpful",
     GET_POSITIVE_REVIEW: "/positive/review",
     GET_NEGATIVE_REVIEW: "/negative/review",
-
-
+    
     //Salary Routes
     SALARY_ROUTE: "/salary",
     POST_STUDENT_SALARY: "/student/salary",
@@ -87,7 +92,8 @@ module.exports = {
     //Image Routes
     IMAGE_ROUTES:"/image",
     POST_IMAGE_USER_PROFILE: "/company/image",
-
+    POST_IMAGE_STUDENT_PROFILE: "/student/image",
+    
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
 
