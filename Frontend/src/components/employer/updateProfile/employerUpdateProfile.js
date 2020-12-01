@@ -183,7 +183,7 @@ class employerUpdateProfile extends Component {
                              disabled={this.state.disabled}
                             value={this.state.website}
                             onChange={this.handleChange}
-                            name="Website"
+                            name="website"
                             width="200px"
                         />
                     </div>

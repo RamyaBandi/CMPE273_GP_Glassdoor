@@ -66,6 +66,11 @@ module.exports = {
 
     GET_JOBS_HOMEPAGE : "/jobshomepage",
 
+
+    //Student SignUp
+    GET_STUDENT_SIGNUP: "/student/profile",
+    PUT_STUDENT_SIGNUP: "/student/profile",
+
     //CompanyRoutes
     GET_COMPANY_DETAILS: '/company/companyDetails',
     GET_JOBS_HOMEPAGE : "/jobshomepage",
@@ -97,6 +102,7 @@ module.exports = {
 
     //Image Routes
     POST_IMAGE_USER_PROFILE: "/company/image",
+    POST_IMAGE_STUDENT_PROFILE: "/student/image",
 
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',

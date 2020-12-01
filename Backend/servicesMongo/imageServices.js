@@ -32,3 +32,23 @@ module.exports.uploadCompanyProfileImage = (req, res) => {
     //     }
     // })
 }
+
+module.exports.uploadStudentProfileImage = (req, res) => {
+    console.log("Inside POST Student profile picture service");
+    console.log("req body" + JSON.stringify(req.body));
+    // let data = req.body
+    // let company = Company({
+    //     companyName: data.companyName,
+    //     email: data.email
+    // })
+    // company.save((err, result) => {
+    //     if (err) {
+    //         console.log("Error creating company profile" + err)
+    //         res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+    //     }
+    //     else {
+    //         console.log("Created Company Profile : " + JSON.stringify(result))
+    //         res.status(200).end(JSON.stringify(result))
+    //     }
+    // })
+}

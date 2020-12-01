@@ -32,6 +32,12 @@ const Student_schema = new mongoose.Schema({
     degree:{
         type: String,
     },
+    education:{
+        type: String,
+    },
+    experience: {
+        type: String,
+    },
     yearsOfExperience:{
         type: String,
     },
