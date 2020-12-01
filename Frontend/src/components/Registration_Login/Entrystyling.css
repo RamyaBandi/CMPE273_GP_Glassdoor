@@ -39,9 +39,10 @@
 
 .radiotext{
     text-align:center;
-    display: block;
+    display: flex;
     color: black;
     font-weight: 700;
+    width: 50%;
     height: 30px;
     justify-content:space-evenly
 }
