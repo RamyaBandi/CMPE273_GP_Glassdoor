@@ -125,7 +125,7 @@ module.exports.getCompanyReviews = async (req, res) => {
                 // If value for given key is not available in Redis
                 else {
                     // Fetch data from your database
-                    let reviews = Company.find({ _id: data.companyId }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((error, result) => {
+                    let reviews = Company.find({ _id: data.companyId, approvalstatus: "Approved" }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((error, result) => {
 
                         if (error) {
                             //console.log(error);
@@ -152,7 +152,7 @@ module.exports.getCompanyReviews = async (req, res) => {
             // console.log("Error while working with redis")
             //console.log(error);
 
-            let reviews = Company.find({ _id: data.companyId }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
+            let reviews = Company.find({ _id: data.companyId, approvalstatus: "Approved" }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
 
                 if (err) {
                     //console.log(err);
@@ -173,8 +173,8 @@ module.exports.getCompanyReviews = async (req, res) => {
         try {
             data.page = 1;
             data.limit = 10;
-            const reviews = await Reviews.find({$or: [{ companyId: data.companyId, approvalstatus: "Approved" }, { studentId: data.studentId, approvalstatus: "Under Review"}]}).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
-            const count = await Reviews.countDocuments({ companyId: data.companyId });
+            const reviews = await Reviews.find({ companyId: data.companyId, approvalstatus: "Approved" }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+            const count = await Reviews.countDocuments({ companyId: data.companyId, approvalstatus: "Approved" });
             console.log("count" + count);
             console.log(reviews)
             const result = ({
