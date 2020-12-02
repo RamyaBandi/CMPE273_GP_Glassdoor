@@ -54,6 +54,11 @@ module.exports = {
     //Company Details Routes
     GET_COMPANY_DETAILS: "/companyDetails",
 
+    //Photo Routes
+    PHOTO_ROUTE: "/photos",
+    POST_COMPANY_PHOTOS: "/company",
+    GET_COMPANY_PHOTOS: "/company",
+
     //Job Routes
     JOB_ROUTE: "/job",
     POST_COMPANY_JOB: "/company/job",
