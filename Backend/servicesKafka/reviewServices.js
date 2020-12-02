@@ -159,3 +159,43 @@ const {
       
   });
   }
+
+  module.exports.putReviewApprove=(req,res)=>{
+    console.log("req.body"+JSON.stringify(req.body))
+    data={
+      api:"PUT_REVIEW_APPROVE",
+      body: req.body
+    }
+    kafka.make_request('reviews', data, function(err,results){
+      console.log('in result');
+      console.log(results);
+      if (err) {
+        console.log("In error");
+        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+    } else {
+        console.log("In else");
+        res.status(RES_SUCCESS).send(JSON.stringify(results));
+    }
+      
+  });
+  }
+
+  module.exports.putReviewReject=(req,res)=>{
+    console.log("req.body"+JSON.stringify(req.body))
+    data={
+      api:"PUT_REVIEW_REJECT",
+      body: req.body
+    }
+    kafka.make_request('reviews', data, function(err,results){
+      console.log('in result');
+      console.log(results);
+      if (err) {
+        console.log("In error");
+        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+    } else {
+        console.log("In else");
+        res.status(RES_SUCCESS).send(JSON.stringify(results));
+    }
+      
+  });
+  }

@@ -31,7 +31,17 @@ class resumeUpdate extends Component {
 </div>
             <div class="col-9">
             <div class="container">
-            <h4>Student Upload Resume</h4>
+            <form class="md-form">
+  <div class="file-field">
+    <a class="btn-floating purple-gradient mt-0 float-left">
+      <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+      <input type="file"></input>
+    </a>
+    <div class="file-path-wrapper">
+      
+    </div>
+  </div>
+</form>
             </div>
             
             </div>

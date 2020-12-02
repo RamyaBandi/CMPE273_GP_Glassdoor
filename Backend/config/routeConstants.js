@@ -38,6 +38,11 @@ module.exports = {
     GET_TOP_CEO_RATING: "/topceorating",
     GET_TOP_COMPANY_VIEWS: "/topcompanyviews",
 
+    //Admin Company Profile Routes
+    GET_ALL_COMPANIES: "/companies",
+    GET_COMPANY_BY_COMPANYNAME: "/company/companyName",
+    GET_COMPANY_REVIEWS: "/company/reviews",
+
     //Company Routes
     COMPANY_ROUTE: "/company",
     PUT_COMPANY_SIGNUP: "/company/profile",
@@ -53,6 +58,7 @@ module.exports = {
     JOB_ROUTE: "/job",
     POST_COMPANY_JOB: "/company/job",
     GET_COMPANY_JOBS: "/company/jobs",
+    GET_COMPANY_JOB_BY_JOBID: "/company/job/jobId",
     GET_COMPANY_JOBS_BY_JOBTITLE: '/company/jobs/jobTitle',
     GET_COMPANY_JOBS_BY_CITY: '/company/jobs/city',
     PUT_COMPANY_JOB: '/company/job',
@@ -77,6 +83,8 @@ module.exports = {
     PUT_COMPANY_REVIEW_HELPFUL: "/student/review/helpful",
     GET_POSITIVE_REVIEW: "/positive/review",
     GET_NEGATIVE_REVIEW: "/negative/review",
+    PUT_REVIEW_APPROVE: "/approve/review",
+    PUT_REVIEW_REJECT: "/reject/review",
 
     //Salary Routes
     SALARY_ROUTE: "/salary",

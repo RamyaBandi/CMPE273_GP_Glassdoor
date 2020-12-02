@@ -12,6 +12,9 @@ const Company = new mongoose.Schema({
     website: {
         type: String,
     },
+    imageUrl: {
+        type: String,
+    },
     companySize: {
         type: Number,
     },

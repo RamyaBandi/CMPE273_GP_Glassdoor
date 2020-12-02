@@ -34,8 +34,9 @@ const interviewRoutes = require('./routes/interviewRoutes');
 const jobsHomePageRoutes = require('./routes/jobsHomePageRoutes')
 const jobRoutes = require('./routes/jobRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
-const adminAnalyticsRoutes = require('./routes/adminDashboardRoutes')
 const companyStatisticsRoutes = require('./routes/companyStatisticsRoutes');
+const adminAnalyticsRoutes = require('./routes/adminDashboardRoutes');
+const adminCompanyProfileRoutes = require('./routes/adminCompanyProfileRoutes');
 const imageRoutes = require('./routes/imageRoutes');
 
 //use express session to maintain session data
@@ -75,6 +76,7 @@ app.use(routeConstants.APPLICATION_ROUTE, applicationRoutes);
 app.use(routeConstants.ADMIN_ROUTES, adminAnalyticsRoutes)
 app.use(routeConstants.STATISTICS_ROUTE, companyStatisticsRoutes)
 app.use(routeConstants.IMAGE_ROUTES, imageRoutes)
+app.use(routeConstants.ADMIN_ROUTES, adminCompanyProfileRoutes);
 
 //start your server on port 3001
 app.listen(3001);
