@@ -24,8 +24,8 @@ class Salaries extends Component {
     axios
       .get(BACKEND_URL + GET_COMPANY_SALARIES + "?companyId=" + company_id)
       .then((response) => {
-        console.log("response")
-        console.log(response.data.salaries);
+        // console.log("response")
+        // console.log(response.data.salaries);
         this.setState({ salaries: response.data.salaries });
         
       })
@@ -37,9 +37,9 @@ class Salaries extends Component {
       .get(BACKEND_URL + GET_COMPANY_DETAILS + "?companyId=" + company_id)
       .then((response) => {
         this.setState({ companyDetails: response.data[0] });
-        console.log("company overview response");
-        console.log(response.data[0]);
-        console.log(this.state.companyDetails);
+        // console.log("company overview response");
+        // console.log(response.data[0]);
+        // console.log(this.state.companyDetails);
       })
       .catch((error) => {
         console.log(error);
