@@ -1,5 +1,6 @@
 const { response } = require('express');
 const con = require('../config/mongoConnection');
+const ObjectId = require('mongoose').Types.ObjectId;
 const {
     CONTENT_TYPE,
     APP_JSON,
@@ -325,11 +326,9 @@ module.exports.getReviewAverage = async (req, res) => {
     let data = req.query
     console.log(data.companyId)
     try {
-        //const reviews = await Reviews.find({ companyId: data.companyId }).sort('-helpfulCount').exec();
         const avgReviews = await Reviews.aggregate([
             
-                //{$match: {companyId: data.companyId}},
-                {$match: {pros: "test"}},
+                {$match: {companyId: new ObjectId(data.companyId) }},
                 {$group:  {
                     _id: null,
                     averageOverallRating:{$avg: "$overallRating"},
@@ -383,4 +382,53 @@ module.exports.putReviewReject = (req, res) => {
             res.status(200).end(JSON.stringify(result))
         }
     })
+}
+
+module.exports.getReviewDetails = async (req, res) => {
+
+    console.log("Inside Review Details GET service");
+    console.log(req.query)
+    let data = req.query
+    let reviews = await Reviews.findById(data.reviewId).exec();
+    try{
+            // console.log(JSON.stringify(result));
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            console.log("Review details fetched Successfully")
+            res.status(RES_SUCCESS).send(reviews);
+    }
+    catch {
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+    }
+}
+
+module.exports.getAllReviews = async (req, res) => {
+
+    console.log("Inside Review Details GET service");
+    let data = req.query;
+    console.log(data);
+    try {
+        data.page = 1;
+        data.limit = 10;
+        const reviews = await Reviews.find()
+            .limit(data.limit * 1)
+            .skip((data.page - 1) * data.limit)
+            .exec();
+        const count = await Reviews.countDocuments();
+        const result = {
+            reviews,
+            totalPages: Math.ceil(count / data.limit),
+            currentPage: data.page,
+        };
+        res.status(RES_SUCCESS).send(result);
+    } catch {
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+    }
 }
