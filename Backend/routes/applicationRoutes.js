@@ -16,6 +16,7 @@ if (process.env.KAFKA_SWITCH === 'true') {
 else {
     applicationRouter.route(POST_APPLICATION).post(applicationServices.postApplication);
     applicationRouter.route(GET_APPLICATIONS_JOBID).get(applicationServices.getApplicationsByJobId);
+    applicationRouter.route(PUT_APPLICATION).put(applicationServices.putApplications);
 
 }
 

@@ -1,0 +1,20 @@
+.applicationsHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.containerList{
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+}
+
+.applicationsList{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+.jobsList{
+    display: flex;
+    justify-content: center;
+}
