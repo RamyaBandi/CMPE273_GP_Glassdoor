@@ -15,8 +15,10 @@ class employerUpdateProfile extends Component {
         industry: "",
         mission: "",
         description: "",
+        selectedFile: null,
+        img: null,
         ceoName: "",
-        image_path: "",
+        imageUrl: "",
         MODIFIED: "",
         disabled: true,
         editstate: false,
@@ -108,18 +110,15 @@ class employerUpdateProfile extends Component {
         onFileUpload = e => {
   
             let formData = new FormData();
-    
-            formData.append("file", this.state.selectedFile);
-            formData.append('companyId', this.props.companyId)
-        
+            console.log(this.state._id)
+            console.log(this.state)
+            console.log(this.state.selectedFile)
+            formData.append('file', this.state.selectedFile);
+            formData.append('companyId', this.state._id)
+            console.log(formData)
             axios
                 .post(
                     `${routeConstants.BACKEND_URL}/image${routeConstants.POST_IMAGE_USER_PROFILE}`,
-                    // {
-                    //     file: formData,
-                    //     companyId: this.state.companyId,
-                    
-                    // }
                     formData
                 )
                 .then(response => {
@@ -138,14 +137,11 @@ class employerUpdateProfile extends Component {
                     </div>
                 );
             }
-
         };
     
     
-    
-    
         onFileChange = event => {
-    
+            console.log(event)
             this.setState({ selectedFile: event.target.files[0] });
             if (this.state.selectedFile) {
                 this.setState({ app: this.state.selectedFile.name });
@@ -154,14 +150,14 @@ class employerUpdateProfile extends Component {
 
     render() { 
        // console.log()
-        let profileURL = `${routeConstants.BACKEND_URL}${this.state.image_path}`
+        //let profileURL = `${routeConstants.BACKEND_URL}${this.state.image_path}`
         return (
             <div className="profile">
 
-              <div className="imageDiv">
-                    <img src={profileURL} width='250px' height='250px' alt="profileImage" className="imageCont" />
-                    <input type="file" onChange={this.onFileChange} />
-                    <button className="btn btn-success" style={{ width: '100px' }} onClick={this.onFileUpload}>Upload!</button>
+<div className="imageDiv">
+                    <img src={this.state.imageUrl} width='250px' alt="profileImage   " height='250px' className="imageCont" />
+                    <input type="file" onChange={this.onFileChange} id="fileinput" />
+                    <button className="btn btn-danger" style={{ width: '100px' }} onClick={this.onFileUpload}>Upload!</button>
                     {this.fileData()}
                 </div>
                 <form className="userdetails" encType="multipart/form-data">
