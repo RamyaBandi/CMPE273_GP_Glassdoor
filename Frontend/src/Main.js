@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import CompanyOverview from './components/student/companyTabs/companyOverview';
 import CompanyJobs from './components/student/companyTabs/companyJobs/companyJobs';
+import JobApplication from './components/student/companyTabs/companyJobs/jobApplication';
 import NavBar from './components/landingPage/navBar'
 import LandingPageDesc from './components/landingPage/landingPageDescription'
 import Register from './components/Registration_Login/Registration'
@@ -55,6 +56,7 @@ class Main extends Component {
                     <Route exact path="/addreview" component={(props) => <AddReview {...props} />} />
                     <Route exact path="/overview" component={CompanyOverview} />
                     <Route exact path="/jobs" component={(props) => <CompanyJobs {...props} />} />
+                    <Route exact path="/jobApplication" component={(props) => <JobApplication {...props} />}/>
                     <Route exact path="/salaries" component={(props) => <Salaries {...props} />} />
                     <Route exact path="/addsalary" component={(props) => <AddSalary {...props} />} />
                     <Route exact path="/interviews" component={(props) => <Interviews {...props} />} />

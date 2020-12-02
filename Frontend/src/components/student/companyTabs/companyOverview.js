@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import Nav from 'react-bootstrap/Nav';
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
 import { Container, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Redirect } from "react-router";
+//import { Redirect } from "react-router";
 import axios from 'axios';
 import { BACKEND_URL, GET_COMPANY_DETAILS, GET_COMPANY_REVIEWS, POST_COMPANYVIEWS } from '../../../config/routeConstants';
 import ReviewCard from "../../student/companyTabs/reviews/reviewCard"
-import Reviews from "../../student/companyTabs/reviews/reviews";
 
-class CompanyOverview extends Component {
+export default class CompanyOverview extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,12 +24,11 @@ class CompanyOverview extends Component {
         //console.log("companyId in overview "+ this.state.companyId);
     }
 
-    async componentDidMount() {
-        // const company_id = '5fb4884acf339e3da0d5c31e';
-        const company_id = this.props.location.state.companyId
-        console.log("Fetched company Id", company_id)
-        await axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + company_id)
-
+    componentDidMount() {
+        const companyId = '5fb4aefe6b61ea46245d5621';
+        //const companyId = this.props.location.state.companyId
+        console.log("Fetched company Id", companyId)
+        axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
             .then(response => {
                 this.setState({ companyDetails: response.data[0] });
                 console.log("In componentDidMount");
@@ -41,8 +39,17 @@ class CompanyOverview extends Component {
             .catch((error) => {
                 console.log(error);
             }
-
-            )
+        )
+        axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + companyId)
+            .then((response) => {
+                console.log(response.data);
+                console.log(response.data.reviews);
+                this.setState({ reviews: response.data.reviews });
+            })
+            .catch((error) => {
+                console.log(error);
+            }
+        )
 
         //Capture number of times a company is viewed
 
@@ -58,18 +65,6 @@ class CompanyOverview extends Component {
                 console.log(error);
             }
             )
-
-        await axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + company_id)
-            .then((response) => {
-                console.log("response")
-                //console.log(response.data.reviews);
-
-                this.setState({ reviews: response.data.reviews });
-            })
-            .catch((error) => {
-                console.log(error);
-
-            })
     }
     render = () => {
         //const companyId = this.state.companyDetails._id;
@@ -80,7 +75,7 @@ class CompanyOverview extends Component {
                 <Container style={{ marginTop: "20px", width: "70%", backgroundColor: "white" }} className="block-example border">
                     <Row style={{ height: "50px", marginTop: "20px" }}>
                         <Col>
-                            <h5><b>{this.state.companyDetails.companyName}</b></h5>
+                            <h4><b>{this.state.companyDetails.companyName}</b></h4>
                         </Col>
                     </Row>
                     <Row style={{ marginBottom: "10px" }}>
@@ -199,5 +194,3 @@ class CompanyOverview extends Component {
         )
     }
 }
-
-export default CompanyOverview;

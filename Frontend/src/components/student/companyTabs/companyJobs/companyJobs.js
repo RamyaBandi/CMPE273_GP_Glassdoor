@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row, Form, FormControl } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Redirect } from "react-router";
 import axios from 'axios';
@@ -37,12 +37,13 @@ class CompanyJobs extends Component {
         )
         console.log(companyId);
         axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOBS + "?companyId=" + companyId)
-        .then(response => {
-            this.setState({ jobs: response.data.jobs});
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+            .then(response => {
+                this.setState({ jobs: response.data.jobs });
+            })
+            .catch((error) => {
+                console.log(error);
+            }
+        )
     }
 
     render = () => {
@@ -52,7 +53,7 @@ class CompanyJobs extends Component {
                 <Container style={{ marginTop: "20px", width: "70%", backgroundColor: "white" }} className="block-example border">
                     <Row style={{ height: "50px", marginTop: "20px" }}>
                         <Col>
-                            <h5><b>{this.state.companyDetails.companyName}</b></h5>
+                            <h4><b>{this.state.companyDetails.companyName}</b></h4>
                         </Col>
                     </Row>
                     <Row style={{ marginBottom: "10px" }}>
@@ -63,7 +64,7 @@ class CompanyJobs extends Component {
                                         <Link to="/overview" style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
                                     </div>
                                     <div class="box-content right">
-                                        <Link to={{pathname: "/reviews", state: this.state.companyDetails._id}} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
+                                        <Link to={{ pathname: "/reviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
                                     </div>
                                     <div class="box-content right">
                                         <Link to="/jobs" style={{ textDecoration: 'none', color: '#1861bf' }}>Jobs</Link>
@@ -84,14 +85,35 @@ class CompanyJobs extends Component {
                             {/* <Button className="float-right" style={{ backgroundColor: "#1861bf" }} onClick = {this.onAddReview}>
                                 <p style={{ color: "#ffffff", marginTop: "5px", marginBottom: "5px" }}>+ Add a Review</p>
                             </Button> */}
-                            <div className = "float-right" style = {{paddingRight: "70px"}}>
-                            <Link to={{pathname: "/addreview", state: this.state.companyDetails._id}} className="btn gd-btn-med gd-btn-icon" 
-                            style={{ color: "#ffffff", backgroundColor: "#1861bf" , marginTop: "5px", marginBottom: "5px", width: "100%" }}>+ Add a Review</Link>
+                            <div className="float-right" style={{ paddingRight: "70px" }}>
+                                <Link to={{ pathname: "/addreview", state: this.state.companyDetails._id }} className="btn gd-btn-med gd-btn-icon"
+                                    style={{ color: "#ffffff", backgroundColor: "#1861bf", marginTop: "5px", marginBottom: "5px", width: "100%" }}>+ Add a Review</Link>
                             </div>
                         </Col>
                     </Row>
                 </Container>
                 <Container style={{ marginTop: "20px", marginBottom: "20px", width: "70%", backgroundColor: "white" }} className="block-example border">
+                    <Row style={{ marginTop: "10px" }}>
+                        <Col>
+                            <p style={{ fontSize: "20px" }}>{this.state.companyDetails.companyName} Jobs</p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Form inline>
+                            <Col md="auto">
+                                <Row style = {{align: "center"}}>
+                                    <FormControl class = "InputStyles_" style = {{ marginRight: "10px", height: "40px" }} type="text" placeholder="Search Job Titles" />
+                                </Row>
+                            </Col>
+                            <Col md="auto">
+                                <Row>
+                                    <Button style = {{backgroundColor: "#1861bf", height: "40px"}}>
+                                        Find Jobs
+                                    </Button>
+                                </Row>
+                            </Col>
+                        </Form>
+                    </Row>
                     {this.state.jobs.map((item) => {
                         return <JobCard {...item} />
                     })}

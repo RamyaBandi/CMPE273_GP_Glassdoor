@@ -33,8 +33,6 @@ module.exports.createCompanyProfile = (req, res) => {
     })
 }
 
-
-
 module.exports.updateCompanyProfile = (req, res) => {
     console.log("Inside Company Profile PUT service");
     console.log("req body" + JSON.stringify(req.body));
@@ -65,8 +63,7 @@ module.exports.updateCompanyProfile = (req, res) => {
 }
 
 module.exports.getCompanyProfile = (req, res) => {
-
-    console.log("Inside Company Updated Profile GET service");
+    console.log("Inside Company Profile GET service");
     console.log(req.query)
     let data = req.query
     let companyDetails = Company.find({ _id: data.companyId }).exec((err, result) => {
@@ -87,8 +84,7 @@ module.exports.getCompanyProfile = (req, res) => {
 }
 
 module.exports.getUpdatedCompanyProfile = (req, res) => {
-
-    console.log("Inside Company Profile GET service");
+    console.log("Inside Company Updated Profile GET service");
     console.log(req.query)
     let data = req.query
     let companyDetails = Company.find({ _id: data.companyId }).exec((err, result) => {
@@ -146,7 +142,6 @@ module.exports.postCompanyView = (req, res) => {
         }
     })
 }
-
 
 module.exports.updateCompanyFeatured = (req, res) => {
     console.log("Inside Company Featured review PUT service");
