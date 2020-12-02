@@ -102,12 +102,12 @@ class CompanyJobs extends Component {
                         <Form inline>
                             <Col md="auto">
                                 <Row style = {{align: "center"}}>
-                                    <FormControl class = "InputStyles_" style = {{ marginRight: "10px", height: "40px" }} type="text" placeholder="Search Job Titles" />
+                                    <FormControl style = {{ marginRight: "10px", height: "40px" }} type="text" placeholder="Search Job Titles" />
                                 </Row>
                             </Col>
                             <Col md="auto">
                                 <Row>
-                                    <Button style = {{backgroundColor: "#1861bf", height: "40px"}}>
+                                    <Button style = {{backgroundColor: "#1861bf", height: "40px", width: "150%"}}>
                                         Find Jobs
                                     </Button>
                                 </Row>
