@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.786.0",
+    "aws-sdk": "^2.801.0",
     "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
@@ -26,6 +26,7 @@
     "express-session": "^1.15.6",
     "express-sessions": "^1.0.6",
     "formidable": "^1.2.2",
+    "fs": "0.0.1-security",
     "jwt-simple": "^0.5.6",
     "kafka-node": "^3.0.1",
     "mocha": "^8.2.1",

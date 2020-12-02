@@ -43,8 +43,8 @@ class AddSalary extends Component {
       yearsOfExperience: this.state.yearsOfExperience,
       location : this.state.location,
       employerName: this.state.employerName,
-      company_id: "5fb4884acf339e3da0d5c31e",
-      student_id: "5fb48df63d242fa0842343f3"
+      companyId: "5fb4884acf339e3da0d5c31e",
+      studentId: "5fb48df63d242fa0842343f3"
     };
     axios.post(BACKEND_URL + POST_STUDENT_SALARY, this.salaryData)
             .then(response => {
