@@ -51,13 +51,8 @@ module.exports.getApplicantsCount = (req, res) => {
     let data = req.query
     console.log(data)
 
-
-    Jobs.aggregate(
-        [
-            { $match: { companyId: new mongoose.Types.ObjectId(data.companyId) } },
-            { $group: { _id: "$companyId", applications: { $sum: { $size: "$applications" } } } }]
-    )
-        .exec((err, result) => {
+    Company.find({ _id: data.companyId }, 'jobs')
+        .exec((err, jobList) => {
             if (err) {
                 console.log("Error fetching job count")
                 console.log(err);
@@ -65,14 +60,56 @@ module.exports.getApplicantsCount = (req, res) => {
                 res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
             }
             else {
-                // console.log(JSON.stringify(result));
                 //res.setHeader(CONTENT_TYPE, APP_JSON);
-                console.log("Applications Counted Successfully");
-                console.log(result);
-                res.status(RES_SUCCESS).end(JSON.stringify(result));
+                console.log("Jobs retrieved Successfully");
+                console.log(jobList[0].jobs);
+                Applications
+                    // .find({ _id: { $in: [...appList] } }, '_id')
+                    // .populate({ path: 'studentId', model: 'Student', select: ['race', 'gender', 'veteranStatus', 'disability'] })
+                    .aggregate([
+                        { $match: { jobId: { $in: jobList[0].jobs } } },
+                        // { $project: { status: 1, applicationstatus: 1 } },
+                        { $group: { _id: "$applicationstatus", count: { "$sum": 1 } } }
+                    ])
+                    .exec((err, applications) => {
+                        if (err) {
+                            console.log("Error fetching Applications")
+                            console.log(err);
+                            //res.setHeader(CONTENT_TYPE, APP_JSON);
+                            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+                        }
+                        else {
 
+                            console.log("Demographics Counted Successfully");
+                            // console.log(applications);
+                            let out = {
+                                'Applied': 0,
+                                'Selected': 0,
+                                'Rejected': 0
+                            }
+                            applications.map((stat) => {
+                                if (stat._id === "Applied") {
+                                    out.Applied = stat.count
+                                }
+                                else if (stat._id === "Selected") {
+                                    out.Selected = stat.count
+                                }
+                                else if (stat._id === "Rejected") {
+                                    out.Rejected = stat.count
+                                }
+                            })
+
+                            res.status(RES_SUCCESS).end(JSON.stringify(out));
+
+                        }
+                    })
+                // console.log(JSON.stringify(appList));
             }
-        });
+            // res.status(RES_SUCCESS).end(JSON.stringify(jobList));
+
+            // }
+        })
+
 }
 
 module.exports.getApplicationDemographics = async (req, res) => {
@@ -158,7 +195,7 @@ module.exports.getApplicationDemographics = async (req, res) => {
                                 // console.log(app.student[0].race)
                                 race[app.student[0].race] = race[app.student[0].race] + 1
                                 gender[app.student[0].gender] = gender[app.student[0].gender] + 1
-                                veteranStatus[app.student[0].race] = veteranStatus[app.student[0].race] + 1
+                                veteranStatus[app.student[0].veteranStatus] = veteranStatus[app.student[0].veteranStatus] + 1
                                 disability[app.student[0].disability] = disability[app.student[0].disability] + 1
 
                             })
