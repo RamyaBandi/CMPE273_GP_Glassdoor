@@ -100,7 +100,8 @@ module.exports = {
     //Company Details Routes
     //GET_COMPANY_DETAILS: "/companyDetails",
 
-
+//Students Reviews
+GET_COUNT_RATINGS: "/reviewcount",
     
     //resumes
     POST_RESUME_UPLOAD: "/resume",

@@ -40,6 +40,9 @@ class EmployerReview extends Component {
                 reviews.push(<Reviewcard reviewitem={review}/>)
             })
         }
+        else{
+            reviews.push(<h4>No reviews added yet!!</h4>)
+        }
         console.log(reviews)
 
         return (  
