@@ -57,14 +57,19 @@ export default class CompanyOverview extends Component {
         //     companyId: this.props.location.state.companyId,
         //     companyName: this.state.companyDetails.companyName
         // }
+
+
         // axios.post(BACKEND_URL + POST_COMPANYVIEWS, views)
+
         //     .then((response) => {
         //         console.log("response for company views", response)
         //     })
         //     .catch((error) => {
         //         console.log(error);
         //     }
+
         // )
+
     }
     render = () => {
         //const companyId = this.state.companyDetails._id;

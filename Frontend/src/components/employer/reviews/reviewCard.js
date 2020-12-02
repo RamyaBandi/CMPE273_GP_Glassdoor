@@ -58,6 +58,13 @@ handlefeatured=(e)=>{
         console.log(this.props.reviewitem)
         let review=this.props.reviewitem
         let reply=this.props.reviewitem.reply
+        var replytime=""
+        if(this.props.reviewitem.replyTimeStamp){
+          //console.log("reply time")
+          var replytime=this.props.reviewitem.replyTimeStamp.split('T')[0]
+          //console.log(replytime)
+        }
+        
 
         return (
             <MDBRow>
@@ -91,7 +98,7 @@ handlefeatured=(e)=>{
             </div>
             <hr />     
             
-            <div className="left-side-meta">{review.replyTimeStamp.split('T')[0]}</div>    
+            <div className="right-side-meta">{replytime}</div> 
                 <h5 className="font-italic">{reply}</h5>          
             <MDBInput far icon="comment" name="reply" onChange={this.replyinput} hint="Add Comment..." />
             <button class="btn btn-success" onClick={this.submithandle}>Reply</button>
@@ -100,7 +107,8 @@ handlefeatured=(e)=>{
       </MDBCol>
       </MDBRow>
           );
-    }
+    
+  }
 }
  
 export default reviewCard;
