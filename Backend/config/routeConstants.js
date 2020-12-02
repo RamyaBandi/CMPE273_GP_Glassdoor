@@ -38,6 +38,11 @@ module.exports = {
     GET_TOP_CEO_RATING : "/topceorating",
     GET_TOP_COMPANY_VIEWS : "/topcompanyviews",
 
+    //Admin Company Profile Routes
+    GET_ALL_COMPANIES : "/companies",
+    GET_COMPANY_BY_COMPANYNAME: "/company/companyName",
+    GET_COMPANY_REVIEWS: "/company/reviews",
+
     //Company Routes
     COMPANY_ROUTE: "/company",
     PUT_COMPANY_SIGNUP: "/company/profile",
