@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Container, Button, Pagination,Modal } from 'react-bootstrap'
+import { Row, Col, Container, Button, Pagination, Modal } from 'react-bootstrap'
 import MultiImageInput from 'react-multiple-image-input';
 import './ImageGallery.css'
 
@@ -7,12 +7,12 @@ const crop = {
     unit: '%',
     aspect: 4 / 3,
     width: '100'
-  };
+};
 
 export default class Tiles extends React.Component {
 
-    state={
-        showModal:false
+    state = {
+        showModal: false
     }
 
     // hiddenImageInput = React.createRef(null);
@@ -21,8 +21,8 @@ export default class Tiles extends React.Component {
     //     this.hiddenImageInput.current.click();
     // };
     // handleChangeImage = async event => {
-        
-        
+
+
     //     const fileUploaded = event.target.files[0];
     //     event.target.value=null;
     //     this.setState({loader:true})
@@ -36,17 +36,17 @@ export default class Tiles extends React.Component {
     //     // window.alert("Set State for Resume")
     // };
 
-    showModal=()=>{
-        this.setState({showModal:true})
+    showModal = () => {
+        this.setState({ showModal: true })
     }
 
-    handleClose=()=>{
-        this.setState({showModal:false})
+    handleClose = () => {
+        this.setState({ showModal: false })
     }
 
-    saveUploads=()=>{
+    saveUploads = () => {
         this.props.saveImages()
-        
+
         this.handleClose()
     }
 
@@ -54,48 +54,48 @@ export default class Tiles extends React.Component {
     render() {
         return (
             <div style={{ backgroundColor: "#eaeaea", minHeight: "100vh", overflow: "hidden" }}>
-                {this.state.showModal?(
+                {this.state.showModal ? (
                     <Modal show={this.state.showModal} onHide={this.handleClose} animation={false} size="lg">
-                    <Modal.Header closeButton>
-                      <Modal.Title>Upload Multiple Photos</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                    <MultiImageInput
-                    style={{border:"0px"}}
-      images={this.props.newImages}
-      setImages={this.props.setnewImages}
-      cropConfig={{ crop, ruleOfThirds: true }}
-      theme="light"
-      max={5}
-    //   cropConfig={{ crop, ruleOfThirds: true }}
-    />
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={this.handleClose}>
-                        Close
+                        <Modal.Header closeButton>
+                            <Modal.Title>Upload Multiple Photos</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <MultiImageInput
+                                style={{ border: "0px" }}
+                                images={this.props.newImages}
+                                setImages={this.props.setnewImages}
+                                cropConfig={{ crop, ruleOfThirds: true }}
+                                theme="light"
+                                max={5}
+                            //   cropConfig={{ crop, ruleOfThirds: true }}
+                            />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.handleClose}>
+                                Close
                       </Button>
-                      <Button variant="primary" onClick={this.saveUploads}>
-                        Save Changes
+                            <Button style = {{backgroundColor: "#1861bf"}} onClick={this.saveUploads}>
+                                Save Changes
                       </Button>
-                    </Modal.Footer>
-                  </Modal>
-                ):null}
+                        </Modal.Footer>
+                    </Modal>
+                ) : null}
                 <Container style={{ backgroundColor: "#fff", marginTop: "20px", padding: "20px " }}>
-                    <Row style={{ width: "78%", margin: "auto",marginBottom:"20px" }}>
+                    <Row style={{ width: "78%", margin: "auto", marginBottom: "20px" }}>
                         <Col md="6">
                             <h4>{this.props.companyName} Office Photos</h4>
                         </Col>
                         <Col md="6" >
-                        <div style={{ float: "right" }}>
-                                                <Button onClick={this.showModal}>
-                                                Add Photos
-                                        </Button>
-                                                {/* <input type="file"
+                            <div style={{ float: "right" }}>
+                                <Button onClick={this.showModal} style = {{backgroundColor: "#1861bf"}}>
+                                    + Add Photos
+                                </Button>
+                                {/* <input type="file"
                                                     ref={this.hiddenImageInput}
                                                     onChange={this.handleChangeImage}
                                                     style={{ display: 'none' }}
                                                 /> */}
-                                            </div>
+                            </div>
                         </Col>
                     </Row>
                     <Row>
@@ -110,10 +110,10 @@ export default class Tiles extends React.Component {
 
 
                             <Pagination style={{ justifyContent: "center" }}>
-                                
+
                                 <Pagination.Prev />
                                 <Pagination.Item active>{1}</Pagination.Item>
-                                
+
                                 <Pagination.Item>{2}</Pagination.Item>
                                 <Pagination.Item>{3}</Pagination.Item>
 
