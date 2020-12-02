@@ -80,8 +80,7 @@ class loggedInNav extends React.Component {
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
                                 <li class="nav-item navWidth">
-                                    <Link to='#' 
-                                        class="nav-link navTab">
+                                    <Link to='/listOfCompanies' class="nav-link navTab">
                                         <i class="far fa-building"> Company Profile</i></Link>
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>

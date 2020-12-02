@@ -55,7 +55,7 @@ module.exports.getCompanyByCompanyName = async (req, res) => {
             totalPages: Math.ceil(count / data.limit),
             currentPage: data.page
         });
-        console.log("Companies fetched successfully from DB");
+        console.log("Companies fetched successfully using Company Name from DB");
         res.status(RES_SUCCESS).send(result);
     }
     catch {
@@ -107,7 +107,7 @@ module.exports.getCompanyJobDetails = async (req, res) => {
             totalPages: Math.ceil(count / data.limit),
             currentPage: data.page
         });
-        console.log("Reviews fetched successfully from DB");
+        console.log("Jobs fetched successfully from DB");
         res.status(RES_SUCCESS).send(result);
     }
     catch {
