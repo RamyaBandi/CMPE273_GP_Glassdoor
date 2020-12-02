@@ -32,8 +32,6 @@ module.exports.createCompanyProfile = (req, res) => {
     })
 }
 
-
-
 module.exports.updateCompanyProfile = (req, res) => {
     console.log("Inside Company Profile PUT service");
     console.log("req body" + JSON.stringify(req.body));
@@ -64,29 +62,6 @@ module.exports.updateCompanyProfile = (req, res) => {
 }
 
 module.exports.getCompanyProfile = (req, res) => {
-
-    console.log("Inside Company Updated Profile GET service");
-    console.log(req.query)
-    let data = req.query
-    let companyDetails = Company.find({ _id: data.companyId }).exec((err, result) => {
-
-        if (err) {
-            console.log(err);
-            //res.setHeader(CONTENT_TYPE, APP_JSON);
-            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
-        }
-        else {
-            // console.log(JSON.stringify(result));
-            //res.setHeader(CONTENT_TYPE, APP_JSON);
-            console.log("Company Details fetched Successfully");
-            console.log(result);
-            res.status(RES_SUCCESS).send(result);
-        }
-    })
-}
-
-module.exports.getUpdatedCompanyProfile = (req, res) => {
-
     console.log("Inside Company Profile GET service");
     console.log(req.query)
     let data = req.query
@@ -107,7 +82,26 @@ module.exports.getUpdatedCompanyProfile = (req, res) => {
     })
 }
 
+module.exports.getUpdatedCompanyProfile = (req, res) => {
+    console.log("Inside Company Updated Profile GET service");
+    console.log(req.query)
+    let data = req.query
+    let companyDetails = Company.find({ _id: data.companyId }).exec((err, result) => {
 
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+        }
+        else {
+            // console.log(JSON.stringify(result));
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            console.log("Company Details fetched Successfully");
+            console.log(result);
+            res.status(RES_SUCCESS).send(result);
+        }
+    })
+}
 
 module.exports.updateCompanyFeatured = (req, res) => {
     console.log("Inside Company Featured review PUT service");

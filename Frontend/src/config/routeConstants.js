@@ -57,7 +57,7 @@ module.exports = {
     GET_JOBS_HOMEPAGE : "/jobshomepage",
 
     //CompanyRoutes
-    GET_COMPANY_DETAILS: '/company/companyDetails',
+    GET_COMPANY_DETAILS: '/company/company/profile',
     GET_JOBS_HOMEPAGE : "/jobshomepage",
     COMPANY_ROUTE: "/company",
     PUT_COMPANY_SIGNUP: "/company/profile",
@@ -66,13 +66,15 @@ module.exports = {
 
     
     //Company Details Routes
-    GET_COMPANY_DETAILS: "/companyDetails",
+    //GET_COMPANY_DETAILS: "/companyDetails",
 
     //Job Routes
     JOB_ROUTE: "/job",
     POST_COMPANY_JOB: "/company/job",
     GET_COMPANY_JOBS: "/company/jobs",
-    GET_COMPANY_JOB: '/company/job',
+    GET_COMPANY_JOB_BY_JOBID: '/company/job/jobId',
+    GET_COMPANY_JOB_BY_JOBTITLE: '/company/job/jobTitle',
+    GET_COMPANY_JOB_BY_CITY: '/company/job/city',
     PUT_COMPANY_JOB: '/company/job',
     GET_ALL_JOBS: '/company/jobList',
 

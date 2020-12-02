@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Container, Col, Row } from 'react-bootstrap';
-import Moment from 'moment';
-import { MdFavoriteBorder } from 'react-icons/md';
+import { FaRegHeart } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export default class ReviewCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            postedDate: Moment("{this.props.postedDate}").format('MM-DD-YYYY')
         }
     }
     render = () => {
@@ -22,10 +21,10 @@ export default class ReviewCard extends Component {
                         <Col md="10">
                             <Row>
                                 <Col md="10">
-                                    {this.props.jobTitle}
+                                    <Link to={{ pathname: "/jobApplication", state: this.props._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>{this.props.jobTitle}</Link>
                                 </Col>
                                 <Col md="2">
-                                    <MdFavoriteBorder />
+                                    <FaRegHeart />
                                 </Col>
                             </Row>
                             <Row>

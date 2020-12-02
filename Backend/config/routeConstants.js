@@ -45,6 +45,7 @@ module.exports = {
     JOB_ROUTE: "/job",
     POST_COMPANY_JOB: "/company/job",
     GET_COMPANY_JOBS: "/company/jobs",
+    GET_COMPANY_JOB_BY_JOBID: "/company/job/jobId",
     GET_COMPANY_JOBS_BY_JOBTITLE: '/company/jobs/jobTitle',
     GET_COMPANY_JOBS_BY_CITY: '/company/jobs/city',
     PUT_COMPANY_JOB: '/company/job',
