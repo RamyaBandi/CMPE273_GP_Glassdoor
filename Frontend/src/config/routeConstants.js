@@ -23,7 +23,16 @@ module.exports = {
     GET_SEARCH_COMPANY : '/search/search/companysearch',
     GET_SEARCH_SALARY : "/search/search/salarysearch",
     GET_SEARCH_INTERVIEW : "/search/search/interviewsearch",
-    GET_JOBS_HOMEPAGE : '/jobshomepage/jobshomepage',
+    // GET_JOBS_HOMEPAGE : "/jobshomepage/jobshomepage",
+
+
+    //Admin Analytics Dashboard Routes
+    GET_REVIEWS_PER_DAY : "/admin/reviewsperday",
+    GET_TOP_REVIEWED_COMPANIES : "/admin/topreviewedcompanies",
+    GET_TOP_AVERAGE_RATED_COMPANIES : "/admin/topaverageratedcompanies",
+    GET_TOP_STUDENTS_ON_RATING : "/admin/topstudentsratings",
+    GET_TOP_CEO_RATING : "/admin/topceorating",
+    GET_TOP_COMPANY_VIEWS : "/admin/topcompanyviews",
 
     //Review Routes
     POST_STUDENT_REVIEW: '/review/student/review',
@@ -34,6 +43,7 @@ module.exports = {
     GET_NEGATIVE_REVIEW: '/review/negative/review',
     PUT_FEATURED_REVIEWS: '/review/featured',
     PUT_COMPANY_REPLY: '/company/reply',
+    GET_REVIEW_AVERAGE: '/review/average/review',
 
     //Salary Routes
     POST_STUDENT_SALARY: '/salary/student/salary',
@@ -44,6 +54,7 @@ module.exports = {
     POST_STUDENT_INTERVIEW: '/interview/student/interview',
     GET_COMPANY_INTERVIEWS: '/interview/company/interviews',
     GET_STUDENT_interviewS: '/interview/student/interviews',
+    GET_COMPANY_INTERVIEW_STATISTICS: '/interview/company/interview/expPercentage',
 
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",
@@ -54,7 +65,14 @@ module.exports = {
 
     //Student Jobs Home Page
 
-    GET_JOBS_HOMEPAGE : "/jobshomepage",
+    GET_STUDENTS_JOBS_HOMEPAGE : "/jobshomepage/jobshomepage",
+
+
+    //Student SignUp
+    GET_STUDENT_SIGNUP: "/student/profile",
+    PUT_STUDENT_SIGNUP: "/student/profile",
+    PUT_STUDENT_DEMOGRAPHICS:"/student/demographics",
+    PUT_STUDENT_JOBPREFERENCE:"/student/jobpreference",
 
     //CompanyRoutes
     GET_COMPANY_DETAILS: '/company/company/profile',
@@ -63,6 +81,7 @@ module.exports = {
     PUT_COMPANY_SIGNUP: "/company/profile",
     GET_COMPANY_SIGNUP: "/company/profile",
     POST_COMPANY_SIGNUP: "/company/profile",
+    POST_COMPANYVIEWS : "/company/viewsperday",
 
     
     //Company Details Routes
@@ -88,6 +107,7 @@ module.exports = {
 
     //Image Routes
     POST_IMAGE_USER_PROFILE: "/company/image",
+    POST_IMAGE_STUDENT_PROFILE: "/student/image",
 
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',

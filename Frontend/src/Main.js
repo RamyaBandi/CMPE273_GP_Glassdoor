@@ -13,6 +13,7 @@ import CompaniesTab from './components/student/HomePageTabs/companies'
 import InterviewsTab from './components/student/HomePageTabs/interviews'
 import JobsTab from './components/student/HomePageTabs/jobs'
 import AdminHomePage from './components/admin/adminHomePage'
+import AdminAnalytics from './components/admin/Dashboard/AdminAnalytics'
 import EmployerHomePage from './components/employer/homePage/EmployerHome'
 import Reviews from './components/student/companyTabs/reviews/reviews';
 import AddReview from './components/student/companyTabs/reviews/addReview';
@@ -28,6 +29,11 @@ import EditJobs from './components/employer/jobs/editJobs/EditJobs';
 import ListApplications from './components/employer/jobs/applications/listApplications/listApplications';
 import EmployerUpdateProfile from './components/employer/updateProfile/employerUpdateProfile';
 import EmployerReview   from './components/employer/reviews/employerReviews'
+import StudentUpdateProfile from './components/student/updateProfile/updateProfile'
+import StudentReviews from './components/student/updateProfile/studentReviews'
+import JobPreference from './components/student/updateProfile/jobPreferences'
+import Demographics from './components/student/updateProfile/demographics'
+import ResumeUpdate from './components/student/updateProfile/resumeUpdate'
 
 class Main extends Component {
     render() {
@@ -44,6 +50,7 @@ class Main extends Component {
                     <Route exact path="/salariestab" render={props => <SalariesTab {...props} />} />
                     <Route exact path="/interviewstab" render={props => <InterviewsTab {...props} />} />
                     <Route exact path="/adminhomepage" render={props => <AdminHomePage {...props} />} />
+                    <Route exact path="/adminanalytics" render={props => <AdminAnalytics {...props} />} />
 
                     <Route exact path="/reviews" component={(props) => <Reviews {...props} />} />
                     <Route exact path="/addreview" component={(props) => <AddReview {...props} />} />
@@ -55,7 +62,11 @@ class Main extends Component {
                     <Route exact path="/interviews" component={(props) => <Interviews {...props} />} />
                     <Route exact path="/addinterview" component={(props) => <AddInterview {...props} />} />
 
-
+                    <Route exact path="/student/profile" render={props => <StudentUpdateProfile {...props} />} />
+                    <Route exact path="/student/reviews" render={props => <StudentReviews {...props} />} />
+                    <Route exact path="/student/jobpreference" render={props => <JobPreference {...props} />} />
+                    <Route exact path="/student/demographics" render={props => <Demographics {...props} />} />
+                    <Route exact path="/student/resume" render={props => <ResumeUpdate {...props} />} />
                     {//Employer Routes
                     }
 
@@ -68,6 +79,8 @@ class Main extends Component {
                     <Route exact path="/company/profile" render={props => <EmployerUpdateProfile{...props} />} />
                     <Route exact path="/employer/reviews" render={props => <EmployerReview {...props} />} />
                     <Route exact path="/employer/analytics" render={props => <EmployerHomePage {...props} />} />
+                   
+                    
                 </div>
             </div>
         )

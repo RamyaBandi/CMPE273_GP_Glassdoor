@@ -6,7 +6,7 @@ import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import axios from "axios";
 import InterviewCard from "./interviewCard";
-import { BACKEND_URL, GET_COMPANY_INTERVIEWS, GET_COMPANY_DETAILS } from "../../../../config/routeConstants";
+import { BACKEND_URL, GET_COMPANY_INTERVIEWS, GET_COMPANY_DETAILS, GET_COMPANY_INTERVIEW_STATISTICS } from "../../../../config/routeConstants";
 
 class Interviews extends Component {
   constructor(props) {
@@ -14,12 +14,13 @@ class Interviews extends Component {
     this.state = {
       companyDetails: [],
       interviews: [],
+      interviewStatistics: {},
       redirect: null,
     };
   }
   componentDidMount() {
-    const company_id = this.props.location.state;
-    //const {data} = this.props.location.state;
+    const company_id = "5fb4884acf339e3da0d5c31e";
+    //const company_id = this.props.location.state;
     console.log(company_id);
     axios
       .get(BACKEND_URL + GET_COMPANY_INTERVIEWS + "?companyId=" + company_id)
@@ -37,6 +38,18 @@ class Interviews extends Component {
         console.log("company overview response");
         console.log(response.data[0]);
         console.log(this.state.companyDetails);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+      axios
+      .get(BACKEND_URL + GET_COMPANY_INTERVIEW_STATISTICS + "?companyId=" + company_id)
+      .then((response) => {
+        this.setState({ interviewStatistics: response.data });
+        console.log("Interviews Experience Rating in Percentage response");
+        console.log(response.data);
+        //console.log(this.state.interviewStatistics);
       })
       .catch((error) => {
         console.log(error);
@@ -91,6 +104,67 @@ class Interviews extends Component {
                         </Col>
                     </Row>
         </Container>
+
+        <Row>
+          <Container className="block-example border" style={{ marginBottom: "10px", marginTop: "10px", width: "62%" }}>
+            <Col>
+            <Row>
+              <p>Interview Experience Statistics</p>
+            </Row>
+            <Row>
+              <Col md="4">
+                Positive: {this.state.interviewStatistics.positivePercentage}%
+              </Col>
+              <Col md="4">
+                Neutral: {this.state.interviewStatistics.neutralPercentage}%
+              </Col>
+              <Col md="4">
+                Negative: {this.state.interviewStatistics.negativePercentage}%
+              </Col>
+            </Row>
+            </Col>
+          </Container>
+        </Row>
+
+        <Row>
+          <Container className="block-example border" style={{ marginBottom: "10px", marginTop: "10px", width: "62%" }}>
+            <Col>
+            <Row>
+              <p>Offer Status Statistics</p>
+            </Row>
+            <Row>
+              <Col md="4">
+                Accepted: {this.state.interviewStatistics.acceptedPercentage}%
+              </Col>
+              <Col md="4">
+                Rejected: {this.state.interviewStatistics.rejectedPercentage}%
+              </Col>
+            </Row>
+            </Col>
+          </Container>
+        </Row>
+
+        <Row>
+          <Container className="block-example border" style={{ marginBottom: "10px", marginTop: "10px", width: "62%" }}>
+            <Col>
+            <Row>
+              <p>Interview Difficulty Statistics</p>
+            </Row>
+            <Row>
+              <Col md="4">
+                Easy: {this.state.interviewStatistics.easyPercentage}%
+              </Col>
+              <Col md="4">
+                Average: {this.state.interviewStatistics.averagePercentage}%
+              </Col>
+              <Col md="4">
+                Difficult: {this.state.interviewStatistics.difficultPercentage}%
+              </Col>
+            </Row>
+            </Col>
+          </Container>
+        </Row>
+
         <Row>
           <Container style={{ marginBottom: "30px" }}>
             {this.state.interviews.map((item) => {

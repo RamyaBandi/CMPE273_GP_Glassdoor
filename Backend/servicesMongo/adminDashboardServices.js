@@ -22,8 +22,17 @@ const CompanyViews = require('../models/CompanyViews')
 // Get count of  reviews per day
 
 module.exports.reviewsperday = async (req, res) => {
-    let getreviewsperday = await Reviews.aggregate([{"$group" : {_id: {"reviewDate":"$reviewDate"}, count:{$sum:1}}}]).exec();
+    // let getreviewsperday = await Reviews.aggregate([{"$group" : {_id: {"reviewDate":"$reviewDate"}, count:{$sum:1}}}]).exec();
+    let getreviewsperday = await Reviews.aggregate([
+        {"$group" : {_id: {$dateToString: { format: "%Y-%m-%d", date: "$reviewDate" }},
+         count:{$sum:1}}},
+         { "$sort": { _id: 1 } },
+         { "$limit": 10 }]).exec();
     console.log("Reviews", getreviewsperday)
+    getreviewsperday = getreviewsperday.filter(company => company._id !== null)
+    console.log("After filter", getreviewsperday)
+
+    res.status(RES_SUCCESS).end(JSON.stringify(getreviewsperday));
 }
 
 // Top 5 most reviewed company
@@ -133,50 +142,16 @@ module.exports.topstudentratings = async (req, res) => {
     res.status(RES_SUCCESS).end(JSON.stringify(datasets));
 }
 
-// Top 5 students based on total accepted reviews made.
-
-module.exports.topstudentratings = async (req, res) => {
-
-    let getTopStudentratings = await Reviews.aggregate([
-        { "$match": { "approvalstatus": "Accepted" } },
-        {"$group" : {_id: {"student_id":"$student_id"}, count:{$sum:1}}},
-        // {"$group" :{"company_id":"$company_id"}, count:{$sum:1}},
-        { "$sort": { count: -1 } },
-        { "$limit": 5 },
-    ]).exec();
-    // console.log(getTopStudentratings[0]._id.company_id)
-    
-    getTopStudentratings = getTopStudentratings.filter(student => student._id.student_id !== null)
-    console.log("After filter", getTopStudentratings)
-
-    let datasets = await Promise.all(getTopStudentratings.map(async (data) => {
-        let products = {};
-        console.log("Data",data)
-        let getStudentData = await Students.aggregate([
-            
-            { $match: { _id: data._id.student_id } },
-            {
-                $project: {
-                    _id: 1,
-                    studentName: 1,
-                }
-            }]).exec();
-            products.studentId = data._id.student_id;
-            products.studentName = getStudentData[0].studentName;
-            products.noOfReviews = data.count;
-
-            return products;
-    }))
-    res.status(RES_SUCCESS).end(JSON.stringify(datasets));
-}
 
 // Top 10 CEO’s based on rating.
 
 module.exports.topceorating= async (req, res) => {
+    // ,"companyName":"$companyName"
     let getTopCeo = await Reviews.aggregate([
+        
         {"$group" : {_id: {"company_id":"$company_id"}, averageCeoRating:{$avg: "$ceoRating"}}},
         // {"$group" :{"company_id":"$company_id"}, count:{$sum:1}},
-        { "$sort": { count: -1 } },
+        { "$sort": { count: 1 } },
         { "$limit": 10 },
     ]).exec();
     // console.log(getTopCeo[0]._id.company_id)
@@ -208,21 +183,21 @@ module.exports.topceorating= async (req, res) => {
     res.status(RES_SUCCESS).end(JSON.stringify(datasets));
 }
 
-
 // Top 10 company based on viewed per day.
 
 module.exports.topcompanyviews = async (req, res) => {
-    let getviewsperday = await Reviews.aggregate([
-        {"$group" : {_id: {"companyId":"$companyId", "Date":"$Date"},
-        count:{$sum:1}}},
-        { "$sort": { count: -1 } },
-        { "$limit": 10 },
-        {
-            $project: {
-                companyId: 1,
-                companyName: 1,
-            }
-        }
-    ]).exec();
+    console.log("Date",req.query.date)
+    let getviewsperday = await CompanyViews.aggregate([
+        {$match : {Date:req.query.date}},
+        {"$group" : {_id: {"companyName": "$companyName"},
+        // {"$group" : {_id: {$dateToString: { format: "%Y-%m-%d", date: "$Date" }},
+         count:{$sum:1}}},
+
+         { "$sort": { _id: -1 } },
+         { "$limit": 10 }]).exec();
+
+    // let getviewsperday = await CompanyViews.find({})
+
     console.log("Reviews", getviewsperday)
+    res.status(RES_SUCCESS).end(JSON.stringify(getviewsperday));
 }

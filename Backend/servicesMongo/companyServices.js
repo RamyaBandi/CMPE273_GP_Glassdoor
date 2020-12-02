@@ -1,6 +1,7 @@
 const { response } = require('express');
 const con = require('../config/mongoConnection');
 const Company = require('../models/Company');
+const CompanyViews = require('../models/CompanyViews')
 const {
     CONTENT_TYPE,
     APP_JSON,
@@ -99,6 +100,45 @@ module.exports.getUpdatedCompanyProfile = (req, res) => {
             console.log("Company Details fetched Successfully");
             console.log(result);
             res.status(RES_SUCCESS).send(result);
+        }
+    })
+}
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+module.exports.postCompanyView = (req, res) => {
+    let date = Date()
+    console.log("Date", date)
+    console.log("Date after formatting", formatDate(date))
+    console.log("Inside Company Profile POST views");
+    console.log("req body" + JSON.stringify(req.body));
+    let data = req.body
+    let companyviews = CompanyViews({
+        companyId : data.companyId,
+        companyName: data.companyName,
+        Date : formatDate(date)
+        // email: data.email
+    })
+    companyviews.save((err, result) => {
+        if (err) {
+            console.log("Error saving views" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Saved company view : " + JSON.stringify(result))
+            res.status(200).end(JSON.stringify(result))
         }
     })
 }
