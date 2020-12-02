@@ -22,4 +22,5 @@ studentRouter.route(PUT_STUDENT_JOBPREFERENCE).put(studentServices.updateStudent
 studentRouter.route(POST_RESUME_UPLOAD).post(studentServices.updateStudentResume);
 studentRouter.route(GET_STUDENT_RESUMES).get(studentServices.getStudentResumes);
 studentRouter.route(PUT_PRIMARY_RESUME).put(studentServices.updatePrimaryResume);
+
 module.exports = studentRouter;

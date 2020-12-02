@@ -7,7 +7,6 @@ const { GET_COMPANY_PHOTOS, POST_COMPANY_PHOTOS } = require('../config/routeCons
 
 // console.log(process.env.KAFKA_SWITCH);
 if (process.env.KAFKA_SWITCH === 'true') {
-    console.log("in kafka service")
 }
 else {
     photoRouter.route(POST_COMPANY_PHOTOS).post(photoServices.postCompanyPhotos);

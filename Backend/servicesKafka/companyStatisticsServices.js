@@ -12,7 +12,7 @@ module.exports.getJobsCount = (req, res) => {
         api: "GET_STATISTICS_APPLICATIONS_COUNT",
         body: req.query
     }
-    kafka.make_request('company', data, function (err, results) {
+    kafka.make_request('companyStatistics', data, function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {
@@ -32,7 +32,7 @@ module.exports.getApplicantsCount = (req, res) => {
         api: "GET_STATISTICS_APPLICATIONS_COUNT",
         body: req.query
     }
-    kafka.make_request('company', data, function (err, results) {
+    kafka.make_request('companyStatistics', data, function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {
@@ -53,7 +53,7 @@ module.exports.getApplicationDemographics = (req, res) => {
         api: "GET_STATISTICS_APPLICANT_DEMOGRAPHICS",
         body: req.query
     }
-    kafka.make_request('company', data, function (err, results) {
+    kafka.make_request('companyStatistics', data, function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {
