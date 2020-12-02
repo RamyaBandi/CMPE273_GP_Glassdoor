@@ -5,11 +5,18 @@ class JobsHome extends Component {
     render() {
         return (
             <div>
-                <h2>Jobs Home</h2>
-                <a href="/employer/jobs/post">Post Job</a>
-                <a href="/employer/jobs/list">List Jobs</a>
-                {/* <a href="/employer/jobs/post">Post Job</a> */}
+                {/* <h2>Jobs Home</h2> */}
+                <div className="homeLayout">
+                    <div className="homeGrid">
+                        <div className="sq zoom">
+                            <h4 ><a href="/employer/jobs/post" className="Glasslink">Post Job</a></h4>
+                        </div>
+                        <div className="sq zoom">
+                            <h4 >  <a href="/employer/jobs/list" className="Glasslink">List Jobs</a></h4>
+                        </div>
 
+                    </div>
+                </div>
             </div>
         );
     }
