@@ -58,6 +58,9 @@ const Student_schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Resume'
     }],
+    resumeNames:[{
+        type: String,
+    }],
     applications: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Application'

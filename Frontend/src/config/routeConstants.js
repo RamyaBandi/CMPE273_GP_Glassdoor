@@ -89,6 +89,13 @@ module.exports = {
     //Company Details Routes
     //GET_COMPANY_DETAILS: "/companyDetails",
 
+
+    
+    //resumes
+    POST_RESUME_UPLOAD: "/resume",
+    GET_STUDENT_RESUMES: "/resume",
+    PUT_PRIMARY_RESUME: "/primaryresume",
+
     //Job Routes
     JOB_ROUTE: "/job",
     POST_COMPANY_JOB: "/company/job",

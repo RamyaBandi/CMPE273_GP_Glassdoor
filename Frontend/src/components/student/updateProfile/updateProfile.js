@@ -13,6 +13,8 @@ class StudentUpdateProfile extends Component {
       experience:"",
       interestedJobtitle: "",
     degree:"",
+    selectedFile: null,
+    img: null,
     yearsOfExperience:"",
     aboutMe:"",
     imageUrl: "",
@@ -106,10 +108,13 @@ class StudentUpdateProfile extends Component {
       onFileUpload = e => {
 
           let formData = new FormData();
-  
+          console.log(this.state._id)
+          console.log(this.state)
+          console.log(this.state.selectedFile)
           formData.append("file", this.state.selectedFile);
-          formData.append('companyId', this.props.studentId)
-      
+          formData.append('studentId', this.state._id)
+          
+           
           axios
               .post(
                   `${routeConstants.BACKEND_URL}/image${routeConstants.POST_IMAGE_STUDENT_PROFILE}`,
@@ -182,10 +187,10 @@ class StudentUpdateProfile extends Component {
 <div className="profile">
 
 <div className="imageDiv">
-      <img src={profileURL} width='250px' height='250px' alt="profileImage" className="imageCont" />
-      <input type="file" onChange={this.onFileChange}/>
-      <button className="btn btn-success" style={{ width: '100px' }} onClick={this.onFileUpload}>Upload!</button>
-      {this.fileData()}
+<img src={this.state.imageUrl} width='250px' alt="profileImage   " height='250px' className="imageCont" />
+                    <input type="file" onChange={this.onFileChange} id="fileinput" />
+                    <button className="btn btn-success" style={{ width: '100px' }} onClick={this.onFileUpload}>Upload!</button>
+                    {this.fileData()}
   </div>
   <form className="userdetails" encType="multipart/form-data">
       <h2>Edit Profile Details</h2>
