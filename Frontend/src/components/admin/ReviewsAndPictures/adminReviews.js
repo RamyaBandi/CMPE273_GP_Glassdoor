@@ -8,7 +8,7 @@ import ReviewCard from "../../student/companyTabs/reviews/reviewCard";
 import axios from "axios";
 import {
   BACKEND_URL,
-  GET_COMPANY_REVIEWS,
+  GET_ALL_REVIEWS,
   PUT_REVIEW_APPROVE,
   PUT_REVIEW_REJECT,
 } from "../../../config/routeConstants";
@@ -33,9 +33,10 @@ class Reviews extends Component {
     const company_id = '5fb4884acf339e3da0d5c31e';
     //const company_id = this.props.location.state;
     axios
-      .get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + company_id)
+      .get(BACKEND_URL + GET_ALL_REVIEWS)
       .then((response) => {
         this.setState({ reviews: response.data.reviews });
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -106,25 +107,23 @@ class Reviews extends Component {
     return (
       <div>
         {this.state.redirect}
-        {/* <Row>
-          <Container style={{ marginBottom: "30px" }}>
-            {this.state.reviews.map((item) => {
-              return <ReviewCard {...item} />;
-            })}
-          </Container>
-        </Row> */}
         <Row style={{marginBottom:"30px", martinLeft: "20px", marginRight: "20px", marginTop: "20px"}}>
                         {this.state.reviews.map(item=>{
                             return (<Col md={12}>
                                 <Row style={{marginRight:"30px", martinLeft: "40px", marginTop: "5px"}}>
-                                    <Col md="6">
-                                    {item._id}
+                                    <Col md="2">
+                                    {/* <Link to={{ pathname: "/viewreview", state: item._id }} 
+                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}>{item._id}</Link> */}
+                                    </Col>
+                                    <Col md="4">
+                                    <Link to={{ pathname: "/viewreview", state: item._id }} 
+                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}>{item.headline}</Link>
                                     </Col>
                                     <Col md="3" >
 
-                                      {this.state.addedItem[item._id]?<Button style={{ backgroundColor: "#f43939", border: "1px solid #d32323",float:"right" }} size="sm" onClick={()=>{
+                                      {this.state.addedItem[item._id]?<Button style={{ backgroundColor: "#2f9c19", border: "1px solid #2f9c19",float:"right" }} size="sm" onClick={()=>{
                                           this.removeApproveItem(item._id)
-                                      }}>Selected for Approval</Button>:<Button style={{ backgroundColor: "#f43939", border: "1px solid #d32323",float:"right" }} size="sm" onClick={()=>{
+                                      }}>Selected for Approval</Button>:<Button style={{ backgroundColor: "#2f9c19", border: "1px solid #2f9c19",float:"right" }} size="sm" onClick={()=>{
                                         this.addApproveItem(item)
                                     }}>Approve</Button>}
                                     </Col>
@@ -145,7 +144,7 @@ class Reviews extends Component {
         </Col>
         <Col md="3" style={{marginTop:"20px"}}>
                         <Col md="12">
-                        <Button onClick={this.onSubmitApproval} style={{ backgroundColor: "#f43939", border: "1px solid #d32323" }} block>Approve selected</Button>
+                        <Button onClick={this.onSubmitApproval} style={{ backgroundColor: "#2f9c19", border: "1px solid #2f9c19" }} block>Approve selected</Button>
                         </Col>
         </Col>
         <Col md="3" style={{marginTop:"20px"}}>

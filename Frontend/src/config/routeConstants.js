@@ -46,6 +46,8 @@ module.exports = {
     GET_REVIEW_AVERAGE: '/review/average/review',
     PUT_REVIEW_APPROVE: '/review/approve/review',
     PUT_REVIEW_REJECT: '/review/reject/review',
+    GET_ALL_REVIEWS: '/review/all/reviews',
+    GET_REVIEW_DETAILS: '/review/details/review',
 
     //Salary Routes
     POST_STUDENT_SALARY: '/salary/student/salary',
