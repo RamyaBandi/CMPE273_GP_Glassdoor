@@ -75,5 +75,25 @@ const {
       
   });
   }
+
+  module.exports.getInterviewStatistics=(req,res)=>{
+    console.log("req.body"+JSON.stringify(req.query))
+    data={
+      api:"GET_COMPANY_INTERVIEW_STATISTICS",
+      body: req.query
+    }
+    kafka.make_request('interviews', data, function(err,results){
+      console.log('in result');
+      console.log(results);
+      if (err) {
+        console.log("In error");
+        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+    } else {
+        console.log("In else");
+        res.status(RES_SUCCESS).send(JSON.stringify(results));
+    }
+      
+  });
+  }
   
   

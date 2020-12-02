@@ -18,7 +18,7 @@ class employerUpdateProfile extends Component {
         ceoName: "",
         image_path: "",
         MODIFIED: "",
-        disabled: false,
+        disabled: true,
         editstate: false,
         oldDetails: {},
     };
@@ -112,19 +112,19 @@ class employerUpdateProfile extends Component {
             formData.append("file", this.state.selectedFile);
             formData.append('companyId', this.props.companyId)
         
-            // axios
-            //     .post(
-            //         `${routeConstants.BACKEND_URL}/company${routeConstants.POST_IMAGE_USER_PROFILE}`,
-            //         // {
-            //         //     file: formData,
-            //         //     customer_id: this.state.customer_id,
-            //         //     customer_name: this.state.customer_name
-            //         // }
-            //         formData
-            //     )
-            //     .then(response => {
-            //         window.location.reload(false)
-            //     });
+            axios
+                .post(
+                    `${routeConstants.BACKEND_URL}/image${routeConstants.POST_IMAGE_USER_PROFILE}`,
+                    // {
+                    //     file: formData,
+                    //     companyId: this.state.companyId,
+                    
+                    // }
+                    formData
+                )
+                .then(response => {
+                    window.location.reload(false)
+                });
         };
     
     
@@ -153,11 +153,17 @@ class employerUpdateProfile extends Component {
         }
 
     render() { 
-        console.log()
+       // console.log()
+        let profileURL = `${routeConstants.BACKEND_URL}${this.state.image_path}`
         return (
             <div className="profile">
 
-
+              <div className="imageDiv">
+                    <img src={profileURL} width='250px' height='250px' alt="profileImage" className="imageCont" />
+                    <input type="file" onChange={this.onFileChange} />
+                    <button className="btn btn-success" style={{ width: '100px' }} onClick={this.onFileUpload}>Upload!</button>
+                    {this.fileData()}
+                </div>
                 <form className="userdetails" encType="multipart/form-data">
                     <h2>Edit Profile Details</h2>
                     <div className="option">
@@ -177,7 +183,7 @@ class employerUpdateProfile extends Component {
                              disabled={this.state.disabled}
                             value={this.state.website}
                             onChange={this.handleChange}
-                            name="Website"
+                            name="website"
                             width="200px"
                         />
                     </div>
@@ -271,11 +277,11 @@ class employerUpdateProfile extends Component {
 
                     {/* {addresschange} */}
                     <div className="option" style={{ justifyContent: "space-around", marginLeft: '20%' }}>
-                        <button className="btn btn-danger" type="submit" onClick={this.handleEdit}>
+                        <button className="btn btn-success" type="submit" onClick={this.handleEdit}>
                             Toggle Edit
               
                         </button>
-                        <button className="btn btn-danger" type="submit" onClick={this.handleSave}>
+                        <button className="btn btn-success" type="submit" onClick={this.handleSave}>
                             Save Changes
                         </button>
 

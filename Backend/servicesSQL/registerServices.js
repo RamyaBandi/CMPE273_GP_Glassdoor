@@ -80,10 +80,19 @@ module.exports.register = (req, res) => {
                     }
                 })
             }
-
+            if(req.body.role === "admin"){
+                registerUser(value, 'None')
+            }
         });
+
         registerUser = (value, user_id)=>{
+            // console.log("insert into users (name, email, password, role, user_id) values ('" + req.body.name + "', '" + req.body.email + "', '" + value + "', '" + req.body.role + "', '" + user_id + "')")
+            if(req.body.role === "admin"){
+                var sql1 = "insert into users (name, email, password, role) values ('" + req.body.name + "', '" + req.body.email + "', '" + value + "', '" + req.body.role + "')";  
+            }
+            else{
             var sql1 = "insert into users (name, email, password, role, user_id) values ('" + req.body.name + "', '" + req.body.email + "', '" + value + "', '" + req.body.role + "', '" + user_id + "')";
+            }
             console.log("Query", sql1)
             mysqlConnection.query(sql1, function (error, rows) {
                 if (error) {

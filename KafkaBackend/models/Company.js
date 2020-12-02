@@ -54,10 +54,10 @@ const Company = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Reviews'
     },
-    featuredReview: {
+    featuredReview: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Reviews'
-    },
+    }],
     averageRating: {
         type: Number,
     },
