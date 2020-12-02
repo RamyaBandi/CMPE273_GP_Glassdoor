@@ -39,6 +39,10 @@ module.exports = {
     GET_COMPANY_BY_COMPANYNAME: "/admin/company/companyName",
     GET_COMPANY_REVIEWS: "/admin/company/reviews",
 
+    //Company Photos Routes
+    POST_COMPANY_PHOTOS: "/photos/company",
+    GET_COMPANY_PHOTOS: "/photos/company",
+
     //Review Routes
     POST_STUDENT_REVIEW: '/review/student/review',
     GET_COMPANY_REVIEWS: '/review/company/reviews',
