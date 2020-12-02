@@ -78,6 +78,8 @@ module.exports = {
     PUT_COMPANY_REVIEW_HELPFUL: "/student/review/helpful",
     GET_POSITIVE_REVIEW: "/positive/review",
     GET_NEGATIVE_REVIEW: "/negative/review",
+    PUT_REVIEW_APPROVE: "/approve/review",
+    PUT_REVIEW_REJECT: "/reject/review",
     
     //Salary Routes
     SALARY_ROUTE: "/salary",

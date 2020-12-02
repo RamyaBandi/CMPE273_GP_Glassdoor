@@ -44,6 +44,8 @@ module.exports = {
     PUT_FEATURED_REVIEWS: '/review/featured',
     PUT_COMPANY_REPLY: '/company/reply',
     GET_REVIEW_AVERAGE: '/review/average/review',
+    PUT_REVIEW_APPROVE: '/review/approve/review',
+    PUT_REVIEW_REJECT: '/review/reject/review',
 
     //Salary Routes
     POST_STUDENT_SALARY: '/salary/student/salary',

@@ -84,9 +84,6 @@ class Salaries extends Component {
                             </div>
                         </Col>
                         <Col md="4">
-                            {/* <Button className="float-right" style={{ backgroundColor: "#1861bf" }} onClick = {this.onAddReview}>
-                                <p style={{ color: "#ffffff", marginTop: "5px", marginBottom: "5px" }}>+ Add a Review</p>
-                            </Button> */}
                             <div className="float-right" style={{ paddingRight: "70px" }}>
                                 <Link to={{ pathname: "/addsalary", state: this.state.companyDetails._id }} className="btn gd-btn-med gd-btn-icon"
                                     style={{ color: "#ffffff", backgroundColor: "#1861bf", marginTop: "5px", marginBottom: "5px", width: "100%" }}>+ Add a Salary</Link>

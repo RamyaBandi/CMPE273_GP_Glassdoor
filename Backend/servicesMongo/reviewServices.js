@@ -353,3 +353,34 @@ module.exports.getReviewAverage = async (req, res) => {
     }
 }
 
+module.exports.putReviewApprove = (req, res) => {
+    console.log("Inside Approve Review PUT service");
+    console.log("req body" + JSON.stringify(req.body));
+    let data = req.body
+    Reviews.findByIdAndUpdate(data.reviewId, { approvalstatus: "Approved" }, (err, result) => {
+        if (err) {
+            console.log("Error updating review" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update Approval status for a Review to Approved: " + JSON.stringify(result))
+            res.status(200).end(JSON.stringify(result))
+        }
+    })
+}
+
+module.exports.putReviewReject = (req, res) => {
+    console.log("Inside Reject Review PUT service");
+    console.log("req body" + JSON.stringify(req.body));
+    let data = req.body
+    Reviews.findByIdAndUpdate(data.reviewId, { approvalstatus: "Rejected" }, (err, result) => {
+        if (err) {
+            console.log("Error updating review" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update Approval status for a Review to Rejected : " + JSON.stringify(result))
+            res.status(200).end(JSON.stringify(result))
+        }
+    })
+}
