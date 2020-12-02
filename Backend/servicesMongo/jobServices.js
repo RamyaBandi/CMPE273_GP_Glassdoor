@@ -1,17 +1,9 @@
 const Jobs = require('../models/Jobs');
 const Company = require('../models/Company')
-const { response } = require('express');
-const con = require('../config/mongoConnection');
 const {
-    CONTENT_TYPE,
-    APP_JSON,
+
     RES_SUCCESS,
-    RES_BAD_REQUEST,
-    RES_NOT_FOUND,
-    RES_DUPLICATE_RESOURCE,
-    TEXT_PLAIN,
     RES_INTERNAL_SERVER_ERROR,
-    POST_LOGIN
 } = require("../config/routeConstants");
 
 // const redisClient = require('../config/redisConnection');
@@ -89,20 +81,13 @@ module.exports.updateCompanyJob = (req, res) => {
         if (err) {
             console.log("Error creating job")
             console.log(err);
-            //res.setHeader(CONTENT_TYPE, APP_JSON);
             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
         }
         else {
-            // console.log(JSON.stringify(result));
-            //res.setHeader(CONTENT_TYPE, APP_JSON);
-
             console.log("Job updated Successfully");
             console.log(result);
             res.status(RES_SUCCESS).send(result);
         }
-
-
-
     })
 }
 

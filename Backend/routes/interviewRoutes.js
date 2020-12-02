@@ -8,7 +8,6 @@ const { POST_STUDENT_INTERVIEW, GET_COMPANY_INTERVIEWS, GET_STUDENT_INTERVIEWS, 
 
 // console.log(process.env.KAFKA_SWITCH)
 if (process.env.KAFKA_SWITCH === 'true') {
-    console.log("in kafka service")
     interviewRouter.route(POST_STUDENT_INTERVIEW).post(interviewKafkaServices.postStudentInterview);
     interviewRouter.route(GET_COMPANY_INTERVIEWS).get(interviewKafkaServices.getCompanyInterviews);
     interviewRouter.route(GET_STUDENT_INTERVIEWS).get(interviewKafkaServices.getStudentInterviews);
