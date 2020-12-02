@@ -15,11 +15,11 @@ module.exports = {
     POST_LOGIN: '/loginroute/login',
 
     //Student Search Routes
-    GET_SEARCH_JOBS : '/search/search/jobsearch',
-    GET_SEARCH_COMPANY : '/search/search/companysearch',
-    GET_SEARCH_SALARY : "/search/search/salarysearch",
-    GET_SEARCH_INTERVIEW : "/search/search/interviewsearch",
-    GET_JOBS_HOMEPAGE : '/jobshomepage/jobshomepage',
+    GET_SEARCH_JOBS: '/search/search/jobsearch',
+    GET_SEARCH_COMPANY: '/search/search/companysearch',
+    GET_SEARCH_SALARY: "/search/search/salarysearch",
+    GET_SEARCH_INTERVIEW: "/search/search/interviewsearch",
+    GET_JOBS_HOMEPAGE: '/jobshomepage/jobshomepage',
 
     //Review Routes
     POST_STUDENT_REVIEW: '/review/student/review',
@@ -58,6 +58,13 @@ module.exports = {
     GET_APPLICATIONS_JOBID: '/jobId',
     GET_APPLICATIONS_STUDENTID: '/studentId',
     GET_APPLICATIONS_ALL: '/',
+
+
+    //Company Statistics
+    STATISTICS_ROUTE: "/statistics",
+    GET_STATISTICS_JOBS_COUNT: "/jobsCount",
+    GET_STATISTICS_APPLICATIONS_COUNT: "/applicationsCount",
+    GET_STATISTICS_APPLICANT_DEMOGRAPHICS: "/applicantDemographics",
 
     //KAFKA TOPICS
     TOPIC_RESTAURANT: 'restaurant',

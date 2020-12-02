@@ -33,15 +33,15 @@ class CompanyOverview extends Component {
             .then(response => {
                 this.setState({ companyDetails: response.data[0] });
                 console.log("In componentDidMount");
-                console.log("Company details",response.data[0]);
+                console.log("Company details", response.data[0]);
                 console.log(this.state.companyDetails);
                 console.log(this.state.companyDetails.reviews);
             })
             .catch((error) => {
                 console.log(error);
             }
-        )
-        axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + companyId)
+            )
+        axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?company_id=" + company_id)
             .then((response) => {
                 console.log("response")
                 console.log(response.data.reviews);
@@ -50,7 +50,7 @@ class CompanyOverview extends Component {
             .catch((error) => {
                 console.log(error);
             }
-        )
+            )
     }
 
     render = () => {

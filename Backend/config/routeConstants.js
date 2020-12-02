@@ -23,13 +23,13 @@ module.exports = {
     GET_JOBS_HOMEPAGE: "/jobshomepage",
 
     // Admin Analytics Dashboard
-    ADMIN_ROUTES : "/admin",
-    GET_REVIEWS_PER_DAY : "/reviewsperday",
-    GET_TOP_REVIEWED_COMPANIES : "/topreviewedcompanies",
-    GET_TOP_AVERAGE_RATED_COMPANIES : "/topaverageratedcompanies",
-    GET_TOP_STUDENTS_ON_RATING : "/topstudentsratings",
-    GET_TOP_CEO_RATING : "/topceorating",
-    GET_TOP_COMPANY_VIEWS : "/topcompanyviews",
+    ADMIN_ROUTES: "/admin",
+    GET_REVIEWS_PER_DAY: "/reviewsperday",
+    GET_TOP_REVIEWED_COMPANIES: "/topreviewedcompanies",
+    GET_TOP_AVERAGE_RATED_COMPANIES: "/topaverageratedcompanies",
+    GET_TOP_STUDENTS_ON_RATING: "/topstudentsratings",
+    GET_TOP_CEO_RATING: "/topceorating",
+    GET_TOP_COMPANY_VIEWS: "/topcompanyviews",
 
     //Company Routes
     COMPANY_ROUTE: "/company",
@@ -75,6 +75,12 @@ module.exports = {
     POST_STUDENT_INTERVIEW: "/student/interview",
     GET_STUDENT_INTERVIEWS: "/student/interviews",
     GET_COMPANY_INTERVIEWS: "/company/interviews",
+
+    //Company Statistics
+    STATISTICS_ROUTE: "/statistics",
+    GET_STATISTICS_JOBS_COUNT: "/jobsCount",
+    GET_STATISTICS_APPLICATIONS_COUNT: "/applicationsCount",
+    GET_STATISTICS_APPLICANT_DEMOGRAPHICS: "/applicantDemographics",
 
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
