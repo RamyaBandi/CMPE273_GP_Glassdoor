@@ -37,6 +37,7 @@ import Demographics from './components/student/updateProfile/demographics'
 import ResumeUpdate from './components/student/updateProfile/resumeUpdate'
 import AdminReviews from './components/admin/ReviewsAndPictures/adminReviews'
 import ViewReview from './components/admin/ReviewsAndPictures/viewreview'
+import AdminPhotos from './components/admin/ReviewsAndPictures/adminPhotos'
 
 class Main extends Component {
     render() {
@@ -66,6 +67,7 @@ class Main extends Component {
                     <Route exact path="/addinterview" component={(props) => <AddInterview {...props} />} />
                     <Route exact path="/adminreviews" component={(props) => <AdminReviews {...props} />} />
                     <Route exact path="/viewreview" component={(props) => <ViewReview {...props} />} />
+                    <Route exact path="/adminphotos" component={(props) => <AdminPhotos {...props} />} />
 
                     <Route exact path="/student/profile" render={props => <StudentUpdateProfile {...props} />} />
                     <Route exact path="/student/reviews" render={props => <StudentReviews {...props} />} />
