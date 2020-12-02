@@ -17,6 +17,7 @@ module.exports = {
     POST_RESUME_UPLOAD: "/resume",
     GET_STUDENT_RESUMES: "/resume",
     PUT_PRIMARY_RESUME: "/primaryresume",
+    DELETE_STUDENT_RESUME: "/resume",
     
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",
