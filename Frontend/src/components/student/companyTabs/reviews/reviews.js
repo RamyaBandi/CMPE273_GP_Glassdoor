@@ -32,10 +32,11 @@ class Reviews extends Component {
   };
   componentDidMount() {
     const company_id = '5fb4884acf339e3da0d5c31e';
+    const student_id = '5fb48df63d242fa0842343f3';
     //const company_id = this.props.location.state;
     //console.log(company_id);
     axios
-      .get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + company_id)
+      .get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + company_id + "?studentId=" + student_id)
       .then((response) => {
         // console.log("reviews response");
         // console.log(response.data.reviews);
