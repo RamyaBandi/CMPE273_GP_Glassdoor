@@ -105,6 +105,7 @@ module.exports = {
     PUT_REVIEW_APPROVE: "/approve/review",
     PUT_REVIEW_REJECT: "/reject/review",
     GET_REVIEW_DETAILS: "/details/review",
+    GET_APPROVED_COMPANY_REVIEWS: "/approved/company/reviews",
 
     //Salary Routes
     SALARY_ROUTE: "/salary",
