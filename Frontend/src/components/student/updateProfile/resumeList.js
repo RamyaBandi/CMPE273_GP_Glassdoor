@@ -7,6 +7,22 @@ class ResumeList extends Component {
      }
     handledelete=(e)=>{
         console.log("delete handle")
+        const req={
+            params:{
+            resumeId: this.props.resumeitem._id,
+            studentId: this.props.resumeitem.studentId
+            }
+        }
+        axios
+            .delete(`${routeConstants.BACKEND_URL}/student${routeConstants.DELETE_STUDENT_RESUME}`, req)
+            .then((res) => {
+                console.log(res)
+                if (res.status === 200) {
+                    window.alert("Deleted Successfully");
+                }
+            }).catch((err) => {
+                window.alert("Unable to delete resume");
+            });
     }
     handleprimaryresume=(e)=>{
         console.log(this.props.resumeitem._id)

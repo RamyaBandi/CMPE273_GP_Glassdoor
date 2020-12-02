@@ -10,7 +10,8 @@ const {
     PUT_STUDENT_JOBPREFERENCE,
     POST_RESUME_UPLOAD,
     GET_STUDENT_RESUMES,
-    PUT_PRIMARY_RESUME
+    PUT_PRIMARY_RESUME,
+    DELETE_STUDENT_RESUME
 } = require("../config/routeConstants")
 
 
@@ -22,4 +23,5 @@ studentRouter.route(PUT_STUDENT_JOBPREFERENCE).put(studentServices.updateStudent
 studentRouter.route(POST_RESUME_UPLOAD).post(studentServices.updateStudentResume);
 studentRouter.route(GET_STUDENT_RESUMES).get(studentServices.getStudentResumes);
 studentRouter.route(PUT_PRIMARY_RESUME).put(studentServices.updatePrimaryResume);
+studentRouter.route(DELETE_STUDENT_RESUME).delete(studentServices.deleteStudentResume);
 module.exports = studentRouter;
