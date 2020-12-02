@@ -22,6 +22,7 @@
     "react-google-charts": "^3.0.15",
     "react-icons": "^4.1.0",
     "react-modal-image": "^2.5.0",
+    "react-multiple-image-input": "^1.0.0",
     "react-nice-input-password": "^2.7.0",
     "react-paginate": "^6.5.0",
     "react-photo-collage": "^1.0.7",
