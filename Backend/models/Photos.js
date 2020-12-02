@@ -13,9 +13,9 @@ const Photos = new mongoose.Schema({
         required: true,
     },
     approvalStatus: {
-        type: Boolean,
-        default: false,
-        required: true,
+        type: String,
+        enum: ['Accepted', 'Rejected', 'Under Review'],
+        default: 'Under Review'
     },
     uploadDate: {
         type: Date,

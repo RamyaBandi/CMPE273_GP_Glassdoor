@@ -6,7 +6,6 @@ const { GET_ALL_COMPANIES, GET_COMPANY_BY_COMPANYNAME, GET_COMPANY_REVIEWS } = r
 
 // console.log(process.env.KAFKA_SWITCH);
 if (process.env.KAFKA_SWITCH === 'true') {
-    console.log("in kafka service")
     //jobRouter.route(GET_COMPANY_JOBS).get(jobKafkaServices.getCompanyJobs);
 }
 else {

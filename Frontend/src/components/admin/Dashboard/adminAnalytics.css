@@ -41,11 +41,11 @@
     -o-border-image: initial;
     border-image: initial;
 }
-
+/* 
 .form-control{
     width: 40%;
     height: 30px;
-}
+} */
 
 .chartHeading{
     line-height: 40px;

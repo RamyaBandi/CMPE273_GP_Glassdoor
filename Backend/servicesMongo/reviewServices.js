@@ -171,9 +171,16 @@ module.exports.getCompanyReviews = async (req, res) => {
     }
     else {
         try {
-            data.page = 1;
-            data.limit = 10;
-            const reviews = await Reviews.find({$or: [{ companyId: data.companyId, approvalstatus: "Approved" }, { studentId: data.studentId, approvalstatus: "Under Review"}]}).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+            //data.page = 1;
+            //data.limit = 10;
+            // const reviews = await Reviews.find({$or: 
+            //     [{ companyId: data.companyId, approvalstatus: "Approved" }, { studentId: data.studentId, approvalstatus: "Under Review"}]
+            // }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+
+            const reviews = await Reviews.find(
+                {  }
+            ).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+
             const count = await Reviews.countDocuments({ companyId: data.companyId });
             console.log("count" + count);
             console.log(reviews)

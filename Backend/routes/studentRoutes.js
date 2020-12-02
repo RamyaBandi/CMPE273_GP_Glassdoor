@@ -26,4 +26,5 @@ studentRouter.route(GET_STUDENT_RESUMES).get(studentServices.getStudentResumes);
 studentRouter.route(PUT_PRIMARY_RESUME).put(studentServices.updatePrimaryResume);
 studentRouter.route(DELETE_STUDENT_RESUME).delete(studentServices.deleteStudentResume);
 studentRouter.route(GET_COUNT_RATINGS).get(studentServices.getRatingsCount);
+
 module.exports = studentRouter;

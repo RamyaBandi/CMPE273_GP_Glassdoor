@@ -103,11 +103,7 @@ module.exports.getApplicantsCount = (req, res) => {
 
                         }
                     })
-                // console.log(JSON.stringify(appList));
             }
-            // res.status(RES_SUCCESS).end(JSON.stringify(jobList));
-
-            // }
         })
 
 }
@@ -118,31 +114,18 @@ module.exports.getApplicationDemographics = async (req, res) => {
     let data = req.query
     console.log(data)
 
-
-    // await Jobs.aggregate([
-    //     { $match: { companyId: new mongoose.Types.ObjectId(data.companyId) } },
-    //     { $unwind: "$applications" },
-    //     { $project: { applications: 1, _id: 0 } },
-    // ])
     Company.find({ _id: data.companyId }, 'jobs')
         .exec((err, jobList) => {
             if (err) {
                 console.log("Error fetching job count")
                 console.log(err);
-                //res.setHeader(CONTENT_TYPE, APP_JSON);
                 res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
             }
             else {
-                //res.setHeader(CONTENT_TYPE, APP_JSON);
                 console.log("Jobs retrieved Successfully");
                 console.log(jobList[0].jobs);
                 Applications
-                    // .find({ _id: { $in: [...appList] } }, '_id')
-                    // .populate({ path: 'studentId', model: 'Student', select: ['race', 'gender', 'veteranStatus', 'disability'] })
                     .aggregate([
-
-                        // { $unwind: "$studentId" }
-                        // { $project: { "userObjId": { "$toObjectId": "$studentId" } } },
                         { $match: { jobId: { $in: jobList[0].jobs } } },
                         {
                             $lookup:
