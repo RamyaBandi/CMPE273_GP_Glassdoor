@@ -134,8 +134,7 @@ module.exports.getCompanyJobs = async (req, res) => {
     let data = req.query
     console.log(data)
     try {
-        data.page = 1;
-        data.limit = 10;
+
         const jobs = await Jobs.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
         const count = await Jobs.countDocuments({ companyId: data.companyId });
         const result = ({

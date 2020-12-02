@@ -39,7 +39,7 @@ export default class CompanyOverview extends Component {
             .catch((error) => {
                 console.log(error);
             }
-        )
+            )
         axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + companyId)
             .then((response) => {
                 console.log(response.data);
@@ -49,7 +49,7 @@ export default class CompanyOverview extends Component {
             .catch((error) => {
                 console.log(error);
             }
-        )
+            )
 
         //Capture number of times a company is viewed
 
