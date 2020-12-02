@@ -1,0 +1,54 @@
+.sq {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    min-width: 150px;
+    min-height: 150px;
+    max-width: 150px;
+    /* font-size: 20px; */
+    border-radius: 15px;
+    background-color: rgba(92, 184, 92, 0.733);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .Glasslink {
+    text-decoration: none;
+    color: white;
+  }
+
+  
+  .Glasslink:hover {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .zoom {
+    transition: transform 0.4s; /* Animation */
+    width: 170px;
+    height: 170px;
+  }
+  
+  .zoom:hover {
+    transform: scale(
+      1.2
+    ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+  .homeLayout {
+    /* display: flex;
+    justify-content: space-between; */
+    align-items: center;
+    height: 60vh;
+    align-items: center;
+    justify-items: center;
+    display: flex;
+    justify-content: center;
+  }  
+  .homeGrid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: auto;
+    gap: 40px;
+    position: absolute;
+  }
+  
