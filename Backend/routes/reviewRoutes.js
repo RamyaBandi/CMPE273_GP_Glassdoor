@@ -7,7 +7,7 @@ const reviewKafkaServices = require("../servicesKafka/reviewServices");
 
 const { POST_STUDENT_REVIEW, GET_COMPANY_REVIEWS, GET_ALL_REVIEWS, GET_STUDENT_REVIEWS, POST_COMPANY_REPLY, 
     PUT_COMPANY_REVIEW_HELPFUL, PUT_COMPANY_REPLY, GET_POSITIVE_REVIEW, GET_NEGATIVE_REVIEW, GET_REVIEW_AVERAGE, 
-    PUT_REVIEW_APPROVE, PUT_REVIEW_REJECT } = require('../config/routeConstants');
+    PUT_REVIEW_APPROVE, PUT_REVIEW_REJECT, GET_REVIEW_DETAILS } = require('../config/routeConstants');
 
 
 
@@ -24,6 +24,8 @@ if (process.env.KAFKA_SWITCH === 'true') {
     reviewRouter.route(GET_REVIEW_AVERAGE).get(reviewKafkaServices.getReviewAverage);
     reviewRouter.route(PUT_REVIEW_APPROVE).put(reviewKafkaServices.putReviewApprove);
     reviewRouter.route(PUT_REVIEW_REJECT).put(reviewKafkaServices.putReviewReject);
+    reviewRouter.route(GET_REVIEW_DETAILS).get(reviewKafkaServices.getReviewDetails);
+    reviewRouter.route(GET_ALL_REVIEWS).get(reviewKafkaServices.getAllReviews);
 }
 else {
     reviewRouter.route(POST_STUDENT_REVIEW).post(reviewServices.postStudentReview);
@@ -36,6 +38,8 @@ else {
     reviewRouter.route(GET_REVIEW_AVERAGE).get(reviewServices.getReviewAverage);
     reviewRouter.route(PUT_REVIEW_APPROVE).put(reviewServices.putReviewApprove);
     reviewRouter.route(PUT_REVIEW_REJECT).put(reviewServices.putReviewReject);
+    reviewRouter.route(GET_REVIEW_DETAILS).get(reviewServices.getReviewDetails);
+    reviewRouter.route(GET_ALL_REVIEWS).get(reviewServices.getAllReviews);
 }
 
 module.exports = reviewRouter;

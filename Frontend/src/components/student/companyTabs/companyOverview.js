@@ -39,7 +39,7 @@ export default class CompanyOverview extends Component {
             .catch((error) => {
                 console.log(error);
             }
-        )
+            )
         axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + companyId)
             .then((response) => {
                 console.log(response.data);
@@ -49,7 +49,7 @@ export default class CompanyOverview extends Component {
             .catch((error) => {
                 console.log(error);
             }
-        )
+            )
 
         //Capture number of times a company is viewed
 
@@ -57,14 +57,19 @@ export default class CompanyOverview extends Component {
         //     companyId: this.props.location.state.companyId,
         //     companyName: this.state.companyDetails.companyName
         // }
-        // await axios.post(BACKEND_URL + POST_COMPANYVIEWS, views)
+
+
+        // axios.post(BACKEND_URL + POST_COMPANYVIEWS, views)
+
         //     .then((response) => {
         //         console.log("response for company views", response)
         //     })
         //     .catch((error) => {
         //         console.log(error);
         //     }
-        //     )
+
+        // )
+
     }
     render = () => {
         //const companyId = this.state.companyDetails._id;

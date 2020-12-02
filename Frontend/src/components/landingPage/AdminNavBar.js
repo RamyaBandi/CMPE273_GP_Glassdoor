@@ -80,14 +80,18 @@ class loggedInNav extends React.Component {
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
                                 <li class="nav-item navWidth">
-                                    <Link to='#' 
-                                        class="nav-link navTab">
+                                    <Link to='/listOfCompanies' class="nav-link navTab">
                                         <i class="far fa-building"> Company Profile</i></Link>
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
                                 <li class="nav-item navWidth">
-                                    <Link to='/interviewstab' class="nav-link navTab">
+                                    <Link to='/adminreviews' class="nav-link navTab">
                                         <i class="far fa-comment-dots">Reviews</i></Link>
+                                    <a class="nav-link navTab" href="#"></a>
+                                </li>
+                                <li class="nav-item navWidth">
+                                    <Link to='/adminphotos' class="nav-link navTab">
+                                        <i class="far fa-comment-dots">Photos</i></Link>
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
                             </ul>

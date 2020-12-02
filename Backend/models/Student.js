@@ -4,7 +4,7 @@ const Student_schema = new mongoose.Schema({
     // studentId: {
     //     type: mongoose.Schema.Types.ObjectId,
     //     required: true,
-  
+
     // },
     studentName: {
         type: String,
@@ -23,25 +23,25 @@ const Student_schema = new mongoose.Schema({
     phoneNumber: {
         type: String,
     },
-    website:{
+    website: {
         type: String,
     },
     location: {
         type: String,
     },
-    degree:{
+    degree: {
         type: String,
     },
-    education:{
+    education: {
         type: String,
     },
     experience: {
         type: String,
     },
-    yearsOfExperience:{
+    yearsOfExperience: {
         type: String,
     },
-    aboutMe:{
+    aboutMe: {
         type: String,
     },
     accpetedReviewCount: {
@@ -85,8 +85,8 @@ const Student_schema = new mongoose.Schema({
         type: String,
         enum: ['Not Looking', 'Casually Looking', 'Actively Looking'],
     },
-    jobTitle:{
-    type: String,
+    jobTitle: {
+        type: String,
     },
     targetedSalary: {
         type: Number,
@@ -100,15 +100,19 @@ const Student_schema = new mongoose.Schema({
     },
     race: {
         type: String,
+        enum: ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Native Hawaiian or Other Pacific Islander', 'White', 'Hispanic or Latino', 'Do not wish to Disclose']
     },
     gender: {
         type: String,
+        enum: ['Male', 'Female', 'Other', 'Do not wish to Disclose']
     },
     disability: {
         type: String,
+        enum: ['Have a Disability', 'Do not have a Disability', 'Do not wish to Disclose']
     },
     veteranStatus: {
         type: String,
+        enum: ['Not a Veteran', 'Veteran', 'Do not wish to Disclose']
     },
     salaries: [{
         type: mongoose.Schema.Types.ObjectId,

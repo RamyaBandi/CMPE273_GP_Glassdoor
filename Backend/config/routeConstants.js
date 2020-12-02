@@ -12,12 +12,15 @@ module.exports = {
     POST_STUDENT_SIGNUP: "/student/profile",
     GET_STUDENT_SIGNUP: "/student/profile",
     PUT_STUDENT_SIGNUP: "/student/profile",
+
     PUT_STUDENT_DEMOGRAPHICS:"/student/demographics",
     PUT_STUDENT_JOBPREFERENCE:"/student/jobpreference",
     POST_RESUME_UPLOAD: "/resume",
     GET_STUDENT_RESUMES: "/resume",
     PUT_PRIMARY_RESUME: "/primaryresume",
-    
+
+ 
+
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",
     GET_JOB_SEARCH: "/search/jobsearch",
@@ -30,27 +33,37 @@ module.exports = {
     GET_JOBS_HOMEPAGE: "/jobshomepage",
 
 
-    
+
 
     // Admin Analytics Dashboard
-    ADMIN_ROUTES : "/admin",
-    GET_REVIEWS_PER_DAY : "/reviewsperday",
-    GET_TOP_REVIEWED_COMPANIES : "/topreviewedcompanies",
-    GET_TOP_AVERAGE_RATED_COMPANIES : "/topaverageratedcompanies",
-    GET_TOP_STUDENTS_ON_RATING : "/topstudentsratings",
-    GET_TOP_CEO_RATING : "/topceorating",
-    GET_TOP_COMPANY_VIEWS : "/topcompanyviews",
+    ADMIN_ROUTES: "/admin",
+    GET_REVIEWS_PER_DAY: "/reviewsperday",
+    GET_TOP_REVIEWED_COMPANIES: "/topreviewedcompanies",
+    GET_TOP_AVERAGE_RATED_COMPANIES: "/topaverageratedcompanies",
+    GET_TOP_STUDENTS_ON_RATING: "/topstudentsratings",
+    GET_TOP_CEO_RATING: "/topceorating",
+    GET_TOP_COMPANY_VIEWS: "/topcompanyviews",
+
+    //Admin Company Profile Routes
+    GET_ALL_COMPANIES: "/companies",
+    GET_COMPANY_BY_COMPANYNAME: "/company/companyName",
+    GET_COMPANY_REVIEWS: "/company/reviews",
 
     //Company Routes
     COMPANY_ROUTE: "/company",
     PUT_COMPANY_SIGNUP: "/company/profile",
     GET_COMPANY_SIGNUP: "/company/profile",
     POST_COMPANY_SIGNUP: "/company/profile",
-    POST_COMPANYVIEWS : "/viewsperday",
+    POST_COMPANYVIEWS: "/viewsperday",
     PUT_FEATURED_REVIEWS: "/review/featured",
-   
+
     //Company Details Routes
     GET_COMPANY_DETAILS: "/companyDetails",
+
+    //Photo Routes
+    PHOTO_ROUTE: "/photos",
+    POST_COMPANY_PHOTOS: "/company",
+    GET_COMPANY_PHOTOS: "/company",
 
     //Job Routes
     JOB_ROUTE: "/job",
@@ -74,7 +87,7 @@ module.exports = {
     REVIEW_ROUTE: "/review",
     POST_STUDENT_REVIEW: "/student/review",
     GET_STUDENT_REVIEWS: "/student/reviews",
-    GET_ALL_REVIEWS: "/company/reviews",
+    GET_ALL_REVIEWS: "/all/reviews",
     GET_COMPANY_REVIEWS: "/company/reviews",
     GET_REVIEW_AVERAGE: "/average/review",
     PUT_COMPANY_REPLY: "/company/reply",
@@ -83,7 +96,8 @@ module.exports = {
     GET_NEGATIVE_REVIEW: "/negative/review",
     PUT_REVIEW_APPROVE: "/approve/review",
     PUT_REVIEW_REJECT: "/reject/review",
-    
+    GET_REVIEW_DETAILS: "/details/review",
+
     //Salary Routes
     SALARY_ROUTE: "/salary",
     POST_STUDENT_SALARY: "/student/salary",
@@ -97,11 +111,17 @@ module.exports = {
     GET_COMPANY_INTERVIEWS: "/company/interviews",
     GET_COMPANY_INTERVIEW_STATISTICS: '/company/interview/expPercentage',
 
+    //Company Statistics
+    STATISTICS_ROUTE: "/statistics",
+    GET_STATISTICS_JOBS_COUNT: "/jobsCount",
+    GET_STATISTICS_APPLICATIONS_COUNT: "/applicationsCount",
+    GET_STATISTICS_APPLICANT_DEMOGRAPHICS: "/applicantDemographics",
+
     //Image Routes
-    IMAGE_ROUTES:"/image",
+    IMAGE_ROUTES: "/image",
     POST_IMAGE_USER_PROFILE: "/company/image",
     POST_IMAGE_STUDENT_PROFILE: "/student/image",
-    
+
     //KAFKA TOPICS
     TOPIC_LOGIN: 'login',
 

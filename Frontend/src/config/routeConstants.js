@@ -14,25 +14,34 @@ module.exports = {
     //Login Routes
     POST_LOGIN: '/loginroute/login',
     //Login Routes
-    
+
     POST_REGISTER: '/register',
     FETCH_CUSTOMERINPUT: '/validationinput',
 
     //Student Search Routes
-    GET_SEARCH_JOBS : '/search/search/jobsearch',
-    GET_SEARCH_COMPANY : '/search/search/companysearch',
-    GET_SEARCH_SALARY : "/search/search/salarysearch",
-    GET_SEARCH_INTERVIEW : "/search/search/interviewsearch",
+    GET_SEARCH_JOBS: '/search/search/jobsearch',
+    GET_SEARCH_COMPANY: '/search/search/companysearch',
+    GET_SEARCH_SALARY: "/search/search/salarysearch",
+    GET_SEARCH_INTERVIEW: "/search/search/interviewsearch",
     // GET_JOBS_HOMEPAGE : "/jobshomepage/jobshomepage",
 
 
     //Admin Analytics Dashboard Routes
-    GET_REVIEWS_PER_DAY : "/admin/reviewsperday",
-    GET_TOP_REVIEWED_COMPANIES : "/admin/topreviewedcompanies",
-    GET_TOP_AVERAGE_RATED_COMPANIES : "/admin/topaverageratedcompanies",
-    GET_TOP_STUDENTS_ON_RATING : "/admin/topstudentsratings",
-    GET_TOP_CEO_RATING : "/admin/topceorating",
-    GET_TOP_COMPANY_VIEWS : "/admin/topcompanyviews",
+    GET_REVIEWS_PER_DAY: "/admin/reviewsperday",
+    GET_TOP_REVIEWED_COMPANIES: "/admin/topreviewedcompanies",
+    GET_TOP_AVERAGE_RATED_COMPANIES: "/admin/topaverageratedcompanies",
+    GET_TOP_STUDENTS_ON_RATING: "/admin/topstudentsratings",
+    GET_TOP_CEO_RATING: "/admin/topceorating",
+    GET_TOP_COMPANY_VIEWS: "/admin/topcompanyviews",
+
+    //Admin Company Profile Routes
+    GET_ALL_COMPANIES : "/admin/companies",
+    GET_COMPANY_BY_COMPANYNAME: "/admin/company/companyName",
+    GET_COMPANY_REVIEWS: "/admin/company/reviews",
+
+    //Company Photos Routes
+    POST_COMPANY_PHOTOS: "/photos/company",
+    GET_COMPANY_PHOTOS: "/photos/company",
 
     //Review Routes
     POST_STUDENT_REVIEW: '/review/student/review',
@@ -46,6 +55,8 @@ module.exports = {
     GET_REVIEW_AVERAGE: '/review/average/review',
     PUT_REVIEW_APPROVE: '/review/approve/review',
     PUT_REVIEW_REJECT: '/review/reject/review',
+    GET_ALL_REVIEWS: '/review/all/reviews',
+    GET_REVIEW_DETAILS: '/review/details/review',
 
     //Salary Routes
     POST_STUDENT_SALARY: '/salary/student/salary',
@@ -60,32 +71,32 @@ module.exports = {
 
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",
-    GET_JOB_SEARCH : "/search/jobsearch",
-    GET_COMPANY_SEARCH : "/search/companysearch",
-    GET_SALARY_SEARCH : "/search/salarysearch",
-    GET_INTERVIEW_SEARCH : "/search/interviewsearch",
+    GET_JOB_SEARCH: "/search/jobsearch",
+    GET_COMPANY_SEARCH: "/search/companysearch",
+    GET_SALARY_SEARCH: "/search/salarysearch",
+    GET_INTERVIEW_SEARCH: "/search/interviewsearch",
 
     //Student Jobs Home Page
 
-    GET_STUDENTS_JOBS_HOMEPAGE : "/jobshomepage/jobshomepage",
+    GET_STUDENTS_JOBS_HOMEPAGE: "/jobshomepage/jobshomepage",
 
 
     //Student SignUp
     GET_STUDENT_SIGNUP: "/student/profile",
     PUT_STUDENT_SIGNUP: "/student/profile",
-    PUT_STUDENT_DEMOGRAPHICS:"/student/demographics",
-    PUT_STUDENT_JOBPREFERENCE:"/student/jobpreference",
+    PUT_STUDENT_DEMOGRAPHICS: "/student/demographics",
+    PUT_STUDENT_JOBPREFERENCE: "/student/jobpreference",
 
     //CompanyRoutes
     GET_COMPANY_DETAILS: '/company/company/profile',
-    GET_JOBS_HOMEPAGE : "/jobshomepage",
+    GET_JOBS_HOMEPAGE: "/jobshomepage",
     COMPANY_ROUTE: "/company",
     PUT_COMPANY_SIGNUP: "/company/profile",
     GET_COMPANY_SIGNUP: "/company/profile",
     POST_COMPANY_SIGNUP: "/company/profile",
-    POST_COMPANYVIEWS : "/company/viewsperday",
+    POST_COMPANYVIEWS: "/company/viewsperday",
 
-    
+
     //Company Details Routes
     //GET_COMPANY_DETAILS: "/companyDetails",
 
@@ -114,6 +125,12 @@ module.exports = {
     GET_APPLICATIONS_STUDENTID: '/studentId',
     GET_APPLICATIONS_ALL: '/',
 
+
+    //Company Statistics
+    STATISTICS_ROUTE: "/statistics",
+    GET_STATISTICS_JOBS_COUNT: "/jobsCount",
+    GET_STATISTICS_APPLICATIONS_COUNT: "/applicationsCount",
+    GET_STATISTICS_APPLICANT_DEMOGRAPHICS: "/applicantDemographics",
     //Image Routes
     POST_IMAGE_USER_PROFILE: "/company/image",
     POST_IMAGE_STUDENT_PROFILE: "/student/image",

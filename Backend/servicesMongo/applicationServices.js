@@ -86,8 +86,7 @@ module.exports.getApplicationsByJobId = async (req, res) => {
     let data = req.query
     console.log(data)
     try {
-        data.page = 1;
-        data.limit = 10;
+
         let applications
         await Applications.find({ jobId: data.jobId })
             .limit(data.limit * 1).skip((data.page - 1) * data.limit)
@@ -115,6 +114,51 @@ module.exports.getApplicationsByJobId = async (req, res) => {
                     })
                 }
             });
+
+    }
+    catch {
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+    }
+}
+
+
+module.exports.putApplications = async (req, res) => {
+
+    console.log("Inside Applications PUT service");
+    let data = req.body
+    console.log(data)
+    let applicationstatus
+    if (data.status === "Submitted" || data.status === "Reviewed" || data.status === "Initial Screening" || data.status === "Interviewing") {
+        applicationstatus = "Applied"
+
+    }
+    else if (data.status === "Hired") {
+        applicationstatus = "Selected"
+
+    }
+    else if (data.status === "Rejected") {
+        applicationstatus = "Rejected"
+    }
+    try {
+        Applications.findOneAndUpdate({ _id: data.applicationId }, { status: data.status, applicationstatus: applicationstatus }, (err, result) => {
+            if (err) {
+                console.log("Error Updating application status")
+                console.log(err);
+                //res.setHeader(CONTENT_TYPE, APP_JSON);
+                res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+            }
+            else {
+                // console.log(JSON.stringify(result));
+                //res.setHeader(CONTENT_TYPE, APP_JSON);
+                console.log("Application updated Successfully");
+                console.log(result);
+                res.status(RES_SUCCESS).send(result);
+            }
+        })
 
     }
     catch {
