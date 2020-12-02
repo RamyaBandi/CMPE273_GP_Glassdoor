@@ -15,7 +15,7 @@ export default class ListOfCompanies extends Component {
         console.log("In componentDidMount");
         axios.get(BACKEND_URL + GET_ALL_COMPANIES)
         .then(response => {
-            console.log(response.data);
+            //console.log(response.data);
             this.setState({companies: response.data.companies});
             console.log(this.state.companies);
         })
