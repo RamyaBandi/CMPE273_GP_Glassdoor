@@ -125,7 +125,7 @@ module.exports.getCompanyReviews = async (req, res) => {
                 // If value for given key is not available in Redis
                 else {
                     // Fetch data from your database
-                    let reviews = Company.find({ _id: data.companyId }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((error, result) => {
+                    let reviews = Company.find({ _id: data.companyId, approvalstatus: "Approved" }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((error, result) => {
 
                         if (error) {
                             //console.log(error);
@@ -152,7 +152,7 @@ module.exports.getCompanyReviews = async (req, res) => {
             // console.log("Error while working with redis")
             //console.log(error);
 
-            let reviews = Company.find({ _id: data.companyId }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
+            let reviews = Company.find({ _id: data.companyId, approvalstatus: "Approved" }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
 
                 if (err) {
                     //console.log(err);
@@ -171,15 +171,12 @@ module.exports.getCompanyReviews = async (req, res) => {
     }
     else {
         try {
-            //data.page = 1;
-            //data.limit = 10;
-            const reviews = await Reviews.find({$or: 
-                [{ companyId: new ObjectId(data.companyId), approvalstatus: 'Approved' }, 
-                { studentId: new ObjectId(data.studentId), approvalstatus: 'Under Review'}]
-            }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
 
+            data.page = 1;
+            data.limit = 10;
+            const reviews = await Reviews.find({ companyId: data.companyId, approvalstatus: "Approved" }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+            const count = await Reviews.countDocuments({ companyId: data.companyId, approvalstatus: "Approved" });
 
-            const count = await Reviews.countDocuments({ companyId: data.companyId });
             console.log("count" + count);
             console.log(reviews)
             const result = ({

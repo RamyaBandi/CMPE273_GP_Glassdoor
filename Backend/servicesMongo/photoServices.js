@@ -10,82 +10,103 @@ const {
     TEXT_PLAIN,
     RES_INTERNAL_SERVER_ERROR
 } = require("../config/routeConstants");
+
 const Company = require('../models/Company');
 const Student = require('../models/Student');
 const Photos = require('../models/Photos');
 const multer = require('multer');
 const uploadToS3 = require('./uploadToS3');
 const { json } = require('body-parser');
-const S3 = require('./S3Operations');
+
 const fs = require('fs');
 const path = require('path');
 
+const AWS = require('aws-sdk');
+const fileType = require('file-type');
+const bluebird = require('bluebird');
+const multiparty = require('multiparty');
+
+AWS.config.update({
+    secretAccessKey: process.env.AWS_S3_SECRETACCESSKEY,
+    accessKeyId: process.env.AWS_S3_ACCESSKEYID,
+    region: process.env.AWS_S3_REGION
+  });
+
+AWS.config.setPromisesDependency(bluebird);
+  
+const s3 = new AWS.S3();
+
+const uploadFile = (buffer, name, type) => {
+    const params = {
+      ACL: 'public-read',
+      Body: buffer,
+      Bucket: process.env.AWS_S3_BUCKET_NAME,
+      ContentType: type.mime,
+      Key: `${name}.${type.ext}`
+    };
+    return s3.upload(params).promise();
+  };
+
 module.exports.postCompanyPhotos = async (req, res) => {
-    console.log("Inside POST company photos service");
-    console.log("req body" + JSON.stringify(req.body));
-    let email_id;
-    let filename = `companyphotos_${Date.now()}.jpg`;
-    let pathname = '/cmpe273images/'
-    let userRequestObject = req.body;
-
-    try {
-        const storage = multer.diskStorage({
-            destination(req, file, cb) {
-                cb(null, './assets');
-            },
-            filename(req, file, cb) {
-                console.log(JSON.stringify(req.body))
-                cb(null, `${filename}`);
-            },
-        });
-
-        const upload = multer({
-            storage
-        }).array('file', 5);
-
-        await upload(req, res, (err) => {
-            console.log("In upload" + JSON.stringify(req.body))
-            if (err instanceof multer.MulterError) {
-                return res.status(500);
-            }
-            if (err) {
-                return res.status(500);
-            }
-            console.log("S3 upload");
-            S3.fileupload(process.env.AWS_S3_BUCKET_NAME,"/cmpe273images/companyphotos", req.file).then((url) => {
-                console.log(url)
-                console.log(req.body)
-                Photos.findOneAndUpdate({companyId: req.body.companyId, photoURL: url}, (err, result) => {
-                    if (err) {
-                        console.log('Error occured while uploading company photos' + err)
-                        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
-                    }
-                    else {
-                        // console.log('Image link set' + result)
-                        // res.status(RES_SUCCESS).send(result);
-                        Company.findByIdAndUpdate(req.body.companyId, { $push: { 'photos': result._id } }, (error, result) => {
-                            if (error) {
-                                console.log("Error uploading company photos")
-                                console.log(error);
-                                //res.setHeader(CONTENT_TYPE, APP_JSON);
-                                res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
-                            }
-                            else {
-                                // console.log(JSON.stringify(result));
-                                //res.setHeader(CONTENT_TYPE, APP_JSON);
-                                console.log("Photos uploaded successfully");
-                                console.log(result);
-                                res.status(RES_SUCCESS).send(result);
-                            }
-                        })
-                    }
-                })
+    console.log("Inside Jobs POST service");
+    const id = req.query.id;
+    //console.log(req.query)
+    const form = new multiparty.Form();
+    let inData = req.body;
+    let photos = Photos({
+        studentId: '5fb48df63d242fa0842343f3',
+        companyId: id,
+        photoURL: 'xyz',
+        approvalStatus: 'true',
+        uploadDate: Date.now(),
+        //fileName: inData.fileName
+    })
+    photos.save((err, result) => {
+        if (err) {
+            console.log("Error posting photos")
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            Company.findOneAndUpdate({ _id: inData.companyId }, { $push: { 'photos': result._id } }, (error, results) => {
+                if (error) {
+                    console.log("Error Updating Company with photos id")
+                    console.log(error);
+                    //res.setHeader(CONTENT_TYPE, APP_JSON);
+                    res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+                }
+                else {
+                    // console.log(JSON.stringify(result));
+                    //res.setHeader(CONTENT_TYPE, APP_JSON);
+                    console.log("Photos created successfully");
+                    console.log(result);
+                    res.status(RES_SUCCESS).send(result);
+                }
             })
-        });
-    } catch (error) {
-        console.log(error);
-        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
-    }
+        }
+    })
+    form.parse(req, async (error, fields, files) => {
+      if (error) throw new Error(error);
+      try {
+        //console.log(files);
+        //return res.status(200).send("done");
+        for (var key in files) {
+            const {path, fieldName} = files[key][0];
+            const buffer = fs.readFileSync(path);
+            const type = await fileType.fromBuffer(buffer)
+            //const timestamp = Date.now().toString();
+            const fileName = `companyPhotos/${id}/${fieldName}`;
+            //console.log(fileName)
+            const data = await uploadFile(buffer, fileName, type);
+            console.log(data);
+          }
+        return res.status(200).send("done");
+      } catch (err) {
+          console.log(err)
+          return res.status(400).send(err);
+      }
+    });
 }
 
 module.exports.getCompanyPhotos = async (req, res) => {
