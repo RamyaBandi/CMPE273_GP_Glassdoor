@@ -157,7 +157,7 @@ class employerUpdateProfile extends Component {
 <div className="imageDiv">
                     <img src={this.state.imageUrl} width='250px' alt="profileImage   " height='250px' className="imageCont" />
                     <input type="file" onChange={this.onFileChange} id="fileinput" />
-                    <button className="btn btn-danger" style={{ width: '100px' }} onClick={this.onFileUpload}>Upload!</button>
+                    <button className="btn btn-success" style={{ width: '100px' }} onClick={this.onFileUpload}>Upload!</button>
                     {this.fileData()}
                 </div>
                 <form className="userdetails" encType="multipart/form-data">

@@ -34,6 +34,15 @@ module.exports = {
     GET_TOP_CEO_RATING: "/admin/topceorating",
     GET_TOP_COMPANY_VIEWS: "/admin/topcompanyviews",
 
+    //Admin Company Profile Routes
+    GET_ALL_COMPANIES : "/admin/companies",
+    GET_COMPANY_BY_COMPANYNAME: "/admin/company/companyName",
+    GET_COMPANY_REVIEWS: "/admin/company/reviews",
+
+    //Company Photos Routes
+    POST_COMPANY_PHOTOS: "/photos/company",
+    GET_COMPANY_PHOTOS: "/photos/company",
+
     //Review Routes
     POST_STUDENT_REVIEW: '/review/student/review',
     GET_COMPANY_REVIEWS: '/review/company/reviews',
@@ -90,6 +99,13 @@ module.exports = {
 
     //Company Details Routes
     //GET_COMPANY_DETAILS: "/companyDetails",
+
+
+    
+    //resumes
+    POST_RESUME_UPLOAD: "/resume",
+    GET_STUDENT_RESUMES: "/resume",
+    PUT_PRIMARY_RESUME: "/primaryresume",
 
     //Job Routes
     JOB_ROUTE: "/job",

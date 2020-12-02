@@ -12,8 +12,14 @@ module.exports = {
     POST_STUDENT_SIGNUP: "/student/profile",
     GET_STUDENT_SIGNUP: "/student/profile",
     PUT_STUDENT_SIGNUP: "/student/profile",
-    PUT_STUDENT_DEMOGRAPHICS: "/student/demographics",
-    PUT_STUDENT_JOBPREFERENCE: "/student/jobpreference",
+
+    PUT_STUDENT_DEMOGRAPHICS:"/student/demographics",
+    PUT_STUDENT_JOBPREFERENCE:"/student/jobpreference",
+    POST_RESUME_UPLOAD: "/resume",
+    GET_STUDENT_RESUMES: "/resume",
+    PUT_PRIMARY_RESUME: "/primaryresume",
+
+ 
 
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",
@@ -53,6 +59,11 @@ module.exports = {
 
     //Company Details Routes
     GET_COMPANY_DETAILS: "/companyDetails",
+
+    //Photo Routes
+    PHOTO_ROUTE: "/photos",
+    POST_COMPANY_PHOTOS: "/company",
+    GET_COMPANY_PHOTOS: "/company",
 
     //Job Routes
     JOB_ROUTE: "/job",

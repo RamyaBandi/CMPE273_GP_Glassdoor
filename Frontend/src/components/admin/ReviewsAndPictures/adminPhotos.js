@@ -14,7 +14,7 @@ import {
 } from "../../../config/routeConstants";
 
 
-class AdminReviews extends Component {
+class AdminPhotos extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -159,4 +159,4 @@ class AdminReviews extends Component {
   };
 }
 
-export default AdminReviews;
+export default AdminPhotos;
