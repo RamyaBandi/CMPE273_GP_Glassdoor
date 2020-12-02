@@ -21,7 +21,10 @@ module.exports = {
     DELETE_STUDENT_RESUME: "/resume",
     
 
+    //Students Reviews
+    GET_COUNT_RATINGS: "/reviewcount",
  
+    
 
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",

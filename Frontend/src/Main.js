@@ -90,7 +90,7 @@ class Main extends Component {
                     <Route exact path="/employer/jobs/edit" render={props => <EditJobs {...props} />} />
                     <Route exact path="/employer/jobs/applications" render={props => <ListApplications {...props} />} />
                     <Route exact path="/company/profile" render={props => <EmployerUpdateProfile{...props} />} />
-                    <Route exact path="/employer/reviews" render={props => <EmployerHomePage {...props} />} />
+                    <Route exact path="/employer/reviews" render={props => <EmployerReview {...props} />} />
                     <Route exact path="/employer/analytics" render={props => <AnalyticsHome {...props} />} />
                 </div>
             </div>

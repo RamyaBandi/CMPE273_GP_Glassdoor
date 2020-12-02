@@ -12,6 +12,7 @@ const {
 } = require("../config/routeConstants");
 const Student = require('../models/Student');
 const Resumes = require('../models/Resumes')
+const Reviews=require('../models/Reviews')
 const multer = require('multer');
 //const kafka = require('../kafka/client')
 const uploadToS3 = require('./uploadToS3');
@@ -19,6 +20,7 @@ const { json } = require('body-parser');
 const S3 = require('./S3Operations')
 const fs = require('fs')
 const path = require('path');
+const { stringify } = require('querystring');
 
 module.exports.createStudentProfile = (req, res) => {
     console.log("Inside Student Profile POST service");
@@ -289,6 +291,32 @@ module.exports.deleteStudentResume =async (req, res) => {
             
         }
     })
+    
+}
+
+module.exports.getRatingsCount =async (req, res) => {
+
+    console.log("Inside Student Ratings and Reviews Count GET service");
+    console.log(req.query)
+    try {
+    let data = req.query
+    
+
+    const studentreviews = await Reviews.find({studentId: data.studentId }).exec();
+    const count = await Reviews.countDocuments({studentId: data.studentId });
+    console.log("count" + count);
+    console.log(studentreviews)
+    //let value= toString(count)
+
+    res.status(RES_SUCCESS).send(studentreviews);
+    }
+    catch {
+        // if (err) {
+        //     console.log(err);
+        //     //res.setHeader(CONTENT_TYPE, APP_JSON);
+        //     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        // }
+    }   
     
 }
 
