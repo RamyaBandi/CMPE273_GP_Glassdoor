@@ -262,5 +262,34 @@ module.exports.updatePrimaryResume =async (req, res) => {
     
 }
 
+module.exports.deleteStudentResume =async (req, res) => {
+
+    console.log("Inside Student Resume DELETE service");
+    console.log(req.query)
+    let data = req.query
+    // let resume_id = {
+    //     resumeId: data.resumeId,
+    // }
+    Resumes.findByIdAndDelete(data.resumeId, (err, result) => {
+        if (err) {
+            console.log("Error updating student profile" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update student jobPreference : " + JSON.stringify(result))
+            Student.updateOne( {_id: data.studentId}, { $pullAll: {resumes: [data.resumeId] } },(error,result)=>{
+                if(error){
+                    res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+                }
+                else{
+                    res.status(200).end(JSON.stringify(result))
+                }
+            } )
+            
+            
+        }
+    })
+    
+}
 
 
