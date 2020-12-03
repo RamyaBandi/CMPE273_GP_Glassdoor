@@ -4,6 +4,7 @@ import Reviewcard from './reviewCard'
 import routeConstants from "../../../config/routeConstants";
 import ReactPaginate from 'react-paginate';
 
+
 class EmployerReview extends Component {
 
     state = {
@@ -15,6 +16,7 @@ class EmployerReview extends Component {
 
     componentDidMount() {
         this.updatePageList()
+
     }
 
     updatePageList() {
@@ -39,11 +41,29 @@ class EmployerReview extends Component {
                 });
 
 
-            }).catch((err) => {
-                console.log(err);
-                window.alert("Failed to display reviews");
-            })
+
+        }).catch((err) => {
+            console.log(err);
+            window.alert("Failed to display reviews");
+        })
     }
+    handlePageClick = (data) => {
+        let selected = data.selected + 1;
+        // let offset = Math.ceil(selected * this.props.perPage);
+        console.log(data)
+        this.setState({ page: selected }, () => {
+            this.updatePageList()
+        })
+
+    };
+
+    handleChange = (e) => {
+        //  console.log(this.state);
+        let { value, id } = e.target;
+        this.setState({ [id]: value }, () => this.updatePageList());
+
+        // console.log(this.state)
+    };
 
 
 
@@ -64,7 +84,7 @@ class EmployerReview extends Component {
         // console.log(this.state)
     };
     render() {
-        // console.log(this.state.reviews.length)
+         console.log(this.state.reviews.length)
         let reviews = [];
         if (this.state.reviews && this.state.reviews.length > 0) {
             this.state.reviews.map((review) => {
@@ -97,7 +117,9 @@ class EmployerReview extends Component {
                     </div>
                 </div>
                 <div>
+
                     {reviews}
+
                 </div>
                 <ReactPaginate
                     previousLabel={'previous'}
