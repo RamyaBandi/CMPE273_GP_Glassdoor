@@ -112,6 +112,7 @@ module.exports = {
     POST_STUDENT_SALARY: "/student/salary",
     GET_STUDENT_SALARIES: "/student/salaries",
     GET_COMPANY_SALARIES: "/company/salaries",
+    GET_SALARY_AVERAGES: "/company/jobTitles/salaries",
 
     //Interview Routes
     INTERVIEW_ROUTE: "/interview",
