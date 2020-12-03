@@ -18,6 +18,10 @@ class CompanyJobs extends Component {
         };
     }
 
+    findJobs=()=>{
+        
+    }
+
     addReview = async (e) => {
         this.setState({ redirect: <Redirect to="/addReview" /> });
     };
@@ -98,21 +102,23 @@ class CompanyJobs extends Component {
                             <p style={{ fontSize: "20px" }}>{this.state.companyDetails.companyName} Jobs</p>
                         </Col>
                     </Row>
-                    <Row>
-                        <Form inline>
+                    <Row style={{float:"right"}}>
+                      
+                                
+                                
                             <Col md="auto">
-                                <Row style = {{align: "center"}}>
-                                    <FormControl style = {{ marginRight: "10px", height: "40px" }} type="text" placeholder="Search Job Titles" />
-                                </Row>
+                                
+                                    <FormControl style={{width: "110%", height: "40px"}} type="text" placeholder="Search Job Titles" />
+                               
                             </Col>
                             <Col md="auto">
-                                <Row>
-                                    <Button style = {{backgroundColor: "#1861bf", height: "40px", width: "150%"}}>
+                                    <Button style = {{backgroundColor: "#1861bf", height: "40px"}} onClick={this.findJobs}>
                                         Find Jobs
                                     </Button>
-                                </Row>
                             </Col>
-                        </Form>
+                            
+                            
+
                     </Row>
                     {this.state.jobs.map((item) => {
                         return <JobCard {...item} />

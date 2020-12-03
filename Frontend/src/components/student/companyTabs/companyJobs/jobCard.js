@@ -4,7 +4,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { FaRegHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-export default class ReviewCard extends Component {
+export default class JobCard extends Component {
     constructor(props) {
         super(props);
         this.state = {

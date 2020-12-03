@@ -26,7 +26,7 @@ const Reviews = new mongoose.Schema({
     },
     approvalstatus: {
         type: String,
-        enum: ['Accepted', 'Rejected', 'Under Review'],
+        enum: ['Approved', 'Rejected', 'Under Review'],
         default: 'Under Review'
     },
     helpfulCount: {

@@ -35,7 +35,7 @@
   text-align: center;
 }
 input {
-  width: 250px;
+  /* width: 250px; */
   /* margin-left: 10px; */
   border-top-style: hidden;
   border-right-style: hidden;
