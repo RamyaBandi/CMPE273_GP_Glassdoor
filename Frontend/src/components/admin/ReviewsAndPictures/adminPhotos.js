@@ -4,13 +4,12 @@ import { Redirect } from "react-router";
 import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import ReviewCard from "../../student/companyTabs/reviews/reviewCard";
 import axios from "axios";
 import {
   BACKEND_URL,
-  GET_ALL_REVIEWS,
-  PUT_REVIEW_APPROVE,
-  PUT_REVIEW_REJECT,
+  GET_ALL_PHOTOS,
+  PUT_PHOTO_APPROVE,
+  PUT_PHOTO_REJECT,
 } from "../../../config/routeConstants";
 
 
@@ -18,9 +17,7 @@ class AdminPhotos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: [],
-      approvedreviews: [],
-      rejectedreviews: [],
+      photos: [],
       addedItem:    {},
       cart:         {},
       addedItem2:    {},
@@ -33,9 +30,9 @@ class AdminPhotos extends Component {
     const company_id = '5fb4884acf339e3da0d5c31e';
     //const company_id = this.props.location.state;
     axios
-      .get(BACKEND_URL + GET_ALL_REVIEWS)
+      .get(BACKEND_URL + GET_ALL_PHOTOS)
       .then((response) => {
-        this.setState({ reviews: response.data.reviews });
+        this.setState({ photos: response.data.photos });
         console.log(response.data);
       })
       .catch((error) => {
@@ -79,24 +76,24 @@ class AdminPhotos extends Component {
 
     onSubmitApproval = async (e) => {
         for(let i in this.state.cart){
-            this.reviewData = {   
-                reviewId: this.state.cart[i]._id
+            this.photoData = {   
+                photoId: this.state.cart[i]._id
             };
-            axios.put(BACKEND_URL + PUT_REVIEW_APPROVE, this.reviewData)
+            axios.put(BACKEND_URL + PUT_PHOTO_APPROVE, this.photoData)
                     .then(response => {
-                        console.log("Review approved successfully");
+                        console.log("Photo approved successfully");
                     }) 
         }                
       };
 
       onSubmitRejection = async (e) => {
         for(let i in this.state.cart2){
-            this.reviewData2 = {   
-                reviewId: this.state.cart2[i]._id
+            this.photoData2 = {   
+                photoId: this.state.cart2[i]._id
             };
-            axios.put(BACKEND_URL + PUT_REVIEW_REJECT, this.reviewData2)
+            axios.put(BACKEND_URL + PUT_PHOTO_REJECT, this.photoData2)
                     .then(response => {
-                        console.log("Review rejected successfully");
+                        console.log("Photo rejected successfully");
                     }) 
         }                
       };
@@ -108,16 +105,20 @@ class AdminPhotos extends Component {
       <div>
         {this.state.redirect}
         <Row style={{marginBottom:"30px", martinLeft: "20px", marginRight: "20px", marginTop: "20px"}}>
-                        {this.state.reviews.map(item=>{
+                        {this.state.photos.map(item=>{
                             return (<Col md={12}>
                                 <Row style={{marginRight:"30px", martinLeft: "40px", marginTop: "5px"}}>
-                                    <Col md="2">
-                                    {/* <Link to={{ pathname: "/viewreview", state: item._id }} 
+                                    <Col md="1">
+                                    {/* <Link to={{ pathname: "/viewphoto", state: item._id }} 
                                     style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}>{item._id}</Link> */}
                                     </Col>
-                                    <Col md="4">
-                                    <Link to={{ pathname: "/viewreview", state: item._id }} 
-                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}>{item.headline}</Link>
+                                    <Col md="2">
+                                    <Link to={{ pathname: "/viewphoto", state: item._id }} 
+                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}>{item.photoURL}</Link>
+                                    </Col>
+                                    <Col md="3">
+                                    <Link to={{ pathname: "/viewphoto", state: item._id }} 
+                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}>{item.uploadDate}</Link>
                                     </Col>
                                     <Col md="3" >
 
