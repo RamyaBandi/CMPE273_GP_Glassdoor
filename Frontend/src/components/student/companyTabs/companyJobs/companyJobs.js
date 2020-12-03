@@ -5,7 +5,7 @@ import { Container, Col, Row, Form, FormControl } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Redirect } from "react-router";
 import axios from 'axios';
-import { BACKEND_URL, JOB_ROUTE, GET_COMPANY_DETAILS, GET_COMPANY_JOBS, GET_COMPANY_JOB_BY_JOBTITLE_OR_CITY } from '../../../../config/routeConstants';
+import { BACKEND_URL, JOB_ROUTE, GET_COMPANY_DETAILS, GET_COMPANY_JOBS, GET_COMPANY_JOB_BY_JOBTITLE } from '../../../../config/routeConstants';
 import JobCard from './jobCard';
 import ReactPaginate from 'react-paginate';
 
@@ -17,19 +17,25 @@ class CompanyJobs extends Component {
             jobs: [],
             limit: 10,
             page:1,
-            redirect: null
+            redirect: null,
+            jobSearchText:""
         };
     }
 
     findJobs = () => {
-        axios.get(BACKEND_URL + GET_COMPANY_JOB_BY_JOBTITLE_OR_CITY + '?jobTitle=')
+        axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOB_BY_JOBTITLE + '?companyId=' + this.state.companyDetails._id + '&jobTitle='+this.state.jobSearchText)
         .then(response => {
+            
             console.log(response.data);
             this.setState({jobs: response.data.jobs});
         })
         .catch((error) => {
             console.log(error);
         })
+    }
+
+    jobSearchTextChange=(e)=>{
+        this.setState({jobSearchText:e.target.value});
     }
 
     addReview = async (e) => {
@@ -147,7 +153,7 @@ class CompanyJobs extends Component {
                     <Container style={{ width:"80%" }}>
                         <Row>
                         <Col md="auto">
-                            <FormControl style={{ width: "110%", height: "40px" }} type="text" placeholder="Search Job Titles" />
+                            <FormControl style={{ width: "110%", height: "40px" }} type="text" placeholder="Search Job Titles" onChange={this.jobSearchTextChange}/>
                         </Col>
                         <Col md="auto">
                             <Button style={{ backgroundColor: "#1861bf", height: "40px" }} onClick={this.findJobs}>
@@ -156,8 +162,8 @@ class CompanyJobs extends Component {
                         </Col>
                         </Row>
                         </Container>
-                    
-                    {this.state.jobs.map((item) => {
+                    {this.state.jobs.length===0?<h4 style={{color:"gray", textAlign: "center", marginTop: "20px", marginBottom: "20px"}}>No Jobs To Display</h4>:
+                    this.state.jobs.map((item) => {
                         return <JobCard {...item} />
                     })}
                 </Container>
