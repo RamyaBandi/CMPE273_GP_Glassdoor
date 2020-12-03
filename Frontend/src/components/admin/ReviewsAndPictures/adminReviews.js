@@ -132,8 +132,12 @@ class AdminReviews extends Component {
             axios.put(BACKEND_URL + PUT_REVIEW_APPROVE, this.reviewData)
                     .then(response => {
                         console.log("Review approved successfully");
+                        window.alert("Approved!"); 
                     }) 
-        }                
+        }
+        //window.location.reload();
+        // this.setState({cart: {}, cart2: {}});
+                     
       };
 
       onSubmitRejection = async (e) => {
@@ -144,8 +148,10 @@ class AdminReviews extends Component {
             axios.put(BACKEND_URL + PUT_REVIEW_REJECT, this.reviewData2)
                     .then(response => {
                         console.log("Review rejected successfully");
-                    }) 
-        }                
+                        window.alert("Rejected!");     
+                    })  
+        }  
+                  
       };
 
   render = () => {

@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 
-const Reviews = require('./Reviews')
-
-
 const Company = new mongoose.Schema({
     companyName: {
         type: String,
@@ -13,6 +10,9 @@ const Company = new mongoose.Schema({
         required: true
     },
     website: {
+        type: String,
+    },
+    imageUrl: {
         type: String,
     },
     companySize: {

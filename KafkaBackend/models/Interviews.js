@@ -6,12 +6,8 @@ const Interviews = new mongoose.Schema({
     },
     studentId: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true
+        required: true,
     },
-    // employerName: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     required: true,
-    // },
     overallExperience: {
         type: Number,
         enum: [-1, 0, 1],
@@ -33,8 +29,9 @@ const Interviews = new mongoose.Schema({
         type: String,
         enum: ["Rejected", "Accepted"],
     },
-    qna: {
-        type: String,
+    interviewQnA: {
+        type: Array,
+        ref: 'InterviewQnA'
     },
 }, { versionKey: false })
 

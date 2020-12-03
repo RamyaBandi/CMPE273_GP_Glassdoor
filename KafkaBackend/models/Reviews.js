@@ -26,10 +26,12 @@ const Reviews = new mongoose.Schema({
     },
     approvalstatus: {
         type: String,
-        enum: ['Accepted', 'Rejected', 'Under Review'],
+        enum: ['Approved', 'Rejected', 'Under Review'],
+        default: 'Under Review'
     },
     helpfulCount: {
         type: Number,
+        default: 0,
         required: true
     },
     overallRating: {
@@ -44,6 +46,10 @@ const Reviews = new mongoose.Schema({
         type: Number,
         required: true
     },
+    reviewDate : {
+        type : Date, 
+        default: Date.now
+    }, 
     reply: {
         type: String,
     },
