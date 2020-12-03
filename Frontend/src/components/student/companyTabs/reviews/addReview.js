@@ -126,7 +126,7 @@ class AddReviews extends Component {
           <Row>
             <Form.Group
               controlId="exampleForm.ControlSelect1"
-              style={{ width: "100%" }}
+              style={{ width: "50%" }}
             >
               <Form.Label>Overall Rating</Form.Label>
               <Form.Control
@@ -146,7 +146,7 @@ class AddReviews extends Component {
           <Row>
             <Form.Group
               controlId="exampleForm.ControlSelect1"
-              style={{ width: "100%" }}
+              style={{ width: "50%" }}
             >
               <Form.Label>Recommended Rating</Form.Label>
               <Form.Control
@@ -166,7 +166,7 @@ class AddReviews extends Component {
           <Row>
             <Form.Group
               controlId="exampleForm.ControlSelect1"
-              style={{ width: "100%" }}
+              style={{ width: "50%" }}
             >
               <Form.Label>CEO Rating</Form.Label>
               <Form.Control
@@ -184,7 +184,7 @@ class AddReviews extends Component {
             </Form.Group>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "100%" }}>
+            <form style={{ marginTop: "0px", width: "50%" }}>
               <div class="form-group">
                 <label for="headline">Review Headline</label>
                 <input
@@ -199,7 +199,7 @@ class AddReviews extends Component {
             </form>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "100%" }}>
+            <form style={{ marginTop: "0px", width: "50%" }}>
               <div class="form-group">
                 <label for="description">Description</label>
                 <textarea
@@ -212,7 +212,7 @@ class AddReviews extends Component {
             </form>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "100%" }}>
+            <form style={{ marginTop: "0px", width: "50%" }}>
               <div class="form-group">
                 <label for="pros">Pros</label>
                 <textarea
@@ -226,7 +226,7 @@ class AddReviews extends Component {
             </form>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "100%" }}>
+            <form style={{ marginTop: "0px", width: "50%" }}>
               <div class="form-group">
                 <label for="cons">Cons</label>
                 <textarea

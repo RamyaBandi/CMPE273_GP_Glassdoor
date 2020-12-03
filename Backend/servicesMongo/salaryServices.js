@@ -68,8 +68,8 @@ module.exports.getCompanySalaries = async (req, res) => {
     let data = req.query
     console.log(data)
         try{
-            data.page = 1;
-            data.limit = 10;
+            // data.page = 1;
+            // data.limit = 10;
             const salaries = await Salaries.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
             const count = await Salaries.countDocuments({companyId: data.companyId});    
             const result = ({
@@ -77,7 +77,7 @@ module.exports.getCompanySalaries = async (req, res) => {
                 totalPages: Math.ceil(count / data.limit),
                 currentPage: data.page
             });  
-            console.log("Salaries fetched Successfully from DB - page not 1 or redis off")
+            console.log("Salaries fetched Successfully")
             res.status(RES_SUCCESS).send(result);
         }
         catch {

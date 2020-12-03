@@ -64,8 +64,8 @@ module.exports.updateCompanyProfile = (req, res) => {
 
 module.exports.getCompanyProfile = (req, res) => {
     console.log("Inside Company Profile GET service");
-    console.log(req.query)
-    let data = req.query
+    console.log(req.query);
+    let data = req.query;
     let companyDetails = Company.find({ _id: data.companyId }).exec((err, result) => {
 
         if (err) {

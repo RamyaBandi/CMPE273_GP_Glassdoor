@@ -35,7 +35,8 @@ class StudentReviews extends Component {
     
     render() { 
         let reviews=[]
-        if(this.state.reviews.length>0){
+        if (this.state.reviews && this.state.reviews.length > 0){
+       
             this.state.reviews.map((review)=>{
                 reviews.push(<ReviewCard reviewitem={review}/>)
             })

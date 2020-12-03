@@ -1,25 +1,27 @@
-const { response } = require("express");
-const con = require("../config/mongoConnection");
+//const { response } = require('express');
+const mongoose = require("mongoose");
+//const con = require('../config/mongoConnection');
 const {
-    CONTENT_TYPE,
-    APP_JSON,
-    RES_SUCCESS,
-    RES_BAD_REQUEST,
-    RES_NOT_FOUND,
-    RES_DUPLICATE_RESOURCE,
-    TEXT_PLAIN,
-    RES_INTERNAL_SERVER_ERROR,
+  CONTENT_TYPE,
+  APP_JSON,
+  RES_SUCCESS,
+  RES_BAD_REQUEST,
+  RES_NOT_FOUND,
+  RES_DUPLICATE_RESOURCE,
+  TEXT_PLAIN,
+  RES_INTERNAL_SERVER_ERROR,
 } = require("../config/routeConstants");
-
 const Company = require("../models/Company");
-const Student = require("../models/Student");
 const Interviews = require("../models/Interviews");
+const Student = require("../models/Student");
 
-module.exports.postStudentInterview = (req, res) => {
-    console.log("Inside Interviews POST service");
-    console.log(req.body);
-    let data = req.body;
-    let interviews = Interviews({
+async function handle_request(msg, callback) {
+  console.log("Inside Interview Services ->kafka backend");
+  console.log(msg);
+  switch (msg.api) {
+    case "POST_STUDENT_INTERVIEW": {
+      let data = msg.body;
+      let interviews = Interviews({
         companyId: data.companyId,
         studentId: data.studentId,
         jobTitle: data.jobTitle,
@@ -33,7 +35,7 @@ module.exports.postStudentInterview = (req, res) => {
         if (err) {
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
-            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+            callback(err, 'Error')
         } else {
             // console.log("Interview Doc created : " + JSON.stringify(result));
             Company.findOneAndUpdate(
@@ -42,7 +44,7 @@ module.exports.postStudentInterview = (req, res) => {
                 (error, results) => {
                     if (error) {
                         console.log("Error adding interview to company" + error);
-                        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+                        callback(error, 'Error')
                     } else {
                         Student.findOneAndUpdate(
                             { _id: data.studentId },
@@ -50,12 +52,10 @@ module.exports.postStudentInterview = (req, res) => {
                             (error2, results2) => {
                                 if (error2) {
                                     console.log("Error adding interview to Student" + error2);
-                                    res
-                                        .status(RES_INTERNAL_SERVER_ERROR)
-                                        .end(JSON.stringify(error2));
+                                    callback(error2, 'Error')
                                 } else {
                                     console.log("Interview inserted Successfully");
-                                    res.status(RES_SUCCESS).end(JSON.stringify(results2));
+                                    callback(null, results2)
                                 }
                             }
                         );
@@ -64,13 +64,13 @@ module.exports.postStudentInterview = (req, res) => {
             );
         }
     });
-};
-
-module.exports.getCompanyInterviews = async (req, res) => {
-    console.log("Inside Company Interviews GET service");
-    let data = req.query;
-    console.log(data);
-    try {
+    break;
+    }
+    case "GET_COMPANY_INTERVIEWS": {
+      console.log("inside get company interviews -> kafka backend");
+      let data = msg.body;
+      console.log(data);
+      try {
         // data.page = 1;
         // data.limit = 10;
         const interviews = await Interviews.find({ companyId: data.companyId })
@@ -88,21 +88,22 @@ module.exports.getCompanyInterviews = async (req, res) => {
         console.log(
             "Interviews fetched Successfully"
         );
-        res.status(RES_SUCCESS).send(result);
-    } catch {
+        callback(null, result)
+        } 
+        catch {
         if (err) {
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
-            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+            callback(err, 'Error')
+            }
         }
     }
-};
 
-module.exports.getStudentInterviews = (req, res) => {
-    console.log("Inside Student Interviews GET service");
-    console.log(req.query);
-    let data = req.query;
-    let interviews = Student.find({ _id: data.studentId })
+    case "GET_STUDENT_INTERVIEWS": {
+      console.log("inside get student salaries -> kafka backend");
+      let data = msg.body;
+      console.log(data);
+      let interviews = Student.find({ _id: data.studentId })
         .select("interviews")
         .populate("interviews")
         .limit(data.limit * 1)
@@ -111,21 +112,22 @@ module.exports.getStudentInterviews = (req, res) => {
             if (err) {
                 console.log(err);
                 //res.setHeader(CONTENT_TYPE, APP_JSON);
-                res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+                callback(err, 'Error')
             } else {
                 // console.log(JSON.stringify(result));
                 //res.setHeader(CONTENT_TYPE, APP_JSON);
                 console.log("Interviews fetched Successfully");
-                res.status(RES_SUCCESS).send(result);
+                callback(null, result)
             }
         });
-};
+      break;
+    }
 
-module.exports.getInterviewStatistics = async (req, res) => {
-    console.log("Inside Company Interviews Experience Rating in Percentage GET service");
-    let data = req.query;
-    console.log(data);
-    try {
+    case "GET_COMPANY_INTERVIEW_STATISTICS": {
+        console.log("inside get student salaries -> kafka backend");
+        let data = msg.body;
+        console.log(data);
+        try {
         const interviews = await Interviews.find({ companyId: data.companyId })
             .exec();
         const totalCount = await Interviews.countDocuments({
@@ -160,13 +162,22 @@ module.exports.getInterviewStatistics = async (req, res) => {
             acceptedPercentage,
             rejectedPercentage
         };
-        res.status(RES_SUCCESS).send(result);
+        callback(null, result)
         console.log(result);
     } catch {
         if (err) {
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
-            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+            callback(err, 'Error')
         }
     }
-};
+        break;
+      }
+
+    default: {
+      console.log("Default switch");
+    }
+  }
+}
+
+exports.handle_request = handle_request;
