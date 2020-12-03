@@ -3,6 +3,7 @@ import './updateProfile.styles.css'
 import axios from "axios";
 import routeConstants from "../../../config/routeConstants";
 import ReviewCard from '../../employer/reviews/reviewCard'
+import { Link } from "react-router-dom";
 
 class StudentReviews extends Component {
     state = {  
@@ -31,6 +32,7 @@ class StudentReviews extends Component {
             })
   
         }
+    
     render() { 
         let reviews=[]
         if(this.state.reviews.length>0){
@@ -61,17 +63,32 @@ class StudentReviews extends Component {
 <li class ="nav-item">
 <a class ="nav-link" href="/student/demographics">Demographics</a>
 </li>
+<li class ="nav-item">
+<a class ="nav-link" href="/student/gallery">Gallery</a>
+</li>
 </ul>
 </nav>
 </div>
             <div class="col-9">
             <div class="container">
             <div class="card">
-  <div class="card-body">
-    Total reviews given are : {this.state.ratingcount}<br>
+            <div class="card-header container-fluid">
+  <div class="row">
+    <div class="col-md-10">
+      <h5 class="w-75 p-3">Total reviews given are : {this.state.ratingcount}<br>
     </br>
-    Total ratings given are: {this.state.ratingcount}
+    Total ratings given are: {this.state.ratingcount}</h5>
+    </div>
+    <div class="col-md-2 float-right">
+      <Link class="btn btn-success" to={{
+              pathname: `/student/gallery`,
+              
+            }}>Gallery</Link>
+     </div>
   </div>
+</div>
+
+
 
 </div>
 {reviews}

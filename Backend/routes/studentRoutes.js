@@ -12,7 +12,8 @@ const {
     GET_STUDENT_RESUMES,
     PUT_PRIMARY_RESUME,
     DELETE_STUDENT_RESUME,
-    GET_COUNT_RATINGS
+    GET_COUNT_RATINGS,
+    GET_PHOTOS_UPLOADED
 } = require("../config/routeConstants")
 
 
@@ -26,5 +27,6 @@ studentRouter.route(GET_STUDENT_RESUMES).get(studentServices.getStudentResumes);
 studentRouter.route(PUT_PRIMARY_RESUME).put(studentServices.updatePrimaryResume);
 studentRouter.route(DELETE_STUDENT_RESUME).delete(studentServices.deleteStudentResume);
 studentRouter.route(GET_COUNT_RATINGS).get(studentServices.getRatingsCount);
+studentRouter.route(GET_PHOTOS_UPLOADED).get(studentServices.getPhotosUploaded);
 
 module.exports = studentRouter;
