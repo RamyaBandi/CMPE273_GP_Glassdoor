@@ -140,8 +140,8 @@ module.exports.getAllPhotos = async (req, res) => {
     console.log(req.query);
     let data = req.query;
     try {
-        data.page = 1;
-        data.limit = 10;
+        // data.page = 1;
+        // data.limit = 10;
         const photos = await Photos.find().limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
         const count = await Photos.countDocuments({ companyId: data.companyId });
         const result = ({

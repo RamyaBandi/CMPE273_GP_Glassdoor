@@ -60,6 +60,13 @@ class Salaries extends Component {
     console.log("Page number",e.selected)
 }
 
+handleChange = (e) => {
+  //  console.log(this.state);
+  let { value, id } = e.target;
+  this.setState({ [id]: value }, () => this.getSalaryResults());
+  // console.log(this.state)
+};
+
 async getSalaryResults(){
   const company_id = this.props.location.state;
   await axios.get(BACKEND_URL + GET_COMPANY_SALARIES, {
@@ -147,6 +154,20 @@ async getSalaryResults(){
                     containerClassName={"pagination"}
                     subContainerClassName={"pages pagination"}
                     activeClassName={"active"} />
+
+        <div className="input-group"
+                            style={{ width: "200px", justifyContent: "space-around" }}
+                        >
+                            <div className="input-group-prepend">
+                                <label  >Page Limit </label>
+                            </div>
+                            <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+        </div>
       </div>
     );
   };
