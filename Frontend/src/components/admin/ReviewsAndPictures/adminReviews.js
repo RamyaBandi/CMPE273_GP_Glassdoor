@@ -31,14 +31,14 @@ class AdminReviews extends Component {
       redirect: null,
     };
     this.handlePageClick = this.handlePageClick.bind(this)
-    this.getReviewResults = this.getReviewResults.bind(this)
+    this.getReviewsResults = this.getReviewsResults.bind(this)
 
   }
 
   componentDidMount() {
     const company_id = '5fb4884acf339e3da0d5c31e';
     //const company_id = this.props.location.state;
-    this.getReviewResults();
+    this.getReviewsResults();
     // axios
     //   .get(BACKEND_URL + GET_ALL_REVIEWS)
     //   .then((response) => {
@@ -55,12 +55,12 @@ class AdminReviews extends Component {
             this.setState({
                 page: e.selected + 1,
             }, () => {
-                this.getReviewResults()
+                this.getReviewsResults()
             });
         console.log("Page number",e.selected)
     }
 
-    async getReviewResults(){
+    async getReviewsResults(){
         await axios.get(BACKEND_URL + GET_ALL_REVIEWS, {
             params: {
                 page : this.state.page,
@@ -80,6 +80,14 @@ class AdminReviews extends Component {
                 console.log(error.response.data.msg)
             })
     }
+
+    handleChange = (e) => {
+        //  console.log(this.state);
+        let { value, id } = e.target;
+        this.setState({ [id]: value }, () => this.getReviewsResults());
+  
+        // console.log(this.state)
+      };
 
     addApproveItem=(item)=>{
         let temp={...item}
@@ -203,6 +211,20 @@ class AdminReviews extends Component {
                     containerClassName={"pagination"}
                     subContainerClassName={"pages pagination"}
                     activeClassName={"active"} />
+
+                <div className="input-group"
+                            style={{ width: "200px", justifyContent: "space-around" }}
+                        >
+                            <div className="input-group-prepend">
+                                <label  >Page Limit </label>
+                            </div>
+                            <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
         
       </div>
     );

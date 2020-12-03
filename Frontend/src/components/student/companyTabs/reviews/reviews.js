@@ -53,7 +53,7 @@ class Reviews extends Component {
     //     console.log(error);
     //   });
 
-    this.updatePageList();
+    this.getReviewsResults();
 
     axios
       .get(BACKEND_URL + GET_COMPANY_DETAILS + "?companyId=" + company_id)
@@ -101,7 +101,7 @@ class Reviews extends Component {
       });
   }
 
-  updatePageList() {
+  getReviewsResults() {
     console.log("in update page list");
     const company_id = '5fb4884acf339e3da0d5c31e';
     const student_id = localStorage.getItem('mongoId');
@@ -125,23 +125,24 @@ class Reviews extends Component {
         
 }
 
-handlePageClick = (data) => {
-  let selected = data.selected + 1;
-  // let offset = Math.ceil(selected * this.props.perPage);
-  //console.log(data)
-  this.setState({ page: selected }, () => {
-      this.updatePageList()
-  })
-
-};
+handlePageClick = (e) => {
+  // console.log("Page number",e.selected)
+      this.setState({
+          page: e.selected + 1,
+      }, () => {
+          this.getReviewsResults()
+      });
+  console.log("Page number",e.selected)
+}
 
 handleChange = (e) => {
   //  console.log(this.state);
   let { value, id } = e.target;
-  this.setState({ [id]: value }, () => this.updatePageList());
+  this.setState({ [id]: value }, () => this.getReviewsResults());
 
   // console.log(this.state)
 };
+
 
   render = () => {
     return (
@@ -498,20 +499,20 @@ handleChange = (e) => {
           </Container>
         </Row>
         <ReactPaginate
-                        previousLabel={'previous'}
-                        nextLabel={'next'}
-                        breakLabel={'...'}
-                        breakClassName={'break-me'}
-                        pageCount={this.state.totalPages}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={this.handlePageClick}
-                        containerClassName={'pagination'}
-                        subContainerClassName={'pages pagination'}
-                        activeClassName={'active'}
-                    />
+                    previousLabel={"<<"}
+                    nextLabel={">>"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={this.state.pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"} />
+
         <Container style={{ marginBottom: "30px" }}>
-        <Row>
+        
         <div className="input-group"
                             style={{ width: "200px", justifyContent: "space-around" }}
                         >
@@ -524,8 +525,8 @@ handleChange = (e) => {
                                 <option value="50">50</option>
                                 <option value="100">100</option>
                             </select>
-        </div>
-        </Row>
+                        </div>
+    
         </Container>
       </div>
     );
