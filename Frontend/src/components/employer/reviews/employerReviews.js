@@ -4,7 +4,6 @@ import Reviewcard from './reviewCard'
 import routeConstants from "../../../config/routeConstants";
 import ReactPaginate from 'react-paginate';
 
-
 class EmployerReview extends Component {
 
     state = {
@@ -46,7 +45,6 @@ class EmployerReview extends Component {
             })
     }
 
-<<<<<<< HEAD
 
 
     handlePageClick = (data) => {
@@ -65,8 +63,6 @@ class EmployerReview extends Component {
 
         // console.log(this.state)
     };
-=======
->>>>>>> 0012401285105f5571c677dff968e6c9f3880782
     render() {
         // console.log(this.state.reviews.length)
         let reviews = [];
@@ -101,7 +97,6 @@ class EmployerReview extends Component {
                     </div>
                 </div>
                 <div>
-<<<<<<< HEAD
                     {reviews}
                 </div>
                 <ReactPaginate
@@ -117,12 +112,9 @@ class EmployerReview extends Component {
                     subContainerClassName={'pages pagination'}
                     activeClassName={'active'}
                 />
-=======
-         
->>>>>>> 0012401285105f5571c677dff968e6c9f3880782
-            </div >
-                </div >
-           
+
+            </div>
+
         );
     }
 }
