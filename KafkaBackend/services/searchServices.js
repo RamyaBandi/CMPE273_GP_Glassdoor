@@ -17,7 +17,6 @@ const Salaries = require('../models/Salaries')
 const Jobs = require('../models/Jobs')
 const Interviews = require('../models/Interviews')
 const Reviews = require('../models/Reviews');
-const salaryRouter = require('../routes/salaryRoutes');
 
 
 async function handle_request(msg, callback) {
@@ -81,19 +80,19 @@ async function handle_request(msg, callback) {
         case "GET_COMPANY_SEARCH": {
 
             let companyResults = await
-            Company.aggregate([
-                { $match: { companyName: msg.body.searchParameter } },
-                {
-                    $project: {
-                        _id: 1,
-                        companyName: 1,
-                        headquarters: 1,
-                        website: 1,
-                        NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
-                        salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
-                        interviewReviews: "$interviews" ? { $size: "$interviews" } : null
-                    }
-                }]).exec();
+                Company.aggregate([
+                    { $match: { companyName: msg.body.searchParameter } },
+                    {
+                        $project: {
+                            _id: 1,
+                            companyName: 1,
+                            headquarters: 1,
+                            website: 1,
+                            NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
+                            salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
+                            interviewReviews: "$interviews" ? { $size: "$interviews" } : null
+                        }
+                    }]).exec();
 
             let averageRating = await Reviews.aggregate([
                 { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(msg.body.limit * 1).skip((msg.body.page - 1) * msg.body.limit).exec();
@@ -108,20 +107,20 @@ async function handle_request(msg, callback) {
 
         case "GET_SALARY_SEARCH": {
             let companyResults = await
-            Company.aggregate([
-                { $match: { companyName: msg.body.searchParameter } },
-                {
-                    $project: {
-                        _id: 1,
-                        companyName: 1,
-                        headquarters: 1,
-                        website: 1,
-                        salaries: 1,
-                        NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
-                        salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
-                        interviewReviews: "$interviews" ? { $size: "$interviews" } : null
-                    }
-                }]).exec();
+                Company.aggregate([
+                    { $match: { companyName: msg.body.searchParameter } },
+                    {
+                        $project: {
+                            _id: 1,
+                            companyName: 1,
+                            headquarters: 1,
+                            website: 1,
+                            salaries: 1,
+                            NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
+                            salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
+                            interviewReviews: "$interviews" ? { $size: "$interviews" } : null
+                        }
+                    }]).exec();
 
             let averageRating = await Reviews.aggregate([
                 { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(msg.body.limit * 1).skip((msg.body.page - 1) * msg.body.limit).exec();
@@ -151,25 +150,25 @@ async function handle_request(msg, callback) {
 
 
             // res.status(RES_SUCCESS).end(JSON.stringify(datasets));
-            callback(null,datasets)
+            callback(null, datasets)
         }
 
         case "GET_INTERVIEW_SEARCH": {
             let companyResults = await
-            Company.aggregate([
-                { $match: { companyName: msg.body.searchParameter } },
-                {
-                    $project: {
-                        _id: 1,
-                        companyName: 1,
-                        headquarters: 1,
-                        website: 1,
-                        interviews: 1,
-                        NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
-                        salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
-                        interviewReviews: "$interviews" ? { $size: "$interviews" } : null
-                    }
-                }]).exec();
+                Company.aggregate([
+                    { $match: { companyName: msg.body.searchParameter } },
+                    {
+                        $project: {
+                            _id: 1,
+                            companyName: 1,
+                            headquarters: 1,
+                            website: 1,
+                            interviews: 1,
+                            NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
+                            salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
+                            interviewReviews: "$interviews" ? { $size: "$interviews" } : null
+                        }
+                    }]).exec();
 
             let averageRating = await Reviews.aggregate([
                 { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(msg.body.limit * 1).skip((msg.body.page - 1) * msg.body.limit).exec();

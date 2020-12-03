@@ -5,10 +5,10 @@ require('./config/mongoConnection');
 
 const register = require('./services/registerServices')
 const login = require('./services/loginServices')
-const reviews=require('./services/reviewServices')
-const company=require('./services/companyServices')
+const reviews = require('./services/reviewServices')
+const company = require('./services/companyServices')
 const jobshomepage = require('./services/jobsHomePageServices')
-const studentsearch= require('./services/searchServices')
+const studentsearch = require('./services/searchServices')
 const adminanalytics = require('./services/adminDashboardServices')
 const companyStatistics = require('./services/companyStatisticsServices')
 const jobs = require('./services/jobServices')
@@ -19,7 +19,7 @@ function handleTopicRequest(topic_name, fname) {
     //var topic_name = 'root_topic';
     var consumer = connection.getConsumer(topic_name);
     var producer = connection.getProducer();
-    console.log('server is running ');
+    // console.log('server is running ');
     consumer.on('message', function (message) {
         console.log('message received for ' + topic_name + " ", fname);
         // console.log(JSON.stringify(message.value));
@@ -76,8 +76,8 @@ function handleTopicRequest(topic_name, fname) {
 
 handleTopicRequest("register", register)
 handleTopicRequest("login", login)
-handleTopicRequest("reviews",reviews)
-handleTopicRequest("company",company)
+handleTopicRequest("reviews", reviews)
+handleTopicRequest("company", company)
 handleTopicRequest("jobshomepage", jobshomepage)
 handleTopicRequest("studentsearch", studentsearch)
 handleTopicRequest("adminanalytics", adminanalytics)

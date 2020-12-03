@@ -6,7 +6,7 @@ const registerServices = require("../servicesSQL/registerServices");
 const { POST_REGISTER } = require('../config/routeConstants');
 
 if (process.env.KAFKA_SWITCH === 'true') {
-    console.log("in kafka service")
+    // console.log("in kafka service")
     registerRouter.route(POST_REGISTER).post(registerKafkaServices.register);
 }
 else {
