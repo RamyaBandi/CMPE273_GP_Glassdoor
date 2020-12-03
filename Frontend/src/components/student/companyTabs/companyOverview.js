@@ -31,7 +31,7 @@ export default class CompanyOverview extends Component {
     }
 
     componentDidMount() {
-        const companyId = '5fb4884acf339e3da0d5c31e';
+        const companyId = '5fb4aefe6b61ea46245d5621';
         //const companyId = this.props.location.state.companyId
         console.log("Fetched company Id", companyId)
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
@@ -173,7 +173,7 @@ export default class CompanyOverview extends Component {
                                         <Link to={{ pathname: "/interviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Interviews</Link>
                                     </div>
                                     <div class="box-content">
-                                        <Link to="/photos" style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
+                                        <Link to={{ pathname: "/photos", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
                                     </div>
                                 </Nav>
                             </div>
@@ -259,7 +259,7 @@ export default class CompanyOverview extends Component {
                             <h5>Company Reviews</h5>
                         </Col>
                     </Row>
-                    <Container className="block-example border" style={{ marginTop: "20px", width: "61%" }}>
+                    <Container className="block-example border" style={{ marginTop: "20px", width: "80%",padding:"20px" }}>
                         <Col>
                             <Row>
                                 <p>Most Positive Review</p>
@@ -269,8 +269,8 @@ export default class CompanyOverview extends Component {
                                     Headline: <b>{this.state.positiveReviews.headline}</b>
                                 </p>
                             </Row>
-                            <Row>
-                                <Col md="4">
+                            <Row style={{justifyContent:"space-between"}}>
+                                <Col md="auto">
 
                                     <StarRatingComponent
                                         name="rating"
@@ -293,7 +293,7 @@ export default class CompanyOverview extends Component {
                                     />
                                     <p>Overall Rating: {this.state.positiveReviews.overallRating} </p>
                                 </Col>
-                                <Col md="4">
+                                <Col md="auto">
                                     <StarRatingComponent
                                         name="rating"
                                         starCount={5}
@@ -315,7 +315,7 @@ export default class CompanyOverview extends Component {
                                     />
                                     <p>Recommended to a Friend: {this.state.positiveReviews.recommendedRating}</p>
                                 </Col>
-                                <Col md="4">
+                                <Col md="auto">
                                     <StarRatingComponent
                                         name="rating"
                                         starCount={5}
@@ -358,7 +358,7 @@ export default class CompanyOverview extends Component {
                         </Col>
                     </Container>
 
-                    <Container className="block-example border" style={{ marginTop: "20px", width: "61%" }}>
+                    <Container className="block-example border" style={{ marginTop: "20px", width: "80%",padding:"20px" }}>
                         <Col>
                             <Row>
                                 <p>Most Negative Review</p>
@@ -368,8 +368,8 @@ export default class CompanyOverview extends Component {
                                     Headline: <b>{this.state.negativeReviews.headline}</b>
                                 </p>
                             </Row>
-                            <Row>
-                                <Col md="4">
+                            <Row style={{justifyContent:"space-between"}}>
+                                <Col md="auto">
                                     <StarRatingComponent
                                         name="rating"
                                         starCount={5}
@@ -391,7 +391,7 @@ export default class CompanyOverview extends Component {
                                     />
                                     <p>Overall Rating: {this.state.negativeReviews.overallRating}</p>
                                 </Col>
-                                <Col md="4">
+                                <Col md="auto">
                                     <StarRatingComponent
                                         name="rating"
                                         starCount={5}
@@ -413,7 +413,7 @@ export default class CompanyOverview extends Component {
                                     />
                                     <p>Recommended to a Friend: {this.state.negativeReviews.recommendedRating}</p>
                                 </Col>
-                                <Col md="4">
+                                <Col md="auto">
                                     <StarRatingComponent
                                         name="rating"
                                         starCount={5}
@@ -455,7 +455,7 @@ export default class CompanyOverview extends Component {
                             </Row>
                         </Col>
                     </Container>
-                    <Container style = {{ width: "61%" }}>
+                    <Container >
                     <Row>
                         {this.state.reviews.map((item) => {
                             return <ReviewCard {...item} />;
