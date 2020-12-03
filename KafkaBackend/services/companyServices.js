@@ -44,7 +44,7 @@ function handle_request(msg, callback) {
 					description: data.description,
 					ceoName: data.ceoName,
 				}
-				Company.findByIdAndUpdate(data.company_id, company_update, (err, result) => {
+				Company.findByIdAndUpdate(data.companyId, company_update, (err, result) => {
 					if (err) {
 						console.log("Error updating company profile" + err)
 						callback(err, 'Error')

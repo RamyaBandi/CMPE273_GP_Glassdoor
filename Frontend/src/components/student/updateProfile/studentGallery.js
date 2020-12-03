@@ -20,8 +20,8 @@ class StudentGallery extends Component {
 
         //console.log(this.props)
         //console.log(localStorage.getItem('mongoId'))
-        let student_id=localStorage.getItem('mongoId')
-        //let student_id="5fb48df63d242fa0842343f3"
+        //let student_id=localStorage.getItem('mongoId')
+        let student_id="5fb48df63d242fa0842343f3"
         axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
         axios.get(`${routeConstants.BACKEND_URL}/student${routeConstants.GET_PHOTOS_UPLOADED}`,
         {
