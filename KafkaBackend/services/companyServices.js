@@ -14,6 +14,7 @@ const {
     PUT_COMPANY_SIGNUP
 } = require("../config/routeConstants");
 const Company = require('../models/Company');
+const CompanyViews = require('../models/CompanyViews')
 //const Reviews = require('../models/Reviews');
 //const Student = require('../models/Student')
 
