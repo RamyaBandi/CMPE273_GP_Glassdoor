@@ -19,7 +19,7 @@ module.exports = {
     GET_STUDENT_RESUMES: "/resume",
     PUT_PRIMARY_RESUME: "/primaryresume",
     DELETE_STUDENT_RESUME: "/resume",
-    
+    GET_PHOTOS_UPLOADED: '/gallery',
 
     //Students Reviews
     GET_COUNT_RATINGS: "/reviewcount",

@@ -131,6 +131,9 @@ GET_COUNT_RATINGS: "/reviewcount",
     GET_APPLICATIONS_STUDENTID: '/studentId',
     GET_APPLICATIONS_ALL: '/',
 
+    //Student Photos
+    GET_PHOTOS_UPLOADED: '/gallery',
+
 
     //Company Statistics
     STATISTICS_ROUTE: "/statistics",
