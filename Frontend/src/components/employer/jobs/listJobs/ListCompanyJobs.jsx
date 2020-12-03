@@ -20,7 +20,8 @@ class ListCompanyJobs extends Component {
     updatePageList() {
         Axios.get(`${BACKEND_URL}${JOB_ROUTE}${GET_COMPANY_JOBS}`, {
             params: {
-                companyId: localStorage.getItem('mongoId'),
+               // companyId: localStorage.getItem('mongoId'),
+               companyId: '5fbd383a20ebc710c11cad02',
                 limit: this.state.limit,
                 page: this.state.page
             }

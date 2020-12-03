@@ -12,8 +12,10 @@ class ListApplications extends Component {
         page: 1,
         totalPages: 0
     }
-    componentDidMount() {
-        // console.log(this.props)
+
+    componentWillMount() {
+        console.log(this.props)
+
         this.updatePageList()
     }
     updatePageList() {
