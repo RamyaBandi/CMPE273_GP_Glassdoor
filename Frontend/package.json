@@ -12,6 +12,7 @@
     "enzyme-adapter-react-16": "^1.15.5",
     "google-maps-react": "^2.0.6",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.20",
     "mdbreact": "^4.27.0",
     "moment": "^2.29.1",
     "multiline-ellipsis-react": "^1.0.4",
