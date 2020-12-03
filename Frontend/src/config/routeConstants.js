@@ -42,6 +42,9 @@ module.exports = {
     //Company Photos Routes
     POST_COMPANY_PHOTOS: "/photos/company",
     GET_COMPANY_PHOTOS: "/photos/company",
+    GET_ALL_PHOTOS: "/photos/all",
+    PUT_PHOTO_APPROVE: "/photos/approve",
+    PUT_PHOTO_REJECT: "/photos/reject",
 
     //Review Routes
     POST_STUDENT_REVIEW: '/review/student/review',
