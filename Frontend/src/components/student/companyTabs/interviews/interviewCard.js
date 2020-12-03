@@ -28,7 +28,7 @@ export default class InterviewCard extends Component {
             </Col>
           </Row>
           <Row>
-              <p>Interview</p>
+              <p>Interview:</p>
           </Row>
           <Row>
             <p>{this.props.description}</p>

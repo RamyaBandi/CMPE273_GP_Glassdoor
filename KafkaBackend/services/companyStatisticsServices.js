@@ -3,7 +3,7 @@ const Company = require('../models/Company');
 const Applications = require('../models/Applications');
 function handle_request(msg, callback) {
 
-	console.log("Inside Company Services ->kafka backend");
+	console.log("Inside Company Statistics Services ->kafka backend");
 	console.log(msg);
 	switch (msg.api) {
 		case "GET_STATISTICS_JOBS_COUNT":

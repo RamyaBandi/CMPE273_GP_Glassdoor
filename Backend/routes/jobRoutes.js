@@ -5,15 +5,21 @@ const jobServices = require("../servicesMongo/jobServices");
 const jobKafkaServices = require("../servicesKafka/jobServices");
 const { GET_ALL_JOBS, GET_COMPANY_JOBS_BY_JOBTITLE, GET_COMPANY_JOBS_BY_CITY, GET_COMPANY_JOBS, POST_COMPANY_JOB, PUT_COMPANY_JOB, GET_COMPANY_JOB_BY_JOBID } = require('../config/routeConstants');
 
-// console.log(process.env.KAFKA_SWITCH);
 if (process.env.KAFKA_SWITCH === 'true') {
-    jobRouter.route(POST_COMPANY_JOB).post(jobKafkaServices.postCompanyJob);
-    jobRouter.route(PUT_COMPANY_JOB).put(jobKafkaServices.updateCompanyJob);
+    console.log("in kafka service")
+    // jobRouter.route(POST_COMPANY_JOB).post(jobKafkaServices.postCompanyJob);
     // jobRouter.route(GET_COMPANY_JOBS).get(jobKafkaServices.getCompanyJobs);
     // jobRouter.route(GET_ALL_JOBS).get(jobKafkaServices.getAllJobs);
     // jobRouter.route(GET_COMPANY_JOBS_BY_JOBTITLE).get(jobKafkaServices.getCompanyJobsByJobTitle);
     // jobRouter.route(GET_COMPANY_JOBS_BY_CITY).get(jobKafkaServices.getCompanyJobsByCity);
-    // jobRouter.route(GET_COMPANY_JOB_BY_JOBID).get(jobKafkaServices.getCompanyJobsByJobId);
+  
+    jobRouter.route(POST_COMPANY_JOB).post(jobKafkaServices.postCompanyJob);
+    jobRouter.route(PUT_COMPANY_JOB).put(jobKafkaServices.updateCompanyJob);
+    jobRouter.route(GET_COMPANY_JOBS).get(jobKafkaServices.getCompanyJobs);
+    jobRouter.route(GET_ALL_JOBS).get(jobKafkaServices.getAllJobs);
+    jobRouter.route(GET_COMPANY_JOBS_BY_JOBTITLE).get(jobKafkaServices.getCompanyJobsByJobTitle);
+    jobRouter.route(GET_COMPANY_JOBS_BY_CITY).get(jobKafkaServices.getCompanyJobsByCity);
+    jobRouter.route(GET_COMPANY_JOB_BY_JOBID).get(jobKafkaServices.getCompanyJobsByJobId);
 }
 else {
     jobRouter.route(POST_COMPANY_JOB).post(jobServices.postCompanyJob);

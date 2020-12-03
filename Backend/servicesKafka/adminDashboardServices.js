@@ -1,17 +1,30 @@
+const { response } = require('express');
 const {
+    CONTENT_TYPE,
+    APP_JSON,
     RES_SUCCESS,
-    RES_INTERNAL_SERVER_ERROR,
+    RES_BAD_REQUEST,
+    RES_NOT_FOUND,
+    RES_DUPLICATE_RESOURCE,
+    TEXT_PLAIN,
+    RES_INTERNAL_SERVER_ERROR
 } = require("../config/routeConstants");
 
-var kafka = require('../kafka/client');
+const Company = require('../models/Company');
+const Salaries = require('../models/Salaries')
+const Jobs = require('../models/Jobs')
+const Interviews = require('../models/Interviews')
+const Reviews = require('../models/Reviews');
+const Students = require('../models/Student')
+const CompanyViews = require('../models/CompanyViews')
 
-module.exports.postCompanyJob = (req, res) => {
-    console.log("req.body" + JSON.stringify(req.body))
+// Get count of  reviews per day
+
+module.exports.reviewsperday = async (req, res) => {
     data = {
-        api: "POST_COMPANY_JOB",
-        body: req.body
+        api: "GET_REVIEWS_PER_DAY",
     }
-    kafka.make_request('jobs', data, function (err, results) {
+    kafka.make_request('adminanalytics', data, function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {
@@ -21,16 +34,17 @@ module.exports.postCompanyJob = (req, res) => {
             console.log("In else");
             res.status(RES_SUCCESS).send(JSON.stringify(results));
         }
+
     });
 }
 
-module.exports.updateCompanyJob = (req, res) => {
-    console.log("req.body" + JSON.stringify(req.body))
+// Top 5 most reviewed company
+
+module.exports.topreviewedcompanies = async (req, res) => {
     data = {
-        api: "PUT_COMPANY_JOB",
-        body: req.body
+        api: "GET_TOP_REVIEWED_COMPANIES",
     }
-    kafka.make_request('jobs', data, function (err, results) {
+    kafka.make_request('adminanalytics', data, function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {
@@ -40,16 +54,17 @@ module.exports.updateCompanyJob = (req, res) => {
             console.log("In else");
             res.status(RES_SUCCESS).send(JSON.stringify(results));
         }
+
     });
 }
 
-module.exports.getCompanyJobs = (req, res) => {
-    console.log("req.body" + JSON.stringify(req.query))
+// Top 5 company based on average rating
+
+module.exports.averageratedcompanies = async (req, res) => {
     data = {
-        api: "GET_COMPANY_JOBS",
-        body: req.query
+        api: "GET_TOP_AVERAGE_RATED_COMPANIES",
     }
-    kafka.make_request('jobs', data, function (err, results) {
+    kafka.make_request('adminanalytics', data, function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {
@@ -59,16 +74,17 @@ module.exports.getCompanyJobs = (req, res) => {
             console.log("In else");
             res.status(RES_SUCCESS).send(JSON.stringify(results));
         }
+
     });
 }
 
-module.exports.getCompanyJobsByJobId = (req, res) => {
-    console.log("req.query" + JSON.stringify(req.query))
+// Top 5 students based on total accepted reviews made.
+
+module.exports.topstudentratings = async (req, res) => {
     data = {
-        api: "GET_COMPANY_JOBS_BY_JOBID",
-        body: req.query
+        api: "GET_TOP_STUDENTS_ON_RATING",
     }
-    kafka.make_request('jobs', data, function (err, results) {
+    kafka.make_request('adminanalytics', data, function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {
@@ -78,16 +94,18 @@ module.exports.getCompanyJobsByJobId = (req, res) => {
             console.log("In else");
             res.status(RES_SUCCESS).send(JSON.stringify(results));
         }
+
     });
 }
 
-module.exports.getCompanyJobsByJobTitle = (req, res) => {
-    console.log("req.query" + JSON.stringify(req.query))
+
+// Top 10 CEO’s based on rating.
+
+module.exports.topceorating = async (req, res) => {
     data = {
-        api: "GET_COMPANY_JOBS_BY_JOBTITLE",
-        body: req.query
+        api: "GET_TOP_CEO_RATING",
     }
-    kafka.make_request('jobs', data, function (err, results) {
+    kafka.make_request('adminanalytics', data, function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {
@@ -97,35 +115,18 @@ module.exports.getCompanyJobsByJobTitle = (req, res) => {
             console.log("In else");
             res.status(RES_SUCCESS).send(JSON.stringify(results));
         }
+
     });
 }
 
-module.exports.getCompanyJobsByCity = (req, res) => {
-    console.log("req.query" + JSON.stringify(req.query))
-    data = {
-        api: "GET_COMPANY_JOBS_BY_CITY",
-        body: req.query
-    }
-    kafka.make_request('jobs', data, function (err, results) {
-        console.log('in result');
-        console.log(results);
-        if (err) {
-            console.log("In error");
-            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
-        } else {
-            console.log("In else");
-            res.status(RES_SUCCESS).send(JSON.stringify(results));
-        }
-    });
-}
+// Top 10 company based on viewed per day.
 
-module.exports.getAllJobs = (req, res) => {
-    console.log("req.query" + JSON.stringify(req.query))
+module.exports.topcompanyviews = async (req, res) => {
     data = {
-        api: "GET_ALL_JOBS",
-        body: req.query
+        api: "GET_TOP_COMPANY_VIEWS",
+        date: req.query.date
     }
-    kafka.make_request('jobs', data, function (err, results) {
+    kafka.make_request('adminanalytics', data, function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {
@@ -135,5 +136,6 @@ module.exports.getAllJobs = (req, res) => {
             console.log("In else");
             res.status(RES_SUCCESS).send(JSON.stringify(results));
         }
+
     });
 }
