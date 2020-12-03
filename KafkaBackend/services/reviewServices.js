@@ -25,8 +25,8 @@ function handle_request(msg, callback) {
             {
                 let data = msg.body
                 let reviews = Reviews({
-                    company_id: data.company_id,
-                    student_id: data.student_id,
+                    companyId: data.companyId,
+                    studentId: data.studentId,
                     headline: data.headline,
                     description: data.description,
                     pros: data.pros,
@@ -46,20 +46,25 @@ function handle_request(msg, callback) {
                     else {
             
                         console.log("Review Doc created : " + JSON.stringify(result));
-                        Company.findOneAndUpdate({ _id: data.company_id }, { $push: { "reviews": result._id } }, (err, res) => {
-                            if (err) {
-                                console.log("Error adding review to company" + err)
-                                callback(err, 'Error')
-            
+                        Company.findOneAndUpdate({ _id: data.companyId }, { $push: { "reviews": result._id } }, (error, results) => {
+                            if (error) {
+                                console.log("Error adding review to company" + error)
+                                res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
                             }
                             else {
-                                //res.setHeader(CONTENT_TYPE, APP_JSON);
-                                console.log("Review inserted Successfully")
-                                callback(null, result)
+                                Student.findOneAndUpdate({ _id: data.studentId }, { $push: { "companyReviews": result._id } }, (error2, results2) => {
+                                    if (error2) {
+                                        console.log("Error adding review to Student" + error2)
+                                        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error2));
+                                    }
+                                    else {
+                                        console.log("Kafka - Review inserted Successfully")
+                                        res.status(RES_SUCCESS).end(JSON.stringify(results2));
+                                    }
+                                })
+            
                             }
                         })
-            
-            
             
                     }
                 })

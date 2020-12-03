@@ -122,6 +122,7 @@ class AdminPhotos extends Component {
             axios.put(BACKEND_URL + PUT_PHOTO_APPROVE, this.photoData)
                     .then(response => {
                         console.log("Photo approved successfully");
+                        window.alert("Approved!");     
                     }) 
         }                
       };
@@ -134,6 +135,7 @@ class AdminPhotos extends Component {
             axios.put(BACKEND_URL + PUT_PHOTO_REJECT, this.photoData2)
                     .then(response => {
                         console.log("Photo rejected successfully");
+                        window.alert("Rejected!");     
                     }) 
         }                
       };
