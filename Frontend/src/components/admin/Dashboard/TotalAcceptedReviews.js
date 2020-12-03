@@ -26,7 +26,7 @@ class TotalAcceptedReviews extends Component {
                 }
             })
             .catch(error => {
-                console.log(error.response.data.msg)
+                console.log("Error")
             })
     }
     render() {

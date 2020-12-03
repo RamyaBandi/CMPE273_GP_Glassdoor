@@ -167,16 +167,16 @@ class Registration extends Component {
                                 <input onChange={this.ChangeHandler} type="radio" value="employer" name="role" checked={this.state.role === "employer"} style={{ color: "black", fontSize: "bold" }} /> Employer
                             </div>
                             <div class="form-group">
-                                <input onChange={this.ChangeHandler} type="text" class="form-control" style={{height:"40px", width: "100%"}} name="name" placeholder="Name" required />
+                                <input onChange={this.ChangeHandler} type="text" class="form-control auth-form-control" style={{height:"40px", width: "100%"}} name="name" placeholder="Name" required />
                                 {this.state.nameFlag && <p class="validationAlert"><mark>Name already exists</mark></p>}
                             </div>
                             <div class="form-group">
-                                <input onChange={this.ChangeHandler} type="email" class="form-control" style={{height:"40px", width: "100%"}} name="email" placeholder="Email ID" required />
+                                <input onChange={this.ChangeHandler} type="email" class="form-control auth-form-control" style={{height:"40px", width: "100%"}} name="email" placeholder="Email ID" required />
                                 {this.state.emailFlag && <p class="validationAlert"><mark> Email ID already exists</mark></p>}
                                 {this.state.emailtypeFlag && <p class="validationAlert"><mark> Please enter email in the format example@domain.com</mark> </p>}
                             </div>
                             <div class="form-group">
-                                <input onChange={this.ChangeHandler} type="password" class="form-control" style={{height:"40px", width: "100%"}} name="password" placeholder="Password" required />
+                                <input onChange={this.ChangeHandler} type="password" class="form-control auth-form-control" style={{height:"40px", width: "100%"}} name="password" placeholder="Password" required />
                                 {this.state.passwordFlag && <p class="validationAlert"> <mark>Please enter a valid password</mark> </p>}
                                 <label style={{ textAlign: "center", lineHeight: "20px", fontSize: "14px", color: "black" }}>Password should have a minimum of eight characters, at least one uppercase letter, one lowercase letter and one number</label>
                             </div>
