@@ -14,7 +14,7 @@ class ListCompanyJobs extends Component {
 
     }
     componentDidMount = () => {
-        console.log(`${BACKEND_URL}${JOB_ROUTE}${GET_COMPANY_JOBS}`)
+        // console.log(`${BACKEND_URL}${JOB_ROUTE}${GET_COMPANY_JOBS}`)
         this.updatePageList()
     }
     updatePageList() {
@@ -62,9 +62,7 @@ class ListCompanyJobs extends Component {
             <div className="containerList">
                 <div className="applicationsList">
                     <div className="applicationsHeader">
-                        <h4>
-                            Jobs Posted
-                    </h4>
+                        <h4> Jobs Posted</h4>
                         <div className="input-group"
                             style={{ width: "200px", justifyContent: "space-around" }}
                         >

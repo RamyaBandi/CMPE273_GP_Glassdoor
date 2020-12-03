@@ -90,91 +90,86 @@ module.exports.getCompanyReviews = async (req, res) => {
     let data = req.query
     console.log(data)
 
-    if (process.env.REDIS_SWITCH == "true" && data.page == '1') {
+    if (process.env.REDIS_SWITCH == "true" && data.page == '1' && data.limit == '10') {
         try {
-            redisClient.get('topReviews', async (err, redisout) => {
+            redisClient.get(`CompanyReviews_${data.companyId}`, async (err, redisout) => {
                 // If value for key is available in Redis
-                //console.log("in redis get")
-                //console.log(err)
-                // console.log(redisout)
-
                 if (redisout !== null) {
                     // send data as output
                     console.log("Data exists in redis")
                     //console.log(redisout.length)
-                    Company.countDocuments({ type: 'reviews' }, (err, count) => {
-                        if (err) {
-                            console.log(err);
-                            //res.setHeader(CONTENT_TYPE, APP_JSON);
-                            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
-                        }
-                        else {
-
-                            let output = {
-                                reviews: JSON.parse(redisout),
-                                totalPages: Math.ceil(count / data.limit),
-                                currentPage: data.page
+                    Reviews.countDocuments({ companyId: data.companyId, approvalstatus: "Approved" })
+                        .exec((err, count) => {
+                            if (err) {
+                                console.log(err);
+                                //res.setHeader(CONTENT_TYPE, APP_JSON);
+                                res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
                             }
-                            res.status(RES_SUCCESS).send(output);
-                        }
-                    })
+                            else {
 
-
-
+                                const output = ({
+                                    reviews: JSON.parse(redisout),
+                                    totalPages: Math.ceil(count / data.limit),
+                                    currentPage: data.page
+                                });
+                                // console.log(output)
+                                res.status(RES_SUCCESS).send(output);
+                            }
+                        })
                 }
                 // If value for given key is not available in Redis
                 else {
+                    console.log("else with redis on")
                     // Fetch data from your database
-                    let reviews = Company.find({ _id: data.companyId, approvalstatus: "Approved" }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((error, result) => {
+                    Reviews.find({ companyId: data.companyId, approvalstatus: "Approved" })
+                        .limit(data.limit * 1)
+                        .skip((data.page - 1) * data.limit)
+                        .exec(async (error, reviews) => {
 
-                        if (error) {
-                            //console.log(error);
-                            //res.setHeader(CONTENT_TYPE, APP_JSON);
-                            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
-                        }
-                        else {
-                            // console.log(JSON.stringify(result));
-                            // store that in Redis
-                            // params: key, time-to-live, value
-                            redisClient.setex('topReviews', 36000, JSON.stringify(result[0].reviews));
+                            if (error) {
+                                console.log(error);
+                                res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+                            }
+                            else {
+                                const count = await Reviews.countDocuments({ companyId: data.companyId, approvalstatus: "Approved" });
 
-                            // send data as output
-                            //res.setHeader(CONTENT_TYPE, APP_JSON);
-                            //console.log("Reviews fetched Successfully")
-                            res.status(RES_SUCCESS).send(result[0].reviews);
-                        }
-                    })
+                                // store that in Redis
+                                // params: key, time-to-live, value
+                                const result = ({
+                                    reviews: reviews,
+                                    totalPages: Math.ceil(count / data.limit),
+                                    currentPage: data.page
+                                });
+                                redisClient.setex(`CompanyReviews_${data.companyId}`, 36000, JSON.stringify(reviews));
+
+                                res.status(RES_SUCCESS).end(JSON.stringify(result));
+
+
+                                // send data as output
+                                //res.setHeader(CONTENT_TYPE, APP_JSON);
+                                //console.log("Reviews fetched Successfully")
+                            }
+                        })
 
                 }
             })
         } catch (error) {
             // Handle error
-            // console.log("Error while working with redis")
-            //console.log(error);
+            console.log("Error while working with redis")
+            console.log(error);
 
-            let reviews = Company.find({ _id: data.companyId, approvalstatus: "Approved" }).select('reviews').populate('reviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
 
-                if (err) {
-                    //console.log(err);
-                    //res.setHeader(CONTENT_TYPE, APP_JSON);
-                    res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
-                }
-                else {
-                    // console.log(JSON.stringify(result));
-                    //res.setHeader(CONTENT_TYPE, APP_JSON);
-                    console.log("Reviews fetched Successfully from DB")
-                    res.status(RES_SUCCESS).send(result);
-                }
-            })
         }
 
     }
     else {
+        console.log("else of redis")
         try {
 
-            data.page = 1;
-            data.limit = 10;
-            const reviews = await Reviews.find({companyId: data.companyId, approvalstatus: "Approved"}).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+
+
+            const reviews = await Reviews.find({ companyId: data.companyId, approvalstatus: "Approved" }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+
             const count = await Reviews.countDocuments({ companyId: data.companyId, approvalstatus: "Approved" });
 
             console.log("count" + count);
@@ -329,15 +324,17 @@ module.exports.getReviewAverage = async (req, res) => {
     console.log(data.companyId)
     try {
         const avgReviews = await Reviews.aggregate([
-            
-                {$match: {companyId: new ObjectId(data.companyId) }},
-                {$group:  {
+
+            { $match: { companyId: new ObjectId(data.companyId) } },
+            {
+                $group: {
                     _id: null,
-                    averageOverallRating:{$avg: "$overallRating"},
-                    averageRecommendedRating:{$avg: "$recommendedRating"},
-                    averageCeoRating:{$avg: "$ceoRating"}
-                }}
-            
+                    averageOverallRating: { $avg: "$overallRating" },
+                    averageRecommendedRating: { $avg: "$recommendedRating" },
+                    averageCeoRating: { $avg: "$ceoRating" }
+                }
+            }
+
         ]).exec();
         const result = ({
             averageOverallRating: avgReviews[0].averageOverallRating.toFixed(2),
@@ -395,11 +392,11 @@ module.exports.getReviewDetails = async (req, res) => {
     console.log(req.query)
     let data = req.query
     let reviews = await Reviews.findById(data.reviewId).exec();
-    try{
-            // console.log(JSON.stringify(result));
-            //res.setHeader(CONTENT_TYPE, APP_JSON);
-            console.log("Review details fetched Successfully")
-            res.status(RES_SUCCESS).send(reviews);
+    try {
+        // console.log(JSON.stringify(result));
+        //res.setHeader(CONTENT_TYPE, APP_JSON);
+        console.log("Review details fetched Successfully")
+        res.status(RES_SUCCESS).send(reviews);
     }
     catch {
         if (err) {
@@ -527,9 +524,10 @@ module.exports.getApprovedCompanyReviews = async (req, res) => {
         try {
             //data.page = 1;
             //data.limit = 10;
-            const reviews = await Reviews.find({$or: 
-                [{ companyId: new ObjectId(data.companyId), approvalstatus: 'Approved' }, 
-                { studentId: new ObjectId(data.studentId), approvalstatus: 'Under Review'}]
+            const reviews = await Reviews.find({
+                $or:
+                    [{ companyId: new ObjectId(data.companyId), approvalstatus: 'Approved' },
+                    { studentId: new ObjectId(data.studentId), approvalstatus: 'Under Review' }]
             }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
 
 

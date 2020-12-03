@@ -24,7 +24,7 @@ class AdminPhotos extends Component {
       addedItem2:    {},
       cart2:         {},
       page : 1,
-      limit : 30,
+      limit : 10,
       totalPages: 0,
       redirect: null,
     };
@@ -154,7 +154,7 @@ class AdminPhotos extends Component {
                                     </Col>
                                     <Col md="2">
                                     <Link to={{ pathname: "/viewphoto", state: item._id }} 
-                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}>{item.photoURL}</Link>
+                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}><img height="60px" width="60px" src={item.photoURL}/></Link>
                                     </Col>
                                     <Col md="3">
                                     <Link to={{ pathname: "/viewphoto", state: item._id }} 
