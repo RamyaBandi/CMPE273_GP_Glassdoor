@@ -9,6 +9,9 @@ const { GET_COMPANY_PHOTOS, POST_COMPANY_PHOTOS, GET_ALL_PHOTOS, PUT_PHOTO_APPRO
 if (process.env.KAFKA_SWITCH === 'true') {
     photoRouter.route(POST_COMPANY_PHOTOS).post(photoKafkaServices.postCompanyPhotos);
     photoRouter.route(GET_COMPANY_PHOTOS).post(photoKafkaServices.getCompanyPhotos);
+    photoRouter.route(GET_ALL_PHOTOS).get(photoKafkaServices.getAllPhotos);
+    photoRouter.route(PUT_PHOTO_APPROVE).put(photoKafkaServices.putPhotoApprove);
+    photoRouter.route(PUT_PHOTO_REJECT).put(photoKafkaServices.putPhotoReject);
 }
 else {
     photoRouter.route(POST_COMPANY_PHOTOS).post(photoServices.postCompanyPhotos);

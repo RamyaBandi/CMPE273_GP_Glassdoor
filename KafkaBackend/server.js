@@ -19,6 +19,8 @@ const student=require('./services/studentServices')
 
 const salaries = require('./services/salaryServices')
 const interviews = require('./services/interviewServices')
+const photos = require('./services/photoServices')
+//const adminCompanyProfile = require('./services/adminCompanyProfileServices')
 
 
 
@@ -95,4 +97,6 @@ handleTopicRequest("salaries", salaries)
 handleTopicRequest("interviews", interviews)
 handleTopicRequest("images",images)
 handleTopicRequest("student",student)
+handleTopicRequest("photos",photos)
+//handleTopicRequest("adminCompanyProfile",adminCompanyProfile)
 
