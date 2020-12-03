@@ -203,7 +203,7 @@ class studentHomePage extends Component {
                 }
             })
             .catch(error => {
-                console.log(error.response.data.msg)
+                console.log("Error")
             })
     }
 

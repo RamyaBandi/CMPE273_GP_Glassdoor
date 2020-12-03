@@ -41,7 +41,7 @@ class JobsTab extends Component {
         })
         await axios.get(BACKEND_URL + GET_SEARCH_JOBS, {
             params: {
-                searchParameter: (typeof this.props.location.state.detail !== "undefined")? this.props.location.state.detail : null,
+                searchParameter: this.props.location.state.detail,
                 // searchParameter : "Software Engineer",
                 page : this.state.page,
                 limit : this.state.limit
@@ -57,7 +57,7 @@ class JobsTab extends Component {
                 }
             })
             .catch(error => {
-                console.log(error.response.data.msg)
+                console.log("Error")
             })
     }
 

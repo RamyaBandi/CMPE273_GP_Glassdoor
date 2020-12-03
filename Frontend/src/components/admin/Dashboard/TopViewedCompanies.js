@@ -43,7 +43,7 @@ class TopViewedCompanies extends Component {
                 }
             })
             .catch(error => {
-                console.log(error.response.data.msg)
+                console.log("Error")
             })
     }
     formatDate() {

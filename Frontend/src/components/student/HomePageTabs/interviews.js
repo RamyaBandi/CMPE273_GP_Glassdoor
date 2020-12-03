@@ -28,8 +28,8 @@ class InterviewsTab extends Component {
         })
         axios.get(BACKEND_URL + GET_SEARCH_INTERVIEW, {
             params: {
-                // searchParameter: this.props.location.state.detail,
-                searchParameter: "Test Company",
+                searchParameter: this.props.location.state.detail,
+                // searchParameter: "Test Company",
                 page: this.state.page,
                 limit: this.state.limit
             }
