@@ -53,7 +53,7 @@ class AddInterview extends Component {
       description: this.state.description,
       difficulty: this.state.difficulty,
       offerStatus: this.state.offerStatus,
-      companyId: "5fb4884acf339e3da0d5c31e",
+      companyId: this.props.location.state,
       studentId: localStorage.getItem('mongoId'),
       interviewQnA: [
         {
