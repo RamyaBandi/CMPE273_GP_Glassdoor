@@ -5,7 +5,7 @@ import { Container, Col, Row, Form, FormControl } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Redirect } from "react-router";
 import axios from 'axios';
-import { BACKEND_URL, JOB_ROUTE, GET_COMPANY_DETAILS, GET_COMPANY_JOBS } from '../../../../config/routeConstants';
+import { BACKEND_URL, JOB_ROUTE, GET_COMPANY_DETAILS, GET_COMPANY_JOBS, GET_COMPANY_JOB_BY_JOBTITLE_OR_CITY } from '../../../../config/routeConstants';
 import JobCard from './jobCard';
 
 class CompanyJobs extends Component {
@@ -18,8 +18,15 @@ class CompanyJobs extends Component {
         };
     }
 
-    findJobs=()=>{
-        
+    findJobs = () => {
+        axios.get(BACKEND_URL + GET_COMPANY_JOB_BY_JOBTITLE_OR_CITY + '?jobTitle=')
+        .then(response => {
+            console.log(response.data);
+            this.setState({jobs: response.data.jobs});
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }
 
     addReview = async (e) => {
@@ -38,7 +45,7 @@ class CompanyJobs extends Component {
             .catch((error) => {
                 console.log(error);
             }
-        )
+            )
         console.log(companyId);
         axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOBS + "?companyId=" + companyId)
             .then(response => {
@@ -47,7 +54,7 @@ class CompanyJobs extends Component {
             .catch((error) => {
                 console.log(error);
             }
-        )
+            )
     }
 
     render = () => {
@@ -102,24 +109,19 @@ class CompanyJobs extends Component {
                             <p style={{ fontSize: "20px" }}>{this.state.companyDetails.companyName} Jobs</p>
                         </Col>
                     </Row>
-                    <Row style={{float:"right"}}>
-                      
-                                
-                                
-                            <Col md="auto">
-                                
-                                    <FormControl style={{width: "110%", height: "40px"}} type="text" placeholder="Search Job Titles" />
-                               
-                            </Col>
-                            <Col md="auto">
-                                    <Button style = {{backgroundColor: "#1861bf", height: "40px"}} onClick={this.findJobs}>
-                                        Find Jobs
-                                    </Button>
-                            </Col>
-                            
-                            
-
-                    </Row>
+                    <Container style={{ width:"80%" }}>
+                        <Row>
+                        <Col md="auto">
+                            <FormControl style={{ width: "110%", height: "40px" }} type="text" placeholder="Search Job Titles" />
+                        </Col>
+                        <Col md="auto">
+                            <Button style={{ backgroundColor: "#1861bf", height: "40px" }} onClick={this.findJobs}>
+                                Find Jobs
+                            </Button>
+                        </Col>
+                        </Row>
+                        </Container>
+                    
                     {this.state.jobs.map((item) => {
                         return <JobCard {...item} />
                     })}

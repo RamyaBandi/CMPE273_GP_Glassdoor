@@ -59,7 +59,7 @@ class Main extends Component {
                     <Route exact path="/adminhomepage" render={props => <AdminHomePage {...props} />} />
                     <Route exact path="/adminanalytics" render={props => <AdminAnalytics {...props} />} />
                     <Route exact path="/listOfCompanies" render={props => <ListOfCompanies {...props} />} />
-                    <Route exact path="/companyProfilePage" render={props => <CompanyProfilePage {...props} />} />
+                    <Route exact path="/companyProfilePage/:id" render={props => <CompanyProfilePage {...props} />} />
 
                     <Route exact path="/reviews" component={(props) => <Reviews {...props} />} />
                     <Route exact path="/addreview" component={(props) => <AddReview {...props} />} />

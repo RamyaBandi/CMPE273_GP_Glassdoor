@@ -36,7 +36,8 @@ module.exports = {
 
     //Admin Company Profile Routes
     GET_ALL_COMPANIES_ADMIN : "/admin/companies",
-    GET_COMPANY_BY_COMPANYNAME_ADMIN: "/admin/company/companyName",
+    GET_COMPANY_BY_COMPANYNAME_SEARCH_ADMIN: "/admin/company/companyName",
+    GET_COMPANY_BY_COMPANYNAME_ADMIN: "/admin/company/companyName/:id",
     GET_COMPANY_REVIEWS_ADMIN: "/admin/company/reviews",
 
     //Company Photos Routes
@@ -115,7 +116,7 @@ GET_COUNT_RATINGS: "/reviewcount",
     POST_COMPANY_JOB: "/company/job",
     GET_COMPANY_JOBS: "/company/jobs",
     GET_COMPANY_JOB_BY_JOBID: '/company/job/jobId',
-    GET_COMPANY_JOB_BY_JOBTITLE: '/company/job/jobTitle',
+    GET_COMPANY_JOB_BY_JOBTITLE_OR_CITY: '/company/job/jobTitleOrCity',
     GET_COMPANY_JOB_BY_CITY: '/company/job/city',
     PUT_COMPANY_JOB: '/company/job',
     GET_ALL_JOBS: '/company/jobList',
