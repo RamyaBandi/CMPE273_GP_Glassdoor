@@ -23,6 +23,9 @@ class InterviewsTab extends Component {
     }
 
     getInterviewSearchResults(){
+        this.setState({
+            interviewData : []
+        })
         axios.get(BACKEND_URL + GET_SEARCH_INTERVIEW, {
             params: {
                 // searchParameter: this.props.location.state.detail,
@@ -41,7 +44,7 @@ class InterviewsTab extends Component {
                 }
             })
             .catch(error => {
-                console.log(error.response.data.msg)
+                console.log("Error")
             })
     }
 
@@ -56,10 +59,10 @@ class InterviewsTab extends Component {
     
     render() {
         return (
-            <div class="body">
+            <div class="student-tabs-body">
             <React.Fragment>
-                {this.state.interviewData.map((interview, i) => {
-                    return <div class="card" style={{ width: "50%", left: "25%", right: "25%", height: "400px" }}>
+                { this.state.interviewData ? this.state.interviewData.map((interview, i) => {
+                    return <div class="card tabs-card" style={{ width: "50%", left: "25%", right: "25%", height: "400px" }}>
                         <div class="card-body">
                             <div style={{ width: "100%" }}>
                                 <div style={{ width: "30%", float: "left" }}>
@@ -88,7 +91,7 @@ class InterviewsTab extends Component {
                             </div>
                         </div>
                     </div>
-                })}
+                }): <h6 style={{textAlign: "center"}}>Loading..............</h6>}
                 </React.Fragment>
                 <ReactPaginate
                 previousLabel={"<<"}

@@ -43,9 +43,9 @@ async function handle_request(msg, callback) {
                                 companyName: 1,
                                 headquarters: 1,
                                 website: 1,
-                                NumberOfReviews: { $size: "$reviews" },
-                                // salaryReviews:  { $size: "$salaries" },
-                                // interviewReviews: { $size: "$interviews" }
+                                NumberOfReviews: { $size: { "$ifNull": [ "$reviews", [] ] } },
+                                salaryReviews: { $size: { "$ifNull": [ "$salaries", [] ] } },
+                                interviewReviews: { $size: { "$ifNull": [ "$interviews", [] ] } }
                             }
                         }]).exec();
 
@@ -89,9 +89,9 @@ async function handle_request(msg, callback) {
                         companyName: 1,
                         headquarters: 1,
                         website: 1,
-                        NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
-                        salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
-                        interviewReviews: "$interviews" ? { $size: "$interviews" } : null
+                        NumberOfReviews: { $size: { "$ifNull": [ "$reviews", [] ] } },
+                        salaryReviews: { $size: { "$ifNull": [ "$salaries", [] ] } },
+                        interviewReviews: { $size: { "$ifNull": [ "$interviews", [] ] } }
                     }
                 }]).exec();
 
@@ -117,9 +117,9 @@ async function handle_request(msg, callback) {
                         headquarters: 1,
                         website: 1,
                         salaries: 1,
-                        NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
-                        salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
-                        interviewReviews: "$interviews" ? { $size: "$interviews" } : null
+                        NumberOfReviews: { $size: { "$ifNull": [ "$reviews", [] ] } },
+                        salaryReviews: { $size: { "$ifNull": [ "$salaries", [] ] } },
+                        interviewReviews: { $size: { "$ifNull": [ "$interviews", [] ] } }
                     }
                 }]).exec();
 
@@ -131,7 +131,7 @@ async function handle_request(msg, callback) {
                 let products = {};
 
                 let last = await Salaries.find({ _id: data }, { jobTitle: 1, baseSalary: 1 })
-
+                if(typeof last[0] !== "undefined"){
                 products._id = companyResults[0]._id;
                 products.companyName = companyResults[0].companyName
                 products.headquarters = companyResults[0].headquarters
@@ -145,6 +145,7 @@ async function handle_request(msg, callback) {
 
 
                 return products;
+                }
             }));
 
             console.log("Outside salaries", datasets)
@@ -165,9 +166,9 @@ async function handle_request(msg, callback) {
                         headquarters: 1,
                         website: 1,
                         interviews: 1,
-                        NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
-                        salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
-                        interviewReviews: "$interviews" ? { $size: "$interviews" } : null
+                        NumberOfReviews: { $size: { "$ifNull": [ "$reviews", [] ] } },
+                        salaryReviews: { $size: { "$ifNull": [ "$salaries", [] ] } },
+                        interviewReviews: { $size: { "$ifNull": [ "$interviews", [] ] } }
                     }
                 }]).exec();
 
@@ -180,7 +181,7 @@ async function handle_request(msg, callback) {
 
                 let last = await Interviews.find({ _id: data }, { jobTitle: 1, description: 1 })
                 console.log("Last", last)
-
+                if(typeof last[0] !== "undefined"){
                 products._id = companyResults[0]._id;
                 products.companyName = companyResults[0].companyName
                 products.headquarters = companyResults[0].headquarters
@@ -194,9 +195,13 @@ async function handle_request(msg, callback) {
 
 
                 return products;
+                }
             }));
 
             console.log("Outside salaries", datasets)
+            datasets = await datasets.filter(company => {
+                return company
+            })
 
 
             // res.status(RES_SUCCESS).end(JSON.stringify(datasets));

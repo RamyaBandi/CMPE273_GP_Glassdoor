@@ -19,9 +19,7 @@ class JobsTab extends Component {
         this.getJobSearchResults = this.getJobSearchResults.bind(this)
     }
     componentDidMount() {
-        // this.setState({
-        //     page : 1
-        // })
+        console.log("Search Parameter", (typeof this.props.location.state.detail !== "undefined")? this.props.location.state.detail : null )
         // if (this.props.location.state.detail !== "") {
             this.getJobSearchResults();
             // this.handlePageClick();
@@ -38,10 +36,13 @@ class JobsTab extends Component {
     }
 
     async getJobSearchResults(){
+        this.setState({
+            jobsData : []
+        })
         await axios.get(BACKEND_URL + GET_SEARCH_JOBS, {
             params: {
-                // searchParameter: this.props.location.state.detail,
-                searchParameter : "Software Engineer",
+                searchParameter: (typeof this.props.location.state.detail !== "undefined")? this.props.location.state.detail : null,
+                // searchParameter : "Software Engineer",
                 page : this.state.page,
                 limit : this.state.limit
             }
@@ -62,11 +63,11 @@ class JobsTab extends Component {
 
     render() {
         return (
-            <div class="body">
+            <div class="student-tabs-body">
 
                 {this.state.jobsData.map((job, i) => {
                     return <React.Fragment>
-                        <div class="card" key={i} style={{ width: "50%", left: "25%", right: "25%", height: "350px" }}>
+                        <div class="card tabs-card" key={i} style={{ width: "50%", left: "25%", right: "25%", height: "350px" }}>
                             <div class="card-body">
                                 <div style={{ width: "100%" }}>
                                     <div style={{ width: "30%", float: "left" }}>

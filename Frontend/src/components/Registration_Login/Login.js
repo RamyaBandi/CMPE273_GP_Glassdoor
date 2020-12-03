@@ -85,10 +85,10 @@ class Login extends Component {
 
                         <form>
                             <div class="form-group">
-                                <input type="email" onChange={this.ChangeHandler} class="form-control" name="email" placeholder="Email ID" required />
+                                <input type="email" onChange={this.ChangeHandler} class="form-control auth-form-control" name="email" placeholder="Email ID" required />
                             </div>
                             <div class="form-group">
-                                <input type="password" onChange={this.ChangeHandler} class="form-control" name="password" placeholder="Password" required />
+                                <input type="password" onChange={this.ChangeHandler} class="form-control auth-form-control" name="password" placeholder="Password" required />
                             </div>
                             <button class="btn btn-success" onClick={this.submitLogin} >Sign In </button>
 

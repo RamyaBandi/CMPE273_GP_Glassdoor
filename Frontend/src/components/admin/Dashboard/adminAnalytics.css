@@ -1,4 +1,4 @@
-.table  {
+.admin-table  {
     margin-left: 10px;
     /* margin-right: 10px; */
     height: 650px;
@@ -6,7 +6,7 @@
     /* background-color: green; */
 }
 
-.row{
+.admin-row{
     height: 50%;
     width: 100%;
 }
@@ -41,11 +41,6 @@
     -o-border-image: initial;
     border-image: initial;
 }
-/* 
-.form-control{
-    width: 40%;
-    height: 30px;
-} */
 
 .chartHeading{
     line-height: 40px;

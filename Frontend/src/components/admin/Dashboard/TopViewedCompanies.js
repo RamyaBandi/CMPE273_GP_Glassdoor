@@ -77,7 +77,7 @@ class TopViewedCompanies extends Component {
         return (
             <div>
                 <h6 class="chartHeading">Top 10 Viewed Companies for Date : {this.state.Date}</h6>
-                <Chart
+                {data.length > 0 && <Chart
                     // width={300}
                     // height={400}
                     chartType="ColumnChart"
@@ -90,7 +90,7 @@ class TopViewedCompanies extends Component {
                         // title: 'Top 5 students based on total accepted reviews made',
                         legend: 'none',
                         colors : ['#0caa41'],
-                        chartArea: { width: '70%', height: '80%' },
+                        chartArea: { width: '70%', height: '70%', top:'10%' },
                         hAxis: {
                             title: 'Company Name',
                             minValue: 0,
@@ -101,7 +101,7 @@ class TopViewedCompanies extends Component {
                           },
                     }}
                     legendToggle
-                />
+                /> }
                 <div style={{"display": "flex", "padding": "20px", "justifyContent": "center"}}>
                 <p>Pick a Date : </p>
                 <input type="date"  class="form-control" name="Date" value={this.state.Date} onChange={this.handledChange} placeholder="Pick a Date"></input>

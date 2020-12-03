@@ -44,7 +44,7 @@ class TopCeo extends Component {
             loader={<div>Loading Chart</div>}
             data={[
                 ['CEO Name', 'Rating'],
-                ...data
+                ...dat
             ]}
             options={{
                 // title: 'Top 10 CEO’s based on rating',
@@ -52,7 +52,7 @@ class TopCeo extends Component {
                 colors : ['#0caa41'],
                 chartArea: { width: '70%', height: '80%' },
                 hAxis: {
-                    // title: 'CEO Rating',
+                    title: 'Ratings',
                     minValue: 0,
                 },
                 //   vAxis: {

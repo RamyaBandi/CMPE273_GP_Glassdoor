@@ -1,4 +1,4 @@
-.body{
+.student-tabs-body{
     padding-top: 1rem;
     background-color: #eaeaea;
     width: 100%; 
@@ -16,10 +16,10 @@
     height: 100%; 
     min-width: 1000px; 
     min-height: 1000px;
-    left: 5%;
-    right: 5%;
+    /* left: 5%; */
+    /* right: 5%; */
 }
-.card{
+.tabs-card{
     margin-bottom: 1rem;
     background-color: white;
     width: "18rem";

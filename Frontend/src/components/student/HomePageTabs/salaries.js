@@ -26,6 +26,9 @@ class SalariesTab extends Component {
     }
 
     getSalarySearchResults(){
+        this.setState({
+            salaryData : []
+        })
         axios.get(BACKEND_URL + GET_SEARCH_SALARY, {
             params: {
                 searchParameter: this.props.location.state.detail,
@@ -43,7 +46,7 @@ class SalariesTab extends Component {
                 }
             })
             .catch(error => {
-                console.log(error.response.data.msg)
+                console.log("Error")
             })
     }
 
@@ -58,10 +61,10 @@ class SalariesTab extends Component {
 
     render() {
         return (
-            <div class="body">
+            <div class="student-tabs-body">
             <React.Fragment>
                 {this.state.salaryData.map((salary, i) => {
-                    return <div class="card" key={i} style={{ width: "50%", left: "25%", right: "25%", height: "400px" }}>
+                    return <div class="card tabs-card" key={i} style={{ width: "50%", left: "25%", right: "25%", height: "400px" }}>
                         <div class="card-body">
                             <div style={{ width: "100%" }}>
                                 <div style={{ width: "30%", float: "left" }}>
@@ -69,9 +72,9 @@ class SalariesTab extends Component {
                                         <Link to="/overview" class="companyName"> {salary.companyName}</Link>
                                         <p class="companyRating"> {salary.averageRating} <i class="fas fa-star"></i></p>
                                     </div>
-                                    <h6 style={{"width": "250%"}}> {salary.jobTitle}</h6>
-                                    <h6 style={{"width": "250%"}}> {salary.baseSalary}</h6>
-                                    <p class="companyLocation"> {salary.headquarters} </p>
+                                    <h6 style={{"width": "250%"}}> Job: {salary.jobTitle}</h6>
+                                    <h6 style={{"width": "250%"}}> Base Salary: {salary.baseSalary}</h6>
+                                    <p class="companyLocation">Headquarters:  {salary.headquarters} </p>
                                 </div>
                                 <div style={{ width: "40%", float: "right" }}>
                                     <button class="companySite"> Visit Website</button>

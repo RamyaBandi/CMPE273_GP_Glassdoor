@@ -16,7 +16,7 @@ const {
 } = require("../config/routeConstants");
 const Company = require('../models/Company');
 const Reviews = require('../models/Reviews');
-const Student = require('../models/Student')
+const student = require('../models/Student')
 const redisClient = require('../config/redisConnection')
 
 function handle_request(msg, callback) {
