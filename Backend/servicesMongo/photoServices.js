@@ -134,3 +134,61 @@ module.exports.getCompanyPhotos = async (req, res) => {
         }
     }
 }
+
+module.exports.getAllPhotos = async (req, res) => {
+    console.log("Inside All Photos GET service");
+    console.log(req.query);
+    let data = req.query;
+    try {
+        data.page = 1;
+        data.limit = 10;
+        const photos = await Photos.find().limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+        const count = await Photos.countDocuments({ companyId: data.companyId });
+        const result = ({
+            photos,
+            totalPages: Math.ceil(count / data.limit),
+            currentPage: data.page
+        });
+        console.log("All photos fetched successfully from DB");
+        res.status(RES_SUCCESS).send(result);
+    }
+    catch {
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+    }
+}
+
+module.exports.putPhotoApprove = (req, res) => {
+    console.log("Inside Approve Photo PUT service");
+    console.log("req body" + JSON.stringify(req.body));
+    let data = req.body
+    Photos.findByIdAndUpdate(data.photoId, { approvalstatus: "Approved" }, (err, result) => {
+        if (err) {
+            console.log("Error updating photo" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update Approval status for a Photo to Approved: " + JSON.stringify(result))
+            res.status(200).end(JSON.stringify(result))
+        }
+    })
+}
+
+module.exports.putPhotoReject = (req, res) => {
+    console.log("Inside Reject Photo PUT service");
+    console.log("req body" + JSON.stringify(req.body));
+    let data = req.body
+    Photos.findByIdAndUpdate(data.photoId, { approvalstatus: "Rejected" }, (err, result) => {
+        if (err) {
+            console.log("Error updating photo" + err)
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            console.log("Update Approval status for a Photo to Rejected : " + JSON.stringify(result))
+            res.status(200).end(JSON.stringify(result))
+        }
+    })
+}

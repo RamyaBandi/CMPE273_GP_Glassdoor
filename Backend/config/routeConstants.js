@@ -12,8 +12,19 @@ module.exports = {
     POST_STUDENT_SIGNUP: "/student/profile",
     GET_STUDENT_SIGNUP: "/student/profile",
     PUT_STUDENT_SIGNUP: "/student/profile",
-    PUT_STUDENT_DEMOGRAPHICS: "/student/demographics",
-    PUT_STUDENT_JOBPREFERENCE: "/student/jobpreference",
+
+    PUT_STUDENT_DEMOGRAPHICS:"/student/demographics",
+    PUT_STUDENT_JOBPREFERENCE:"/student/jobpreference",
+    POST_RESUME_UPLOAD: "/resume",
+    GET_STUDENT_RESUMES: "/resume",
+    PUT_PRIMARY_RESUME: "/primaryresume",
+    DELETE_STUDENT_RESUME: "/resume",
+    
+
+    //Students Reviews
+    GET_COUNT_RATINGS: "/reviewcount",
+ 
+    
 
     //Student Search Routes
     GET_SEARCH_RESULTS: "/search",
@@ -58,6 +69,9 @@ module.exports = {
     PHOTO_ROUTE: "/photos",
     POST_COMPANY_PHOTOS: "/company",
     GET_COMPANY_PHOTOS: "/company",
+    GET_ALL_PHOTOS: "/all",
+    PUT_PHOTO_APPROVE: "/approve",
+    PUT_PHOTO_REJECT: "/reject",
 
     //Job Routes
     JOB_ROUTE: "/job",
@@ -91,6 +105,7 @@ module.exports = {
     PUT_REVIEW_APPROVE: "/approve/review",
     PUT_REVIEW_REJECT: "/reject/review",
     GET_REVIEW_DETAILS: "/details/review",
+    GET_APPROVED_COMPANY_REVIEWS: "/approved/company/reviews",
 
     //Salary Routes
     SALARY_ROUTE: "/salary",

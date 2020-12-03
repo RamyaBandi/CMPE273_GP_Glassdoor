@@ -57,6 +57,7 @@ module.exports = {
     PUT_REVIEW_REJECT: '/review/reject/review',
     GET_ALL_REVIEWS: '/review/all/reviews',
     GET_REVIEW_DETAILS: '/review/details/review',
+    GET_APPROVED_COMPANY_REVIEWS: '/review/approved/company/reviews',
 
     //Salary Routes
     POST_STUDENT_SALARY: '/salary/student/salary',
@@ -99,6 +100,15 @@ module.exports = {
 
     //Company Details Routes
     //GET_COMPANY_DETAILS: "/companyDetails",
+
+//Students Reviews
+GET_COUNT_RATINGS: "/reviewcount",
+    
+    //resumes
+    POST_RESUME_UPLOAD: "/resume",
+    GET_STUDENT_RESUMES: "/resume",
+    PUT_PRIMARY_RESUME: "/primaryresume",
+    DELETE_STUDENT_RESUME: "/resume",
 
     //Job Routes
     JOB_ROUTE: "/job",

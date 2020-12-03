@@ -7,10 +7,9 @@ const { GET_APPLICATIONS_JOBID, POST_APPLICATION, PUT_APPLICATION, GET_APPLICATI
 
 // console.log(process.env.KAFKA_SWITCH);
 if (process.env.KAFKA_SWITCH === 'true') {
-    // console.log("in kafka service")
-    // jobRouter.route(POST_COMPANY_JOB).post(jobKafkaServices.postCompanyJob);
-    // jobRouter.route(GET_COMPANY_JOBS).get(jobKafkaServices.getCompanyJobs);
-    // jobRouter.route(GET_ALL_JOBS).get(jobServices.getAllJobs);
+    applicationRouter.route(POST_APPLICATION).post(applicationKafkaServices.postApplication);
+    applicationRouter.route(GET_APPLICATIONS_JOBID).get(applicationServices.getApplicationsByJobId);
+    applicationRouter.route(PUT_APPLICATION).put(applicationKafkaServices.putApplications);
 
 }
 else {
