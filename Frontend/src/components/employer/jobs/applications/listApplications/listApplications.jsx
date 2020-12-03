@@ -78,7 +78,7 @@ class ListApplications extends Component {
                             </select>
                         </div>
                     </div>
-                    <div class="card-deck" style={{ justifyContent: "space-evenly" }}>
+                    <div className="card-deck" style={{ justifyContent: "space-evenly" }}>
                         {renderVar}
                     </div>
                     <ReactPaginate
