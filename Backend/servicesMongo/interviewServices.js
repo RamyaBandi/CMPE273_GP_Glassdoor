@@ -71,8 +71,8 @@ module.exports.getCompanyInterviews = async (req, res) => {
     let data = req.query;
     console.log(data);
     try {
-        data.page = 1;
-        data.limit = 10;
+        // data.page = 1;
+        // data.limit = 10;
         const interviews = await Interviews.find({ companyId: data.companyId })
             .limit(data.limit * 1)
             .skip((data.page - 1) * data.limit)
