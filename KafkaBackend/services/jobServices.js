@@ -136,6 +136,32 @@ async function handle_request(msg, callback) {
 				})
 				break;
 			}
+		case "GET_COMPANY_JOBS_BY_JOBTITLE_OR_CITY":
+			{
+				let data = msg.body
+				console.log(data)
+				try {
+					data.page = 1;
+					data.limit = 10;
+					const jobs = Jobs.find({ $and: [{ companyId: data.companyId, $or: [{ jobTitle: data.jobTitle, city: data.city }] }] }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+					const count = Jobs.countDocuments({ companyId: data.companyId, jobTitle: data.jobTitle });
+					const result = ({
+						jobs,
+						totalPages: Math.ceil(count / data.limit),
+						currentPage: data.page
+					});
+					console.log("Jobs fetched successfully from DB");
+					callback(null, result)
+				}
+				catch {
+					if (err) {
+						console.log(err);
+						//res.setHeader(CONTENT_TYPE, APP_JSON);
+						callback(err, 'Error')
+					}
+				}
+				break;
+			}
 		case "GET_COMPANY_JOBS_BY_JOBTITLE":
 			{
 				let data = msg.body

@@ -67,6 +67,7 @@ module.exports = {
     POST_STUDENT_SALARY: '/salary/student/salary',
     GET_COMPANY_SALARIES: '/salary/company/salaries',
     GET_STUDENT_SALARIES: '/salary/student/salaries',
+    GET_SALARY_AVERAGES: "/salary/company/jobTitles/salaries",
 
     //Interview Routes
     POST_STUDENT_INTERVIEW: '/interview/student/interview',
@@ -93,7 +94,7 @@ module.exports = {
     PUT_STUDENT_JOBPREFERENCE: "/student/jobpreference",
 
     //CompanyRoutes
-    GET_COMPANY_DETAILS: '/company/company/profile',
+    GET_COMPANY_DETAILS: '/company/companyDetails',
     GET_JOBS_HOMEPAGE: "/jobshomepage",
     COMPANY_ROUTE: "/company",
     PUT_COMPANY_SIGNUP: "/company/profile",
@@ -120,6 +121,7 @@ GET_COUNT_RATINGS: "/reviewcount",
     GET_COMPANY_JOBS: "/company/jobs",
     GET_COMPANY_JOB_BY_JOBID: '/company/job/jobId',
     GET_COMPANY_JOB_BY_JOBTITLE_OR_CITY: '/company/job/jobTitleOrCity',
+    GET_COMPANY_JOB_BY_JOBTITLE: '/company/job/jobTitle',
     GET_COMPANY_JOB_BY_CITY: '/company/job/city',
     PUT_COMPANY_JOB: '/company/job',
     GET_ALL_JOBS: '/company/jobList',

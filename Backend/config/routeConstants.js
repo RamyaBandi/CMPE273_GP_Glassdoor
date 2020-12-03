@@ -78,7 +78,8 @@ module.exports = {
     POST_COMPANY_JOB: "/company/job",
     GET_COMPANY_JOBS: "/company/jobs",
     GET_COMPANY_JOB_BY_JOBID: "/company/job/jobId",
-    GET_COMPANY_JOBS_BY_JOBTITLE_OR_CITY: '/company/jobs/jobTitleorCity',
+    GET_COMPANY_JOBS_BY_JOBTITLE_OR_CITY: '/company/jobs/jobTitleOrCity',
+    GET_COMPANY_JOBS_BY_JOBTITLE: '/company/jobs/jobTitle',
     GET_COMPANY_JOBS_BY_CITY: '/company/jobs/city',
     PUT_COMPANY_JOB: '/company/job',
     GET_ALL_JOBS: '/company/jobList',
@@ -112,6 +113,7 @@ module.exports = {
     POST_STUDENT_SALARY: "/student/salary",
     GET_STUDENT_SALARIES: "/student/salaries",
     GET_COMPANY_SALARIES: "/company/salaries",
+    GET_SALARY_AVERAGES: "/company/jobTitles/salaries",
 
     //Interview Routes
     INTERVIEW_ROUTE: "/interview",
