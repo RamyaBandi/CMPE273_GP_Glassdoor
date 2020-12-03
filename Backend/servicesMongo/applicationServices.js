@@ -143,6 +143,11 @@ module.exports.putApplications = async (req, res) => {
     else if (data.status === "Rejected") {
         applicationstatus = "Rejected"
     }
+    else if (data.status === "Withdrawn") {
+        applicationstatus = "Withdrawn"
+    }
+
+
     try {
         Applications.findOneAndUpdate({ _id: data.applicationId }, { status: data.status, applicationstatus: applicationstatus }, (err, result) => {
             if (err) {
@@ -159,6 +164,52 @@ module.exports.putApplications = async (req, res) => {
                 res.status(RES_SUCCESS).send(result);
             }
         })
+
+    }
+    catch {
+        if (err) {
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+    }
+}
+
+
+
+module.exports.getApplicationsByStudentId = async (req, res) => {
+
+    console.log("Inside Applications Student GET service");
+    let data = req.query
+    console.log(data)
+    try {
+
+        await Applications.find({ studentId: data.studentId })
+            .limit(data.limit * 1).skip((data.page - 1) * data.limit)
+            .populate({ path: 'jobId', model: 'Jobs', select: 'companyName jobTitle postedDate industry responsibilities country remote streetAddress city state  zip averageSalary' })
+            // .populate({ path: 'studentId', model: 'Student' })
+            // .populate({ path: 'resume', model: 'Resume' })
+            .exec((err, results) => {
+                if (err) {
+                    console.log("Error Fetching Applications with student id")
+                    console.log(err);
+                    //res.setHeader(CONTENT_TYPE, APP_JSON);
+                    res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+                }
+                else {
+                    console.log(results)
+
+                    Applications.countDocuments({ studentId: data.studentId }, (err, count) => {
+                        const result = ({
+                            results,
+                            totalPages: Math.ceil(count / data.limit),
+                            currentPage: data.page
+                        });
+                        console.log("Applications fetched successfully from DB")
+                        res.status(RES_SUCCESS).send(result);
+                    })
+                }
+            });
 
     }
     catch {
