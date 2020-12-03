@@ -123,8 +123,8 @@ module.exports.getCompanyPhotos = async (req, res) => {
     console.log(studentId)
     let data = req.query;
     try {
-        data.page = 1;
-        data.limit = 20;
+        // data.page = 1;
+        // data.limit = 20;
         const photos = await Photos.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
         const count = await Photos.countDocuments({ companyId: data.companyId });
         let formattedPhotos=[]

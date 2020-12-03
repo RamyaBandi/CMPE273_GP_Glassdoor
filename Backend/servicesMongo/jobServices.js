@@ -90,35 +90,40 @@ module.exports.updateCompanyJob = (req, res) => {
     })
 }
 
-module.exports.getAllJobs = (req, res) => {
+module.exports.getAllJobs = async (req, res) => {
     console.log("Inside Job GET all service");
-    console.log(req.query)
-    let data = req.body
-    Jobs.find((err, result) => {
-
+    console.log(req.query);
+    let data = req.body;
+    try {
+        // data.page = 1;
+        // data.limit = 10;
+        const jobs = await Jobs.find().limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+        const count = await Jobs.countDocuments();
+        const result = ({
+            jobs,
+            totalPages: Math.ceil(count / data.limit),
+            currentPage: data.page
+        });
+        console.log("Jobs fetched successfully from DB");
+        res.status(RES_SUCCESS).send(result);
+    }
+    catch {
         if (err) {
-            console.log("Error fetching job")
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
         }
-        else {
-            // console.log(JSON.stringify(result));
-            //res.setHeader(CONTENT_TYPE, APP_JSON);
-            console.log("Jobs fetched Successfully");
-            console.log(result);
-            res.status(RES_SUCCESS).send(result);
-
-        }
-    })
+    }
 }
+
 
 module.exports.getCompanyJobs = async (req, res) => {
     console.log("Inside Company Jobs GET service");
     let data = req.query
     console.log(data)
     try {
-
+        // data.page = 1;
+        // data.limit = 10;
         const jobs = await Jobs.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
         const count = await Jobs.countDocuments({ companyId: data.companyId });
         const result = ({
@@ -144,8 +149,8 @@ module.exports.getCompanyJobsByJobId = async (req, res) => {
     let data = req.query
     console.log(data)
     try {
-        data.page = 1;
-        data.limit = 10;
+        // data.page = 1;
+        // data.limit = 10;
         const jobs = await Jobs.find({ _id: data.jobId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
         const count = await Jobs.countDocuments({ _id: data.jobId });
         const result = ({
@@ -171,8 +176,8 @@ module.exports.getCompanyJobsByJobTitleOrCity = async (req, res) => {
     let data = req.query
     console.log(data)
     try {
-        data.page = 1;
-        data.limit = 10;
+        // data.page = 1;
+        // data.limit = 10;
         if (data.jobTitle != null && data.city != null) {
             const jobs = await Jobs.find({ $and: [{ companyId: data.companyId, $or: [{ jobTitle: data.jobTitle, city: data.city }] }] }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
             const count = await Jobs.countDocuments({ companyId: data.companyId, jobTitle: data.jobTitle });
@@ -196,8 +201,6 @@ module.exports.getCompanyJobsByJobTitleOrCity = async (req, res) => {
             res.status(RES_SUCCESS).send(result);
         }
         else {
-            data.page = 1;
-            data.limit = 10;
             const jobs = await Jobs.find({ companyId: data.companyId, city: data.city }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
             const count = await Jobs.countDocuments({ companyId: data.companyId, city: data.city });
             const result = ({
@@ -224,8 +227,8 @@ module.exports.getCompanyJobsByJobTitle = async (req, res) => {
     let data = req.query
     console.log(data)
     try {
-        data.page = 1;
-        data.limit = 10;
+        // data.page = 1;
+        // data.limit = 10;
         const jobs = await Jobs.find({ companyId: data.companyId, jobTitle: data.jobTitle }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
         const count = await Jobs.countDocuments({ companyId: data.companyId, jobTitle: data.jobTitle });
         const result = ({
@@ -251,8 +254,8 @@ module.exports.getCompanyJobsByCity = async (req, res) => {
     let data = req.query
     console.log(data)
     try {
-        data.page = 1;
-        data.limit = 10;
+        // data.page = 1;
+        // data.limit = 10;
         const jobs = await Jobs.find({ companyId: data.companyId, city: data.city }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
         const count = await Jobs.countDocuments({ companyId: data.companyId, city: data.city });
         const result = ({
