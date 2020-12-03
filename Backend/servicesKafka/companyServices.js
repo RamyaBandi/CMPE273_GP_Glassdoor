@@ -13,8 +13,6 @@ const {
     GET_ALL_REVIEWS,
     GET_COMPANY_REVIEWS,
     POST_COMPANY_REPLY,
-	  RES_SUCCESS,
-	  RES_INTERNAL_SERVER_ERROR,
 } = require("../config/routeConstants");
 
 
