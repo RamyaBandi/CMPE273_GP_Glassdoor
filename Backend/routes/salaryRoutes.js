@@ -8,7 +8,6 @@ const { POST_STUDENT_SALARY, GET_COMPANY_SALARIES, GET_STUDENT_SALARIES } = requ
 
 // console.log(process.env.KAFKA_SWITCH)
 if (process.env.KAFKA_SWITCH === 'true') {
-    console.log("in kafka service")
     salaryRouter.route(POST_STUDENT_SALARY).post(salaryKafkaServices.postStudentSalary);
     salaryRouter.route(GET_COMPANY_SALARIES).get(salaryKafkaServices.getCompanySalaries);
     salaryRouter.route(GET_STUDENT_SALARIES).get(salaryKafkaServices.getStudentSalaries);

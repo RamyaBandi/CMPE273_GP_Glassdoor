@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {   MDBRow,  MDBCard, MDBCardBody, MDBIcon, MDBCol, MDBCardImage, MDBInput } from "mdbreact"
 import axios from 'axios'
 import routeConstants from "../../../config/routeConstants";
+import StarRatingComponent from 'react-star-rating-component';
+import { Link } from "react-router-dom";
 class reviewCard extends Component {
   state={
     reply:''
@@ -58,6 +60,13 @@ handlefeatured=(e)=>{
         console.log(this.props.reviewitem)
         let review=this.props.reviewitem
         let reply=this.props.reviewitem.reply
+        var replytime=""
+        if(this.props.reviewitem.replyTimeStamp){
+          //console.log("reply time")
+          var replytime=this.props.reviewitem.replyTimeStamp.split('T')[0]
+          //console.log(replytime)
+        }
+        
 
         return (
             <MDBRow>
@@ -65,13 +74,38 @@ handlefeatured=(e)=>{
         <MDBCard news className="my-7">
           <MDBCardBody>
             <div className="content">
-        <div className="right-side-meta">{review.reviewDate.split('T')[0]}</div>
-              <img
-                
-                alt=""
-                className="rounded-circle avatar-img z-depth-1-half"
-              />
-              <h1>{review.headline} </h1>
+        <div className="right-side-meta">{review.reviewDate.split('T')[0]}
+        <h3><StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={review.overallRating}
+                        starColor="#D4AF37"
+                        renderStarIcon={(index, value) => {
+                          return (
+                            <div className="color-of-star">
+                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                            </div>
+                          );
+                        }}
+                        renderStarIconHalf={() => (
+                          <div className="color-of-star">
+                            <span className="position-absolute"><i className={"far fa-star"} /></span>
+                            <span><i className={"fas fa-star-half"} /></span>
+                          </div>
+                        )}
+                    />
+                    </h3>
+        <p>Rating : {review.overallRating}</p>
+        </div>
+        <h2>   
+        <Link
+            className="Link"
+            to={{
+              pathname: `/viewreview`,
+              state: review._id 
+            }}
+            style={{ color: "black" }}
+          >{review.headline} </Link></h2>   
               <p>{review.description} </p>
             </div>
           </MDBCardBody>
@@ -91,7 +125,7 @@ handlefeatured=(e)=>{
             </div>
             <hr />     
             
-            <div className="left-side-meta">{review.replyTimeStamp.split('T')[0]}</div>    
+            <div className="right-side-meta">{replytime}</div> 
                 <h5 className="font-italic">{reply}</h5>          
             <MDBInput far icon="comment" name="reply" onChange={this.replyinput} hint="Add Comment..." />
             <button class="btn btn-success" onClick={this.submithandle}>Reply</button>
@@ -100,7 +134,8 @@ handlefeatured=(e)=>{
       </MDBCol>
       </MDBRow>
           );
-    }
+    
+  }
 }
  
 export default reviewCard;

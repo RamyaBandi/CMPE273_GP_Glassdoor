@@ -43,8 +43,8 @@ class AddSalary extends Component {
       yearsOfExperience: this.state.yearsOfExperience,
       location : this.state.location,
       employerName: this.state.employerName,
-      company_id: "5fb4884acf339e3da0d5c31e",
-      student_id: "5fb48df63d242fa0842343f3"
+      companyId: "5fb4884acf339e3da0d5c31e",
+      studentId: localStorage.getItem('mongoId'),
     };
     axios.post(BACKEND_URL + POST_STUDENT_SALARY, this.salaryData)
             .then(response => {
@@ -108,13 +108,13 @@ class AddSalary extends Component {
                         </Col>
                     </Row>
         </Container>
-        
-        <Container style={{ marginLeft: "25%", width: "42%" }}>
+        <Container style={{ marginLeft: "25%", width: "100%" }}>
+        <Container style={{ width: "100%" }}>
           <Row>
             <b>Add a Salary</b>
           </Row>
         </Container>
-        <Container style={{ marginTop: "20px", width: "45%" }}>
+        <Container style={{ marginTop: "20px", width: "100%" }}>
             <Row>
             <p>Salary Details</p>
           </Row>
@@ -233,6 +233,7 @@ class AddSalary extends Component {
               </Row>
             </div>
           </Row>
+        </Container>
         </Container>
       </div>
     );

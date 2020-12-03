@@ -5,6 +5,7 @@ const searchKafkaServices = require('../servicesKafka/searchServices')
 
 const { GET_JOB_SEARCH, GET_COMPANY_SEARCH, GET_SALARY_SEARCH, GET_INTERVIEW_SEARCH } = require('../config/routeConstants');
 
+
 if (process.env.KAFKA_SWITCH === 'true') {
     searchRouter.route(GET_JOB_SEARCH).get(searchServices.jobSearch);
 

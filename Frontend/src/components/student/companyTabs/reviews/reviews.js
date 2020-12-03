@@ -5,10 +5,13 @@ import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import ReviewCard from "./reviewCard";
+import ReactPaginate from 'react-paginate';
+import StarRatingComponent from 'react-star-rating-component';
+import Chart from "react-google-charts";
 import axios from "axios";
 import {
   BACKEND_URL,
-  GET_COMPANY_REVIEWS,
+  GET_APPROVED_COMPANY_REVIEWS,
   GET_COMPANY_DETAILS,
   GET_POSITIVE_REVIEW,
   GET_NEGATIVE_REVIEW,
@@ -25,6 +28,9 @@ class Reviews extends Component {
       negativeReviews: {},
       avgReviews: {},
       redirect: null,
+      limit: 10,
+      page: 1,
+      totalPages: 0
     };
   }
   addReview = async (e) => {
@@ -32,18 +38,22 @@ class Reviews extends Component {
   };
   componentDidMount() {
     const company_id = '5fb4884acf339e3da0d5c31e';
+    const student_id = localStorage.getItem('mongoId');
     //const company_id = this.props.location.state;
     //console.log(company_id);
-    axios
-      .get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + company_id)
-      .then((response) => {
-        // console.log("reviews response");
-        // console.log(response.data.reviews);
-        this.setState({ reviews: response.data.reviews });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
+    // axios
+    //   .get( BACKEND_URL + GET_APPROVED_COMPANY_REVIEWS + "?companyId=" + company_id + "&studentId="+ student_id + "&page=" + this.state.page + "&limit=" + this.state.limit)
+    //   .then((response) => {
+    //     this.setState({ reviews: response.data.reviews });
+    //     console.log("reviews response")
+    //     console.log(response.data)
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    this.updatePageList();
 
     axios
       .get(BACKEND_URL + GET_COMPANY_DETAILS + "?companyId=" + company_id)
@@ -60,7 +70,7 @@ class Reviews extends Component {
       axios
       .get(BACKEND_URL + GET_POSITIVE_REVIEW + "?companyId=" + company_id)
       .then((response) => {
-        console.log("positive review");
+        //console.log("positive review");
         this.setState({ positiveReviews: response.data.positiveReviews[0] });
         //console.log(this.state.positiveReviews);
       })
@@ -71,7 +81,7 @@ class Reviews extends Component {
       axios
       .get(BACKEND_URL + GET_NEGATIVE_REVIEW + "?companyId=" + company_id)
       .then((response) => {
-        console.log("negative review");
+        //console.log("negative review");
         this.setState({ negativeReviews: response.data.negativeReviews[0] });
         //console.log(this.state.negativeReviews);
       })
@@ -82,14 +92,56 @@ class Reviews extends Component {
       axios
       .get(BACKEND_URL + GET_REVIEW_AVERAGE + "?companyId=" + company_id)
       .then((response) => {
-        console.log("review average");
-        this.setState({ avgReviews: response.data.avgReviews[0] });
-        console.log(this.state.avgReviews);
+        //console.log("review average");
+        this.setState({ avgReviews: response.data });
+        //console.log(this.state.avgReviews);
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
+  updatePageList() {
+    console.log("in update page list");
+    const company_id = '5fb4884acf339e3da0d5c31e';
+    const student_id = localStorage.getItem('mongoId');
+    axios.get(BACKEND_URL + GET_APPROVED_COMPANY_REVIEWS, {
+        params: {
+            companyId: company_id,
+            studentId: student_id,
+            limit: this.state.limit,
+            page: this.state.page
+        }
+        })
+        .then((res) => {
+            this.setState({ reviews: [...res.data.reviews], totalPages: res.data.totalPages })
+            console.log("reviews list")
+            console.log(this.state.reviews);
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+        
+}
+
+handlePageClick = (data) => {
+  let selected = data.selected + 1;
+  // let offset = Math.ceil(selected * this.props.perPage);
+  //console.log(data)
+  this.setState({ page: selected }, () => {
+      this.updatePageList()
+  })
+
+};
+
+handleChange = (e) => {
+  //  console.log(this.state);
+  let { value, id } = e.target;
+  this.setState({ [id]: value }, () => this.updatePageList());
+
+  // console.log(this.state)
+};
 
   render = () => {
     return (
@@ -143,14 +195,24 @@ class Reviews extends Component {
         
           <Container style={{ marginTop: "30px", width: "61%" }}>
             <Row>
+              <Col md="4">
+              </Col>
             <Col md="4">
-              Average Overall Rating: {this.state.avgReviews.averageOverallRating}
+              <p style={{fontSize:"17px"}}  class="companyRating">Average Overall Rating: {this.state.avgReviews.averageOverallRating}<i class="fas fa-star"></i></p>
             </Col>
+            
             <Col md="4">
-              Average Recommended Rating: {this.state.avgReviews.averageRecommendedRating}
+              </Col>
+            </Row>
+
+            <Row>
+              <Col md="1">
+              </Col>
+            <Col md="5">
+              <p style={{fontSize:"17px"}} class="companyRating">Average Recommended Rating: {this.state.avgReviews.averageRecommendedRating}<i class="fas fa-star"></i></p>
             </Col>
-            <Col md="4">
-              Average CEO Rating: {this.state.avgReviews.averageCeoRating}
+            <Col md="6">
+              <p style={{fontSize:"17px"}} class="companyRating">Average CEO Rating: {this.state.avgReviews.averageCeoRating}<i class="fas fa-star"></i></p>
             </Col>
             </Row>
           </Container>
@@ -164,33 +226,91 @@ class Reviews extends Component {
           </Row>
             <Row>
               <p style={{ color: "#3f76cc", fontSize: "22px" }}>
-                <b>{this.state.positiveReviews.headline}</b>
+                Headline: <b>{this.state.positiveReviews.headline}</b>
               </p>          
             </Row>
             <Row>
               <Col md="4">
-                <p>Overall Rating: {this.state.positiveReviews.overallRating}</p>
+                
+                <StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={this.state.positiveReviews.overallRating}
+                        starColor="#D4AF37"
+                        renderStarIcon={(index, value) => {
+                          return (
+                            <div className="color-of-star">
+                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                            </div>
+                          );
+                        }}
+                        renderStarIconHalf={() => (
+                          <div className="color-of-star">
+                            <span className="position-absolute"><i className={"far fa-star"} /></span>
+                            <span><i className={"fas fa-star-half"} /></span>
+                          </div>
+                        )}
+                    />
+                   <p>Overall Rating: {this.state.positiveReviews.overallRating} </p>
               </Col>
               <Col md="4">
+              <StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={this.state.positiveReviews.recommendedRating}
+                        starColor="#D4AF37"
+                        renderStarIcon={(index, value) => {
+                          return (
+                            <div className="color-of-star">
+                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                            </div>
+                          );
+                        }}
+                        renderStarIconHalf={() => (
+                          <div className="color-of-star">
+                            <span className="position-absolute"><i className={"far fa-star"} /></span>
+                            <span><i className={"fas fa-star-half"} /></span>
+                          </div>
+                        )}
+                    />
                 <p>Recommended to a Friend: {this.state.positiveReviews.recommendedRating}</p>
               </Col>
               <Col md="4">
+              <StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={this.state.positiveReviews.ceoRating}
+                        starColor="#D4AF37"
+                        renderStarIcon={(index, value) => {
+                          return (
+                            <div className="color-of-star">
+                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                            </div>
+                          );
+                        }}
+                        renderStarIconHalf={() => (
+                          <div className="color-of-star">
+                            <span className="position-absolute"><i className={"far fa-star"} /></span>
+                            <span><i className={"fas fa-star-half"} /></span>
+                          </div>
+                        )}
+                    />
                 <p>CEO approval: {this.state.positiveReviews.ceoRating}</p>
               </Col>
             </Row>
             <Row>
-              <p>{this.state.positiveReviews.description}</p>
+              <p>Description: {this.state.positiveReviews.description}</p>
             </Row>
             <Row>
               <p>
-                <b>Pros</b>
+                <b>Pros:</b>
                 <br />
                 {this.state.positiveReviews.pros}
               </p>
             </Row>
             <Row>
               <p>
-                <b>Cons</b>
+                <b>Cons:</b>
                 <br />
                 {this.state.positiveReviews.cons}
               </p>
@@ -205,46 +325,133 @@ class Reviews extends Component {
           </Row>
             <Row>
               <p style={{ color: "#3f76cc", fontSize: "22px" }}>
-                <b>{this.state.negativeReviews.headline}</b>
+                Headline: <b>{this.state.negativeReviews.headline}</b>
               </p>          
             </Row>
             <Row>
               <Col md="4">
+              <StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={this.state.negativeReviews.overallRating}
+                        starColor="#D4AF37"
+                        renderStarIcon={(index, value) => {
+                          return (
+                            <div className="color-of-star">
+                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                            </div>
+                          );
+                        }}
+                        renderStarIconHalf={() => (
+                          <div className="color-of-star">
+                            <span className="position-absolute"><i className={"far fa-star"} /></span>
+                            <span><i className={"fas fa-star-half"} /></span>
+                          </div>
+                        )}
+                    />
                 <p>Overall Rating: {this.state.negativeReviews.overallRating}</p>
               </Col>
               <Col md="4">
+              <StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={this.state.negativeReviews.recommendedRating}
+                        starColor="#D4AF37"
+                        renderStarIcon={(index, value) => {
+                          return (
+                            <div className="color-of-star">
+                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                            </div>
+                          );
+                        }}
+                        renderStarIconHalf={() => (
+                          <div className="color-of-star">
+                            <span className="position-absolute"><i className={"far fa-star"} /></span>
+                            <span><i className={"fas fa-star-half"} /></span>
+                          </div>
+                        )}
+                    />
                 <p>Recommended to a Friend: {this.state.negativeReviews.recommendedRating}</p>
               </Col>
               <Col md="4">
+              <StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={this.state.negativeReviews.ceoRating}
+                        starColor="#D4AF37"
+                        renderStarIcon={(index, value) => {
+                          return (
+                            <div className="color-of-star">
+                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                            </div>
+                          );
+                        }}
+                        renderStarIconHalf={() => (
+                          <div className="color-of-star">
+                            <span className="position-absolute"><i className={"far fa-star"} /></span>
+                            <span><i className={"fas fa-star-half"} /></span>
+                          </div>
+                        )}
+                    />
                 <p>CEO approval: {this.state.negativeReviews.ceoRating}</p>
               </Col>
             </Row>
             <Row>
-              <p>{this.state.negativeReviews.description}</p>
+              <p>Description: {this.state.negativeReviews.description}</p>
             </Row>
             <Row>
               <p>
-                <b>Pros</b>
+                <b>Pros:</b>
                 <br />
                 {this.state.negativeReviews.pros}
               </p>
             </Row>
             <Row>
               <p>
-                <b>Cons</b>
+                <b>Cons:</b>
                 <br />
                 {this.state.negativeReviews.cons}
               </p>
             </Row>
           </Col>
         </Container>
-
+        
           <Container style={{ marginBottom: "30px" }}>
             {this.state.reviews.map((item) => {
               return <ReviewCard {...item} />;
             })}
           </Container>
         </Row>
+        <ReactPaginate
+                        previousLabel={'previous'}
+                        nextLabel={'next'}
+                        breakLabel={'...'}
+                        breakClassName={'break-me'}
+                        pageCount={this.state.totalPages}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={this.handlePageClick}
+                        containerClassName={'pagination'}
+                        subContainerClassName={'pages pagination'}
+                        activeClassName={'active'}
+                    />
+        <Container style={{ marginBottom: "30px" }}>
+        <Row>
+        <div className="input-group"
+                            style={{ width: "200px", justifyContent: "space-around" }}
+                        >
+                            <div className="input-group-prepend">
+                                <label  >Page Limit </label>
+                            </div>
+                            <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+        </div>
+        </Row>
+        </Container>
       </div>
     );
   };

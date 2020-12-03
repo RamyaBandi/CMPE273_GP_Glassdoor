@@ -47,7 +47,7 @@ class AddReviews extends Component {
       cons: this.state.cons,
       description: this.state.description,
       companyId: this.props.location.state,
-      studentId: "5fb48df63d242fa0842343f3"
+      studentId: localStorage.getItem('mongoId'),
     };
     axios.post(BACKEND_URL + POST_STUDENT_REVIEW, this.reviewData)
             .then(response => {
@@ -111,8 +111,8 @@ class AddReviews extends Component {
                         </Col>
                     </Row>
         </Container>
-
-        <Container style={{ marginLeft: "25%", width: "42%" }}>
+        <Container style={{ marginTop: "30px", marginLeft: "25%", width: "100%" }}>
+        <Container style={{ marginLeft: "0%", width: "42%" }}>
           <Row>
             <b>Rate a Company</b>
           </Row>
@@ -121,12 +121,12 @@ class AddReviews extends Component {
             job seekers.
           </Row>
         </Container>
-        <Container style={{ marginTop: "20px", width: "45%" }}>
+        <Container style={{ marginTop: "20px", width: "100%" }}>
           
           <Row>
             <Form.Group
               controlId="exampleForm.ControlSelect1"
-              style={{ width: "42%" }}
+              style={{ width: "100%" }}
             >
               <Form.Label>Overall Rating</Form.Label>
               <Form.Control
@@ -146,7 +146,7 @@ class AddReviews extends Component {
           <Row>
             <Form.Group
               controlId="exampleForm.ControlSelect1"
-              style={{ width: "42%" }}
+              style={{ width: "100%" }}
             >
               <Form.Label>Recommended Rating</Form.Label>
               <Form.Control
@@ -166,7 +166,7 @@ class AddReviews extends Component {
           <Row>
             <Form.Group
               controlId="exampleForm.ControlSelect1"
-              style={{ width: "42%" }}
+              style={{ width: "100%" }}
             >
               <Form.Label>CEO Rating</Form.Label>
               <Form.Control
@@ -239,7 +239,7 @@ class AddReviews extends Component {
               </div>
             </form>
           </Row>
-          <Row>
+          <Row style={{ marginLeft: "0%", width: "42%" }}>
             By submitting I agree to the Glassdoor Terms of Use. This review of
             my experience at my current or former employer is truthful.
           </Row>
@@ -259,6 +259,7 @@ class AddReviews extends Component {
               </Row>
             </div>
           </Row>
+        </Container>
         </Container>
       </div>
     );

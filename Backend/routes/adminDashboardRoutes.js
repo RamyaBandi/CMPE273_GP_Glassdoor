@@ -32,4 +32,5 @@ else {
     adminAnalyticsRouter.route(GET_TOP_COMPANY_VIEWS).get(adminAnalyticsServices.topcompanyviews);
 }
 
+
 module.exports = adminAnalyticsRouter;

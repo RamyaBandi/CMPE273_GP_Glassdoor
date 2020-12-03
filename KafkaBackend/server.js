@@ -10,6 +10,10 @@ const company=require('./services/companyServices')
 const jobshomepage = require('./services/jobsHomePageServices')
 const studentsearch= require('./services/searchServices')
 const adminanalytics = require('./services/adminDashboardServices')
+const companyStatistics = require('./services/companyStatisticsServices')
+const jobs = require('./services/jobServices')
+const applications = require('./services/applicationServices')
+
 
 function handleTopicRequest(topic_name, fname) {
     //var topic_name = 'root_topic';
@@ -43,7 +47,7 @@ function handleTopicRequest(topic_name, fname) {
                 return;
             }
             else {
-                // console.log('after handle' + res);
+                // console.log('after handle' + JSON.stringify(res));
                 var payloads = [
                     {
                         topic: data.replyTo,
@@ -55,7 +59,7 @@ function handleTopicRequest(topic_name, fname) {
                     }
                 ];
                 producer.send(payloads, function (err, data) {
-                    // console.log(data);
+                    // console.log(payloads);
                 });
                 return;
             }
@@ -69,6 +73,7 @@ function handleTopicRequest(topic_name, fname) {
 // handleTopicRequest("post_book", Books)
 
 //handleTopicRequest("login", login)
+
 handleTopicRequest("register", register)
 handleTopicRequest("login", login)
 handleTopicRequest("reviews",reviews)
@@ -76,3 +81,7 @@ handleTopicRequest("company",company)
 handleTopicRequest("jobshomepage", jobshomepage)
 handleTopicRequest("studentsearch", studentsearch)
 handleTopicRequest("adminanalytics", adminanalytics)
+handleTopicRequest("companyStatistics", companyStatistics)
+handleTopicRequest("jobs", jobs)
+handleTopicRequest("applications", applications)
+

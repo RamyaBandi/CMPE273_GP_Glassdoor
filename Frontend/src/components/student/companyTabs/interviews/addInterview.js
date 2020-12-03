@@ -54,11 +54,11 @@ class AddInterview extends Component {
       difficulty: this.state.difficulty,
       offerStatus: this.state.offerStatus,
       companyId: "5fb4884acf339e3da0d5c31e",
-      studentId: "5fb48df63d242fa0842343f3",
+      studentId: localStorage.getItem('mongoId'),
       interviewQnA: [
         {
           companyId: "5fb4884acf339e3da0d5c31e",
-          studentId: "5fb48df63d242fa0842343f3",
+          studentId: localStorage.getItem('mongoId'),
           question: this.state.question,
           answer: this.state.answer,
         },
@@ -127,8 +127,8 @@ class AddInterview extends Component {
                         </Col>
                     </Row>
         </Container>
-
-        <Container style={{ marginLeft: "35%", width: "50%" }}>
+        <Container style={{ marginLeft: "25%", width: "100%" }}>
+        <Container style={{ width: "100%" }}>
           <Row>
             <p>
               <b>Add an Interview</b>
@@ -136,13 +136,13 @@ class AddInterview extends Component {
           </Row>
         </Container>
         <Container
-          style={{ marginLeft: "35%", marginTop: "0px", width: "50%" }}
+          style={{ marginTop: "0px", width: "100%" }}
         >
           <Row>
             <p>Tell us about a recent job interview</p>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "50%" }}>
+            <form style={{ marginTop: "0px", width: "100%" }}>
               <div class="form-group">
                 <label for="employername">Employer</label>
                 <input
@@ -165,7 +165,7 @@ class AddInterview extends Component {
               data-toggle="buttons"
               style={{
                 marginTop: "0px",
-                width: "50%",
+                width: "40%",
                 marginLeft: "0px",
                 marginRight: "0px",
               }}
@@ -204,7 +204,7 @@ class AddInterview extends Component {
             </div>
           </Row>
           <Row>
-            <form style={{ marginTop: "10px", width: "50%" }}>
+            <form style={{ marginTop: "10px", width: "100%" }}>
               <div class="form-group">
                 <label for="jobtitle">Job Title</label>
                 <input
@@ -219,7 +219,7 @@ class AddInterview extends Component {
             </form>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "50%" }}>
+            <form style={{ marginTop: "0px", width: "100%" }}>
               <div class="form-group">
                 <label for="description">Describe the Interview Process</label>
                 <textarea
@@ -235,7 +235,7 @@ class AddInterview extends Component {
           <Row>
             <Form.Group
               controlId="exampleForm.ControlSelect1"
-              style={{ width: "50%" }}
+              style={{ width: "100%" }}
             >
               <Form.Label>Interview Difficulty</Form.Label>
               <Form.Control
@@ -253,7 +253,7 @@ class AddInterview extends Component {
           <Row>
             <Form.Group
               controlId="exampleForm.ControlSelect1"
-              style={{ width: "50%" }}
+              style={{ width: "100%" }}
             >
               <Form.Label>Offer Status</Form.Label>
               <Form.Control
@@ -268,7 +268,7 @@ class AddInterview extends Component {
             </Form.Group>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "50%" }}>
+            <form style={{ marginTop: "0px", width: "100%" }}>
               <div class="form-group">
                 <label for="question">Interview Question</label>
                 <textarea
@@ -282,7 +282,7 @@ class AddInterview extends Component {
             </form>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "50%" }}>
+            <form style={{ marginTop: "0px", width: "100%" }}>
               <div class="form-group">
                 <label for="answer">Answer</label>
                 <textarea
@@ -323,6 +323,7 @@ class AddInterview extends Component {
               </Row>
             </div>
           </Row>
+        </Container>
         </Container>
       </div>
     );

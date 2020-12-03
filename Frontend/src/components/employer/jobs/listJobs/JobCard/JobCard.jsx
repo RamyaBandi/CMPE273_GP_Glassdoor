@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
-
+import './JobCard.styles.css'
 class JobCard extends Component {
     state = {
-        redirect: false
     }
     componentDidMount() {
         console.log(this.props)
@@ -48,8 +47,7 @@ class JobCard extends Component {
         }
         return (
             <div>
-                {this.renderRedirect()}
-                <div class="card">
+                <div class="card jobCard">
                     <h5 class="card-header">{data.companyName}</h5>
                     <div class="card-body">
                         <h5 class="card-title">{data.jobTitle}</h5>
@@ -58,12 +56,10 @@ class JobCard extends Component {
                         {/* <p class="card-text">Responsibilities : {data.responsibilities}</p> */}
                         {/* <p class="card-text">Location : {data.streetAddress},{data.city},{data.state},{data.country},{data.zip}</p> */}
                         <p class="card-text">Location :{data.city},{data.state},{data.country}</p>
-
                         <p class="card-text">Remote : {data.remote ? "Yes" : "No"}</p>
+                        <p class="card-text">Applications Count : {data.applications.length}</p>
                         <p class="card-text"><small class="text-muted">{data.postedDate}</small></p>
-
-
-                        <button onClick={this.handleJobDetails} class="btn btn-success">Edit Job</button>
+                        <button onClick={this.handleJobDetails} style={{ marginRight: "10px" }} class="btn btn-success">Edit Job</button>
                         <button onClick={this.handleViewApplicants} class="btn btn-success">View Applications</button>
 
                     </div>
