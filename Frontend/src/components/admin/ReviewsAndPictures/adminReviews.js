@@ -5,6 +5,7 @@ import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import ReviewCard from "../../student/companyTabs/reviews/reviewCard";
+import ReactPaginate from 'react-paginate';
 import axios from "axios";
 import {
   BACKEND_URL,
@@ -25,22 +26,59 @@ class AdminReviews extends Component {
       cart:         {},
       addedItem2:    {},
       cart2:         {},
+      page : 1,
+      limit : 30,
       redirect: null,
     };
+    this.handlePageClick = this.handlePageClick.bind(this)
+    this.getReviewResults = this.getReviewResults.bind(this)
+
   }
 
   componentDidMount() {
     const company_id = '5fb4884acf339e3da0d5c31e';
     //const company_id = this.props.location.state;
-    axios
-      .get(BACKEND_URL + GET_ALL_REVIEWS)
-      .then((response) => {
-        this.setState({ reviews: response.data.reviews });
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.getReviewResults();
+    // axios
+    //   .get(BACKEND_URL + GET_ALL_REVIEWS)
+    //   .then((response) => {
+    //     this.setState({ reviews: response.data.reviews });
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    }
+
+    handlePageClick = (e) => {
+        // console.log("Page number",e.selected)
+            this.setState({
+                page: e.selected + 1,
+            }, () => {
+                this.getReviewResults()
+            });
+        console.log("Page number",e.selected)
+    }
+
+    async getReviewResults(){
+        await axios.get(BACKEND_URL + GET_ALL_REVIEWS, {
+            params: {
+                page : this.state.page,
+                limit : this.state.limit
+            }
+        })
+            .then(response => {
+                console.log("Status Code : ", response.status);
+                if (response.status === 200) {
+                    console.log("Reviews Data", response.data)
+                    this.setState({
+                        reviews: response.data.reviews
+                    })
+                }
+            })
+            .catch(error => {
+                console.log(error.response.data.msg)
+            })
     }
 
     addApproveItem=(item)=>{
@@ -153,6 +191,18 @@ class AdminReviews extends Component {
                         </Col>
         </Col>
         </Row>
+        <ReactPaginate
+                    previousLabel={"<<"}
+                    nextLabel={">>"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={this.state.pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"} />
         
       </div>
     );

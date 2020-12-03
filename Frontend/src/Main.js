@@ -41,6 +41,7 @@ import Photos from './components/student/companyTabs/photos/parent';
 import AdminReviews from './components/admin/ReviewsAndPictures/adminReviews'
 import ViewReview from './components/admin/ReviewsAndPictures/viewreview'
 import AdminPhotos from './components/admin/ReviewsAndPictures/adminPhotos'
+import ViewPhoto from './components/admin/ReviewsAndPictures/viewphoto'
 
 class Main extends Component {
     render() {
@@ -74,6 +75,7 @@ class Main extends Component {
                     <Route exact path="/adminreviews" component={(props) => <AdminReviews {...props} />} />
                     <Route exact path="/viewreview" component={(props) => <ViewReview {...props} />} />
                     <Route exact path="/adminphotos" component={(props) => <AdminPhotos {...props} />} />
+                    <Route exact path="/viewphoto" component={(props) => <ViewPhoto {...props} />} />
 
                     <Route exact path="/student/profile" render={props => <StudentUpdateProfile {...props} />} />
                     <Route exact path="/student/reviews" render={props => <StudentReviews {...props} />} />

@@ -35,13 +35,16 @@ module.exports = {
     GET_TOP_COMPANY_VIEWS: "/admin/topcompanyviews",
 
     //Admin Company Profile Routes
-    GET_ALL_COMPANIES : "/admin/companies",
-    GET_COMPANY_BY_COMPANYNAME: "/admin/company/companyName",
-    GET_COMPANY_REVIEWS: "/admin/company/reviews",
+    GET_ALL_COMPANIES_ADMIN : "/admin/companies",
+    GET_COMPANY_BY_COMPANYNAME_ADMIN: "/admin/company/companyName",
+    GET_COMPANY_REVIEWS_ADMIN: "/admin/company/reviews",
 
     //Company Photos Routes
     POST_COMPANY_PHOTOS: "/photos/company",
     GET_COMPANY_PHOTOS: "/photos/company",
+    GET_ALL_PHOTOS: "/photos/all",
+    PUT_PHOTO_APPROVE: "/photos/approve",
+    PUT_PHOTO_REJECT: "/photos/reject",
 
     //Review Routes
     POST_STUDENT_REVIEW: '/review/student/review',
@@ -57,6 +60,7 @@ module.exports = {
     PUT_REVIEW_REJECT: '/review/reject/review',
     GET_ALL_REVIEWS: '/review/all/reviews',
     GET_REVIEW_DETAILS: '/review/details/review',
+    GET_APPROVED_COMPANY_REVIEWS: '/review/approved/company/reviews',
 
     //Salary Routes
     POST_STUDENT_SALARY: '/salary/student/salary',

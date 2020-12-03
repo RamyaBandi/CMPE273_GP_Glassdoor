@@ -9,7 +9,9 @@ export default class JobApplication extends Component {
         this.state = {
             companyDetails: [],
             jobDetails: [],
-            redirect: null
+            redirect: null,
+            resumeProgress: 0,
+            coverLetterProgress: 0
         };
     }
 
@@ -27,23 +29,21 @@ export default class JobApplication extends Component {
     //     city: "Cupertino",
     //     state: "CA",
     //     zip: 98628,
-    //     resumeProgress: 0,
-    //     coverLetterProgress: 0
     // }
 
-    componentDidMount() {
+    componentDidMount = async () => {
         console.log('In componentDidMount in application');
         const jobId = this.props.location.state;
         console.log(jobId);
-        axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOB_BY_JOBID + '?jobId=' + jobId)
+        await axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOB_BY_JOBID + '?jobId=' + jobId)
             .then(response => {
-                this.setState({ jobDetails: response.data[0] });
+                this.setState({ jobDetails: response.data.jobs[0] });
                 console.log(this.state.jobDetails);
             })
             .catch((error) => {
                 console.log(error);
             }
-        )
+            )
         const companyId = this.state.jobDetails.companyId;
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
             .then(response => {
@@ -55,7 +55,7 @@ export default class JobApplication extends Component {
             .catch((error) => {
                 console.log(error);
             }
-        )
+            )
     }
 
     hiddenResumeInput = React.createRef(null);
@@ -69,7 +69,14 @@ export default class JobApplication extends Component {
     handleChangeResume = event => {
         this.increaseResumeProgressPercentage();
         const fileUploaded = event.target.files[0];
+        this.setState({uploadedResume:fileUploaded})
+        event.target.value=null;
     };
+
+    apply=()=>{
+        console.log(this.state);
+        
+    }
     increaseResumeProgressPercentage = async () => {
         for (let i = 1; i <= 100; i++) {
             await new Promise((resolve) => setTimeout(resolve, 25));
@@ -86,8 +93,9 @@ export default class JobApplication extends Component {
     };
     handleChangeCoverLetter = event => {
         this.increaseCoverLetterProgressPercentage();
-        const fileUploaded = event.target.files[0];
-        // window.alert("Set State for Cover Letter")
+        // const fileUploaded = event.target.files[0];
+        this.setState({uploadedCoverLetter:event.target.files[0]})
+        event.target.value=null;
     };
 
     increaseCoverLetterProgressPercentage = async () => {
@@ -127,6 +135,11 @@ export default class JobApplication extends Component {
                         </Col>
                         <Col md="6" >
                             <Row style={{ float: "right" }}>
+                                <Col md="auto">
+                                    <Button style={{ backgroundColor: "#1861bf" }} onClick={this.apply}>
+                                        Apply Now
+                                    </Button>
+                                </Col>
                                 <Col md="auto">
                                     <Row>
                                         <Col md="12">
@@ -182,11 +195,7 @@ export default class JobApplication extends Component {
                                         </Col>
                                     </Row>
                                 </Col>
-                                <Col md="auto">
-                                    <Button style={{ backgroundColor: "#1861bf" }}>
-                                        Apply Now
-                                    </Button>
-                                </Col>
+
                             </Row>
                         </Col>
                     </Row>
@@ -211,7 +220,7 @@ export default class JobApplication extends Component {
                             <Row>
                                 <Col md="auto"> <b>Office Location : </b></Col>
                                 <Col md="auto">
-                                    <Row><Col>{this.state.jobDetails.streetAddress}</Col></Row>
+                                    <Row style={{height:"15px"}}><Col>{this.state.jobDetails.streetAddress}</Col></Row>
                                     <Row><Col>{this.state.jobDetails.city}, {this.state.jobDetails.state}</Col></Row>
                                     <Row><Col>{this.state.jobDetails.country}, {this.state.jobDetails.zip}.</Col></Row>
                                 </Col>

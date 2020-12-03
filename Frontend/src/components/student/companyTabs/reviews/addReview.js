@@ -47,7 +47,7 @@ class AddReviews extends Component {
       cons: this.state.cons,
       description: this.state.description,
       companyId: this.props.location.state,
-      studentId: "5fb48df63d242fa0842343f3"
+      studentId: localStorage.getItem('mongoId'),
     };
     axios.post(BACKEND_URL + POST_STUDENT_REVIEW, this.reviewData)
             .then(response => {
