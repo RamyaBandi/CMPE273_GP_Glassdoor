@@ -12,8 +12,10 @@ class ListApplications extends Component {
         page: 1,
         totalPages: 0
     }
-    componentDidMount() {
+
+    componentWillMount() {
         console.log(this.props)
+
         this.updatePageList()
     }
     updatePageList() {
@@ -52,7 +54,8 @@ class ListApplications extends Component {
         let renderVar
         if (this.state.apps.length > 0) {
             renderVar = this.state.apps.map((app, key) => {
-                return <ApplicationCard props={app} key={key} />
+                if (app.status !== "Withdrawn")
+                    return <ApplicationCard props={app} key={key} />
             })
         }
         return (

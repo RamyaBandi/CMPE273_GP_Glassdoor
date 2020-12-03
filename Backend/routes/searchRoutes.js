@@ -17,7 +17,7 @@ if (process.env.KAFKA_SWITCH === 'true') {
 }
 else {
     searchRouter.route(GET_JOB_SEARCH).get(searchServices.jobSearch);
-    
+
     searchRouter.route(GET_COMPANY_SEARCH).get(searchServices.companySearch);
 
     searchRouter.route(GET_SALARY_SEARCH).get(searchServices.salarySearch);

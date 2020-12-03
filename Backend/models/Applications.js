@@ -13,19 +13,24 @@ const Applications = new mongoose.Schema({
         required: true
     },
 
-    applicationstatus:{
+    applicationstatus: {
         type: String,
-        enum:['Applied','Selected','Rejected']
+        enum: ['Applied', 'Selected', 'Rejected', 'Withdrawn']
     },
     status: {
         type: String,
-        enum: ["Submitted", "Reviewed", "Initial Screening", "Interviewing", "Hired"],
+        enum: ["Submitted", "Reviewed", "Initial Screening", "Interviewing", "Hired", "Withdrawn", "Rejected"],
         default: "Submitted"
     },
     resume: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Resumes',
-        required: true
+    },
+    resumeUrl: {
+        type: String
+    },
+    coverLetterUrl:{
+        type:String
     }
 }, { versionKey: false })
 

@@ -1,38 +1,37 @@
+import Axios from 'axios';
 import React, { Component } from 'react';
-import Axios from 'axios'
-import { BACKEND_URL, JOB_ROUTE, GET_COMPANY_JOBS } from '../../../../config/routeConstants'
-import JobCard from './JobCard/JobCard';
+import { BACKEND_URL, APPLICATION_ROUTE, GET_APPLICATIONS_STUDENTID } from '../../../config/routeConstants';
+import ApplicationCard from './applicationsCard'
 import ReactPaginate from 'react-paginate';
-import './ListJobs.styles.css'
 
-class ListCompanyJobs extends Component {
+class Applications extends Component {
     state = {
-        jobsList: [],
+        appsList: [],
         limit: 10,
         page: 1,
         totalPages: 0
+    }
+    componentDidMount() {
+        this.updatePageList();
 
     }
-    componentDidMount = () => {
-        // console.log(`${BACKEND_URL}${JOB_ROUTE}${GET_COMPANY_JOBS}`)
-        this.updatePageList()
-    }
     updatePageList() {
-        Axios.get(`${BACKEND_URL}${JOB_ROUTE}${GET_COMPANY_JOBS}`, {
+        Axios.get(`${BACKEND_URL}${APPLICATION_ROUTE}${GET_APPLICATIONS_STUDENTID}`, {
             params: {
-                companyId: localStorage.getItem('mongoId'),
-               //companyId: '5fbd383a20ebc710c11cad02',
+                studentId: localStorage.getItem('mongoId'),
                 limit: this.state.limit,
                 page: this.state.page
             }
+        }).then((res) => {
+            console.log(res.data)
+            this.setState({
+                appsList: res.data.results,
+                totalPages: res.data.totalPages,
+                page: res.data.page
+            })
+        }).catch((err) => {
+            console.log(err)
         })
-            .then((res) => {
-                this.setState({ jobsList: [...res.data.jobs], totalPages: res.data.totalPages })
-                console.log(res)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
     }
 
 
@@ -54,16 +53,16 @@ class ListCompanyJobs extends Component {
     };
     render() {
         let renderVar
-        if (this.state.jobsList.length > 0) {
-            renderVar = this.state.jobsList.map((job, key) => {
-                return <JobCard props={{ job: job, props: this.props }} key={key} />
+        if (this.state.appsList.length > 0) {
+            renderVar = this.state.appsList.map((job, key) => {
+                return <ApplicationCard props={{ app: job, props: this.props }} key={key} />
             })
         }
         return (
             <div className="containerList">
                 <div className="applicationsList">
                     <div className="applicationsHeader">
-                        <h4> Jobs Posted</h4>
+                        <h4> Jobs Applied</h4>
                         <div className="input-group"
                             style={{ width: "200px", justifyContent: "space-around" }}
                         >
@@ -101,4 +100,4 @@ class ListCompanyJobs extends Component {
     }
 }
 
-export default ListCompanyJobs;
+export default Applications;

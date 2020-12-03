@@ -8,14 +8,17 @@ const { GET_APPLICATIONS_JOBID, POST_APPLICATION, PUT_APPLICATION, GET_APPLICATI
 // console.log(process.env.KAFKA_SWITCH);
 if (process.env.KAFKA_SWITCH === 'true') {
     applicationRouter.route(POST_APPLICATION).post(applicationKafkaServices.postApplication);
-    applicationRouter.route(GET_APPLICATIONS_JOBID).get(applicationServices.getApplicationsByJobId);
+    applicationRouter.route(GET_APPLICATIONS_JOBID).get(applicationKafkaServices.getApplicationsByJobId);
     applicationRouter.route(PUT_APPLICATION).put(applicationKafkaServices.putApplications);
+    applicationRouter.route(GET_APPLICATIONS_STUDENTID).get(applicationKafkaServices.getApplicationsByStudentId);
 
 }
 else {
     applicationRouter.route(POST_APPLICATION).post(applicationServices.postApplication);
     applicationRouter.route(GET_APPLICATIONS_JOBID).get(applicationServices.getApplicationsByJobId);
     applicationRouter.route(PUT_APPLICATION).put(applicationServices.putApplications);
+    applicationRouter.route(GET_APPLICATIONS_STUDENTID).get(applicationServices.getApplicationsByStudentId);
+
 
 }
 
