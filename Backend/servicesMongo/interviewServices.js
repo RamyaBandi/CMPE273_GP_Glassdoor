@@ -86,7 +86,7 @@ module.exports.getCompanyInterviews = async (req, res) => {
             currentPage: data.page,
         };
         console.log(
-            "Interviews fetched Successfully from DB - page not 1 or redis off"
+            "Interviews fetched Successfully"
         );
         res.status(RES_SUCCESS).send(result);
     } catch {
