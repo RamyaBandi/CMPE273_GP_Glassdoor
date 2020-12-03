@@ -215,7 +215,7 @@ async function handle_request(msg, callback) {
 			}
 		case "GET_COMPANY_JOB_BY_JOBID":
 			{
-				let data = req.query
+				let data = msg.body
 				console.log(data)
 				try {
 					data.page = 1;

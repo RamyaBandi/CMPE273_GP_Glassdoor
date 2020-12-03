@@ -1,12 +1,12 @@
 import React from 'react';
 import ImageGallery from './ImageGallery';
-import { BACKEND_URL, POST_COMPANY_PHOTOS, GET_COMPANY_PHOTOS } from './../../../../config/routeConstants';
+import { BACKEND_URL, POST_COMPANY_PHOTOS, GET_COMPANY_PHOTOS, GET_COMPANY_DETAILS } from './../../../../config/routeConstants';
 import axios from 'axios';
 
 class Parent extends React.Component {
 
   state = {
-    companyName: "Facebook",
+    companyDetails: [],
     images: [],
     newImages: {},
     redirect: null,
@@ -63,14 +63,25 @@ class Parent extends React.Component {
     const companyId = '5fb4aefe6b61ea46245d5621';
     axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios.get(BACKEND_URL + GET_COMPANY_PHOTOS + '?companyId=' + companyId + '&studentId=' + studentId)
-    .then(response => {
-      console.log(response);
-      this.setState({images: response.data.formattedPhotos});
-    })
-    .catch((error) => {
-      console.log(error);
-  }
-)
+      .then(response => {
+        console.log(response);
+        this.setState({ images: response.data.formattedPhotos });
+      })
+      .catch((error) => {
+        console.log(error);
+      }
+    )
+    axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
+            .then(response => {
+                this.setState({ companyDetails: response.data[0] });
+                console.log("In componentDidMount");
+                console.log("Company details", response.data[0]);
+                console.log(this.state.companyDetails);
+            })
+            .catch((error) => {
+                console.log(error);
+            }
+            )
   }
 
   setnewImages = (images) => {
@@ -85,7 +96,7 @@ class Parent extends React.Component {
       const blob = await res.blob();
       let newFile = new File([blob], "file" + toString(i), { type: 'image/png' });
       files.push(newFile);
-     
+
     }
 
     var fileArray = files;
@@ -100,18 +111,18 @@ class Parent extends React.Component {
         const companyId = '5fb4aefe6b61ea46245d5621';
         axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_PHOTOS + '?companyId=' + companyId + '&studentId=' + studentId)
-        .then(response => {
-          this.setState({images: response.data.formattedPhotos});
-        })
-        .catch((error) => {
-          console.log(error);
-      }
-    )
+          .then(response => {
+            this.setState({ images: response.data.formattedPhotos });
+          })
+          .catch((error) => {
+            console.log(error);
+          }
+          )
       })
       .catch((error) => {
         console.log(error);
-    }
-)
+      }
+      )
 
 
 
@@ -132,7 +143,7 @@ class Parent extends React.Component {
 
     return (
       <div>
-        <ImageGallery companyName={this.state.companyName} data={this.state.images} setnewImages={this.setnewImages} newImages={this.state.newImages} saveImages={this.saveImages} />
+        <ImageGallery companyName={this.state.companyDetails.companyName} data={this.state.images} setnewImages={this.setnewImages} newImages={this.state.newImages} saveImages={this.saveImages} />
       </div>
     )
   }

@@ -65,7 +65,7 @@ module.exports.getCompanyJobs = (req, res) => {
 module.exports.getCompanyJobsByJobId = (req, res) => {
     console.log("req.query" + JSON.stringify(req.query))
     data = {
-        api: "GET_COMPANY_JOBS_BY_JOBID",
+        api: "GET_COMPANY_JOB_BY_JOBID",
         body: req.query
     }
     kafka.make_request('jobs', data, function (err, results) {

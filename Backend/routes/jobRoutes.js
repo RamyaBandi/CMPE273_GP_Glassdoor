@@ -6,7 +6,7 @@ const jobKafkaServices = require("../servicesKafka/jobServices");
 const { GET_ALL_JOBS, GET_COMPANY_JOBS_BY_JOBTITLE_OR_CITY, GET_COMPANY_JOBS_BY_JOBTITLE, GET_COMPANY_JOBS_BY_CITY, GET_COMPANY_JOBS, POST_COMPANY_JOB, PUT_COMPANY_JOB, GET_COMPANY_JOB_BY_JOBID } = require('../config/routeConstants');
 
 if (process.env.KAFKA_SWITCH === 'true') {
-    console.log("in kafka service")
+    // console.log("in kafka service")
     // jobRouter.route(POST_COMPANY_JOB).post(jobKafkaServices.postCompanyJob);
     // jobRouter.route(GET_COMPANY_JOBS).get(jobKafkaServices.getCompanyJobs);
     // jobRouter.route(GET_ALL_JOBS).get(jobKafkaServices.getAllJobs);

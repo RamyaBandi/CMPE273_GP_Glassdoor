@@ -11,6 +11,14 @@ module.exports = {
     STUDENT_ROUTE: "/student",
     POST_STUDENT_SIGNUP: "/student/profile",
 
+    //Photo Routes
+    PHOTO_ROUTE: "/photos",
+    POST_COMPANY_PHOTOS: "/company",
+    GET_COMPANY_PHOTOS: "/company",
+    GET_ALL_PHOTOS: "/all",
+    PUT_PHOTO_APPROVE: "/approve",
+    PUT_PHOTO_REJECT: "/reject",
+
     //Company Routes
     COMPANY_ROUTE: "/company",
     PUT_COMPANY_SIGNUP: "/company/profile",

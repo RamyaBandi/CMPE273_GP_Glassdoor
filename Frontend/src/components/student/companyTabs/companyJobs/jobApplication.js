@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button, ProgressBar } from 'react-bootstrap';
 import axios from 'axios';
-import { BACKEND_URL, JOB_ROUTE, GET_COMPANY_JOB_BY_JOBID, GET_COMPANY_DETAILS } from '../../../../config/routeConstants';
+import { BACKEND_URL, JOB_ROUTE, GET_COMPANY_JOB_BY_JOBID, GET_COMPANY_DETAILS, APPLICATION_ROUTE, POST_APPLICATION } from '../../../../config/routeConstants';
 
 export default class JobApplication extends Component {
     constructor(props) {
@@ -75,9 +75,42 @@ export default class JobApplication extends Component {
         event.target.value=null;
     };
 
-    apply=()=>{
-        console.log(this.state);
+    apply=(e)=>{
+        e.preventDefault();
+        let data={
+            studentId:"5fb48df63d242fa0842343f3",
+            jobId: this.state.jobDetails._id,
+            resumeUploaded:false,
+            coverLetterUploaded:false
+        }
+
+        const mediaForm=new FormData();
+if(this.state.uploadedResume){
         
+        mediaForm.append("resume",this.state.uploadedResume);
+        data.resumeUploaded=true
+}
+
+if(this.state.uploadedCoverLetter){
+
+    mediaForm.append("Cover Letter",this.state.uploadedCoverLetter);
+    data.coverLetterUploaded=true
+}
+    
+//axios
+
+axios.post(`${BACKEND_URL}${APPLICATION_ROUTE}${POST_APPLICATION}?studentId=${data.studentId}&jobId=${data.jobId}&resumeUploaded=${data.resumeUploaded}&coverLetterUploaded=${data.coverLetterUploaded}`,mediaForm)
+.then(response => {
+    //redirect
+    window.alert('Applied successfully');
+})
+.catch((error) => {
+    console.log(error.response.data);
+    window.alert(error.response.data);
+}
+)
+
+
     }
     increaseResumeProgressPercentage = async () => {
         for (let i = 1; i <= 100; i++) {
@@ -107,6 +140,7 @@ export default class JobApplication extends Component {
         }
     }
 
+   
     render = () => {
         console.log('In render');
         return (

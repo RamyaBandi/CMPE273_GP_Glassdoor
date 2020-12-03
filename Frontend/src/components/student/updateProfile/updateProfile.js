@@ -35,7 +35,6 @@ class StudentUpdateProfile extends Component {
         //console.log(this.props)
         //console.log(localStorage.getItem('mongoId'))
         let student_id = localStorage.getItem('mongoId')
-        //   axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
         axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(`${routeConstants.BACKEND_URL}/student${routeConstants.GET_STUDENT_SIGNUP}`,
             {
