@@ -44,7 +44,7 @@ class TopCeo extends Component {
             loader={<div>Loading Chart</div>}
             data={[
                 ['CEO Name', 'Rating'],
-                ...dat
+                ...data
             ]}
             options={{
                 // title: 'Top 10 CEO’s based on rating',
