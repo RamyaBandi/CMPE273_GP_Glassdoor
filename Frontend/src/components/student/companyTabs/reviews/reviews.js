@@ -37,9 +37,9 @@ class Reviews extends Component {
     this.setState({ redirect: <Redirect to="/addReview" /> });
   };
   componentDidMount() {
-    const company_id = '5fb4884acf339e3da0d5c31e';
+    //const company_id = '5fb4884acf339e3da0d5c31e';
     const student_id = localStorage.getItem('mongoId');
-    //const company_id = this.props.location.state;
+    const company_id = this.props.location.state;
     //console.log(company_id);
 
     // axios

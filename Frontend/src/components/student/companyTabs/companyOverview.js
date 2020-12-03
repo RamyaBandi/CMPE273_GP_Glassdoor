@@ -31,7 +31,7 @@ export default class CompanyOverview extends Component {
     }
 
     componentDidMount() {
-        const companyId = '5fbd383a20ebc710c11cad02';
+        const companyId = '5fb4884acf339e3da0d5c31e';
         //const companyId = this.props.location.state.companyId
         console.log("Fetched company Id", companyId)
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)

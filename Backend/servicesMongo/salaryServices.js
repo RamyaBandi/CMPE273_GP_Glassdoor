@@ -77,7 +77,7 @@ module.exports.getCompanySalaries = async (req, res) => {
                 totalPages: Math.ceil(count / data.limit),
                 currentPage: data.page
             });  
-            console.log("Salaries fetched Successfully from DB - page not 1 or redis off")
+            console.log("Salaries fetched Successfully")
             res.status(RES_SUCCESS).send(result);
         }
         catch {
