@@ -260,206 +260,208 @@ export default class CompanyOverview extends Component {
                         </Col>
                     </Row>
                     <Container className="block-example border" style={{ marginTop: "20px", width: "61%" }}>
-          <Col>
-          <Row>
-            <p>Most Positive Review</p>
-          </Row>
-            <Row>
-              <p style={{ color: "#3f76cc", fontSize: "22px" }}>
-                Headline: <b>{this.state.positiveReviews.headline}</b>
-              </p>          
-            </Row>
-            <Row>
-              <Col md="4">
-                
-                <StarRatingComponent
-                        name="rating"
-                        starCount={5}
-                        value={this.state.positiveReviews.overallRating}
-                        starColor="#D4AF37"
-                        renderStarIcon={(index, value) => {
-                          return (
-                            <div className="color-of-star">
-                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
-                            </div>
-                          );
-                        }}
-                        renderStarIconHalf={() => (
-                          <div className="color-of-star">
-                            <span className="position-absolute"><i className={"far fa-star"} /></span>
-                            <span><i className={"fas fa-star-half"} /></span>
-                          </div>
-                        )}
-                    />
-                   <p>Overall Rating: {this.state.positiveReviews.overallRating} </p>
-              </Col>
-              <Col md="4">
-              <StarRatingComponent
-                        name="rating"
-                        starCount={5}
-                        value={this.state.positiveReviews.recommendedRating}
-                        starColor="#D4AF37"
-                        renderStarIcon={(index, value) => {
-                          return (
-                            <div className="color-of-star">
-                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
-                            </div>
-                          );
-                        }}
-                        renderStarIconHalf={() => (
-                          <div className="color-of-star">
-                            <span className="position-absolute"><i className={"far fa-star"} /></span>
-                            <span><i className={"fas fa-star-half"} /></span>
-                          </div>
-                        )}
-                    />
-                <p>Recommended to a Friend: {this.state.positiveReviews.recommendedRating}</p>
-              </Col>
-              <Col md="4">
-              <StarRatingComponent
-                        name="rating"
-                        starCount={5}
-                        value={this.state.positiveReviews.ceoRating}
-                        starColor="#D4AF37"
-                        renderStarIcon={(index, value) => {
-                          return (
-                            <div className="color-of-star">
-                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
-                            </div>
-                          );
-                        }}
-                        renderStarIconHalf={() => (
-                          <div className="color-of-star">
-                            <span className="position-absolute"><i className={"far fa-star"} /></span>
-                            <span><i className={"fas fa-star-half"} /></span>
-                          </div>
-                        )}
-                    />
-                <p>CEO approval: {this.state.positiveReviews.ceoRating}</p>
-              </Col>
-            </Row>
-            <Row>
-              <p>Description: {this.state.positiveReviews.description}</p>
-            </Row>
-            <Row>
-              <p>
-                <b>Pros:</b>
-                <br />
-                {this.state.positiveReviews.pros}
-              </p>
-            </Row>
-            <Row>
-              <p>
-                <b>Cons:</b>
-                <br />
-                {this.state.positiveReviews.cons}
-              </p>
-            </Row>
-          </Col>
-        </Container>
+                        <Col>
+                            <Row>
+                                <p>Most Positive Review</p>
+                            </Row>
+                            <Row>
+                                <p style={{ color: "#3f76cc", fontSize: "22px" }}>
+                                    Headline: <b>{this.state.positiveReviews.headline}</b>
+                                </p>
+                            </Row>
+                            <Row>
+                                <Col md="4">
 
-        <Container className="block-example border" style={{ marginTop: "20px", width: "61%" }}>
-          <Col>
-          <Row>
-            <p>Most Negative Review</p>
-          </Row>
-            <Row>
-              <p style={{ color: "#3f76cc", fontSize: "22px" }}>
-                Headline: <b>{this.state.negativeReviews.headline}</b>
-              </p>          
-            </Row>
-            <Row>
-              <Col md="4">
-              <StarRatingComponent
-                        name="rating"
-                        starCount={5}
-                        value={this.state.negativeReviews.overallRating}
-                        starColor="#D4AF37"
-                        renderStarIcon={(index, value) => {
-                          return (
-                            <div className="color-of-star">
-                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
-                            </div>
-                          );
-                        }}
-                        renderStarIconHalf={() => (
-                          <div className="color-of-star">
-                            <span className="position-absolute"><i className={"far fa-star"} /></span>
-                            <span><i className={"fas fa-star-half"} /></span>
-                          </div>
-                        )}
-                    />
-                <p>Overall Rating: {this.state.negativeReviews.overallRating}</p>
-              </Col>
-              <Col md="4">
-              <StarRatingComponent
-                        name="rating"
-                        starCount={5}
-                        value={this.state.negativeReviews.recommendedRating}
-                        starColor="#D4AF37"
-                        renderStarIcon={(index, value) => {
-                          return (
-                            <div className="color-of-star">
-                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
-                            </div>
-                          );
-                        }}
-                        renderStarIconHalf={() => (
-                          <div className="color-of-star">
-                            <span className="position-absolute"><i className={"far fa-star"} /></span>
-                            <span><i className={"fas fa-star-half"} /></span>
-                          </div>
-                        )}
-                    />
-                <p>Recommended to a Friend: {this.state.negativeReviews.recommendedRating}</p>
-              </Col>
-              <Col md="4">
-              <StarRatingComponent
-                        name="rating"
-                        starCount={5}
-                        value={this.state.negativeReviews.ceoRating}
-                        starColor="#D4AF37"
-                        renderStarIcon={(index, value) => {
-                          return (
-                            <div className="color-of-star">
-                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
-                            </div>
-                          );
-                        }}
-                        renderStarIconHalf={() => (
-                          <div className="color-of-star">
-                            <span className="position-absolute"><i className={"far fa-star"} /></span>
-                            <span><i className={"fas fa-star-half"} /></span>
-                          </div>
-                        )}
-                    />
-                <p>CEO approval: {this.state.negativeReviews.ceoRating}</p>
-              </Col>
-            </Row>
-            <Row>
-              <p>Description: {this.state.negativeReviews.description}</p>
-            </Row>
-            <Row>
-              <p>
-                <b>Pros:</b>
-                <br />
-                {this.state.negativeReviews.pros}
-              </p>
-            </Row>
-            <Row>
-              <p>
-                <b>Cons:</b>
-                <br />
-                {this.state.negativeReviews.cons}
-              </p>
-            </Row>
-          </Col>
-        </Container>
-                    <Row style={{ width: "100%" }}>
+                                    <StarRatingComponent
+                                        name="rating"
+                                        starCount={5}
+                                        value={this.state.positiveReviews.overallRating}
+                                        starColor="#D4AF37"
+                                        renderStarIcon={(index, value) => {
+                                            return (
+                                                <div className="color-of-star">
+                                                    <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                                                </div>
+                                            );
+                                        }}
+                                        renderStarIconHalf={() => (
+                                            <div className="color-of-star">
+                                                <span className="position-absolute"><i className={"far fa-star"} /></span>
+                                                <span><i className={"fas fa-star-half"} /></span>
+                                            </div>
+                                        )}
+                                    />
+                                    <p>Overall Rating: {this.state.positiveReviews.overallRating} </p>
+                                </Col>
+                                <Col md="4">
+                                    <StarRatingComponent
+                                        name="rating"
+                                        starCount={5}
+                                        value={this.state.positiveReviews.recommendedRating}
+                                        starColor="#D4AF37"
+                                        renderStarIcon={(index, value) => {
+                                            return (
+                                                <div className="color-of-star">
+                                                    <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                                                </div>
+                                            );
+                                        }}
+                                        renderStarIconHalf={() => (
+                                            <div className="color-of-star">
+                                                <span className="position-absolute"><i className={"far fa-star"} /></span>
+                                                <span><i className={"fas fa-star-half"} /></span>
+                                            </div>
+                                        )}
+                                    />
+                                    <p>Recommended to a Friend: {this.state.positiveReviews.recommendedRating}</p>
+                                </Col>
+                                <Col md="4">
+                                    <StarRatingComponent
+                                        name="rating"
+                                        starCount={5}
+                                        value={this.state.positiveReviews.ceoRating}
+                                        starColor="#D4AF37"
+                                        renderStarIcon={(index, value) => {
+                                            return (
+                                                <div className="color-of-star">
+                                                    <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                                                </div>
+                                            );
+                                        }}
+                                        renderStarIconHalf={() => (
+                                            <div className="color-of-star">
+                                                <span className="position-absolute"><i className={"far fa-star"} /></span>
+                                                <span><i className={"fas fa-star-half"} /></span>
+                                            </div>
+                                        )}
+                                    />
+                                    <p>CEO approval: {this.state.positiveReviews.ceoRating}</p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <p>Description: {this.state.positiveReviews.description}</p>
+                            </Row>
+                            <Row>
+                                <p>
+                                    <b>Pros:</b>
+                                    <br />
+                                    {this.state.positiveReviews.pros}
+                                </p>
+                            </Row>
+                            <Row>
+                                <p>
+                                    <b>Cons:</b>
+                                    <br />
+                                    {this.state.positiveReviews.cons}
+                                </p>
+                            </Row>
+                        </Col>
+                    </Container>
+
+                    <Container className="block-example border" style={{ marginTop: "20px", width: "61%" }}>
+                        <Col>
+                            <Row>
+                                <p>Most Negative Review</p>
+                            </Row>
+                            <Row>
+                                <p style={{ color: "#3f76cc", fontSize: "22px" }}>
+                                    Headline: <b>{this.state.negativeReviews.headline}</b>
+                                </p>
+                            </Row>
+                            <Row>
+                                <Col md="4">
+                                    <StarRatingComponent
+                                        name="rating"
+                                        starCount={5}
+                                        value={this.state.negativeReviews.overallRating}
+                                        starColor="#D4AF37"
+                                        renderStarIcon={(index, value) => {
+                                            return (
+                                                <div className="color-of-star">
+                                                    <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                                                </div>
+                                            );
+                                        }}
+                                        renderStarIconHalf={() => (
+                                            <div className="color-of-star">
+                                                <span className="position-absolute"><i className={"far fa-star"} /></span>
+                                                <span><i className={"fas fa-star-half"} /></span>
+                                            </div>
+                                        )}
+                                    />
+                                    <p>Overall Rating: {this.state.negativeReviews.overallRating}</p>
+                                </Col>
+                                <Col md="4">
+                                    <StarRatingComponent
+                                        name="rating"
+                                        starCount={5}
+                                        value={this.state.negativeReviews.recommendedRating}
+                                        starColor="#D4AF37"
+                                        renderStarIcon={(index, value) => {
+                                            return (
+                                                <div className="color-of-star">
+                                                    <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                                                </div>
+                                            );
+                                        }}
+                                        renderStarIconHalf={() => (
+                                            <div className="color-of-star">
+                                                <span className="position-absolute"><i className={"far fa-star"} /></span>
+                                                <span><i className={"fas fa-star-half"} /></span>
+                                            </div>
+                                        )}
+                                    />
+                                    <p>Recommended to a Friend: {this.state.negativeReviews.recommendedRating}</p>
+                                </Col>
+                                <Col md="4">
+                                    <StarRatingComponent
+                                        name="rating"
+                                        starCount={5}
+                                        value={this.state.negativeReviews.ceoRating}
+                                        starColor="#D4AF37"
+                                        renderStarIcon={(index, value) => {
+                                            return (
+                                                <div className="color-of-star">
+                                                    <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                                                </div>
+                                            );
+                                        }}
+                                        renderStarIconHalf={() => (
+                                            <div className="color-of-star">
+                                                <span className="position-absolute"><i className={"far fa-star"} /></span>
+                                                <span><i className={"fas fa-star-half"} /></span>
+                                            </div>
+                                        )}
+                                    />
+                                    <p>CEO approval: {this.state.negativeReviews.ceoRating}</p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <p>Description: {this.state.negativeReviews.description}</p>
+                            </Row>
+                            <Row>
+                                <p>
+                                    <b>Pros:</b>
+                                    <br />
+                                    {this.state.negativeReviews.pros}
+                                </p>
+                            </Row>
+                            <Row>
+                                <p>
+                                    <b>Cons:</b>
+                                    <br />
+                                    {this.state.negativeReviews.cons}
+                                </p>
+                            </Row>
+                        </Col>
+                    </Container>
+                    <Container style = {{ width: "61%" }}>
+                    <Row>
                         {this.state.reviews.map((item) => {
                             return <ReviewCard {...item} />;
                         })}
                     </Row>
+                    </Container>
                     <ReactPaginate
                         previousLabel={"<<"}
                         nextLabel={">>"}
