@@ -58,6 +58,47 @@ const {
   });
   }
 
+  function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+module.exports.postCompanyView = (req, res) => {
+    let date = Date()
+    console.log("Date", date)
+    console.log("Date after formatting", formatDate(date))
+    console.log("Inside Company Profile POST views");
+    console.log("req body" + JSON.stringify(req.body));
+    let data = req.body
+    data={
+      api:"POST_COMPANYVIEWS",
+      companyId : req.body.companyId,
+      companyName: req.body.companyName,
+      Date : formatDate(date)
+    }
+    kafka.make_request('company', data, function(err,results){
+      console.log('in result');
+      console.log(results);
+      if (err) {
+        console.log("In error");
+        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+    } else {
+        console.log("In else");
+        res.status(RES_SUCCESS).send(JSON.stringify(results));
+    }
+      
+  });
+}
+
   
   
   

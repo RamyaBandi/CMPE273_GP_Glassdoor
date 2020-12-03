@@ -69,7 +69,24 @@ function handle_request(msg, callback) {
     })
         
                     break;
-    }        
+    }  
+    case "POST_COMPANYVIEWS": {
+        let company = new Company({
+            companyId :msg.companyId,
+            companyName: msg.companyName,
+            Date : msg.Date
+        })
+        company.save((err, result) => {
+            if (err) {
+                console.log("Error creating company profile" + err)
+                callback(err, 'Error')
+            }
+            else {
+                console.log("Created Company Profile : " + JSON.stringify(result))
+                callback(null, result)
+            }
+        })
+    }      
         default:
             {
                 console.log("Default switch")

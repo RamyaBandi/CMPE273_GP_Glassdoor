@@ -1,8 +1,8 @@
-const { response } = require('express');
-var bcrypt = require('bcryptjs');
-const saltRounds = 10;
-const jwt = require('jsonwebtoken')
+const Reviews = require('../models/Reviews');
+const Company = require('../models/Company')
+const Jobs = require('../models/Jobs')
 var kafka = require('../kafka/client');
+
 // const { jwtsecret } = require('../config/mysqlinit')
 
 const {
@@ -16,11 +16,9 @@ const {
     RES_INTERNAL_SERVER_ERROR
 } = require("../config/routeConstants");
 
-
-
-module.exports.login = (req, res) => {
-    console.log("req.body" + JSON.stringify(req.body))
-    kafka.make_request('login', req.body, function (err, results) {
+module.exports.jobsHomePage = async (req, res) => {
+    //Salary needs to be present, most rated
+    kafka.make_request('jobshomepage', 'All Jobs Data', function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {
@@ -30,5 +28,7 @@ module.exports.login = (req, res) => {
             console.log("In else");
             res.status(RES_SUCCESS).send(JSON.stringify(results));
         }
+
     });
 }
+
