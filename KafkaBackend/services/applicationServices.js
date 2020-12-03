@@ -143,6 +143,48 @@ function handle_request(msg, callback) {
 
                 break;
             }
+        case "GET_APPLICATIONS_STUDENTID":
+            {
+                let data = msg.body
+                try {
+
+                    Applications.find({ studentId: data.studentId })
+                        .limit(data.limit * 1).skip((data.page - 1) * data.limit)
+                        .populate({ path: 'jobId', model: 'Jobs', select: 'companyName jobTitle postedDate industry responsibilities country remote streetAddress city state  zip averageSalary' })
+                        // .populate({ path: 'studentId', model: 'Student' })
+                        // .populate({ path: 'resume', model: 'Resume' })
+                        .exec(async (err, results) => {
+                            if (err) {
+                                console.log("Error Fetching Applications with student id")
+                                console.log(err);
+                                //res.setHeader(CONTENT_TYPE, APP_JSON);
+                                callback(err, 'Error')
+                            }
+                            else {
+                                // console.log(results)
+
+                                await Applications.countDocuments({ studentId: data.studentId }, (err, count) => {
+                                    const result = ({
+                                        results,
+                                        totalPages: Math.ceil(count / data.limit),
+                                        currentPage: data.page
+                                    });
+                                    console.log("Applications fetched successfully from DB")
+                                    callback(null, result)
+                                })
+                            }
+                        });
+
+                }
+                catch {
+                    if (err) {
+                        console.log(err);
+                        //res.setHeader(CONTENT_TYPE, APP_JSON);
+                        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+                    }
+                }
+                break;
+            }
         default:
             {
                 console.log("Default switch")

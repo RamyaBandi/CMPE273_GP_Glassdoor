@@ -38,13 +38,13 @@ function handle_request(msg, callback) {
                 const newStudent = new student(studentObj)
                 newStudent.save((err, result) => {
                     if (err) {
-                        callback(err,'Error')
+                        callback(err, 'Error')
                         // console.log("Error1", err)
                     }
                     else {
                         student.find({ email: msg.email }, { _id: 1 }, (err, docs) => {
                             if (err) {
-                                callback(err,'Error')
+                                callback(err, 'Error')
                                 // console.log("Error2", err)
                             }
                             else {
@@ -57,22 +57,22 @@ function handle_request(msg, callback) {
                     }
                 })
             }
-            if(msg.role === "employer"){
+            if (msg.role === "employer") {
                 let companyObj = { companyName: msg.name, email: msg.email }
                 const newCompany = new company(companyObj)
-                newCompany.save((err, result)=>{
-                    if(err){
-                        callback(err,'Error')
+                newCompany.save((err, result) => {
+                    if (err) {
+                        callback(err, 'Error')
                         // console.log("Error", err)
                     }
-                    else{
-                        company.find({email: msg.email},{_id: 1}, (err,docs)=>{
-                            if(err){
-                                callback(err,'Error')
+                    else {
+                        company.find({ email: msg.email }, { _id: 1 }, (err, docs) => {
+                            if (err) {
+                                callback(err, 'Error')
                                 // console.log("Error")
                             }
-                            else{
-                                user_id =  docs[0]._id
+                            else {
+                                user_id = docs[0]._id
                                 console.log("User ID", user_id)
                                 registerUser(value, user_id)
 
@@ -81,29 +81,29 @@ function handle_request(msg, callback) {
                     }
                 })
             }
-            if(msg.role === "admin"){
+            if (msg.role === "admin") {
                 registerUser(value, 'None')
             }
         });
 
-        registerUser = (value, user_id)=>{
-            if(msg.role === "admin"){
-                var sql1 = "insert into users (name, email, password, role) values ('" + msg.name + "', '" + msg.email + "', '" + value + "', '" + msg.role + "')";  
-            }
-            else{
-            var sql1 = "insert into users (name, email, password, role, user_id) values ('" + msg.name + "', '" + msg.email + "', '" + value + "', '" + msg.role + "', '" + user_id + "')";
-            }
-            console.log("Query", sql1)
-            mysqlConnection.query(sql1, function (error, rows) {
-                if (error) {
-                    callback(err,'Error')
-                }
-                else {
-                    // res.status(RES_SUCCESS).send({ data: rows});
-                    callback(null, rows)
-                }
-            });
+    registerUser = (value, user_id) => {
+        if (msg.role === "admin") {
+            var sql1 = "insert into users (name, email, password, role) values ('" + msg.name + "', '" + msg.email + "', '" + value + "', '" + msg.role + "')";
         }
+        else {
+            var sql1 = "insert into users (name, email, password, role, user_id) values ('" + msg.name + "', '" + msg.email + "', '" + value + "', '" + msg.role + "', '" + user_id + "')";
+        }
+        console.log("Query", sql1)
+        mysqlConnection.query(sql1, function (error, rows) {
+            if (error) {
+                callback(err, 'Error')
+            }
+            else {
+                // res.status(RES_SUCCESS).send({ data: rows});
+                callback(null, rows)
+            }
+        });
+    }
 
 }
 exports.handle_request = handle_request;

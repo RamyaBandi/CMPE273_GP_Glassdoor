@@ -6,7 +6,7 @@ const jobsHomeKafkaServices = require("../servicesKafka/jobsHomePageServices");
 const { GET_JOBS_HOMEPAGE } = require('../config/routeConstants');
 
 if (process.env.KAFKA_SWITCH === 'true') {
-    console.log("in kafka service")
+    // console.log("in kafka service")
 
     jobsRouter.route(GET_JOBS_HOMEPAGE).get(jobsHomeKafkaServices.jobsHomePage);
 }

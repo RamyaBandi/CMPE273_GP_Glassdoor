@@ -9,6 +9,7 @@ const {
     TEXT_PLAIN,
     RES_INTERNAL_SERVER_ERROR
 } = require("../config/routeConstants");
+var kafka = require('../kafka/client');
 
 const Company = require('../models/Company');
 const Salaries = require('../models/Salaries')

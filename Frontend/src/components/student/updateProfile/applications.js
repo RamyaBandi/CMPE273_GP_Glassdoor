@@ -1,35 +1,39 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
-import { GET_APPLICATIONS_JOBID, BACKEND_URL, APPLICATION_ROUTE } from '../../../../../config/routeConstants';
-import ApplicationCard from './ApplicationCard';
-import './listApplications.styles.css'
+import { BACKEND_URL, APPLICATION_ROUTE, GET_APPLICATIONS_STUDENTID } from '../../../config/routeConstants';
+import ApplicationCard from './applicationsCard'
 import ReactPaginate from 'react-paginate';
 
-class ListApplications extends Component {
+class Applications extends Component {
     state = {
-        apps: [],
+        appsList: [],
         limit: 10,
         page: 1,
         totalPages: 0
     }
     componentDidMount() {
-        // console.log(this.props)
-        this.updatePageList()
+        this.updatePageList();
+
     }
     updatePageList() {
-        Axios.get(`${BACKEND_URL}${APPLICATION_ROUTE}${GET_APPLICATIONS_JOBID}`, {
+        Axios.get(`${BACKEND_URL}${APPLICATION_ROUTE}${GET_APPLICATIONS_STUDENTID}`, {
             params: {
-                jobId: localStorage.getItem('jobId'),
+                studentId: localStorage.getItem('mongoId'),
                 limit: this.state.limit,
                 page: this.state.page
             }
         }).then((res) => {
-            console.log(res);
-            this.setState({ apps: [...res.data.results], totalPages: res.data.totalPages })
+            console.log(res.data)
+            this.setState({
+                appsList: res.data.results,
+                totalPages: res.data.totalPages,
+                page: res.data.page
+            })
         }).catch((err) => {
             console.log(err)
         })
     }
+
 
     handlePageClick = (data) => {
         let selected = data.selected + 1;
@@ -47,22 +51,18 @@ class ListApplications extends Component {
 
         // console.log(this.state)
     };
-
     render() {
         let renderVar
-        if (this.state.apps.length > 0) {
-            renderVar = this.state.apps.map((app, key) => {
-                if (app.status !== "Withdrawn")
-                    return <ApplicationCard props={app} key={key} />
+        if (this.state.appsList.length > 0) {
+            renderVar = this.state.appsList.map((job, key) => {
+                return <ApplicationCard props={{ app: job, props: this.props }} key={key} />
             })
         }
         return (
             <div className="containerList">
                 <div className="applicationsList">
                     <div className="applicationsHeader">
-                        <h4>
-                            Applications for {this.props.location.state.job.jobTitle}
-                        </h4>
+                        <h4> Jobs Applied</h4>
                         <div className="input-group"
                             style={{ width: "200px", justifyContent: "space-around" }}
                         >
@@ -74,12 +74,11 @@ class ListApplications extends Component {
                                 <option value="20">20</option>
                                 <option value="50">50</option>
                                 <option value="100">100</option>
-
-
                             </select>
                         </div>
                     </div>
-                    <div className="card-deck" style={{ justifyContent: "space-evenly" }}>
+                    <div class="card-deck jobsList">
+
                         {renderVar}
                     </div>
                     <ReactPaginate
@@ -101,4 +100,4 @@ class ListApplications extends Component {
     }
 }
 
-export default ListApplications;
+export default Applications;
