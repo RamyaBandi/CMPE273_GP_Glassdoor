@@ -86,4 +86,5 @@ handleTopicRequest("adminanalytics", adminanalytics)
 handleTopicRequest("companyStatistics", companyStatistics)
 handleTopicRequest("jobs", jobs)
 handleTopicRequest("applications", applications)
-
+handleTopicRequest("salaries", salaries)
+handleTopicRequest("interviews", interviews)

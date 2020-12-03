@@ -187,7 +187,7 @@ class AdminPhotos extends Component {
         </Col>
         <Col md="3" style={{marginTop:"20px"}}>
                         <Col md="12">
-                        <Button onClick={this.onSubmitApproval} style={{ backgroundColor: "#2f9c19", border: "1px solid #2f9c19" }} block>Approve selected</Button>
+                        <Button onClick={this.onSubmitApproval} type="Submit" style={{ backgroundColor: "#2f9c19", border: "1px solid #2f9c19" }} block>Approve selected</Button>
                         </Col>
         </Col>
         <Col md="3" style={{marginTop:"20px"}}>
