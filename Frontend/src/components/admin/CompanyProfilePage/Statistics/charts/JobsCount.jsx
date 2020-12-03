@@ -11,7 +11,7 @@ class JobCount extends Component {
     componentDidMount() {
         Axios.get(`${BACKEND_URL}${STATISTICS_ROUTE}${GET_STATISTICS_APPLICATIONS_COUNT}`, {
             params: {
-                companyId: localStorage.getItem('mongoId')
+                companyId: this.props.companyId
             }
         }).then((res) => {
             this.setState({ jobs: res.data });

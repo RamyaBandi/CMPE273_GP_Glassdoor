@@ -8,7 +8,7 @@ import { BACKEND_URL, GET_COMPANY_BY_COMPANYNAME_ADMIN, GET_COMPANY_REVIEWS_ADMI
 import AdminReviewCard from './adminReviewCard';
 import ApplicantDemographics from './Statistics/charts/ApplicantsDemographics';
 import JobCount from './Statistics/charts/JobsCount';
-//import '.'
+import './Statistics/AnalyticsHome.styles.css';
 
 export default class CompanyProfilePage extends Component {
     state = {
@@ -21,21 +21,22 @@ export default class CompanyProfilePage extends Component {
 
     componentDidMount = async () => {
         const companyName = this.props.location.state;
-        await axios.get(BACKEND_URL + GET_COMPANY_BY_COMPANYNAME_ADMIN + '?companyName=' + companyName)
-            .then(response => {
-                //console.log(response.data.company[0]);
-                this.setState({ companyDetails: response.data.company[0], reviews: response.data.company[0].reviews });
-                console.log(this.state.reviews);
-            })
-            .catch((error) => {
-                console.log(error);
-            }
-            )
+        
+        // await axios.get(BACKEND_URL + GET_COMPANY_BY_COMPANYNAME_ADMIN + '?companyName=' + companyName)
+        //     .then(response => {
+        //         //console.log(response.data.company[0]);
+        //         this.setState({ companyDetails: response.data.company[0], reviews: response.data.company[0].reviews });
+        //         console.log(this.state.reviews);
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     }
+        //     )
 
         //axios to get approved
-        await axios.get(BACKEND_URL + GET_COMPANY_REVIEWS_ADMIN + '?companyId=' + this.state.companyDetails._id + '&approvalstatus=Approved')
+        await axios.get(BACKEND_URL + GET_COMPANY_REVIEWS_ADMIN + '?companyId=' + this.props.match.params.id + '&approvalstatus=Approved')
             .then(response => {
-                this.setState({ approvedReviews: response.data.reviews });
+                this.setState({ companyName:this.props.location.state, approvedReviews: response.data.reviews });
                 console.log(response.data.reviews);
             })
             .catch((error) => {
@@ -43,7 +44,7 @@ export default class CompanyProfilePage extends Component {
             })
 
         //axios to get rejected
-        await axios.get(BACKEND_URL + GET_COMPANY_REVIEWS_ADMIN + '?companyId=' + this.state.companyDetails._id + '&approvalstatus=Rejected')
+        await axios.get(BACKEND_URL + GET_COMPANY_REVIEWS_ADMIN + '?companyId=' + this.props.match.params.id + '&approvalstatus=Rejected')
             .then(response => {
                 this.setState({ rejectedReviews: response.data.reviews });
                 console.log(this.state.rejectedReviews);
@@ -60,7 +61,7 @@ export default class CompanyProfilePage extends Component {
                 <Container style={{ marginTop: "20px", width: "70%", backgroundColor: "white" }} className="block-example border">
                     <Row style={{ height: "50px", marginTop: "20px" }}>
                         <Col>
-                            <h4><b>{this.state.companyDetails.companyName}</b></h4>
+                            <h4><b>{this.state.companyName}</b></h4>
                         </Col>
                     </Row>
                     <Row style={{ marginTop: "20px" }}>
@@ -75,9 +76,10 @@ export default class CompanyProfilePage extends Component {
                             })}
                         </Col>
                     </Row>
+                    <br/>
                     <Row style={{ marginTop: "20px" }}>
                         <Col>
-                        <h5 style={{color: "red"}}><b>Rejected Reviews</b></h5>
+                        <h5 style={{color: "rgb(220,0,0)"}}><b>Rejected Reviews</b></h5>
                         </Col>
                     </Row>
                     <Row style={{ marginTop: "20px" }}>
@@ -94,10 +96,10 @@ export default class CompanyProfilePage extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            <div className="analyticsHome">
+                            <div className="companyProfilePage">
                                 <div>
-                                    <JobCount />
-                                    <ApplicantDemographics />
+                                    <JobCount companyId={this.props.match.params.id} />
+                                    <ApplicantDemographics companyId={this.props.match.params.id}/>
                                 </div>
                             </div>
                         </Col>

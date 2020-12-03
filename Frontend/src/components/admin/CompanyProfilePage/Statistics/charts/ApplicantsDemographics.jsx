@@ -19,9 +19,10 @@ class ApplicantDemographics extends Component {
 
     }
     componentDidMount = async () => {
+       
         await Axios.get(`${BACKEND_URL}${STATISTICS_ROUTE}${GET_STATISTICS_APPLICANT_DEMOGRAPHICS}`, {
             params: {
-                companyId: localStorage.getItem('mongoId')
+                companyId: this.props.companyId
             }
         }).then((res) => {
             this.setState({ ...res.data });

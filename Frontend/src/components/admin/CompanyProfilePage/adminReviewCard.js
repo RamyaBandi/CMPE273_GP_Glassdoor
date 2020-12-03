@@ -13,7 +13,7 @@ export default class ReviewCard extends Component {
     render = () => {
         return(
             <div>
-                <Container style={{ marginTop: "20px", width: "80%" }}>
+                <Container style={{ marginTop: "20px", width: "80%" }} className="block-example border">
                     <Row style = {{marginTop: "10px", marginLeft: "10px"}}>
                         {/* <Col md="2">
                         </Col> */}
@@ -24,7 +24,7 @@ export default class ReviewCard extends Component {
                                 </Col>
                                 <Col md="4">
                                     {this.props.approvalstatus === "Approved" ? (<p style = {{color: "green"}}>Approval Status: <b>{this.props.approvalstatus}</b></p>)
-                                    : (<p style = {{color: "red"}}>Approval Status: <b>{this.props.approvalstatus}</b></p>)}
+                                    : (<p style = {{color: "rgb(220,0,0)"}}>Approval Status: <b>{this.props.approvalstatus}</b></p>)}
                                 </Col>
                             </Row>
                             <Row>
@@ -37,7 +37,6 @@ export default class ReviewCard extends Component {
                             </Row>
                         </Col>
                     </Row>
-                    <hr/>
                 </Container>
             </div>
         )
