@@ -26,6 +26,7 @@ class InterviewsTab extends Component {
         this.setState({
             interviewData : []
         })
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_SEARCH_INTERVIEW, {
             params: {
                 searchParameter: this.props.location.state.detail,

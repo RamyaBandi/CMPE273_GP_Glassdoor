@@ -191,6 +191,7 @@ class studentHomePage extends Component {
     // Initial function to get the jobs result from the backend
 
     async getJobSearchResults() {
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         await axios.get(BACKEND_URL + GET_STUDENTS_JOBS_HOMEPAGE,
         )
             .then(response => {

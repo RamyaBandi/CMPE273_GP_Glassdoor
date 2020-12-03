@@ -9,6 +9,7 @@ class JobCount extends Component {
         jobs: null
     }
     componentDidMount() {
+        Axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         Axios.get(`${BACKEND_URL}${STATISTICS_ROUTE}${GET_STATISTICS_APPLICATIONS_COUNT}`, {
             params: {
                 companyId: localStorage.getItem('mongoId')

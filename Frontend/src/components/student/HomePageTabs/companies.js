@@ -27,6 +27,7 @@ class CompaniesTab extends Component {
         this.setState({
             companyData : []
         })
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_SEARCH_COMPANY, {
             params: {
                 searchParameter: this.props.location.state.detail,

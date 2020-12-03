@@ -12,6 +12,7 @@ export default class ReviewCard extends Component {
     this.reviewData = {   
       reviewId: this.props._id,
     };
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios.put(BACKEND_URL + PUT_STUDENT_REVIEW_HELPFUL, this.reviewData)
             .then(response => {
                 console.log("review helpful count updated successfully")

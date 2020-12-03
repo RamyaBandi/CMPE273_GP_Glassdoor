@@ -46,6 +46,7 @@ class AddSalary extends Component {
       companyId: "5fb4884acf339e3da0d5c31e",
       studentId: localStorage.getItem('mongoId'),
     };
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios.post(BACKEND_URL + POST_STUDENT_SALARY, this.salaryData)
             .then(response => {
                 console.log("Salary posted successfully");
@@ -55,7 +56,7 @@ class AddSalary extends Component {
   componentDidMount() {
     const company_id = this.props.location.state;
     console.log(company_id);
-
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios
       .get(BACKEND_URL + GET_COMPANY_DETAILS + "?companyId=" + company_id)
       .then((response) => {

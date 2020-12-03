@@ -2,6 +2,8 @@ const { response } = require('express');
 var bcrypt = require('bcryptjs');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken')
+const { auth } = require('../config/passport')
+auth();
 var kafka = require('../kafka/client');
 // const { jwtsecret } = require('../config/mysqlinit')
 
