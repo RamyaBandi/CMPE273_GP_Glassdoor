@@ -26,7 +26,7 @@ else {
     jobRouter.route(PUT_COMPANY_JOB).put(jobServices.updateCompanyJob);
     jobRouter.route(GET_COMPANY_JOBS).get(jobServices.getCompanyJobs);
     jobRouter.route(GET_ALL_JOBS).get(jobServices.getAllJobs);
-    //jobRouter.route(GET_COMPANY_JOBS_BY_JOBTITLE_OR_CITY).get(jobServices.getCompanyJobsByJobTitleOrCity);
+    jobRouter.route(GET_COMPANY_JOBS_BY_JOBTITLE_OR_CITY).get(jobServices.getCompanyJobsByJobTitleOrCity);
     jobRouter.route(GET_COMPANY_JOBS_BY_CITY).get(jobServices.getCompanyJobsByCity);
     jobRouter.route(GET_COMPANY_JOB_BY_JOBID).get(jobServices.getCompanyJobsByJobId);
 }
