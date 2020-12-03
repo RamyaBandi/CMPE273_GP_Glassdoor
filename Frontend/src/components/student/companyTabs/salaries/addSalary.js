@@ -44,7 +44,7 @@ class AddSalary extends Component {
       location : this.state.location,
       employerName: this.state.employerName,
       companyId: "5fb4884acf339e3da0d5c31e",
-      studentId: "5fb48df63d242fa0842343f3"
+      studentId: localStorage.getItem('mongoId'),
     };
     axios.post(BACKEND_URL + POST_STUDENT_SALARY, this.salaryData)
             .then(response => {

@@ -57,6 +57,7 @@ module.exports = {
     PUT_REVIEW_REJECT: '/review/reject/review',
     GET_ALL_REVIEWS: '/review/all/reviews',
     GET_REVIEW_DETAILS: '/review/details/review',
+    GET_APPROVED_COMPANY_REVIEWS: '/review/approved/company/reviews',
 
     //Salary Routes
     POST_STUDENT_SALARY: '/salary/student/salary',

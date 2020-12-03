@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import reviewCard from "./reviewCard";
+import StarRatingComponent from 'react-star-rating-component';
 import axios from "axios";
 import { BACKEND_URL, PUT_STUDENT_REVIEW_HELPFUL } from '../../../../config/routeConstants'
 
@@ -27,33 +28,90 @@ export default class ReviewCard extends Component {
           <Col>
             <Row>
               <p style={{ color: "#3f76cc", fontSize: "22px" }}>
-                <b>"{this.props.headline}"</b>
+                Headline: <b>"{this.props.headline}"</b>
               </p>
             </Row>
             <Row>
               <Col md="4">
+              <StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={this.props.overallRating}
+                        starColor="#D4AF37"
+                        renderStarIcon={(index, value) => {
+                          return (
+                            <div className="color-of-star">
+                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                            </div>
+                          );
+                        }}
+                        renderStarIconHalf={() => (
+                          <div className="color-of-star">
+                            <span className="position-absolute"><i className={"far fa-star"} /></span>
+                            <span><i className={"fas fa-star-half"} /></span>
+                          </div>
+                        )}
+                    />
                 <p>Overall Rating: {this.props.overallRating}</p>
               </Col>
               <Col md="4">
+              <StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={this.props.recommendedRating}
+                        starColor="#D4AF37"
+                        renderStarIcon={(index, value) => {
+                          return (
+                            <div className="color-of-star">
+                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                            </div>
+                          );
+                        }}
+                        renderStarIconHalf={() => (
+                          <div className="color-of-star">
+                            <span className="position-absolute"><i className={"far fa-star"} /></span>
+                            <span><i className={"fas fa-star-half"} /></span>
+                          </div>
+                        )}
+                    />
                 <p>Recommended to a Friend: {this.props.recommendedRating}</p>
               </Col>
               <Col md="4">
+              <StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={this.props.ceoRating}
+                        starColor="#D4AF37"
+                        renderStarIcon={(index, value) => {
+                          return (
+                            <div className="color-of-star">
+                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                            </div>
+                          );
+                        }}
+                        renderStarIconHalf={() => (
+                          <div className="color-of-star">
+                            <span className="position-absolute"><i className={"far fa-star"} /></span>
+                            <span><i className={"fas fa-star-half"} /></span>
+                          </div>
+                        )}
+                    />
                 <p>CEO approval: {this.props.ceoRating}</p>
               </Col>
             </Row>
             <Row>
-              <p>{this.props.description}</p>
+              <p>Description: {this.props.description}</p>
             </Row>
             <Row>
               <p>
-                <b>Pros</b>
+                <b>Pros:</b>
                 <br />
                 {this.props.pros}
               </p>
             </Row>
             <Row>
               <p>
-                <b>Cons</b>
+                <b>Cons:</b>
                 <br />
                 {this.props.cons}
               </p>
