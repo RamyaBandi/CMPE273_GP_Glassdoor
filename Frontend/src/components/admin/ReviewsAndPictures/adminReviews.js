@@ -27,7 +27,7 @@ class AdminReviews extends Component {
       addedItem2:    {},
       cart2:         {},
       page : 1,
-      limit : 30,
+      limit : 10,
       redirect: null,
     };
     this.handlePageClick = this.handlePageClick.bind(this)
@@ -124,6 +124,7 @@ class AdminReviews extends Component {
     }
 
     onSubmitApproval = async (e) => {
+        
         for(let i in this.state.cart){
             this.reviewData = {   
                 reviewId: this.state.cart[i]._id
