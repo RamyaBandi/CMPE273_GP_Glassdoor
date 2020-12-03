@@ -75,3 +75,23 @@ const {
       
   });
   }
+
+  module.exports.getSalaryAverages=(req,res)=>{
+    console.log("req.body"+JSON.stringify(req.query))
+    data={
+      api:"GET_SALARY_AVERAGES",
+      body: req.query
+    }
+    kafka.make_request('salaries', data, function(err,results){
+      console.log('in result');
+      console.log(results);
+      if (err) {
+        console.log("In error");
+        res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+    } else {
+        console.log("In else");
+        res.status(RES_SUCCESS).send(JSON.stringify(results));
+    }
+      
+  });
+  }

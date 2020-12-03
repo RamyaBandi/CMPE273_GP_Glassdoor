@@ -45,6 +45,8 @@ import AdminPhotos from './components/admin/ReviewsAndPictures/adminPhotos'
 import StudentGallery from './components/student/updateProfile/studentGallery'
 
 import ViewPhoto from './components/admin/ReviewsAndPictures/viewphoto'
+import Applications from './components/student/updateProfile/applications';
+import StudentProfile from './components/employer/jobs/applications/viewApplication/studentProfile';
 
 
 class Main extends Component {
@@ -70,8 +72,8 @@ class Main extends Component {
                     <Route exact path="/addreview" component={(props) => <AddReview {...props} />} />
                     <Route exact path="/overview" component={CompanyOverview} />
                     <Route exact path="/jobs" component={(props) => <CompanyJobs {...props} />} />
-                    <Route exact path="/jobApplication" component={(props) => <JobApplication {...props} />}/>
-                    <Route exact path="/photos" component={(props) => <Photos {...props} />}/>
+                    <Route exact path="/jobApplication" component={(props) => <JobApplication {...props} />} />
+                    <Route exact path="/photos" component={(props) => <Photos {...props} />} />
                     <Route exact path="/salaries" component={(props) => <Salaries {...props} />} />
                     <Route exact path="/addsalary" component={(props) => <AddSalary {...props} />} />
                     <Route exact path="/interviews" component={(props) => <Interviews {...props} />} />
@@ -87,6 +89,8 @@ class Main extends Component {
                     <Route exact path="/student/demographics" render={props => <Demographics {...props} />} />
                     <Route exact path="/student/resume" render={props => <ResumeUpdate {...props} />} />
                     <Route exact path="/student/gallery" render={props => <StudentGallery {...props} />} />
+                    <Route exact path="/student/applications" render={props => <Applications {...props} />} />
+
                     {//Employer Routes
                     }
 
@@ -96,6 +100,8 @@ class Main extends Component {
                     <Route exact path="/employer/jobs/list" render={props => <ListCompanyJobs {...props} />} />
                     <Route exact path="/employer/jobs/edit" render={props => <EditJobs {...props} />} />
                     <Route exact path="/employer/jobs/applications" render={props => <ListApplications {...props} />} />
+                    <Route exact path="/employer/jobs/studentProfile" render={props => <StudentProfile {...props} />} />
+
                     <Route exact path="/company/profile" render={props => <EmployerUpdateProfile{...props} />} />
                     <Route exact path="/employer/reviews" render={props => <EmployerReview {...props} />} />
                     <Route exact path="/employer/analytics" render={props => <AnalyticsHome {...props} />} />

@@ -38,9 +38,9 @@ module.exports.jobSearch = async (req, res) => {
                     companyName: 1,
                     headquarters: 1,
                     website: 1,
-                    NumberOfReviews: { $size: "$reviews" },
-                    // salaryReviews:  { $size: "$salaries" },
-                    // interviewReviews: { $size: "$interviews" }
+                    NumberOfReviews: { $size: { "$ifNull": [ "$reviews", [] ] } },
+                    salaryReviews: { $size: { "$ifNull": [ "$salaries", [] ] } },
+                    interviewReviews: { $size: { "$ifNull": [ "$interviews", [] ] } }
                 }
             }]).exec();
 
@@ -82,9 +82,10 @@ module.exports.companySearch = async (req, res) => {
                     companyName: 1,
                     headquarters: 1,
                     website: 1,
-                    NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
-                    salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
-                    interviewReviews: "$interviews" ? { $size: "$interviews" } : null
+                    // NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
+                    NumberOfReviews: { $size: { "$ifNull": [ "$reviews", [] ] } },
+                    salaryReviews: { $size: { "$ifNull": [ "$salaries", [] ] } },
+                    interviewReviews: { $size: { "$ifNull": [ "$interviews", [] ] } }
                 }
             }]).exec();
 
@@ -99,6 +100,8 @@ module.exports.companySearch = async (req, res) => {
 }
 
 module.exports.salarySearch = async (req, res) => {
+    console.log("Page limit",req.query.limit )
+    console.log("Page Number",req.query.page )
     let companyResults = await
         Company.aggregate([
             { $match: { companyName: req.query.searchParameter} },
@@ -109,21 +112,23 @@ module.exports.salarySearch = async (req, res) => {
                     headquarters: 1,
                     website: 1,
                     salaries: 1,
-                    NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
-                    salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
-                    interviewReviews: "$interviews" ? { $size: "$interviews" } : null
+                    NumberOfReviews: { $size: { "$ifNull": [ "$reviews", [] ] } },
+                    salaryReviews: { $size: { "$ifNull": [ "$salaries", [] ] } },
+                    interviewReviews: { $size: { "$ifNull": [ "$interviews", [] ] } }
                 }
-            }]).exec();
+            }]).skip((req.query.page - 1) * req.query.limit).exec();
 
     let averageRating = await Reviews.aggregate([
-        { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(req.query.limit * 1).skip((req.query.page - 1) * req.query.limit).exec();
+        { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(req.query.limit * 1).exec();
     console.log("Average Rating", averageRating)
 
     let datasets = await Promise.all(companyResults[0].salaries.map(async (data) => {
         let products = {};
 
         let last = await Salaries.find({ _id: data }, { jobTitle: 1, baseSalary: 1 })
+        console.log("Last", last[0])
 
+        if(typeof last[0] !== "undefined"){
         products._id = companyResults[0]._id;
         products.companyName = companyResults[0].companyName
         products.headquarters = companyResults[0].headquarters
@@ -137,8 +142,11 @@ module.exports.salarySearch = async (req, res) => {
 
 
         return products;
+        }
     }));
-
+    datasets = await datasets.filter(company => {
+        return company.companyName
+    })
     console.log("Outside salaries", datasets)
 
 
@@ -156,14 +164,14 @@ module.exports.interviewSearch = async (req, res) => {
                     headquarters: 1,
                     website: 1,
                     interviews: 1,
-                    NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
-                    salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
-                    interviewReviews: "$interviews" ? { $size: "$interviews" } : null
+                    NumberOfReviews: { $size: { "$ifNull": [ "$reviews", [] ] } },
+                    salaryReviews: { $size: { "$ifNull": [ "$salaries", [] ] } },
+                    interviewReviews: { $size: { "$ifNull": [ "$interviews", [] ] } }
                 }
-            }]).exec();
+            }]).limit(req.query.limit * 1).skip((req.query.page - 1) * req.query.limit).exec();
 
     let averageRating = await Reviews.aggregate([
-        { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(req.query.limit * 1).skip((req.query.page - 1) * req.query.limit).exec();
+        { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).exec();
     console.log("Average Rating", averageRating)
 
     let datasets = await Promise.all(companyResults[0].interviews.map(async (data) => {
@@ -171,7 +179,7 @@ module.exports.interviewSearch = async (req, res) => {
 
         let last = await Interviews.find({ _id: data }, { jobTitle: 1, description: 1 })
         console.log("Last", last)
-
+        if(typeof last[0] !== "undefined"){
         products._id = companyResults[0]._id;
         products.companyName = companyResults[0].companyName
         products.headquarters = companyResults[0].headquarters
@@ -183,11 +191,14 @@ module.exports.interviewSearch = async (req, res) => {
         products.jobTitle = last[0].jobTitle;
         products.description = last[0].description;
 
-
         return products;
+        }
     }));
+    datasets = await datasets.filter(company => {
+        return company
+    })
 
-    console.log("Outside salaries", datasets)
+    console.log("Outside interviews", datasets)
 
 
     res.status(RES_SUCCESS).end(JSON.stringify(datasets));

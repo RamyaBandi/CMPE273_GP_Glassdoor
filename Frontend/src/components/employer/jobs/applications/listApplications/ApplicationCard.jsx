@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BACKEND_URL, APPLICATION_ROUTE, PUT_APPLICATION } from '../../../../../config/routeConstants';
 import Axios from 'axios'
 import './ApplicationCard.styles.css'
+import { Link } from 'react-router-dom';
 class ApplicationCard extends Component {
     state = {
         status: ""
@@ -41,7 +42,13 @@ class ApplicationCard extends Component {
             <div>
                 <div className="card applicationCard" >
                     <div className="card-body">
-                        <a style={{ textDecoration: "none" }} href="/employer/student/profile"> <h5 className="card-title">{data.studentId.studentName}</h5></a>
+                        <Link style={{ textDecoration: "none" }} to={{
+                            pathname: "/employer/jobs/studentProfile",
+                            state: {
+                                studentId: data.studentId._id
+                            }
+                        }}
+                        > <h5 className="card-title">{data.studentId.studentName}</h5></Link>
                         <p className="card-text">{data.studentId.email}</p>
                         <p className="card-text">Applied on : {date}</p>
                         {/* <p className="card-text">{data.applicationstatus}</p> */}

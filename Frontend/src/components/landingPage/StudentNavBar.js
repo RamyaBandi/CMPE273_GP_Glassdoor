@@ -42,12 +42,16 @@ class StudentNavBar extends React.Component {
     }
 
     submitSearch(event){
+        console.log("Previos", this.state.previousSearchParameter)
+        console.log("Category", this.state.selectedOption)
+        console.log("Parameter", this.state.searchParameter )
         event.preventDefault();
         if(this.state.selectedOption === "jobs"){
             this.props.history.replace({
                 pathname: '/jobstab',
                 search: '?query=abc',
-                state: { detail: this.state.searchParameter }
+                state: {
+                    detail: this.state.searchParameter }
                 });
         }
         else if(this.state.selectedOption === "companies"){
@@ -71,6 +75,7 @@ class StudentNavBar extends React.Component {
                 state: { detail: this.state.searchParameter }
                 });
         }
+        window.location.reload()
     }
 
     render() {
