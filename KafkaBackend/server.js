@@ -14,7 +14,7 @@ const companyStatistics = require('./services/companyStatisticsServices')
 const jobs = require('./services/jobServices')
 const applications = require('./services/applicationServices')
 const salaries = require('./services/salaryServices')
-const interviews = require('./interviews/interviewServices')
+const interviews = require('./services/interviewServices')
 
 
 function handleTopicRequest(topic_name, fname) {
