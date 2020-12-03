@@ -12,6 +12,10 @@ const Resumes = new mongoose.Schema({
         type: String,
         required: true
     },
+    uploadFileName:{
+        type: String,
+
+    }
 
 }, { versionKey: false })
 

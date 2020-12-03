@@ -71,8 +71,8 @@ module.exports.getCompanyInterviews = async (req, res) => {
     let data = req.query;
     console.log(data);
     try {
-        data.page = 1;
-        data.limit = 10;
+        // data.page = 1;
+        // data.limit = 10;
         const interviews = await Interviews.find({ companyId: data.companyId })
             .limit(data.limit * 1)
             .skip((data.page - 1) * data.limit)
@@ -86,7 +86,7 @@ module.exports.getCompanyInterviews = async (req, res) => {
             currentPage: data.page,
         };
         console.log(
-            "Interviews fetched Successfully from DB - page not 1 or redis off"
+            "Interviews fetched Successfully"
         );
         res.status(RES_SUCCESS).send(result);
     } catch {

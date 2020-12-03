@@ -119,7 +119,7 @@ class AddSalary extends Component {
             <p>Salary Details</p>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "100%" }}>
+            <form style={{ marginTop: "0px", width: "50%" }}>
               <div class="form-group">
                 <label for="basesalary">Base Salary</label>
                 <input
@@ -135,7 +135,7 @@ class AddSalary extends Component {
             </form>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "100%" }}>
+            <form style={{ marginTop: "0px", width: "50%" }}>
               <div class="form-group">
                 <label for="bonuses">Bonuses</label>
                 <input
@@ -157,7 +157,7 @@ class AddSalary extends Component {
               <p>Job Details</p>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "100%" }}>
+            <form style={{ marginTop: "0px", width: "50%" }}>
               <div class="form-group">
                 <label for="jobtitle">Job Title</label>
                 <input
@@ -172,7 +172,7 @@ class AddSalary extends Component {
             </form>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "100%" }}>
+            <form style={{ marginTop: "0px", width: "50%" }}>
               <div class="form-group">
                 <label for="yearofexp">Years of Experience</label>
                 <input
@@ -188,7 +188,7 @@ class AddSalary extends Component {
             </form>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "100%" }}>
+            <form style={{ marginTop: "0px", width: "50%" }}>
               <div class="form-group">
                 <label for="location">Location</label>
                 <input
@@ -203,7 +203,7 @@ class AddSalary extends Component {
             </form>
           </Row>
           <Row>
-            <form style={{ marginTop: "0px", width: "100%" }}>
+            <form style={{ marginTop: "0px", width: "50%" }}>
               <div class="form-group">
                 <label for="employername">Employer Name</label>
                 <input

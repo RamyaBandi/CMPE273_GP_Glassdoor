@@ -14,7 +14,7 @@ export default class JobCard extends Component {
         return (
             <div>
                 <Container style={{ marginTop: "20px", width: "80%" }}>
-                    <Row style = {{marginTop: "10px", marginLeft: "10px"}}>
+                    <Row style = {{marginTop: "10px"}}>
                         <Col md="2">
                             Company Image
                         </Col>

@@ -6,7 +6,8 @@ import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import axios from "axios";
 import SalaryCard from "./salaryCard";
-import { BACKEND_URL, GET_COMPANY_SALARIES, GET_COMPANY_DETAILS } from "../../../../config/routeConstants";
+import ReactPaginate from 'react-paginate';
+import { BACKEND_URL, GET_SALARY_AVERAGES, GET_COMPANY_DETAILS } from "../../../../config/routeConstants";
 
 class Salaries extends Component {
   constructor(props) {
@@ -14,6 +15,8 @@ class Salaries extends Component {
     this.state = {
       companyDetails: [],
       salaries: [],
+      page : 1,
+      limit : 10,
       redirect: null,
     };
   }
@@ -21,17 +24,18 @@ class Salaries extends Component {
     const company_id = this.props.location.state;
     //const {data} = this.props.location.state;
     console.log(company_id);
-    axios
-      .get(BACKEND_URL + GET_COMPANY_SALARIES + "?companyId=" + company_id)
-      .then((response) => {
-        // console.log("response")
-        // console.log(response.data.salaries);
-        this.setState({ salaries: response.data.salaries });
+    this.getSalaryResults();
+    // axios
+    //   .get(BACKEND_URL + GET_COMPANY_SALARIES + "?companyId=" + company_id)
+    //   .then((response) => {
+    //     // console.log("response")
+    //     // console.log(response.data.salaries);
+    //     this.setState({ salaries: response.data.salaries });
         
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
       axios
       .get(BACKEND_URL + GET_COMPANY_DETAILS + "?companyId=" + company_id)
@@ -45,6 +49,45 @@ class Salaries extends Component {
         console.log(error);
       });
   }
+
+  handlePageClick = (e) => {
+    // console.log("Page number",e.selected)
+        this.setState({
+            page: e.selected + 1,
+        }, () => {
+            this.getSalaryResults()
+        });
+    console.log("Page number",e.selected)
+}
+
+handleChange = (e) => {
+  //  console.log(this.state);
+  let { value, id } = e.target;
+  this.setState({ [id]: value }, () => this.getSalaryResults());
+  // console.log(this.state)
+};
+
+async getSalaryResults(){
+  const company_id = this.props.location.state;
+  await axios.get(BACKEND_URL + GET_SALARY_AVERAGES, {
+      params: {
+        companyId: company_id,
+      }
+  })
+      .then(response => {
+          console.log("Status Code : ", response.status);
+          if (response.status === 200) {
+              //console.log("Salaries Data", response.data)
+              this.setState({
+                  salaries: response.data                 
+              })
+              console.log(this.state.salaries)
+          }
+      })
+      .catch(error => {
+          console.log(error.response.data.msg)
+      })
+}
 
   render = () => {
     return (
@@ -98,6 +141,32 @@ class Salaries extends Component {
             })}
           </Container>
         </Row>
+        <ReactPaginate
+                    previousLabel={"<<"}
+                    nextLabel={">>"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={this.state.pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"} />
+
+        <div className="input-group"
+                            style={{ width: "200px", justifyContent: "space-around" }}
+                        >
+                            <div className="input-group-prepend">
+                                <label  >Page Limit </label>
+                            </div>
+                            <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+        </div>
       </div>
     );
   };

@@ -182,6 +182,9 @@ class StudentUpdateProfile extends Component {
 <li class ="nav-item">
 <a class ="nav-link" href="/student/demographics">Demographics</a>
 </li>
+<li class ="nav-item">
+<a class ="nav-link" href="/student/gallery">Gallery</a>
+</li>
 </ul>
 </nav>
 </div>

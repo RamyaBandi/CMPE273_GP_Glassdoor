@@ -14,6 +14,13 @@ const companyStatistics = require('./services/companyStatisticsServices')
 const jobs = require('./services/jobServices')
 const applications = require('./services/applicationServices')
 
+const images= require('./services/imageServices')
+const student=require('./services/studentServices')
+
+const salaries = require('./services/salaryServices')
+const interviews = require('./services/interviewServices')
+
+
 
 function handleTopicRequest(topic_name, fname) {
     //var topic_name = 'root_topic';
@@ -84,4 +91,8 @@ handleTopicRequest("adminanalytics", adminanalytics)
 handleTopicRequest("companyStatistics", companyStatistics)
 handleTopicRequest("jobs", jobs)
 handleTopicRequest("applications", applications)
+handleTopicRequest("salaries", salaries)
+handleTopicRequest("interviews", interviews)
+handleTopicRequest("images",images)
+handleTopicRequest("student",student)
 

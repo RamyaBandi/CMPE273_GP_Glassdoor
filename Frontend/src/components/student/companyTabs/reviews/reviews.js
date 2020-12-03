@@ -37,9 +37,9 @@ class Reviews extends Component {
     this.setState({ redirect: <Redirect to="/addReview" /> });
   };
   componentDidMount() {
-    const company_id = '5fb4884acf339e3da0d5c31e';
+    //const company_id = '5fb4884acf339e3da0d5c31e';
     const student_id = localStorage.getItem('mongoId');
-    //const company_id = this.props.location.state;
+    const company_id = this.props.location.state;
     //console.log(company_id);
 
     // axios
@@ -53,7 +53,7 @@ class Reviews extends Component {
     //     console.log(error);
     //   });
 
-    this.updatePageList();
+    this.getReviewsResults();
 
     axios
       .get(BACKEND_URL + GET_COMPANY_DETAILS + "?companyId=" + company_id)
@@ -101,7 +101,7 @@ class Reviews extends Component {
       });
   }
 
-  updatePageList() {
+  getReviewsResults() {
     console.log("in update page list");
     const company_id = '5fb4884acf339e3da0d5c31e';
     const student_id = localStorage.getItem('mongoId');
@@ -125,29 +125,30 @@ class Reviews extends Component {
         
 }
 
-handlePageClick = (data) => {
-  let selected = data.selected + 1;
-  // let offset = Math.ceil(selected * this.props.perPage);
-  //console.log(data)
-  this.setState({ page: selected }, () => {
-      this.updatePageList()
-  })
-
-};
+handlePageClick = (e) => {
+  // console.log("Page number",e.selected)
+      this.setState({
+          page: e.selected + 1,
+      }, () => {
+          this.getReviewsResults()
+      });
+  console.log("Page number",e.selected)
+}
 
 handleChange = (e) => {
   //  console.log(this.state);
   let { value, id } = e.target;
-  this.setState({ [id]: value }, () => this.updatePageList());
+  this.setState({ [id]: value }, () => this.getReviewsResults());
 
   // console.log(this.state)
 };
+
 
   render = () => {
     return (
       <div>
         {this.state.redirect}
-        <Container style={{ marginTop: "20px", width: "70%", backgroundColor: "white" }} className="block-example border">
+        <Container style={{ marginTop: "20px", width: "70%", backgroundColor: "white" }} className="block-example border block-example border">
           <Row style={{ height: "50px", marginTop: "20px" }}>
             <Col>
               <h5>
@@ -198,7 +199,32 @@ handleChange = (e) => {
               <Col md="4">
               </Col>
             <Col md="4">
-              <p style={{fontSize:"17px"}}  class="companyRating">Average Overall Rating: {this.state.avgReviews.averageOverallRating}<i class="fas fa-star"></i></p>
+              <Row><p style={{fontSize:"17px"}}  class="companyRating">Average Overall Rating: {this.state.avgReviews.averageOverallRating}</p></Row>
+              <Row>
+                <Col md="3">
+                </Col>
+                <Col md="7"><StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={this.state.avgReviews.averageOverallRating}
+                        starColor="#0d9e1d"
+                        renderStarIcon={(index, value) => {
+                          return (
+                            <div className="color-of-star">
+                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                            </div>
+                          );
+                        }}
+                        renderStarIconHalf={() => (
+                          <div className="color-of-star">
+                            <span className="position-absolute"><i className={"far fa-star"} /></span>
+                            <span><i className={"fas fa-star-half"} /></span>
+                          </div>
+                        )}
+                    /></Col>
+                    <Col md="2">
+                    </Col>
+                    </Row>
             </Col>
             
             <Col md="4">
@@ -209,10 +235,60 @@ handleChange = (e) => {
               <Col md="1">
               </Col>
             <Col md="5">
-              <p style={{fontSize:"17px"}} class="companyRating">Average Recommended Rating: {this.state.avgReviews.averageRecommendedRating}<i class="fas fa-star"></i></p>
+              <Row><p style={{fontSize:"17px"}} class="companyRating">Average Recommended Rating: {this.state.avgReviews.averageRecommendedRating}</p></Row>
+              <Row>
+                <Col md="3">
+                </Col>
+              <Col md="6"><StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={this.state.avgReviews.averageRecommendedRating}
+                        starColor="#0d9e1d"
+                        renderStarIcon={(index, value) => {
+                          return (
+                            <div className="color-of-star">
+                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                            </div>
+                          );
+                        }}
+                        renderStarIconHalf={() => (
+                          <div className="color-of-star">
+                            <span className="position-absolute"><i className={"far fa-star"} /></span>
+                            <span><i className={"fas fa-star-half"} /></span>
+                          </div>
+                        )}
+                    /></Col>
+                    <Col md="3">
+                    </Col>
+                    </Row>
             </Col>
             <Col md="6">
-              <p style={{fontSize:"17px"}} class="companyRating">Average CEO Rating: {this.state.avgReviews.averageCeoRating}<i class="fas fa-star"></i></p>
+              <Row><p style={{fontSize:"17px"}} class="companyRating">Average CEO Rating: {this.state.avgReviews.averageCeoRating}</p></Row>
+              <Row>
+                <Col md="2">
+                </Col>
+              <Col md="6"><StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={this.state.avgReviews.averageRecommendedRating}
+                        starColor="#0d9e1d"
+                        renderStarIcon={(index, value) => {
+                          return (
+                            <div className="color-of-star">
+                              <i className={index <= value ? 'fas fa-star' : 'far fa-star'} />
+                            </div>
+                          );
+                        }}
+                        renderStarIconHalf={() => (
+                          <div className="color-of-star">
+                            <span className="position-absolute"><i className={"far fa-star"} /></span>
+                            <span><i className={"fas fa-star-half"} /></span>
+                          </div>
+                        )}
+                    /></Col>
+                    <Col md="4">
+                    </Col>
+                    </Row>
             </Col>
             </Row>
           </Container>
@@ -423,20 +499,20 @@ handleChange = (e) => {
           </Container>
         </Row>
         <ReactPaginate
-                        previousLabel={'previous'}
-                        nextLabel={'next'}
-                        breakLabel={'...'}
-                        breakClassName={'break-me'}
-                        pageCount={this.state.totalPages}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={this.handlePageClick}
-                        containerClassName={'pagination'}
-                        subContainerClassName={'pages pagination'}
-                        activeClassName={'active'}
-                    />
+                    previousLabel={"<<"}
+                    nextLabel={">>"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={this.state.pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"} />
+
         <Container style={{ marginBottom: "30px" }}>
-        <Row>
+        
         <div className="input-group"
                             style={{ width: "200px", justifyContent: "space-around" }}
                         >
@@ -449,8 +525,8 @@ handleChange = (e) => {
                                 <option value="50">50</option>
                                 <option value="100">100</option>
                             </select>
-        </div>
-        </Row>
+                        </div>
+    
         </Container>
       </div>
     );

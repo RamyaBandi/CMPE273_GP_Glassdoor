@@ -41,7 +41,11 @@ import Photos from './components/student/companyTabs/photos/parent';
 import AdminReviews from './components/admin/ReviewsAndPictures/adminReviews'
 import ViewReview from './components/admin/ReviewsAndPictures/viewreview'
 import AdminPhotos from './components/admin/ReviewsAndPictures/adminPhotos'
+
+import StudentGallery from './components/student/updateProfile/studentGallery'
+
 import ViewPhoto from './components/admin/ReviewsAndPictures/viewphoto'
+
 
 class Main extends Component {
     render() {
@@ -60,7 +64,7 @@ class Main extends Component {
                     <Route exact path="/adminhomepage" render={props => <AdminHomePage {...props} />} />
                     <Route exact path="/adminanalytics" render={props => <AdminAnalytics {...props} />} />
                     <Route exact path="/listOfCompanies" render={props => <ListOfCompanies {...props} />} />
-                    <Route exact path="/companyProfilePage" render={props => <CompanyProfilePage {...props} />} />
+                    <Route exact path="/companyProfilePage/:id" render={props => <CompanyProfilePage {...props} />} />
 
                     <Route exact path="/reviews" component={(props) => <Reviews {...props} />} />
                     <Route exact path="/addreview" component={(props) => <AddReview {...props} />} />
@@ -82,6 +86,7 @@ class Main extends Component {
                     <Route exact path="/student/jobpreference" render={props => <JobPreference {...props} />} />
                     <Route exact path="/student/demographics" render={props => <Demographics {...props} />} />
                     <Route exact path="/student/resume" render={props => <ResumeUpdate {...props} />} />
+                    <Route exact path="/student/gallery" render={props => <StudentGallery {...props} />} />
                     {//Employer Routes
                     }
 

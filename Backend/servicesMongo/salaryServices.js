@@ -1,5 +1,6 @@
 const { response } = require('express');
 const con = require('../config/mongoConnection');
+const ObjectId = require('mongoose').Types.ObjectId;
 const {
     CONTENT_TYPE,
     APP_JSON,
@@ -68,8 +69,8 @@ module.exports.getCompanySalaries = async (req, res) => {
     let data = req.query
     console.log(data)
         try{
-            data.page = 1;
-            data.limit = 10;
+            // data.page = 1;
+            // data.limit = 10;
             const salaries = await Salaries.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
             const count = await Salaries.countDocuments({companyId: data.companyId});    
             const result = ({
@@ -77,7 +78,7 @@ module.exports.getCompanySalaries = async (req, res) => {
                 totalPages: Math.ceil(count / data.limit),
                 currentPage: data.page
             });  
-            console.log("Salaries fetched Successfully from DB - page not 1 or redis off")
+            console.log("Salaries fetched Successfully")
             res.status(RES_SUCCESS).send(result);
         }
         catch {
@@ -107,6 +108,34 @@ module.exports.getStudentSalaries = (req, res) => {
             //res.setHeader(CONTENT_TYPE, APP_JSON);
             console.log("Salaries fetched Successfully")
             res.status(RES_SUCCESS).send(result);
+        }
+    })
+}
+
+module.exports.getSalaryAverages = (req, res) => {
+
+    console.log("Inside Student Salaries GET service");
+    console.log(req.query)
+    let data = req.query
+    Salaries
+    .aggregate([
+        { $match: { companyId: new ObjectId(data.companyId)} },
+        { $group: { _id: "$jobTitle", 
+                    avg: { "$avg": "$baseSalary" } } }
+    ])
+    .exec((err, salaries) => {
+        if (err) {
+            console.log("Error fetching Salaries")
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+
+            console.log("Salary averages calculated Successfully");
+            console.log(salaries);
+            res.status(RES_SUCCESS).end(JSON.stringify(salaries));
+
         }
     })
 }

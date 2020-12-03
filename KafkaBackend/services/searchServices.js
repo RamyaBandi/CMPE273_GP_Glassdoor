@@ -17,7 +17,7 @@ const Salaries = require('../models/Salaries')
 const Jobs = require('../models/Jobs')
 const Interviews = require('../models/Interviews')
 const Reviews = require('../models/Reviews');
-const salaryRouter = require('../routes/salaryRoutes');
+//const salaryRouter = require('../routes/salaryRoutes');
 
 
 async function handle_request(msg, callback) {

@@ -14,23 +14,13 @@ const { POST_STUDENT_REVIEW, GET_COMPANY_REVIEWS, GET_ALL_REVIEWS, GET_STUDENT_R
 // console.log(process.env.KAFKA_SWITCH)
 if (process.env.KAFKA_SWITCH === 'true') {
     console.log("in kafka service")
-    // reviewRouter.route(POST_STUDENT_REVIEW).post(reviewKafkaServices.postStudentReview);
-    // reviewRouter.route(GET_COMPANY_REVIEWS).get(reviewKafkaServices.getCompanyReviews);
-    // reviewRouter.route(GET_STUDENT_REVIEWS).get(reviewKafkaServices.getStudentReviews);
-    // reviewRouter.route(PUT_COMPANY_REVIEW_HELPFUL).put(reviewKafkaServices.updateReviewHelpfulCount);
-    // reviewRouter.route(GET_POSITIVE_REVIEW).get(reviewKafkaServices.getMostPositiveReview);
-    // reviewRouter.route(GET_NEGATIVE_REVIEW).get(reviewKafkaServices.getMostNegativeReview);
-    // reviewRouter.route(PUT_COMPANY_REPLY).put(reviewKafkaServices.postReplyFromCompany);
-    // reviewRouter.route(GET_REVIEW_AVERAGE).get(reviewKafkaServices.getReviewAverage);
-
-
     reviewRouter.route(POST_STUDENT_REVIEW).post(reviewKafkaServices.postStudentReview);
     reviewRouter.route(GET_COMPANY_REVIEWS).get(reviewKafkaServices.getCompanyReviews);
     reviewRouter.route(GET_STUDENT_REVIEWS).get(reviewKafkaServices.getStudentReviews);
     reviewRouter.route(PUT_COMPANY_REVIEW_HELPFUL).put(reviewKafkaServices.updateReviewHelpfulCount);
     reviewRouter.route(GET_POSITIVE_REVIEW).get(reviewKafkaServices.getMostPositiveReview);
     reviewRouter.route(GET_NEGATIVE_REVIEW).get(reviewKafkaServices.getMostNegativeReview);
-    // reviewRouter.route(PUT_COMPANY_REPLY).put(reviewKafkaServices.postReplyFromCompany);
+    reviewRouter.route(PUT_COMPANY_REPLY).put(reviewKafkaServices.postReplyFromCompany);
     reviewRouter.route(GET_REVIEW_AVERAGE).get(reviewKafkaServices.getReviewAverage);
     reviewRouter.route(PUT_REVIEW_APPROVE).put(reviewKafkaServices.putReviewApprove);
     reviewRouter.route(PUT_REVIEW_REJECT).put(reviewKafkaServices.putReviewReject);

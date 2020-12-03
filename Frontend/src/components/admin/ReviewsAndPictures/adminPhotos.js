@@ -4,6 +4,7 @@ import { Redirect } from "react-router";
 import { Col, Row, Container, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import ReactPaginate from 'react-paginate';
 import axios from "axios";
 import {
   BACKEND_URL,
@@ -22,23 +23,62 @@ class AdminPhotos extends Component {
       cart:         {},
       addedItem2:    {},
       cart2:         {},
+      page : 1,
+      limit : 10,
+      totalPages: 0,
       redirect: null,
     };
   }
 
   componentDidMount() {
-    const company_id = '5fb4884acf339e3da0d5c31e';
+    //const company_id = '5fb4884acf339e3da0d5c31e';
     //const company_id = this.props.location.state;
-    axios
-      .get(BACKEND_URL + GET_ALL_PHOTOS)
-      .then((response) => {
-        this.setState({ photos: response.data.photos });
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.getPhotosResults();
+
+    // axios
+    //   .get(BACKEND_URL + GET_ALL_PHOTOS)
+    //   .then((response) => {
+    //     this.setState({ photos: response.data.photos });
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
     }
+
+    getPhotosResults() {
+      axios.get(BACKEND_URL + GET_ALL_PHOTOS, {
+          params: {
+              limit: this.state.limit,
+              page: this.state.page
+          }
+      })
+          .then((res) => {
+              this.setState({ photos: [...res.data.photos], totalPages: res.data.totalPages })
+              console.log(res)
+          })
+          .catch((err) => {
+              console.log(err)
+          })
+    }
+
+    handlePageClick = (e) => {
+      // console.log("Page number",e.selected)
+          this.setState({
+              page: e.selected + 1,
+          }, () => {
+              this.getPhotosResults()
+          });
+      console.log("Page number",e.selected)
+  }
+
+    handleChange = (e) => {
+      //  console.log(this.state);
+      let { value, id } = e.target;
+      this.setState({ [id]: value }, () => this.getPhotosResults());
+
+      // console.log(this.state)
+    };
 
     addApproveItem=(item)=>{
         let temp={...item}
@@ -82,6 +122,8 @@ class AdminPhotos extends Component {
             axios.put(BACKEND_URL + PUT_PHOTO_APPROVE, this.photoData)
                     .then(response => {
                         console.log("Photo approved successfully");
+                        window.location.reload();
+                        window.alert("Approved!");     
                     }) 
         }                
       };
@@ -94,6 +136,8 @@ class AdminPhotos extends Component {
             axios.put(BACKEND_URL + PUT_PHOTO_REJECT, this.photoData2)
                     .then(response => {
                         console.log("Photo rejected successfully");
+                        window.location.reload();
+                        window.alert("Rejected!");     
                     }) 
         }                
       };
@@ -114,7 +158,7 @@ class AdminPhotos extends Component {
                                     </Col>
                                     <Col md="2">
                                     <Link to={{ pathname: "/viewphoto", state: item._id }} 
-                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}>{item.photoURL}</Link>
+                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}><img height="60px" width="60px" src={item.photoURL}/></Link>
                                     </Col>
                                     <Col md="3">
                                     <Link to={{ pathname: "/viewphoto", state: item._id }} 
@@ -145,7 +189,7 @@ class AdminPhotos extends Component {
         </Col>
         <Col md="3" style={{marginTop:"20px"}}>
                         <Col md="12">
-                        <Button onClick={this.onSubmitApproval} style={{ backgroundColor: "#2f9c19", border: "1px solid #2f9c19" }} block>Approve selected</Button>
+                        <Button onClick={this.onSubmitApproval} type="Submit" style={{ backgroundColor: "#2f9c19", border: "1px solid #2f9c19" }} block>Approve selected</Button>
                         </Col>
         </Col>
         <Col md="3" style={{marginTop:"20px"}}>
@@ -154,7 +198,32 @@ class AdminPhotos extends Component {
                         </Col>
         </Col>
         </Row>
-        
+        <ReactPaginate
+                    previousLabel={"<<"}
+                    nextLabel={">>"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={this.state.pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"} />
+
+        <div className="input-group"
+                            style={{ width: "200px", justifyContent: "space-around" }}
+                        >
+                            <div className="input-group-prepend">
+                                <label  >Page Limit </label>
+                            </div>
+                            <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
       </div>
     );
   };
