@@ -1,7 +1,7 @@
 const express = require("express");
 const imageRouter = express.Router();
 const imageServices = require("../servicesMongo/imageServices");
-const imagekafkaServices=require("../servicesKafka/imagesServices")
+const imageKafkaServices=require("../servicesKafka/imagesServices")
 
 const {
    POST_IMAGE_USER_PROFILE,
