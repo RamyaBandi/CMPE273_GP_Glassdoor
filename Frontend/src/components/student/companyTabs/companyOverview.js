@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 //import { Redirect } from "react-router";
 import axios from 'axios';
 import { BACKEND_URL, GET_COMPANY_DETAILS, GET_COMPANY_REVIEWS, POST_COMPANYVIEWS } from '../../../config/routeConstants';
-import ReviewCard from "../../student/companyTabs/reviews/reviewCard"
+import ReviewCard from "../../student/companyTabs/reviews/reviewCard";
+import ReactPaginate from 'react-paginate';
 
 export default class CompanyOverview extends Component {
     constructor(props) {
@@ -14,6 +15,8 @@ export default class CompanyOverview extends Component {
         this.state = {
             companyDetails: [],
             reviews: [],
+            limit: 10,
+            page: 1,
             redirect: null
         };
     }
@@ -40,16 +43,16 @@ export default class CompanyOverview extends Component {
                 console.log(error);
             }
             )
-        axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + companyId)
-            .then((response) => {
-                console.log(response.data);
-                console.log(response.data.reviews);
-                this.setState({ reviews: response.data.reviews });
-            })
-            .catch((error) => {
-                console.log(error);
-            }
-            )
+        // axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + companyId)
+        //     .then((response) => {
+        //         console.log(response.data);
+        //         console.log(response.data.reviews);
+        //         this.setState({ reviews: response.data.reviews });
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     }
+        // )
 
         //Capture number of times a company is viewed
 
@@ -69,8 +72,42 @@ export default class CompanyOverview extends Component {
         //     }
 
         // )
-
+        this.getResults();
     }
+
+    handlePageClick = (e) => {
+        this.setState({
+            page: e.selected + 1,
+        }, () => {
+            this.getResults()
+        });
+        console.log("Page number", e.selected)
+    }
+
+    async getResults() {
+        const companyId = '5fb4aefe6b61ea46245d5621';
+        axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + companyId, {
+            params: {
+                page: this.state.page,
+                limit: this.state.limit
+            }
+        })
+            .then((response) => {
+                console.log(response.data);
+                console.log(response.data.reviews);
+                this.setState({ reviews: response.data.reviews });
+            })
+            .catch((error) => {
+                console.log(error);
+            }
+            )
+    }
+
+    handleChange = (e) => {
+        let { value, id } = e.target;
+        this.setState({ [id]: value }, () => this.getResults());
+    };
+
     render = () => {
         //const companyId = this.state.companyDetails._id;
         console.log(this.state.companyDetails);
@@ -151,7 +188,7 @@ export default class CompanyOverview extends Component {
                                 <p>Founded:</p>
                             </Col>
                             <Col md="3">
-                                <p>Founded</p>
+                            <p>{this.state.companyDetails.founded}</p>
                             </Col>
                         </Row>
                         <Row>
@@ -194,6 +231,32 @@ export default class CompanyOverview extends Component {
                             return <ReviewCard {...item} />;
                         })}
                     </Row>
+                    <ReactPaginate
+                        previousLabel={"<<"}
+                        nextLabel={">>"}
+                        breakLabel={"..."}
+                        breakClassName={"break-me"}
+                        pageCount={this.state.pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={this.handlePageClick}
+                        containerClassName={"pagination"}
+                        subContainerClassName={"pages pagination"}
+                        activeClassName={"active"} />
+
+                    <div className="input-group"
+                        style={{ width: "200px", justifyContent: "space-around" }}
+                    >
+                        <div className="input-group-prepend">
+                            <label  >Page Limit </label>
+                        </div>
+                        <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
                 </Container>
             </div>
         )

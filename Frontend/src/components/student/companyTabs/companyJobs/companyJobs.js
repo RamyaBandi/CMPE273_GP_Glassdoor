@@ -7,6 +7,7 @@ import { Redirect } from "react-router";
 import axios from 'axios';
 import { BACKEND_URL, JOB_ROUTE, GET_COMPANY_DETAILS, GET_COMPANY_JOBS, GET_COMPANY_JOB_BY_JOBTITLE_OR_CITY } from '../../../../config/routeConstants';
 import JobCard from './jobCard';
+import ReactPaginate from 'react-paginate';
 
 class CompanyJobs extends Component {
     constructor(props) {
@@ -14,6 +15,8 @@ class CompanyJobs extends Component {
         this.state = {
             companyDetails: [],
             jobs: [],
+            limit: 10,
+            page:1,
             redirect: null
         };
     }
@@ -46,16 +49,48 @@ class CompanyJobs extends Component {
                 console.log(error);
             }
             )
-        console.log(companyId);
-        axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOBS + "?companyId=" + companyId)
+        //console.log(companyId);
+        // axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOBS + "?companyId=" + companyId)
+        //     .then(response => {
+        //         this.setState({ jobs: response.data.jobs });
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     }
+        // )
+        this.getResults();
+    }
+
+    handlePageClick = (e) => {
+        this.setState({
+            page: e.selected + 1,
+        }, () => {
+            this.getResults()
+        });
+        console.log("Page number", e.selected)
+    }
+
+    async getResults() {
+        const companyId = this.props.location.state;
+        axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOBS + "?companyId=" + companyId, {
+            params: {
+                page : this.state.page,
+                limit : this.state.limit
+            }
+        })
             .then(response => {
                 this.setState({ jobs: response.data.jobs });
             })
             .catch((error) => {
                 console.log(error);
             }
-            )
+        )
     }
+
+    handleChange = (e) => {
+        let { value, id } = e.target;
+        this.setState({ [id]: value }, () => this.getResults());
+    };
 
     render = () => {
         return (
@@ -126,6 +161,32 @@ class CompanyJobs extends Component {
                         return <JobCard {...item} />
                     })}
                 </Container>
+                <ReactPaginate
+                        previousLabel={"<<"}
+                        nextLabel={">>"}
+                        breakLabel={"..."}
+                        breakClassName={"break-me"}
+                        pageCount={this.state.pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={this.handlePageClick}
+                        containerClassName={"pagination"}
+                        subContainerClassName={"pages pagination"}
+                        activeClassName={"active"} />
+
+                    <div className="input-group"
+                        style={{ width: "200px", justifyContent: "space-around" }}
+                    >
+                        <div className="input-group-prepend">
+                            <label  >Page Limit </label>
+                        </div>
+                        <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
             </div>
         )
     }

@@ -15,9 +15,9 @@ const {
 
 var kafka = require('../kafka/client');
 const multer = require('multer');
-const uploadToS3 = require('./uploadToS3');
+const uploadToS3 = require('./../servicesMongo/uploadToS3');
 const { json } = require('body-parser');
-const S3 = require('./S3Operations')
+const S3 = require('./../servicesMongo/S3Operations')
 const fs = require('fs')
 const path = require('path');
 
@@ -43,7 +43,7 @@ module.exports.uploadCompanyProfileImage = (req, res) => {
             storage
         }).single('file');
 
-        await upload(req, res, (err) => {
+        upload(req, res, (err) => {
             console.log("In upload" + JSON.stringify(req.body))
             if (err instanceof multer.MulterError) {
                 return res.status(500);
