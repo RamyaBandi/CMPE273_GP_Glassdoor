@@ -54,7 +54,7 @@ class Reviews extends Component {
     //   });
 
     this.getReviewsResults();
-
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios
       .get(BACKEND_URL + GET_COMPANY_DETAILS + "?companyId=" + company_id)
       .then((response) => {
@@ -66,7 +66,7 @@ class Reviews extends Component {
       .catch((error) => {
         console.log(error);
       });
-
+      axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
       axios
       .get(BACKEND_URL + GET_POSITIVE_REVIEW + "?companyId=" + company_id)
       .then((response) => {
@@ -77,7 +77,7 @@ class Reviews extends Component {
       .catch((error) => {
         console.log(error);
       });
-
+      axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
       axios
       .get(BACKEND_URL + GET_NEGATIVE_REVIEW + "?companyId=" + company_id)
       .then((response) => {
@@ -88,7 +88,7 @@ class Reviews extends Component {
       .catch((error) => {
         console.log(error);
       });
-
+      axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
       axios
       .get(BACKEND_URL + GET_REVIEW_AVERAGE + "?companyId=" + company_id)
       .then((response) => {
@@ -105,6 +105,7 @@ class Reviews extends Component {
     console.log("in update page list");
     const company_id = '5fb4884acf339e3da0d5c31e';
     const student_id = localStorage.getItem('mongoId');
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios.get(BACKEND_URL + GET_APPROVED_COMPANY_REVIEWS, {
         params: {
             companyId: company_id,

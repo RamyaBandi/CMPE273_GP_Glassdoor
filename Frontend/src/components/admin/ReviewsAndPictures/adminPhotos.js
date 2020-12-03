@@ -47,6 +47,7 @@ class AdminPhotos extends Component {
     }
 
     getPhotosResults() {
+      axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
       axios.get(BACKEND_URL + GET_ALL_PHOTOS, {
           params: {
               limit: this.state.limit,

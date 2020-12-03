@@ -3,7 +3,9 @@ var bcrypt = require('bcryptjs');
 const saltRounds = 10;
 var mysqlConnection = require('../config/mysqlConnection');
 const jwt = require('jsonwebtoken')
-// const { jwtsecret } = require('../config/mysqlinit')
+const { auth } = require('../config/passport')
+auth();
+
 
 const {
     CONTENT_TYPE,
@@ -15,7 +17,6 @@ const {
     TEXT_PLAIN,
     RES_INTERNAL_SERVER_ERROR
 } = require("../config/routeConstants");
-
 
 
 module.exports.login = (req, res) => {

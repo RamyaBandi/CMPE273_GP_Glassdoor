@@ -23,6 +23,7 @@ class CompanyJobs extends Component {
     }
 
     findJobs = () => {
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOB_BY_JOBTITLE + '?companyId=' + this.state.companyDetails._id + '&jobTitle='+this.state.jobSearchText)
         .then(response => {
             
@@ -44,6 +45,7 @@ class CompanyJobs extends Component {
 
     componentDidMount() {
         const companyId = this.props.location.state;
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
             .then(response => {
                 this.setState({ companyDetails: response.data[0] });
@@ -78,6 +80,7 @@ class CompanyJobs extends Component {
 
     async getResults() {
         const companyId = this.props.location.state;
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOBS + "?companyId=" + companyId, {
             params: {
                 page : this.state.page,

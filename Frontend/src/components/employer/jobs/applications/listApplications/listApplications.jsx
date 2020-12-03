@@ -19,6 +19,7 @@ class ListApplications extends Component {
         this.updatePageList()
     }
     updatePageList() {
+        Axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         Axios.get(`${BACKEND_URL}${APPLICATION_ROUTE}${GET_APPLICATIONS_JOBID}`, {
             params: {
                 jobId: localStorage.getItem('jobId'),

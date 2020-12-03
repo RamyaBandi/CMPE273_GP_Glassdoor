@@ -15,6 +15,7 @@ class TopCeo extends Component {
     // Top 10 CEO’s based on rating.
 
     componentDidMount() {
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_TOP_CEO_RATING )
             .then(response => {
                 console.log("Status Code : ", response.status);
