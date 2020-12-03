@@ -35,9 +35,9 @@ module.exports = {
     GET_TOP_COMPANY_VIEWS: "/admin/topcompanyviews",
 
     //Admin Company Profile Routes
-    GET_ALL_COMPANIES : "/admin/companies",
-    GET_COMPANY_BY_COMPANYNAME: "/admin/company/companyName",
-    GET_COMPANY_REVIEWS: "/admin/company/reviews",
+    GET_ALL_COMPANIES_ADMIN : "/admin/companies",
+    GET_COMPANY_BY_COMPANYNAME_ADMIN: "/admin/company/companyName",
+    GET_COMPANY_REVIEWS_ADMIN: "/admin/company/reviews",
 
     //Company Photos Routes
     POST_COMPANY_PHOTOS: "/photos/company",
