@@ -40,7 +40,7 @@ module.exports.updateCompanyProfile = (req, res) => {
 
     let company_update = {
         companyName: data.companyName,
-        website: data.Website,
+        website: data.website,
         companySize: data.companySize,
         companyType: data.companyType,
         revenue: data.revenue,

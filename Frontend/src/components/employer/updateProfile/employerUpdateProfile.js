@@ -26,9 +26,10 @@ class employerUpdateProfile extends Component {
     };
 
     handleChange = (e) => {
-      
+        console.log(e.target)
         const { value, name } = e.target;
         this.setState({ [name]: value });
+        console.log(this.state)
 
     };
 
@@ -150,12 +151,15 @@ class employerUpdateProfile extends Component {
 
     render() { 
        // console.log()
-        //let profileURL = `${routeConstants.BACKEND_URL}${this.state.image_path}`
+        var profileURL =""
+        if(this.state.imageUrl){
+            var profileURL=this.state.imageUrl.split('?')[0]
+        }
         return (
             <div className="profile">
 
 <div className="imageDiv">
-                    <img src={this.state.imageUrl} width='250px' alt="profileImage   " height='250px' className="imageCont" />
+                    <img src={profileURL} width='250px' alt="profileImage   " height='250px' className="imageCont" />
                     <input type="file" onChange={this.onFileChange} id="fileinput" />
                     <button className="btn btn-success" style={{ width: '100px' }} onClick={this.onFileUpload}>Upload!</button>
                     {this.fileData()}
@@ -180,7 +184,7 @@ class employerUpdateProfile extends Component {
                             value={this.state.website}
                             onChange={this.handleChange}
                             name="website"
-                            width="200px"
+                            
                         />
                     </div>
                     <div className="option">

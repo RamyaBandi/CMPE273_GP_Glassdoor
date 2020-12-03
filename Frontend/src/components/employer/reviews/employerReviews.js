@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import Reviewcard from './reviewCard'
 import routeConstants from "../../../config/routeConstants";
-
+import ReactPaginate from 'react-paginate';
 
 class EmployerReview extends Component {
+
     state = {
         reviews: [],
     }
@@ -35,6 +36,7 @@ class EmployerReview extends Component {
                 window.alert("Failed to display reviews");
             })
     }
+
     render() {
         // console.log(this.state.reviews.length)
         let reviews = [];
@@ -53,9 +55,10 @@ class EmployerReview extends Component {
             // <h4>Reviews</h4>
             <div>
                 <div>
-                    {reviews}
-                </div>
+         
             </div>
+                </div>
+           
         );
     }
 }
