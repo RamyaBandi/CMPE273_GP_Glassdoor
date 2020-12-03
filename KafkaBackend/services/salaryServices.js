@@ -1,5 +1,6 @@
 //const { response } = require('express');
 const mongoose = require("mongoose");
+const ObjectId = require('mongoose').Types.ObjectId;
 //const con = require('../config/mongoConnection');
 const {
   CONTENT_TYPE,
@@ -110,6 +111,34 @@ async function handle_request(msg, callback) {
             callback(null, result)
         }
         })
+      break;
+    }
+
+    case "GET_SALARY_AVERAGES": {
+      console.log("inside get student salaries average -> kafka backend");
+      let data = msg.body;
+      console.log(data);
+      Salaries
+    .aggregate([
+        { $match: { companyId: new ObjectId(data.companyId)} },
+        { $group: { _id: "$jobTitle", 
+                    avg: { "$avg": "$baseSalary" } } }
+    ])
+    .exec((err, salaries) => {
+        if (err) {
+            console.log("Error fetching Salaries")
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            callback(err, 'Error')
+        }
+        else {
+
+            console.log("Salary averages calculated Successfully");
+            console.log(salaries);
+            callback(null, salaries)
+
+        }
+    })
       break;
     }
 

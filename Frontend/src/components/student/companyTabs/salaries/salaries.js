@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import SalaryCard from "./salaryCard";
 import ReactPaginate from 'react-paginate';
-import { BACKEND_URL, GET_COMPANY_SALARIES, GET_COMPANY_DETAILS } from "../../../../config/routeConstants";
+import { BACKEND_URL, GET_SALARY_AVERAGES, GET_COMPANY_DETAILS } from "../../../../config/routeConstants";
 
 class Salaries extends Component {
   constructor(props) {
@@ -69,20 +69,19 @@ handleChange = (e) => {
 
 async getSalaryResults(){
   const company_id = this.props.location.state;
-  await axios.get(BACKEND_URL + GET_COMPANY_SALARIES, {
+  await axios.get(BACKEND_URL + GET_SALARY_AVERAGES, {
       params: {
         companyId: company_id,
-        page : this.state.page,
-        limit : this.state.limit
       }
   })
       .then(response => {
           console.log("Status Code : ", response.status);
           if (response.status === 200) {
-              console.log("Salaries Data", response.data)
+              //console.log("Salaries Data", response.data)
               this.setState({
-                  salaries: response.data.salaries
+                  salaries: response.data                 
               })
+              console.log(this.state.salaries)
           }
       })
       .catch(error => {

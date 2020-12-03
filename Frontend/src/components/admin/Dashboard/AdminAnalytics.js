@@ -10,8 +10,8 @@ import TopViewedCompanies from './TopViewedCompanies'
 class adminAnalytics extends Component {
     render() {
         return (
-            <table class="table">
-                <tr class="row">
+            <table class="admin-table">
+                <tr class="admin-row">
                     <td class="column1">
                         <ReviewsPerDay />
                     </td>
@@ -22,7 +22,7 @@ class adminAnalytics extends Component {
                         <TopAverageCompanies />
                     </td>
                 </tr>
-                <tr class="row">
+                <tr class="admin-row">
                     <td class="column1">
                         <TotalAcceptedReviews />
                     </td>
