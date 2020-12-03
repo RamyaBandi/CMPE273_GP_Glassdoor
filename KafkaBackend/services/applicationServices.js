@@ -1,50 +1,36 @@
 const mongoose = require("mongoose");
 const Company = require('../models/Company');
 const Applications = require('../models/Applications');
-function handle_request(msg, callback) {
+async function handle_request(msg, callback) {
 
     console.log("Inside Application Services ->kafka backend");
     console.log(msg);
     switch (msg.api) {
         case "GET_APPLICATIONS_JOBID":
             {
-                let data = msg.body
-                let apps
-                console.log(data)
+                try {
 
-
-                Applications.find({ jobId: data.jobId })
-                    .limit(data.limit * 1).skip((data.page - 1) * data.limit)
-                    // .populate({ path: 'jobId', model: 'Jobs' })
-                    .populate({ path: 'studentId', model: 'Student' })
-                    // .populate({ path: 'resume', model: 'Resume' })
-                    .exec((err, results) => {
-                        if (err) {
-                            console.log("Error Fetching Applications with job id")
-                            console.log(err);
-                            callback(err, 'Error')
-                        }
-                        else {
-                            apps = results
-                            Applications.countDocuments({ jobId: data.jobId }, (err2, count) => {
-                                if (err2) {
-                                    console.log("Error counting Applications with job id")
-                                    console.log(err2);
-                                    callback(err2, 'Error')
-                                }
-                                else {
-                                    let result = ({
-                                        results: apps,
-                                        totalPages: Math.ceil(count / data.limit),
-                                        currentPage: data.page
-                                    });
-                                    console.log(result)
-                                    console.log("Applications fetched successfully from DB")
-                                    callback(null, result)
-                                }
-                            })
-                        }
+                    let data = msg.body
+                    console.log(data)
+                    //let applications
+                    const applications= await Applications.find({ jobId: data.jobId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).populate({ path: 'studentId', model: 'Student' }).exec();
+                    const count=  await Applications.countDocuments({ jobId: data.jobId })
+                    console.log(applications)
+                    const result = ({
+                        applications,
+                        totalPages: Math.ceil(count / data.limit),
+                        currentPage: data.page
                     });
+                    console.log("Applications fetched successfully from DB")
+                  callback(null, result);        
+                }
+                catch {
+                    if (err) {
+                        console.log(err);
+                        //res.setHeader(CONTENT_TYPE, APP_JSON);
+                        callback(err, 'Error')
+                    }
+                }
                 break;
             }
         case "PUT_APPLICATION":
