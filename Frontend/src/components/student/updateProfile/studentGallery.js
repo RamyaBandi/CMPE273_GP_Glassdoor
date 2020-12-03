@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import PhotoGrid from './photoGrid'
 import axios from "axios";
 import routeConstants from "../../../config/routeConstants";
+import { Row, Col, Container, Button, Pagination, Modal } from 'react-bootstrap'
+import './studentGallery.styles.css'
+
+const crop = {
+    unit: '%',
+    aspect: 4 / 3,
+    width: '100'
+};
+
 class StudentGallery extends Component {
     state = { 
         photos:[],
@@ -11,8 +20,8 @@ class StudentGallery extends Component {
 
         //console.log(this.props)
         //console.log(localStorage.getItem('mongoId'))
-        //let student_id=localStorage.getItem('mongoId')
-        let student_id="5fb48df63d242fa0842343f3"
+        let student_id=localStorage.getItem('mongoId')
+        //let student_id="5fb48df63d242fa0842343f3"
         axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
         axios.get(`${routeConstants.BACKEND_URL}/student${routeConstants.GET_PHOTOS_UPLOADED}`,
         {
@@ -30,15 +39,25 @@ class StudentGallery extends Component {
   
         }
     render() { 
-        let photos=[]
-        if(this.state.photos.length>0){
-            this.state.photos.map((photo)=>{
+         let photos=[]
+        // console.log(this.state.photos)
+         if (this.state.photos && this.state.photos.length > 0){
+                   
+             this.state.photos.map((photo)=>{
+        //         //console.log(photo)
                 photos.push(<PhotoGrid photoitem={photo}/>)
-            })
-        }
-        else{
-            photos.push(<h4>No photo added yet!!</h4>)
-        }
+             })
+         }
+         else{
+         photos.push(<h4>Photos not added yet!!</h4>)
+         }
+
+    // let photos=[]
+    // if(this.state.photos && this.state.photos.length>0){
+    //     this.state.photos.map((photo)=>{
+    //         photos.push(photo)
+    //     })
+    // }
 
 
         return (
@@ -69,9 +88,61 @@ class StudentGallery extends Component {
 </div>
             <div class="col-9">
             <div class="container">
-            <div>
-                <PhotoGrid />
-            </div>
+                <Container style={{ backgroundColor: "#fff", marginTop: "20px", padding: "20px " }}>
+                    <Row style={{ width: "78%", margin: "auto", marginBottom: "20px" }}>
+                        <Col md="8">
+                            <h4>Displaying Student Uploaded Photos</h4>
+                        </Col>
+                        
+                    </Row>
+                    <Row>
+                        <div className="tiles">
+                        
+                            {photos.map((photo) => {
+                                return photo
+                            })}
+                        </div>
+                    </Row>
+                    <Row >
+                        <Col md="12" >
+
+
+                            <Pagination style={{ justifyContent: "center" }}>
+
+                                <Pagination.Prev />
+                                <Pagination.Item active>{1}</Pagination.Item>
+
+                                <Pagination.Item >{2}</Pagination.Item>
+                                <Pagination.Item >{3}</Pagination.Item>
+
+                                <Pagination.Next />
+                            </Pagination>
+                        </Col>
+                    </Row>
+                </Container>
+
+
+
+           
+            {/* <div class="row">
+  <div class="col-md-12">
+
+    <div id="mdb-lightbox-ui"></div>
+
+    <div class="mdb-lightbox no-margin">
+
+            {photos}
+     
+
+    </div>
+
+  </div>
+</div>
+
+ */}
+
+
+
             </div>
             </div>
             </div>
