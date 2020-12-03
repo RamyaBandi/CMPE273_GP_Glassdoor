@@ -36,7 +36,7 @@ class AdminReviews extends Component {
   }
 
   componentDidMount() {
-    const company_id = '5fb4884acf339e3da0d5c31e';
+    //const company_id = '5fb4884acf339e3da0d5c31e';
     //const company_id = this.props.location.state;
     this.getReviewsResults();
     // axios
@@ -132,6 +132,7 @@ class AdminReviews extends Component {
             axios.put(BACKEND_URL + PUT_REVIEW_APPROVE, this.reviewData)
                     .then(response => {
                         console.log("Review approved successfully");
+                        window.location.reload();
                         window.alert("Approved!"); 
                     }) 
         }
@@ -148,6 +149,7 @@ class AdminReviews extends Component {
             axios.put(BACKEND_URL + PUT_REVIEW_REJECT, this.reviewData2)
                     .then(response => {
                         console.log("Review rejected successfully");
+                        window.location.reload();
                         window.alert("Rejected!");     
                     })  
         }  
@@ -164,13 +166,17 @@ class AdminReviews extends Component {
                         {this.state.reviews.map(item=>{
                             return (<Col md={12}>
                                 <Row style={{marginRight:"30px", martinLeft: "40px", marginTop: "5px"}}>
-                                    <Col md="2">
+                                    <Col md="1">
                                     {/* <Link to={{ pathname: "/viewreview", state: item._id }} 
                                     style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}>{item._id}</Link> */}
                                     </Col>
-                                    <Col md="4">
+                                    <Col md="3">
                                     <Link to={{ pathname: "/viewreview", state: item._id }} 
                                     style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}>{item.headline}</Link>
+                                    </Col>
+                                    <Col md="2">
+                                    <Link to={{ pathname: "/viewreview", state: item._id }} 
+                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}>{item.approvalstatus}</Link>
                                     </Col>
                                     <Col md="3" >
 

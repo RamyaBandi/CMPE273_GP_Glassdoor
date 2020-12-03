@@ -12,6 +12,8 @@ async function handle_request(msg, callback) {
 			{
 				console.log(msg.body)
 				let data = msg.body
+				console.log("companyId is :")
+				console.log(data.companyId)
 				Company.findByIdAndUpdate(data.companyId, { imageUrl: data.imageUrl}, (err, result) => {
                     if (err) {
                         console.log('Error occured while updating Profile image link' + err)
@@ -27,7 +29,7 @@ async function handle_request(msg, callback) {
 		case "POST_IMAGE_STUDENT_PROFILE":
 			{
 				let data = msg.body
-				Student.findByIdAndUpdate(data.studentId, { imageUrl: url}, (err, result) => {
+				Student.findByIdAndUpdate(data.studentId, { imageUrl: data.imageUrl}, (err, result) => {
                     if (err) {
                         console.log('Error occured while updating Profile image link' + err)
 						callback(err, 'Error')

@@ -122,6 +122,7 @@ class AdminPhotos extends Component {
             axios.put(BACKEND_URL + PUT_PHOTO_APPROVE, this.photoData)
                     .then(response => {
                         console.log("Photo approved successfully");
+                        window.location.reload();
                         window.alert("Approved!");     
                     }) 
         }                
@@ -135,6 +136,7 @@ class AdminPhotos extends Component {
             axios.put(BACKEND_URL + PUT_PHOTO_REJECT, this.photoData2)
                     .then(response => {
                         console.log("Photo rejected successfully");
+                        window.location.reload();
                         window.alert("Rejected!");     
                     }) 
         }                
@@ -187,7 +189,7 @@ class AdminPhotos extends Component {
         </Col>
         <Col md="3" style={{marginTop:"20px"}}>
                         <Col md="12">
-                        <Button onClick={this.onSubmitApproval} style={{ backgroundColor: "#2f9c19", border: "1px solid #2f9c19" }} block>Approve selected</Button>
+                        <Button onClick={this.onSubmitApproval} type="Submit" style={{ backgroundColor: "#2f9c19", border: "1px solid #2f9c19" }} block>Approve selected</Button>
                         </Col>
         </Col>
         <Col md="3" style={{marginTop:"20px"}}>
