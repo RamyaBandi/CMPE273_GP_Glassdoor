@@ -13,6 +13,7 @@ const {
 const Student = require('../models/Student');
 const Resumes = require('../models/Resumes')
 const Reviews=require('../models/Reviews')
+const Photos=require('../models/Photos')
 const multer = require('multer');
 //const kafka = require('../kafka/client')
 const uploadToS3 = require('./uploadToS3');
@@ -309,6 +310,30 @@ module.exports.getRatingsCount =async (req, res) => {
     //let value= toString(count)
 
     res.status(RES_SUCCESS).send(studentreviews);
+    }
+    catch {
+        // if (err) {
+        //     console.log(err);
+        //     //res.setHeader(CONTENT_TYPE, APP_JSON);
+        //     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        // }
+    }   
+    
+}
+
+module.exports.getPhotosUploaded =async (req, res) => {
+
+    console.log("Inside Student Photos GET service");
+    console.log(req.query)
+    try {
+    let data = req.query
+    let PhotoDetails = await Photos.find({studentId: data.studentId}).exec();
+    //let studentde=await Resumes.find({studentId: data.studentId}).exec();
+    const count = await Photos.countDocuments({studentId: data.studentId });
+    //console.log("count" + count);
+    console.log(PhotoDetails)
+    //console.log(studentde)
+    res.status(RES_SUCCESS).send(PhotoDetails);
     }
     catch {
         // if (err) {

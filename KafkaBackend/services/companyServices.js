@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const Company = require('../models/Company');
+const CompanyViews = require('../models/CompanyViews')
+//const Reviews = require('../models/Reviews');
+//const Student = require('../models/Student')
 
 function handle_request(msg, callback) {
 
@@ -51,9 +54,25 @@ function handle_request(msg, callback) {
 						callback(null, result)
 					}
 				})
-
 				break;
 			}
+        case "POST_COMPANYVIEWS": {
+        let company = new Company({
+            companyId :msg.companyId,
+            companyName: msg.companyName,
+            Date : msg.Date
+        })
+        company.save((err, result) => {
+            if (err) {
+                console.log("Error creating company profile" + err)
+                callback(err, 'Error')
+            }
+            else {
+                console.log("Created Company Profile : " + JSON.stringify(result))
+                callback(null, result)
+            }
+        })
+    } 
 		case "GET_COMPANY_DETAILS":
 			{
 				let data = msg.body

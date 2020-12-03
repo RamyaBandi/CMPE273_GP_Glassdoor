@@ -1,26 +1,17 @@
 const { response } = require('express');
-var bcrypt = require('bcryptjs');
-const saltRounds = 10;
-const jwt = require('jsonwebtoken')
-var kafka = require('../kafka/client');
-// const { jwtsecret } = require('../config/mysqlinit')
 
 const {
-    CONTENT_TYPE,
-    APP_JSON,
     RES_SUCCESS,
-    RES_BAD_REQUEST,
-    RES_NOT_FOUND,
-    RES_DUPLICATE_RESOURCE,
-    TEXT_PLAIN,
     RES_INTERNAL_SERVER_ERROR
 } = require("../config/routeConstants");
 
+var kafka = require('../kafka/client');
 
 
-module.exports.login = (req, res) => {
+
+module.exports.register = (req, res) => {
     console.log("req.body" + JSON.stringify(req.body))
-    kafka.make_request('login', req.body, function (err, results) {
+    kafka.make_request('register', req.body, function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {

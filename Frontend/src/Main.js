@@ -42,6 +42,11 @@ import AdminReviews from './components/admin/ReviewsAndPictures/adminReviews'
 import ViewReview from './components/admin/ReviewsAndPictures/viewreview'
 import AdminPhotos from './components/admin/ReviewsAndPictures/adminPhotos'
 
+import StudentGallery from './components/student/updateProfile/studentGallery'
+
+import ViewPhoto from './components/admin/ReviewsAndPictures/viewphoto'
+
+
 class Main extends Component {
     render() {
         return (
@@ -74,12 +79,14 @@ class Main extends Component {
                     <Route exact path="/adminreviews" component={(props) => <AdminReviews {...props} />} />
                     <Route exact path="/viewreview" component={(props) => <ViewReview {...props} />} />
                     <Route exact path="/adminphotos" component={(props) => <AdminPhotos {...props} />} />
+                    <Route exact path="/viewphoto" component={(props) => <ViewPhoto {...props} />} />
 
                     <Route exact path="/student/profile" render={props => <StudentUpdateProfile {...props} />} />
                     <Route exact path="/student/reviews" render={props => <StudentReviews {...props} />} />
                     <Route exact path="/student/jobpreference" render={props => <JobPreference {...props} />} />
                     <Route exact path="/student/demographics" render={props => <Demographics {...props} />} />
                     <Route exact path="/student/resume" render={props => <ResumeUpdate {...props} />} />
+                    <Route exact path="/student/gallery" render={props => <StudentGallery {...props} />} />
                     {//Employer Routes
                     }
 

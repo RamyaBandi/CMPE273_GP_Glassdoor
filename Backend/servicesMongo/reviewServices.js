@@ -182,11 +182,11 @@ module.exports.getCompanyReviews = async (req, res) => {
             res.status(RES_SUCCESS).send(result);
         }
         catch {
-            if (err) {
-                console.log(err);
-                //res.setHeader(CONTENT_TYPE, APP_JSON);
-                res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
-            }
+            // if (err) {
+            //     console.log(err);
+            //     //res.setHeader(CONTENT_TYPE, APP_JSON);
+            //     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+           // }
         }
     }
 

@@ -156,7 +156,10 @@ class StudentUpdateProfile extends Component {
       }
 
     render() { 
-        let profileURL = `${routeConstants.BACKEND_URL}${this.state.imageUrl}`
+        var profileURL =""
+        if(this.state.imageUrl){
+            var profileURL=this.state.imageUrl.split('?')[0]
+        }
         return ( 
             // <h4>Student Update Profile</h4>
 
@@ -179,6 +182,9 @@ class StudentUpdateProfile extends Component {
 <li class ="nav-item">
 <a class ="nav-link" href="/student/demographics">Demographics</a>
 </li>
+<li class ="nav-item">
+<a class ="nav-link" href="/student/gallery">Gallery</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -187,7 +193,7 @@ class StudentUpdateProfile extends Component {
 <div className="profile">
 
 <div className="imageDiv">
-<img src={this.state.imageUrl} width='250px' alt="profileImage   " height='250px' className="imageCont" />
+<img src={profileURL} width='250px' alt="profileImage   " height='250px' className="imageCont" />
                     <input type="file" onChange={this.onFileChange} id="fileinput" />
                     <button className="btn btn-success" style={{ width: '100px' }} onClick={this.onFileUpload}>Upload!</button>
                     {this.fileData()}

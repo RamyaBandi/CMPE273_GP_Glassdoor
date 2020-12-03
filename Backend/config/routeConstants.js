@@ -19,7 +19,7 @@ module.exports = {
     GET_STUDENT_RESUMES: "/resume",
     PUT_PRIMARY_RESUME: "/primaryresume",
     DELETE_STUDENT_RESUME: "/resume",
-    
+    GET_PHOTOS_UPLOADED: '/gallery',
 
     //Students Reviews
     GET_COUNT_RATINGS: "/reviewcount",
@@ -50,9 +50,9 @@ module.exports = {
     GET_TOP_COMPANY_VIEWS: "/topcompanyviews",
 
     //Admin Company Profile Routes
-    GET_ALL_COMPANIES: "/companies",
-    GET_COMPANY_BY_COMPANYNAME: "/company/companyName",
-    GET_COMPANY_REVIEWS: "/company/reviews",
+    GET_ALL_COMPANIES_ADMIN: "/companies",
+    GET_COMPANY_BY_COMPANYNAME_ADMIN: "/company/companyName",
+    GET_COMPANY_REVIEWS_ADMIN: "/company/reviews",
 
     //Company Routes
     COMPANY_ROUTE: "/company",
