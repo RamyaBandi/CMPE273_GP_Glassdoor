@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row, Container, Form, Button,Image } from "react-bootstrap";
-import axios from "axios";
+import { Col, Row, Container, Image } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
 export default class CompanyCard extends Component {
@@ -11,31 +10,31 @@ export default class CompanyCard extends Component {
     }
 
     render = () => {
-        let companyImage=""
-        
-        if(this.props.imageUrl){
+        let companyImage = ""
+
+        if (this.props.imageUrl) {
             console.log(this.props.imageUrl)
-        for(let i=0;i<this.props.imageUrl.length;i++){
-            if(this.props.imageUrl[i]!='?'){
-                companyImage+=this.props.imageUrl[i];
-            }else{
-                break;
+            for (let i = 0; i < this.props.imageUrl.length; i++) {
+                if (this.props.imageUrl[i] != '?') {
+                    companyImage += this.props.imageUrl[i];
+                } else {
+                    break;
+                }
             }
+            console.log(companyImage)
         }
-        console.log(companyImage)
-    }
-        
-        return(
+
+        return (
             <div>
-                <Container style={{ marginTop: "20px", marginBottom: "20px",width:"80%",padding:"20px" }} className="block-example border">
-                    <Row style = {{ marginBottom: "10px"}}>
+                <Container style={{ marginTop: "20px", marginBottom: "20px", width: "80%", padding: "20px" }} className="block-example border">
+                    <Row style={{ marginBottom: "10px" }}>
                         <Col md="12">
-                        <h3><Link to={{ pathname: "/companyProfilePage/"+this.props._id, state: this.props.companyName }} style={{ textDecoration: 'none', color: '#1861bf' }}>{this.props.companyName}</Link></h3>
+                            <h3><Link to={{ pathname: "/companyProfilePage/" + this.props._id, state: this.props.companyName }} style={{ textDecoration: 'none', color: '#1861bf' }}>{this.props.companyName}</Link></h3>
                         </Col>
-                        </Row>
-                        <Row>
+                    </Row>
+                    <Row>
                         <Col md="3">
-                        <Image style={{height:"100px",width:"100%"}} src={companyImage} thumbnail />
+                            <Image style={{ height: "100px", width: "100%" }} src={companyImage} thumbnail />
                         </Col>
                         <Col md="8">
                             <Row>
