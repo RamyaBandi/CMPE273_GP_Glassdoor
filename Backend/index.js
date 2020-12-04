@@ -73,7 +73,7 @@ app.use(routeConstants.COMPANY_ROUTE, companyRoutes);
 app.use(routeConstants.STUDENT_ROUTE, studentRoutes);
 app.use(routeConstants.SALARY_ROUTE, salaryRoutes);
 app.use(routeConstants.INTERVIEW_ROUTE, interviewRoutes);
-app.use(routeConstants.GET_JOBS_HOMEPAGE, jobsHomePageRoutes);
+app.use(routeConstants.JOBS_HOMEPAGE, jobsHomePageRoutes);
 app.use(routeConstants.JOB_ROUTE, jobRoutes);
 app.use(routeConstants.APPLICATION_ROUTE, applicationRoutes);
 app.use(routeConstants.ADMIN_ROUTES, adminAnalyticsRoutes)
