@@ -21,7 +21,9 @@ class EmployerReview extends Component {
 
     updatePageList() {
         let company_id = localStorage.getItem('mongoId')
+        //5fbd383a20ebc710c11cad02
         //let company_id="5fb4884acf339e3da0d5c31e"
+        //let company_id="5fbd383a20ebc710c11cad02"
         axios.get(`${routeConstants.BACKEND_URL}${routeConstants.GET_COMPANY_REVIEWS}`,
             {
                 params: {
