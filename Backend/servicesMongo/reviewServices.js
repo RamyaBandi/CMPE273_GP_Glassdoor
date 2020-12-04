@@ -168,9 +168,10 @@ module.exports.getCompanyReviews = async (req, res) => {
 
 
             //approvalstatus: "Approved"
-            const reviews = await Reviews.find({ companyId: data.companyId, approvalstatus: "Approved" }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+            const reviews = await Reviews.find({ companyId: data.companyId, approvalstatus: "Approved"}).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+            //const reviews = await Reviews.find({ companyId: data.companyId }).exec();
 
-            const count = await Reviews.countDocuments({ companyId: data.companyId, approvalstatus: "Approved" });
+            const count = await Reviews.countDocuments({ companyId: data.companyId, approvalstatus: "Approved"});
 
             console.log("count" + count);
             console.log(reviews)
@@ -181,6 +182,7 @@ module.exports.getCompanyReviews = async (req, res) => {
             });
 
             console.log("Reviews fetched Successfully from DB - page not 1 or redis off")
+            console.log(result)
             res.status(RES_SUCCESS).send(result);
         }
         catch {
