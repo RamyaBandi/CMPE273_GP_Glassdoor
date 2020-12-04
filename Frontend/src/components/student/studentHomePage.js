@@ -73,7 +73,8 @@ class studentHomePage extends Component {
                                         pathname: "/overview",
                                         state: { companyId: job._id }
                                     }}
-                                        class="companyName"><b>{job.companyName}</b></Link>
+                                        class="companyName"
+                                        onClick={()=>{localStorage.setItem('companyId',job._id)}}><b>{job.companyName}</b></Link>
                                     <p class="companyRating">{job.averageRating}<i class="fas fa-star"></i></p>
                                     <p class="companyName"> <b>Job Type: </b>{job.industry}</p>
                                 </div>

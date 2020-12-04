@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row, Image } from 'react-bootstrap';
 import { FaRegHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
@@ -11,17 +10,31 @@ export default class JobCard extends Component {
         }
     }
     render = () => {
+        let companyImage = ""
+        console.log(this.props)
+        if (this.props.imageUrl) {
+            console.log(this.props.imageUrl)
+            for (let i = 0; i < this.props.imageUrl.length; i++) {
+                if (this.props.imageUrl[i] != '?') {
+                    companyImage += this.props.imageUrl[i];
+                    console.log(this.props)
+                } else {
+                    break;
+                }
+            }
+            //console.log(companyImage)
+        }
         return (
             <div>
                 <Container style={{ marginTop: "20px", width: "80%" }}>
-                    <Row style = {{marginTop: "10px"}}>
-                        <Col md="2">
-                            Company Image
-                        </Col>
+                    <Row style={{ marginTop: "10px" }}>
+                        {/* <Col md="2">
+                            <Image style={{ height: "100px", width: "100%" }} src={companyImage} thumbnail />
+                        </Col> */}
                         <Col md="10">
                             <Row>
                                 <Col md="10">
-                                    <Link to={{ pathname: "/jobApplication", state: this.props._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>{this.props.jobTitle}</Link>
+                                    <Link to={{ pathname: "/jobApplication", state: localStorage.setItem('jobId', this.props._id) }} style={{ textDecoration: 'none', color: '#1861bf' }}>{this.props.jobTitle}</Link>
                                 </Col>
                                 <Col md="2">
                                     <FaRegHeart />
@@ -31,13 +44,13 @@ export default class JobCard extends Component {
                                 <Col md="9">
                                     {this.props.companyName} - {this.props.city}, {this.props.state}
                                 </Col>
-                                <Col md="3" style = {{width: "200px"}}>
+                                <Col md="3" style={{ width: "200px" }}>
                                     <p>{this.props.postedDate.substring(0, 10)}</p>
                                 </Col>
                             </Row>
                         </Col>
                     </Row>
-                    <hr/>
+                    <hr />
                 </Container>
             </div>
         )

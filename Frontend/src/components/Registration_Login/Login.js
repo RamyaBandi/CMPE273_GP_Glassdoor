@@ -46,7 +46,7 @@ class Login extends Component {
                 }
             })
             .catch(error => {
-                console.log(error.response.data.msg)
+                console.log(error)
                 alert(error.response.data.msg)
                 this.setState({
                     loginFlag: false
