@@ -45,7 +45,7 @@ class CompanyJobs extends Component {
     };
 
     componentDidMount() {
-        const companyId = this.props.location.state;
+        const companyId = localStorage.getItem('companyId');
         axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
             .then(response => {
@@ -90,6 +90,7 @@ class CompanyJobs extends Component {
             }
         })
             .then(response => {
+                console.log(response.data)
                 this.setState({ jobs: response.data.jobs, totalPages: response.data.totalPages });
             })
             .catch((error) => {

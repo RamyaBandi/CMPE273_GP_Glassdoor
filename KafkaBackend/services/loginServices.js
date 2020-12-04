@@ -30,7 +30,8 @@ async function handle_request(msg, callback) {
             if (!result[0]) {
                 returnObject.message = "nouser";
                 console.log('Invalid user');
-                res.json(returnObject);
+                callback(null,returnObject)
+                //res.json(returnObject);
             }
             resolve(result[0])
         });
