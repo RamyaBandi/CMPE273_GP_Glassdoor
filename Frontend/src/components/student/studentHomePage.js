@@ -69,7 +69,6 @@ class studentHomePage extends Component {
                                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                                     <Link to={{
                                         pathname: "/overview",
-                                        search: '?query=abc',
                                         state: { companyId: job._id }
                                     }}
                                         class="companyName"><b>{job.companyName}</b></Link>

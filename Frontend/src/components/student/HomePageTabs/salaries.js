@@ -43,7 +43,11 @@ class SalariesTab extends Component {
                     <div style={{ width: "100%" }}>
                         <div style={{ width: "60%", float: "left" }}>
                             <div style={{ display: "flex", justifyContent: "normal" }}>
-                                <Link to="/overview" class="companyName"><b>{salary.companyName}</b></Link>
+                            <Link to={{
+                                pathname: "/overview",
+                                state: { companyId: salary._id }
+                            }}
+                                class="companyName">{salary.companyName}</Link>
                                 <p class="companyRating"> {salary.averageRating} <i class="fas fa-star"></i></p>
                             </div>
                             <h6 style={{ "width": "250%" }}><b>Job:  </b>{salary.jobTitle}</h6>

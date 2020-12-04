@@ -5,7 +5,7 @@ class adminHomePage extends Component{
 render(){
     return(
         <div>
-        <h1> Admin Home Page</h1>
+        <h1 style={{textAlign:"center"}}> Welcome to Admin Home Page. Click on the tabs to see the necessary views</h1>
         </div>
     )
 }

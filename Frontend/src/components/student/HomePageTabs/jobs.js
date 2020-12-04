@@ -57,13 +57,17 @@ class JobsTab extends Component {
                             <div style={{ display: "flex", justifyContent: "normal" }}>
                                 <Link to={{
                                     pathname: "/overview",
-                                    search: '?query=abc',
                                     state: { companyId: job._id }
                                 }}
                                     class="companyName">{job.companyName}</Link>
                                 <p class="companyRating">{job.averageRating}<i class="fas fa-star"></i></p>
                             </div>
-                            <h6 style={{ "width": "250%" }}> {job.jobTitle}</h6>
+                            <h6>Job Title: <Link to={{
+                                pathname: "/jobApplication",
+                                search: '?query=abc',
+                                state: job.jobId
+                            }}
+                                style={{ "width": "250%" }}>{job.jobTitle}</Link></h6>
                             <p class="companyLocation"> {job.streetAddress},{job.city}, {job.state}, {job.zip}</p>
                         </div>
                         <div style={{ width: "40%", float: "right" }}>
