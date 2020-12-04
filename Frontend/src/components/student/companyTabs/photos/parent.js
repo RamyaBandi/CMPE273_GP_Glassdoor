@@ -103,12 +103,14 @@ class Parent extends React.Component {
     for (var i = 0; i < fileArray.length; i++) {
       formData.append(i + 1, fileArray[i]);
     }
-    axios.post(BACKEND_URL + POST_COMPANY_PHOTOS + '?id=' + this.props.location.state, formData)
+    axios.post(BACKEND_URL + POST_COMPANY_PHOTOS + '?id=' + this.props.location.state+ '&studentId=' + localStorage.getItem('mongoId'), formData)
       .then(response => {
         const studentId = localStorage.getItem('mongoId');
         const companyId = this.props.location.state;
+        console.log()
         axios.get(BACKEND_URL + GET_COMPANY_PHOTOS + '?companyId=' + companyId + '&studentId=' + studentId)
           .then(response => {
+            console.log(response)
             this.setState({ images: response.data.formattedPhotos });
           })
           .catch((error) => {
@@ -131,7 +133,7 @@ class Parent extends React.Component {
       });
     }
     console.log(allImages)
-    this.setState({ images: allImages, newImages: {} })
+    this.setState({  newImages: {} })
   }
 
   render = () => {
