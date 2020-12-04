@@ -296,6 +296,21 @@ class Reviews extends Component {
 						</Col>
 					</Row>
 				</Container>
+		
+
+<div className="input-group"
+	style={{ width: "200px", float: "right" }}
+>
+	<div className="input-group-prepend">
+		<label  >Page Limit </label>
+	</div>
+	<select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
+		<option value="10">10</option>
+		<option value="20">20</option>
+		<option value="50">50</option>
+		<option value="100">100</option>
+	</select>
+</div>
 
 
 				<Row>
@@ -515,23 +530,7 @@ class Reviews extends Component {
 					subContainerClassName={"pages pagination"}
 					activeClassName={"active"} />
 
-				<Container style={{ marginBottom: "30px" }}>
-
-					<div className="input-group"
-						style={{ width: "200px", justifyContent: "space-around" }}
-					>
-						<div className="input-group-prepend">
-							<label  >Page Limit </label>
-						</div>
-						<select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
-							<option value="10">10</option>
-							<option value="20">20</option>
-							<option value="50">50</option>
-							<option value="100">100</option>
-						</select>
-					</div>
-
-				</Container>
+				
 			</div>
 		);
 	};
