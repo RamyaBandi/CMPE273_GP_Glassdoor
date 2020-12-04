@@ -76,7 +76,6 @@ class CompaniesTab extends Component {
                                         <div style={{ display: "flex", justifyContent: "normal" }}>
                                             <Link to={{
                                                 pathname: "/overview",
-                                                search: '?query=abc',
                                                 state: { companyId: company._id }
                                             }}
                                                 class="companyName">{company.companyName}</Link>

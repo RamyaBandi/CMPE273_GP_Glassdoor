@@ -46,6 +46,25 @@ export default class CompanyOverview extends Component {
                 console.log("Company details", response.data[0]);
                 console.log(this.state.companyDetails);
                 console.log(this.state.companyDetails.reviews);
+                // Capture number of times a company is viewed
+
+                let views = {
+                    companyId: this.props.location.state.companyId,
+                    companyName: this.state.companyDetails.companyName
+                }
+                console.log("Views", views)
+
+                axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
+                axios.post(BACKEND_URL + POST_COMPANYVIEWS, views)
+
+                    .then((response) => {
+                        console.log("response for company views", response)
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    }
+
+                    )
             })
             .catch((error) => {
                 console.log(error);
@@ -81,6 +100,7 @@ export default class CompanyOverview extends Component {
             .catch((error) => {
                 console.log(error);
             });
+        // axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         // axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + companyId)
         //     .then((response) => {
         //         console.log(response.data);
@@ -92,24 +112,6 @@ export default class CompanyOverview extends Component {
         //     }
         // )
 
-        //Capture number of times a company is viewed
-
-        // let views = {
-        //     companyId: this.props.location.state.companyId,
-        //     companyName: this.state.companyDetails.companyName
-        // }
-
-
-        // axios.post(BACKEND_URL + POST_COMPANYVIEWS, views)
-
-        //     .then((response) => {
-        //         console.log("response for company views", response)
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     }
-
-        // )
         this.getResults();
     }
 
@@ -280,7 +282,7 @@ export default class CompanyOverview extends Component {
                     </div>
                         </Col>
                     </Row>
-                    <Container className="block-example border" style={{ marginTop: "20px", width: "80%",padding:"20px" }}>
+                    <Container className="block-example border" style={{ marginTop: "20px", width: "80%", padding: "20px" }}>
                         <Col>
                             <Row>
                                 <p>Most Positive Review</p>
@@ -290,7 +292,7 @@ export default class CompanyOverview extends Component {
                                     Headline: <b>{this.state.positiveReviews.headline}</b>
                                 </p>
                             </Row>
-                            <Row style={{justifyContent:"space-between"}}>
+                            <Row style={{ justifyContent: "space-between" }}>
                                 <Col md="auto">
 
                                     <StarRatingComponent
@@ -379,7 +381,7 @@ export default class CompanyOverview extends Component {
                         </Col>
                     </Container>
 
-                    <Container className="block-example border" style={{ marginTop: "20px", width: "80%",padding:"20px" }}>
+                    <Container className="block-example border" style={{ marginTop: "20px", width: "80%", padding: "20px" }}>
                         <Col>
                             <Row>
                                 <p>Most Negative Review</p>
@@ -389,7 +391,7 @@ export default class CompanyOverview extends Component {
                                     Headline: <b>{this.state.negativeReviews.headline}</b>
                                 </p>
                             </Row>
-                            <Row style={{justifyContent:"space-between"}}>
+                            <Row style={{ justifyContent: "space-between" }}>
                                 <Col md="auto">
                                     <StarRatingComponent
                                         name="rating"
@@ -477,11 +479,11 @@ export default class CompanyOverview extends Component {
                         </Col>
                     </Container>
                     <Container >
-                    <Row>
-                        {this.state.reviews.map((item) => {
-                            return <ReviewCard {...item} />;
-                        })}
-                    </Row>
+                        <Row>
+                            {this.state.reviews.map((item) => {
+                                return <ReviewCard {...item} />;
+                            })}
+                        </Row>
                     </Container>
                     <ReactPaginate
                         previousLabel={"<<"}

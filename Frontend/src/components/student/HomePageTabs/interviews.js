@@ -69,7 +69,11 @@ class InterviewsTab extends Component {
                     <div style={{ width: "100%" }}>
                         <div style={{ width: "30%", float: "left" }}>
                             <div style={{ display: "flex", justifyContent: "normal" }}>
-                                <Link to="/overview" class="companyName"> {interview.companyName}</Link>
+                            <Link to={{
+                                pathname: "/overview",
+                                state: { companyId: interview._id }
+                            }}
+                                class="companyName">{interview.companyName}</Link>
                                 <p class="companyRating"> {interview.averageRating} <i class="fas fa-star"></i></p>
                             </div>
                             <p class="companyLocation"> {interview.headquarters}</p>
