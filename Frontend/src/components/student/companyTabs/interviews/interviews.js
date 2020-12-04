@@ -106,7 +106,8 @@ class Interviews extends Component {
             if (response.status === 200) {
                 console.log("Interviews Data", response.data)
                 this.setState({
-                    interviews: response.data.interviews
+                    interviews: response.data.interviews,
+                    totalPages: this.state.totalPages
                 })
             }
         })
@@ -288,7 +289,7 @@ class Interviews extends Component {
                     nextLabel={">>"}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
+                    pageCount={this.state.totalPages}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
                     onPageChange={this.handlePageClick}
