@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../student/HomePageTabs/Tabs.css'
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
-import { BACKEND_URL, GET_COMPANY_HOMETAB } from './../../config/routeConstants'
+import { BACKEND_URL, GET_COMPANY_HOMETAB, GET_ALL_COMPANIES_ADMIN } from './../../config/routeConstants'
 import axios from 'axios'
 import '../student/HomePageTabs/Paginate.css'
 
@@ -40,13 +40,14 @@ class CompaniesHomePage extends Component {
             }
         })
             .then(response => {
-                console.log("Status Code : ", response.status);
+                console.log("Status Code : ", response.data);
                 if (response.status === 200) {
                     console.log("Company Data", response.data)
                     this.setState({
-                        companyData: response.data,
+                        companyData: response.data.companies,
+                        totalPages: response.data.totalPages,
                         isLoading: false
-                    },()=>{
+                    }, () => {
                         this.receivedData();
                     })
                 }
@@ -59,76 +60,76 @@ class CompaniesHomePage extends Component {
     receivedData() {
         let count = 0
         console.log("Data", this.state.companyData)
-        const slice = this.state.companyData.slice(this.state.offset, this.state.offset + this.state.perPage)
-        const postData = slice.map((company, i) =>                 <React.Fragment>
-        <div class="card tabs-card" style={{ width: "50%", left: "25%", right: "25%", height: "300px" }}>
-            {/*<img class="card-img-top" src={default_pic} alt="Card image cap" />*/}
-            <div class="card-body">
-                <div style={{ width: "100%" }}>
-                    <div style={{ width: "30%", float: "left" }}>
-                        <div style={{ display: "flex", justifyContent: "normal" }}>
-                            <Link to={{
-                                pathname: "/overview",
-                                state: { companyId: company._id }
-                            }}
-                                class="companyName">{company.companyName}</Link>
-                            <p class="companyRating"> {company.averageRating} <i class="fas fa-star"></i></p>
+        const slice = this.state.companyData
+
+        const postData = slice.map((company, i) => <React.Fragment>
+            <div class="card tabs-card" style={{ width: "50%", left: "25%", right: "25%", height: "300px" }}>
+                {/*<img class="card-img-top" src={default_pic} alt="Card image cap" />*/}
+                <div class="card-body">
+                    <div style={{ width: "100%" }}>
+                        <div style={{ width: "30%", float: "left" }}>
+                            <div style={{ display: "flex", justifyContent: "normal" }}>
+                                <Link to={{
+                                    pathname: "/overview",
+                                    state: { companyId: company._id }
+                                }}
+                                    class="companyName">{company.companyName}</Link>
+                                <p class="companyRating"> {company.averageRating} <i class="fas fa-star"></i></p>
+                            </div>
+                            <p class="companyLocation"> <b>Headquarters: </b> {company.headquarters}</p>
                         </div>
-                        <p class="companyLocation"> <b>Headquarters: </b> {company.headquarters}</p>
+                        <div style={{ width: "40%", float: "right" }}>
+                            <button class="btn btn-success"><Link style={{ color: "white" }} to={company.website}>Visit Website</Link></button>
+                        </div>
                     </div>
-                    <div style={{ width: "40%", float: "right" }}>
-                        <button class="companySite"><Link to="{company.website}">Visit Website</Link></button>
-                    </div>
-                </div>
-                <div class="companyInsights">
-                    <div class="insights">
-                        <p class="insightHeading">Job & Company Insights</p>
-                        <p class="card-text"><p class="companyReviewsHeading"> No. of reviews:</p><p class="companyReviewsContent"> {company.NumberOfReviews} </p></p>
-                        <p class="card-text"><p class="companyReviewsHeading"> No. of Salary reviews:</p><p class="companyReviewsContent"> {company.salaryReviews}</p></p>
-                        <p class="card-text"><p class="companyReviewsHeading"> No. of Interview reviews: </p><p class="companyReviewsContent"> {company.interviewReviews} </p></p>
+                    <div class="companyInsights">
+                        <div class="insights">
+                            <p class="insightHeading">Job & Company Insights</p>
+                            <p class="card-text"><p class="companyReviewsHeading"> No. of reviews:</p><p class="companyReviewsContent"> {company.NumberOfReviews} </p></p>
+                            <p class="card-text"><p class="companyReviewsHeading"> No. of Salary reviews:</p><p class="companyReviewsContent"> {company.salaryReviews}</p></p>
+                            <p class="card-text"><p class="companyReviewsHeading"> No. of Interview reviews: </p><p class="companyReviewsContent"> {company.interviewReviews} </p></p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-</React.Fragment>)
+        </React.Fragment>)
 
         this.setState({
             pageCount: Math.ceil(this.state.companyData.length / this.state.perPage),
 
             postData
         })
+
     }
 
-    handlePageClick = (e) => {
-        const selectedPage = e.selected;
-        const offset = selectedPage * this.state.perPage;
+    handlePageClick = (data) => {
 
-        this.setState({
-            currentPage: selectedPage,
-            offset: offset
-        }, () => {
-            this.receivedData()
-        });
+        let selected = data.selected + 1;
+        // let offset = Math.ceil(selected * this.props.perPage);
+        console.log(data)
+        this.setState({ page: selected }, () => {
+            this.getCompanySearchResults()
+        })
     }
     render() {
         let company = this.state.companyData
         console.log("Company", company)
         return (
             <div class="student-tabs-body">
-                <h5 style = {{textAlign : "center"}}> Company Search Results</h5>
+                <h5 style={{ textAlign: "center" }}> Companies</h5>
                 {this.state.isLoading ? <h6 style={{ textAlign: "center", color: "#0caa41" }}> Loading......</h6> : this.state.postData}
                 <ReactPaginate
                     previousLabel={"<<"}
                     nextLabel={">>"}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
+                    pageCount={this.state.totalPages}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
                     onPageChange={this.handlePageClick}
                     containerClassName={"pagination"}
                     subContainerClassName={"pages pagination"}
-                activeClassName={"active"} />
+                    activeClassName={"active"} />
             </div>
         )
 

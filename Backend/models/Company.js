@@ -60,12 +60,15 @@ const Company = new mongoose.Schema({
     }],
     averageRating: {
         type: Number,
+        default: 0
     },
     overallRating: {
         type: Number,
+        default: 0
     },
     recommendedRating: {
         type: Number,
+        default: 0
     },
     revenue: {
         type: Number,
