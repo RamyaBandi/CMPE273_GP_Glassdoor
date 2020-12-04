@@ -11,12 +11,13 @@ export default class JobCard extends Component {
     }
     render = () => {
         let companyImage = ""
-
+        console.log(this.props)
         if (this.props.imageUrl) {
             console.log(this.props.imageUrl)
             for (let i = 0; i < this.props.imageUrl.length; i++) {
                 if (this.props.imageUrl[i] != '?') {
                     companyImage += this.props.imageUrl[i];
+                    console.log(this.props)
                 } else {
                     break;
                 }
@@ -27,13 +28,13 @@ export default class JobCard extends Component {
             <div>
                 <Container style={{ marginTop: "20px", width: "80%" }}>
                     <Row style={{ marginTop: "10px" }}>
-                        <Col md="2">
+                        {/* <Col md="2">
                             <Image style={{ height: "100px", width: "100%" }} src={companyImage} thumbnail />
-                        </Col>
+                        </Col> */}
                         <Col md="10">
                             <Row>
                                 <Col md="10">
-                                    <Link to={{ pathname: "/jobApplication", state: this.props._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>{this.props.jobTitle}</Link>
+                                    <Link to={{ pathname: "/jobApplication", state: localStorage.setItem('jobId', this.props._id) }} style={{ textDecoration: 'none', color: '#1861bf' }}>{this.props.jobTitle}</Link>
                                 </Col>
                                 <Col md="2">
                                     <FaRegHeart />
