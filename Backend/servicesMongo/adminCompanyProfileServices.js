@@ -32,7 +32,7 @@ module.exports.getAllCompanies = async (req, res) => {
         console.log("Companies fetched successfully from DB");
         res.status(RES_SUCCESS).send(result);
     }
-    catch {
+    catch (err) {
         if (err) {
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
