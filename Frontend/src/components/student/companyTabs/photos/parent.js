@@ -69,18 +69,18 @@ class Parent extends React.Component {
       .catch((error) => {
         console.log(error);
       }
-    )
+      )
     axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
-            .then(response => {
-                this.setState({ companyDetails: response.data[0] });
-                console.log("In componentDidMount");
-                console.log("Company details", response.data[0]);
-                console.log(this.state.companyDetails);
-            })
-            .catch((error) => {
-                console.log(error);
-            }
-            )
+      .then(response => {
+        this.setState({ companyDetails: response.data[0] });
+        console.log("In componentDidMount");
+        console.log("Company details", response.data[0]);
+        console.log(this.state.companyDetails);
+      })
+      .catch((error) => {
+        console.log(error);
+      }
+      )
   }
 
   setnewImages = (images) => {
@@ -103,10 +103,10 @@ class Parent extends React.Component {
     for (var i = 0; i < fileArray.length; i++) {
       formData.append(i + 1, fileArray[i]);
     }
-    axios.post(BACKEND_URL + POST_COMPANY_PHOTOS + '?id=5fb4aefe6b61ea46245d5621', formData)
+    axios.post(BACKEND_URL + POST_COMPANY_PHOTOS + '?id=' + this.props.location.state, formData)
       .then(response => {
-        const studentId = '5fb48df63d242fa0842343f3';
-        const companyId = '5fb4aefe6b61ea46245d5621';
+        const studentId = localStorage.getItem('mongoId');
+        const companyId = this.props.location.state;
         axios.get(BACKEND_URL + GET_COMPANY_PHOTOS + '?companyId=' + companyId + '&studentId=' + studentId)
           .then(response => {
             this.setState({ images: response.data.formattedPhotos });
@@ -120,8 +120,6 @@ class Parent extends React.Component {
         console.log(error);
       }
       )
-
-
 
     let allImages = [...this.state.images]
 

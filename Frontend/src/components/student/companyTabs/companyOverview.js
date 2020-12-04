@@ -31,8 +31,8 @@ export default class CompanyOverview extends Component {
     }
 
     componentDidMount() {
-        const companyId = '5fb4aefe6b61ea46245d5621';
-        //const companyId = this.props.location.state.companyId
+        //const companyId = '5fb4aefe6b61ea46245d5621';
+        const companyId = this.props.location.state.companyId;
         console.log("Fetched company Id", companyId)
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
             .then(response => {
@@ -142,7 +142,7 @@ export default class CompanyOverview extends Component {
     };
 
     render = () => {
-        //const companyId = this.state.companyDetails._id;
+        const companyId = this.state.companyDetails._id;
         console.log(this.state.companyDetails);
         return (
             <div style={{ backgroundColor: "#eaeaea" }}>

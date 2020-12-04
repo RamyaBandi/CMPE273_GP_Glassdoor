@@ -69,46 +69,44 @@ export default class JobApplication extends Component {
     handleChangeResume = event => {
         this.increaseResumeProgressPercentage();
         const fileUploaded = event.target.files[0];
-        this.setState({uploadedResume:fileUploaded})
-        event.target.value=null;
+        this.setState({ uploadedResume: fileUploaded })
+        event.target.value = null;
     };
 
-    apply=(e)=>{
+    apply = (e) => {
         e.preventDefault();
-        let data={
-            studentId:"5fb48df63d242fa0842343f3",
+        let data = {
+            studentId: localStorage.getItem('mongoId'),
             jobId: this.state.jobDetails._id,
-            resumeUploaded:false,
-            coverLetterUploaded:false
+            resumeUploaded: false,
+            coverLetterUploaded: false
         }
 
-        const mediaForm=new FormData();
-if(this.state.uploadedResume){
-        
-        mediaForm.append("resume",this.state.uploadedResume);
-        data.resumeUploaded=true
-}
+        const mediaForm = new FormData();
+        if (this.state.uploadedResume) {
 
-if(this.state.uploadedCoverLetter){
+            mediaForm.append("resume", this.state.uploadedResume);
+            data.resumeUploaded = true
+        }
 
-    mediaForm.append("Cover Letter",this.state.uploadedCoverLetter);
-    data.coverLetterUploaded=true
-}
-    
-//axios
+        if (this.state.uploadedCoverLetter) {
 
-axios.post(`${BACKEND_URL}${APPLICATION_ROUTE}${POST_APPLICATION}?studentId=${data.studentId}&jobId=${data.jobId}&resumeUploaded=${data.resumeUploaded}&coverLetterUploaded=${data.coverLetterUploaded}`,mediaForm)
-.then(response => {
-    //redirect
-    window.alert('Applied successfully');
-})
-.catch((error) => {
-    console.log(error.response.data);
-    window.alert(error.response.data);
-}
-)
+            mediaForm.append("Cover Letter", this.state.uploadedCoverLetter);
+            data.coverLetterUploaded = true
+        }
 
+        //axios
 
+        axios.post(`${BACKEND_URL}${APPLICATION_ROUTE}${POST_APPLICATION}?studentId=${data.studentId}&jobId=${data.jobId}&resumeUploaded=${data.resumeUploaded}&coverLetterUploaded=${data.coverLetterUploaded}`, mediaForm)
+            .then(response => {
+                //redirect
+                window.alert('Applied successfully');
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+                window.alert(error.response.data);
+            }
+        )
     }
     increaseResumeProgressPercentage = async () => {
         for (let i = 1; i <= 100; i++) {
@@ -127,8 +125,8 @@ axios.post(`${BACKEND_URL}${APPLICATION_ROUTE}${POST_APPLICATION}?studentId=${da
     handleChangeCoverLetter = event => {
         this.increaseCoverLetterProgressPercentage();
         // const fileUploaded = event.target.files[0];
-        this.setState({uploadedCoverLetter:event.target.files[0]})
-        event.target.value=null;
+        this.setState({ uploadedCoverLetter: event.target.files[0] })
+        event.target.value = null;
     };
 
     increaseCoverLetterProgressPercentage = async () => {
@@ -138,7 +136,7 @@ axios.post(`${BACKEND_URL}${APPLICATION_ROUTE}${POST_APPLICATION}?studentId=${da
         }
     }
 
-   
+
     render = () => {
         console.log('In render');
         return (
@@ -254,7 +252,7 @@ axios.post(`${BACKEND_URL}${APPLICATION_ROUTE}${POST_APPLICATION}?studentId=${da
                             <Row>
                                 <Col md="auto"> <b>Office Location : </b></Col>
                                 <Col md="auto">
-                                    <Row style={{height:"15px"}}><Col>{this.state.jobDetails.streetAddress}</Col></Row>
+                                    <Row style={{ height: "15px" }}><Col>{this.state.jobDetails.streetAddress}</Col></Row>
                                     <Row><Col>{this.state.jobDetails.city}, {this.state.jobDetails.state}</Col></Row>
                                     <Row><Col>{this.state.jobDetails.country}, {this.state.jobDetails.zip}.</Col></Row>
                                 </Col>
