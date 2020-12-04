@@ -23,7 +23,7 @@ if (process.env.KAFKA_SWITCH === 'true') {
     jobRouter.route(GET_COMPANY_JOB_BY_JOBID).get(checkAuth, jobKafkaServices.getCompanyJobsByJobId);
 }
 else {
-    jobRouter.route(POST_COMPANY_JOB).post(checkAuth, jobServices.postCompanyJob);
+    jobRouter.route(POST_COMPANY_JOB).post(jobServices.postCompanyJob);
     jobRouter.route(PUT_COMPANY_JOB).put(checkAuth, jobServices.updateCompanyJob);
     jobRouter.route(GET_COMPANY_JOBS).get(checkAuth, jobServices.getCompanyJobs);
     jobRouter.route(GET_ALL_JOBS).get(checkAuth, jobServices.getAllJobs);
