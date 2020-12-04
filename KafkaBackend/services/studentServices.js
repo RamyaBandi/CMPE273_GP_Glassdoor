@@ -222,8 +222,10 @@ async function handle_request(msg, callback) {
 				try {
 					let data = msg.body
 					console.log(data)
-					const studentreviews = await Reviews.find({studentId: data.studentId }).exec();
-					const count = await Reviews.countDocuments({studentId: data.studentId });
+					const studentreviews = await Reviews.find({ studentId: data.studentId })
+					.populate({ path: 'companyId', model: 'Company', select: 'companyName' })
+					.exec();
+					const count = await Reviews.countDocuments({ studentId: data.studentId });
 					console.log("count" + count);
 					console.log(studentreviews)
 					//let value= toString(count)

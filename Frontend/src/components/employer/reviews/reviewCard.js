@@ -68,8 +68,39 @@ class reviewCard extends Component {
       var replytime = this.props.reviewitem.replyTimeStamp.split('T')[0]
       //console.log(replytime)
     }
+    //console.log(localStorage.getItem("role"))
+    let replyVar
+    let companyVar=<div>
+    <p>Company Name:{review.companyId.companyName}</p>
+  </div>
+    if (localStorage.getItem("role") === 'employer') {
+      replyVar = <div>
+        <MDBCardBody>
+          <div className="social-meta">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-success active">
+                <MDBIcon icon="heart" />
+                <button name="favorite" id="option1" autocomplete="off" checked></button>Mark as favorite
+  </label>
+              <button class="btn btn-success active" onClick={this.handlefeatured}>
+                <MDBIcon icon="flag" />
+                <label autocomplete="off"></label>Mark as featured
+  </button>
+            </div>
+          </div>
+          <hr />
 
-
+          <div className="right-side-meta">{replytime}</div>
+          <h5 className="font-italic">{reply}</h5>
+          {replyVar}
+        </MDBCardBody>
+        <MDBInput far icon="comment" name="reply" onChange={this.replyinput} hint="Add Comment..." />
+        <button class="btn btn-success" onClick={this.submithandle}>Reply</button>
+      </div>
+    companyVar=<div>
+    <p>StudentName:{review.studentId.studentName}</p>
+  </div>
+    }
     return (
       <MDBRow>
         <MDBCol md="4" lg="10">
@@ -107,31 +138,13 @@ class reviewCard extends Component {
                       state: review._id
                     }}
                     style={{ color: "black" }}
-                  >{review.headline} </Link></h3>
-                <p>{review.description} </p>
+                  >Title: {review.headline} </Link></h3>
+                {companyVar}
+                <p>Description: {review.description} </p>
               </div>
             </MDBCardBody>
 
-            <MDBCardBody>
-              <div className="social-meta">
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-success active">
-                    <MDBIcon icon="heart" />
-                    <button name="favorite" id="option1" autocomplete="off" checked></button>Mark as favorite
-  </label>
-                  <button class="btn btn-success active" onClick={this.handlefeatured}>
-                    <MDBIcon icon="flag" />
-                    <label autocomplete="off"></label>Mark as featured
-  </button>
-                </div>
-              </div>
-              <hr />
-
-              <div className="right-side-meta">{replytime}</div>
-              <h5 className="font-italic">{reply}</h5>
-              <MDBInput far icon="comment" name="reply" onChange={this.replyinput} hint="Add Comment..." />
-              <button class="btn btn-success" onClick={this.submithandle}>Reply</button>
-            </MDBCardBody>
+{replyVar}
           </MDBCard>
         </MDBCol>
       </MDBRow>

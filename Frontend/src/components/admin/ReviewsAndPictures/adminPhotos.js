@@ -124,9 +124,10 @@ class AdminPhotos extends Component {
                     .then(response => {
                         console.log("Photo approved successfully");
                         window.location.reload();
-                        window.alert("Approved!");     
+                        //window.alert("Approved!");     
                     }) 
-        }                
+        }
+        window.alert("Approved!");                  
       };
 
       onSubmitRejection = async (e) => {
@@ -138,9 +139,10 @@ class AdminPhotos extends Component {
                     .then(response => {
                         console.log("Photo rejected successfully");
                         window.location.reload();
-                        window.alert("Rejected!");     
+                        //window.alert("Rejected!");     
                     }) 
-        }                
+        }  
+        window.alert("Rejected!");                   
       };
 
   render = () => {
@@ -159,11 +161,11 @@ class AdminPhotos extends Component {
                                     </Col>
                                     <Col md="2">
                                     <Link to={{ pathname: "/viewphoto", state: item._id }} 
-                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}><img height="60px" width="60px" src={item.photoURL}/></Link>
+                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}><img height="90px" width="90px" src={item.photoURL}/></Link>
                                     </Col>
                                     <Col md="3">
                                     <Link to={{ pathname: "/viewphoto", state: item._id }} 
-                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}>{item.uploadDate}</Link>
+                                    style={{ color: "#060008", marginTop: "5px", marginBottom: "5px", width: "100%" }}>{item.approvalStatus}</Link>
                                     </Col>
                                     <Col md="3" >
 

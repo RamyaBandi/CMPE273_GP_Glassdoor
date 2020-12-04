@@ -71,7 +71,7 @@ module.exports.getCompanyProfile = (req, res) => {
         if (err) {
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
-            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
         }
         else {
             // console.log(JSON.stringify(result));
@@ -110,9 +110,9 @@ function formatDate(date) {
         day = '' + d.getDate(),
         year = d.getFullYear();
 
-    if (month.length < 2) 
+    if (month.length < 2)
         month = '0' + month;
-    if (day.length < 2) 
+    if (day.length < 2)
         day = '0' + day;
 
     return [year, month, day].join('-');
@@ -126,9 +126,9 @@ module.exports.postCompanyView = (req, res) => {
     console.log("req body" + JSON.stringify(req.body));
     let data = req.body
     let companyviews = CompanyViews({
-        companyId : data.companyId,
+        companyId: data.companyId,
         companyName: data.companyName,
-        Date : formatDate(date)
+        Date: formatDate(date)
         // email: data.email
     })
     companyviews.save((err, result) => {
@@ -149,11 +149,11 @@ module.exports.updateCompanyFeatured = (req, res) => {
     let data = req.body
 
     let featured_update = {
-        
+
         featuredReview: data.featuredId
     }
     //console.log(featured_update)
-    Company.findByIdAndUpdate(data.companyId, {$push:featured_update}, (err, result) => {
+    Company.findByIdAndUpdate(data.companyId, { $push: featured_update }, (err, result) => {
         //console.log(result.featuredReview)
         //console.log(result._id)
         if (err) {

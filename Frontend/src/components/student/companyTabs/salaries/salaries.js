@@ -22,7 +22,7 @@ class Salaries extends Component {
     };
   }
   componentDidMount() {
-    const company_id = this.props.location.state;
+    const company_id = localStorage.getItem('companyId');
     //const {data} = this.props.location.state;
     console.log(company_id);
     this.getSalaryResults();
@@ -70,18 +70,22 @@ handleChange = (e) => {
 
 async getSalaryResults(){
   const company_id = this.props.location.state;
+  console.log(company_id);
   axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
   await axios.get(BACKEND_URL + GET_SALARY_AVERAGES, {
       params: {
         companyId: company_id,
+        page : this.state.page,
+        limit : this.state.limit
       }
   })
       .then(response => {
-          console.log("Status Code : ", response.status);
+          console.log(response);
           if (response.status === 200) {
               //console.log("Salaries Data", response.data)
               this.setState({
-                  salaries: response.data                 
+                  salaries: response.data.salaries,
+                  totalPages: response.data.totalPages                 
               })
               console.log(this.state.salaries)
           }
@@ -136,6 +140,24 @@ async getSalaryResults(){
                         </Col>
                     </Row>
         </Container>
+        <div className="input-group"
+                        style={{ width: "100px", float: "right" }}
+                    >
+                        <div className="input-group-prepend">
+                            <label  >Page Limit </label>
+                            <br></br>
+                        </div>
+                        
+                        <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+               
+                
+
         <Row>
           <Container style={{ marginBottom: "30px" }}>
             {this.state.salaries.map((item) => {
@@ -148,7 +170,7 @@ async getSalaryResults(){
                     nextLabel={">>"}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
+                    pageCount={this.state.totalPages}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
                     onPageChange={this.handlePageClick}
@@ -156,19 +178,7 @@ async getSalaryResults(){
                     subContainerClassName={"pages pagination"}
                     activeClassName={"active"} />
 
-        <div className="input-group"
-                            style={{ width: "200px", justifyContent: "space-around" }}
-                        >
-                            <div className="input-group-prepend">
-                                <label  >Page Limit </label>
-                            </div>
-                            <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-        </div>
+      
       </div>
     );
   };
