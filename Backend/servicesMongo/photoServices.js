@@ -129,7 +129,7 @@ module.exports.getCompanyPhotos = async (req, res) => {
         // data.limit = 20;
         const photos = await Photos.find({ companyId: data.companyId ,approvalStatus:{$in:['Approved','Under Review']}})
         .limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
-        const count = await Photos.countDocuments({ companyId: data.companyId });
+        const count = await Photos.countDocuments({ companyId: data.companyId ,approvalStatus:{$in:['Approved','Under Review']}});
         // let formattedPhotos=[]
         // for(let i of photos){
         //     if(i.approvalStatus==="Rejected"){
@@ -157,7 +157,7 @@ module.exports.getCompanyPhotos = async (req, res) => {
         // }
         const result = ({
             formattedPhotos:photos,
-            totalPages: Math.ceil(photos.length / data.limit),
+            totalPages: Math.ceil(count / data.limit),
             currentPage: data.page
         });
         console.log("Company photos fetched successfully from DB");

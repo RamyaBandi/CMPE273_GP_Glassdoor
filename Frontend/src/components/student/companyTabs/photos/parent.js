@@ -72,7 +72,7 @@ class Parent extends React.Component {
     })
       .then(response => {
         console.log(response);
-        this.setState({ images: response.data.formattedPhotos });
+        this.setState({ images: response.data.formattedPhotos, totalPages: response.data.totalPages });
       })
       .catch((error) => {
         console.log(error);
@@ -116,6 +116,7 @@ class Parent extends React.Component {
           .then(response => {
             console.log(response)
             this.setState({ images: response.data.formattedPhotos });
+            window.location.reload();
           })
           .catch((error) => {
             console.log(error);
