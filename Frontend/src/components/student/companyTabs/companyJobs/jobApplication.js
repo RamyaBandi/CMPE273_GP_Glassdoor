@@ -78,7 +78,7 @@ export default class JobApplication extends Component {
     apply = (e) => {
         e.preventDefault();
         let data = {
-            studentId: "5fb48df63d242fa0842343f3",
+            studentId: localStorage.getItem('mongoId'),
             jobId: this.state.jobDetails._id,
             resumeUploaded: false,
             coverLetterUploaded: false

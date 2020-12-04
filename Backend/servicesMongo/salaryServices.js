@@ -121,7 +121,9 @@ module.exports.getSalaryAverages = (req, res) => {
     .aggregate([
         { $match: { companyId: new ObjectId(data.companyId)} },
         { $group: { _id: "$jobTitle", 
-                    avg: { "$avg": "$baseSalary" } } }
+                    avg: { "$avg": "$baseSalary" },
+                    min: { "$min": "$baseSalary" } ,
+                    max: { "$max": "$baseSalary" } }}
     ])
     .exec((err, salaries) => {
         if (err) {
@@ -131,7 +133,9 @@ module.exports.getSalaryAverages = (req, res) => {
             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
         }
         else {
-
+            // const salaryranges = {
+            //     _id: salaries.
+            // }
             console.log("Salary averages calculated Successfully");
             console.log(salaries);
             res.status(RES_SUCCESS).end(JSON.stringify(salaries));

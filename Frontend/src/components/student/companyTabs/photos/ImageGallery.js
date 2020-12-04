@@ -93,7 +93,7 @@ export default class Tiles extends React.Component {
                             <div>
                                 <Nav className="mr-auto">
                                     <div className="box-content right">
-                                        <Link to="/overview" style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
+                                        <Link to={{ pathname: "/overview", state: this.props._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
                                     </div>
                                     <div class="box-content right">
                                         <Link to={{ pathname: "/reviews", state: this.props._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
