@@ -112,11 +112,12 @@ module.exports.getStudentSalaries = (req, res) => {
     })
 }
 
-module.exports.getSalaryAverages = (req, res) => {
+module.exports.getSalaryAverages = async (req, res) => {
 
     console.log("Inside Student Salaries GET service");
     console.log(req.query)
     let data = req.query
+    const count = await Salaries.countDocuments({ companyId: data.companyId });
     Salaries
     .aggregate([
         { $match: { companyId: new ObjectId(data.companyId)} },
@@ -136,9 +137,14 @@ module.exports.getSalaryAverages = (req, res) => {
             // const salaryranges = {
             //     _id: salaries.
             // }
+            const result = ({
+                salaries,
+                totalPages: Math.ceil(count / data.limit),
+                currentPage: data.page
+            });
             console.log("Salary averages calculated Successfully");
-            console.log(salaries);
-            res.status(RES_SUCCESS).end(JSON.stringify(salaries));
+            console.log(result);
+            res.status(RES_SUCCESS).end(JSON.stringify(result));
 
         }
     })

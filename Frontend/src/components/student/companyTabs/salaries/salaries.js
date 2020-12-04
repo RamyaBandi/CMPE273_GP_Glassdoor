@@ -84,7 +84,8 @@ async getSalaryResults(){
           if (response.status === 200) {
               //console.log("Salaries Data", response.data)
               this.setState({
-                  salaries: response.data                 
+                  salaries: response.data,
+                  totalPages: this.state.totalPages                 
               })
               console.log(this.state.salaries)
           }
@@ -151,7 +152,7 @@ async getSalaryResults(){
                     nextLabel={">>"}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
+                    pageCount={this.state.totalPages}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
                     onPageChange={this.handlePageClick}

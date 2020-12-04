@@ -507,7 +507,7 @@ class Reviews extends Component {
 					nextLabel={">>"}
 					breakLabel={"..."}
 					breakClassName={"break-me"}
-					pageCount={this.state.pageCount}
+					pageCount={this.state.totalPages}
 					marginPagesDisplayed={2}
 					pageRangeDisplayed={5}
 					onPageChange={this.handlePageClick}
