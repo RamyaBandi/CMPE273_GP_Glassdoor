@@ -492,4 +492,3 @@ module.exports.getApprovedCompanyReviews = async (req, res) => {
     }
 
 }
-
