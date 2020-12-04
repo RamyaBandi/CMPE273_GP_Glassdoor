@@ -118,8 +118,13 @@ module.exports.salarySearch = async (req, res) => {
                 }
             }]).skip((req.query.page - 1) * req.query.limit).exec();
 
+            console.log("Company results", companyResults[0])
+
     let averageRating = await Reviews.aggregate([
         { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(req.query.limit * 1).exec();
+    
+
+
     console.log("Average Rating", averageRating)
 
     let datasets = await Promise.all(companyResults[0].salaries.map(async (data) => {
@@ -145,7 +150,7 @@ module.exports.salarySearch = async (req, res) => {
         }
     }));
     datasets = await datasets.filter(company => {
-        return company.companyName
+        return company
     })
     console.log("Outside salaries", datasets)
 
