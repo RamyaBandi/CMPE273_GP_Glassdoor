@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button, ProgressBar } from 'react-bootstrap';
 import axios from 'axios';
-import { BACKEND_URL, JOB_ROUTE, GET_COMPANY_JOB_BY_JOBID, GET_COMPANY_DETAILS } from '../../../../config/routeConstants';
+import { BACKEND_URL, JOB_ROUTE, GET_COMPANY_JOB_BY_JOBID, GET_COMPANY_DETAILS, APPLICATION_ROUTE, POST_APPLICATION } from '../../../../config/routeConstants';
 
 export default class JobApplication extends Component {
     constructor(props) {
@@ -35,6 +35,7 @@ export default class JobApplication extends Component {
         console.log('In componentDidMount in application');
         const jobId = this.props.location.state;
         console.log(jobId);
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         await axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOB_BY_JOBID + '?jobId=' + jobId)
             .then(response => {
                 this.setState({ jobDetails: response.data.jobs[0] });
@@ -45,6 +46,7 @@ export default class JobApplication extends Component {
             }
             )
         const companyId = this.state.jobDetails.companyId;
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
             .then(response => {
                 this.setState({ companyDetails: response.data[0] });
@@ -69,13 +71,47 @@ export default class JobApplication extends Component {
     handleChangeResume = event => {
         this.increaseResumeProgressPercentage();
         const fileUploaded = event.target.files[0];
-        this.setState({uploadedResume:fileUploaded})
-        event.target.value=null;
+        this.setState({ uploadedResume: fileUploaded })
+        event.target.value = null;
     };
 
-    apply=()=>{
-        console.log(this.state);
-        
+    apply = (e) => {
+        e.preventDefault();
+        let data = {
+            studentId: localStorage.getItem('mongoId'),
+            jobId: this.state.jobDetails._id,
+            resumeUploaded: false,
+            coverLetterUploaded: false
+        }
+
+        const mediaForm = new FormData();
+        if (this.state.uploadedResume) {
+
+            mediaForm.append("resume", this.state.uploadedResume);
+            data.resumeUploaded = true
+        }
+
+        if (this.state.uploadedCoverLetter) {
+
+            mediaForm.append("Cover Letter", this.state.uploadedCoverLetter);
+            data.coverLetterUploaded = true
+        }
+
+        //axios
+
+        axios.post(`${BACKEND_URL}${APPLICATION_ROUTE}${POST_APPLICATION}?studentId=${data.studentId}&jobId=${data.jobId}&resumeUploaded=${data.resumeUploaded}&coverLetterUploaded=${data.coverLetterUploaded}`, mediaForm)
+            .then(response => {
+                //redirect
+                window.alert('Applied successfully');
+                this.props.history.push('/student/applications')
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+                window.alert(error.response.data);
+            }
+            )
+
+
     }
     increaseResumeProgressPercentage = async () => {
         for (let i = 1; i <= 100; i++) {
@@ -94,8 +130,8 @@ export default class JobApplication extends Component {
     handleChangeCoverLetter = event => {
         this.increaseCoverLetterProgressPercentage();
         // const fileUploaded = event.target.files[0];
-        this.setState({uploadedCoverLetter:event.target.files[0]})
-        event.target.value=null;
+        this.setState({ uploadedCoverLetter: event.target.files[0] })
+        event.target.value = null;
     };
 
     increaseCoverLetterProgressPercentage = async () => {
@@ -104,6 +140,7 @@ export default class JobApplication extends Component {
             this.setState({ coverLetterProgress: i })
         }
     }
+
 
     render = () => {
         console.log('In render');
@@ -220,7 +257,7 @@ export default class JobApplication extends Component {
                             <Row>
                                 <Col md="auto"> <b>Office Location : </b></Col>
                                 <Col md="auto">
-                                    <Row style={{height:"15px"}}><Col>{this.state.jobDetails.streetAddress}</Col></Row>
+                                    <Row style={{ height: "15px" }}><Col>{this.state.jobDetails.streetAddress}</Col></Row>
                                     <Row><Col>{this.state.jobDetails.city}, {this.state.jobDetails.state}</Col></Row>
                                     <Row><Col>{this.state.jobDetails.country}, {this.state.jobDetails.zip}.</Col></Row>
                                 </Col>

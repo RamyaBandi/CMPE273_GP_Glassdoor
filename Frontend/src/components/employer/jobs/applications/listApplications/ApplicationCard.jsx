@@ -21,6 +21,7 @@ class ApplicationCard extends Component {
             status: this.state.status,
             applicationId: this.props.props._id
         }
+        Axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         Axios.put(`${BACKEND_URL}${APPLICATION_ROUTE}${PUT_APPLICATION}`, data)
             .then((res) => {
                 console.log("Updated Successfully" + res)

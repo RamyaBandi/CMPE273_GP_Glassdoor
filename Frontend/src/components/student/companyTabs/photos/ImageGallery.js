@@ -1,7 +1,9 @@
-import React from 'react'
-import { Row, Col, Container, Button, Pagination, Modal } from 'react-bootstrap'
+import React from 'react';
+import { Row, Col, Container, Button, Pagination, Modal } from 'react-bootstrap';
 import MultiImageInput from 'react-multiple-image-input';
-import './ImageGallery.css'
+import './ImageGallery.css';
+import Nav from 'react-bootstrap/Nav';
+import { Link } from 'react-router-dom';
 
 const crop = {
     unit: '%',
@@ -80,6 +82,39 @@ export default class Tiles extends React.Component {
                         </Modal.Footer>
                     </Modal>
                 ) : null}
+                <Container style={{ marginTop: "20px", width: "90%", backgroundColor: "white" }} className="block-example border">
+                    <Row style={{ height: "50px", marginTop: "20px" }}>
+                        <Col>
+                            <h4><b>{this.props.companyName}</b></h4>
+                        </Col>
+                    </Row>
+                    <Row style={{ marginBottom: "10px" }}>
+                        <Col md="8">
+                            <div>
+                                <Nav className="mr-auto">
+                                    <div className="box-content right">
+                                        <Link to={{ pathname: "/overview", state: this.props._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
+                                    </div>
+                                    <div class="box-content right">
+                                        <Link to={{ pathname: "/reviews", state: this.props._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
+                                    </div>
+                                    <div class="box-content right">
+                                        <Link to={{ pathname: "/jobs", state: this.props._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Jobs</Link>
+                                    </div>
+                                    <div class="box-content right">
+                                        <Link to={{ pathname: "/salaries", state: this.props._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Salaries</Link>
+                                    </div>
+                                    <div class="box-content right">
+                                        <Link to={{ pathname: "/interviews", state: this.props._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Interviews</Link>
+                                    </div>
+                                    <div class="box-content">
+                                        <Link to="/photos" style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
+                                    </div>
+                                </Nav>
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
                 <Container style={{ backgroundColor: "#fff", marginTop: "20px", padding: "20px " }}>
                     <Row style={{ width: "78%", margin: "auto", marginBottom: "20px" }}>
                         <Col md="6">

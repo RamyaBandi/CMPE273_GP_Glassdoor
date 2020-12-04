@@ -12,6 +12,7 @@ export default class ReviewCard extends Component {
     this.reviewData = {   
       reviewId: this.props._id,
     };
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios.put(BACKEND_URL + PUT_STUDENT_REVIEW_HELPFUL, this.reviewData)
             .then(response => {
                 console.log("review helpful count updated successfully")
@@ -22,17 +23,24 @@ export default class ReviewCard extends Component {
   render = () => {
     //console.log(this.props.reviews);
 
+    let companyOverviewReviewsStyle={
+
+    }
+    if(this.props.companyOverview){
+      companyOverviewReviewsStyle={
+        
+      }
+    }
     return (
-      <div>
-        <Container className="block-example border" style={{ marginTop: "20px", width: "80%" }}>
+        <Container className="block-example border" style={{ marginTop: "20px", width: "80%",padding:"20px" }}>
           <Col>
             <Row>
               <p style={{ color: "#3f76cc", fontSize: "22px" }}>
                 Headline: <b>"{this.props.headline}"</b>
               </p>
             </Row>
-            <Row>
-              <Col md="4">
+            <Row style={{justifyContent:"space-between"}}>
+              <Col md="auto">
               <StarRatingComponent
                         name="rating"
                         starCount={5}
@@ -54,7 +62,7 @@ export default class ReviewCard extends Component {
                     />
                 <p>Overall Rating: {this.props.overallRating}</p>
               </Col>
-              <Col md="4">
+              <Col md="auto">
               <StarRatingComponent
                         name="rating"
                         starCount={5}
@@ -76,7 +84,7 @@ export default class ReviewCard extends Component {
                     />
                 <p>Recommended to a Friend: {this.props.recommendedRating}</p>
               </Col>
-              <Col md="4">
+              <Col md="auto">
               <StarRatingComponent
                         name="rating"
                         starCount={5}
@@ -127,7 +135,6 @@ export default class ReviewCard extends Component {
             </Row>
           </Col>
         </Container>
-      </div>
     );
   };
 }

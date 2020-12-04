@@ -25,7 +25,12 @@ const Applications = new mongoose.Schema({
     resume: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Resumes',
-        required: true
+    },
+    resumeUrl: {
+        type: String
+    },
+    coverLetterUrl:{
+        type:String
     }
 }, { versionKey: false })
 

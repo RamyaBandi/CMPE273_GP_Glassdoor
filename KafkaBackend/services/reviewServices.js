@@ -1,5 +1,6 @@
 //const { response } = require('express');
 const mongoose = require("mongoose");
+const ObjectId = require('mongoose').Types.ObjectId;
 //const con = require('../config/mongoConnection');
 const {
   CONTENT_TYPE,
@@ -330,7 +331,6 @@ async function handle_request(msg, callback) {
           ),
           averageCeoRating: avgReviews[0].averageCeoRating.toFixed(2),
         };
-
         callback(null, result);
         console.log(avgReviews[0]);
       } catch {
@@ -443,33 +443,34 @@ async function handle_request(msg, callback) {
         let data = msg.body;
         console.log(data);
         try {
-            //data.page = 1;
-            //data.limit = 10;
-            const reviews = await Reviews.find({
-                $or:
-                    [{ companyId: new ObjectId(data.companyId), approvalstatus: 'Approved' },
-                    { studentId: new ObjectId(data.studentId), approvalstatus: 'Under Review' }]
-            }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
-                
-            const count = await Reviews.countDocuments({ companyId: data.companyId });
-            //console.log("count" + count);
-            //console.log(reviews)
-            const result = ({
-                reviews,
-                totalPages: Math.ceil(count / data.limit),
-                currentPage: data.page
-            });
-        
-            console.log("Reviews fetched Successfully")
-            callback(null, result);
-        }
-        catch {
-            if (err) {
-                console.log(err);
-                //res.setHeader(CONTENT_TYPE, APP_JSON);
-                callback(err, "Error");
-            }
-        }
+          //data.page = 1;
+          //data.limit = 10;
+          const reviews = await Reviews.find({
+              $or:
+                  [{ companyId: new ObjectId(data.companyId), approvalstatus: 'Approved' },
+                  { studentId: new ObjectId(data.studentId), approvalstatus: 'Under Review' }]
+          }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+      
+      
+          const count = await Reviews.countDocuments({ companyId: data.companyId });
+          //console.log("count" + count);
+          //console.log(reviews)
+          const result = ({
+              reviews,
+              totalPages: Math.ceil(count / data.limit),
+              currentPage: data.page
+          });
+      
+          console.log("Reviews fetched Successfully from DB - page not 1 or redis off")
+          callback(null, result);
+      }
+      catch {
+          if (err) {
+              console.log(err);
+              //res.setHeader(CONTENT_TYPE, APP_JSON);
+              callback(err, "Error");
+          }
+      }  
         break;
       }
 

@@ -5,7 +5,7 @@ import { Container, Col, Row, Form, FormControl } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Redirect } from "react-router";
 import axios from 'axios';
-import { BACKEND_URL, JOB_ROUTE, GET_COMPANY_DETAILS, GET_COMPANY_JOBS, GET_COMPANY_JOB_BY_JOBTITLE_OR_CITY } from '../../../../config/routeConstants';
+import { BACKEND_URL, JOB_ROUTE, GET_COMPANY_DETAILS, GET_COMPANY_JOBS, GET_COMPANY_JOB_BY_JOBTITLE } from '../../../../config/routeConstants';
 import JobCard from './jobCard';
 import ReactPaginate from 'react-paginate';
 
@@ -17,13 +17,16 @@ class CompanyJobs extends Component {
             jobs: [],
             limit: 10,
             page:1,
-            redirect: null
+            redirect: null,
+            jobSearchText:""
         };
     }
 
     findJobs = () => {
-        axios.get(BACKEND_URL + GET_COMPANY_JOB_BY_JOBTITLE_OR_CITY + '?jobTitle=')
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
+        axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOB_BY_JOBTITLE + '?companyId=' + this.state.companyDetails._id + '&jobTitle='+this.state.jobSearchText)
         .then(response => {
+            
             console.log(response.data);
             this.setState({jobs: response.data.jobs});
         })
@@ -32,12 +35,17 @@ class CompanyJobs extends Component {
         })
     }
 
+    jobSearchTextChange=(e)=>{
+        this.setState({jobSearchText:e.target.value});
+    }
+
     addReview = async (e) => {
         this.setState({ redirect: <Redirect to="/addReview" /> });
     };
 
     componentDidMount() {
         const companyId = this.props.location.state;
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
             .then(response => {
                 this.setState({ companyDetails: response.data[0] });
@@ -72,6 +80,7 @@ class CompanyJobs extends Component {
 
     async getResults() {
         const companyId = this.props.location.state;
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOBS + "?companyId=" + companyId, {
             params: {
                 page : this.state.page,
@@ -107,7 +116,7 @@ class CompanyJobs extends Component {
                             <div>
                                 <Nav className="mr-auto">
                                     <div className="box-content right">
-                                        <Link to="/overview" style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
+                                        <Link to={{ pathname: "/overview", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
                                     </div>
                                     <div class="box-content right">
                                         <Link to={{ pathname: "/reviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
@@ -116,13 +125,13 @@ class CompanyJobs extends Component {
                                         <Link to="/jobs" style={{ textDecoration: 'none', color: '#1861bf' }}>Jobs</Link>
                                     </div>
                                     <div class="box-content right">
-                                        <Link to="/salaries" style={{ textDecoration: 'none', color: '#1861bf' }}>Salaries</Link>
+                                        <Link to={{ pathname: "/salaries", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Salaries</Link>
                                     </div>
                                     <div class="box-content right">
-                                        <Link to="/interviews" style={{ textDecoration: 'none', color: '#1861bf' }}>Interviews</Link>
+                                        <Link to={{ pathname: "/interviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Interviews</Link>
                                     </div>
                                     <div class="box-content">
-                                        <Link to="/photos" style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
+                                        <Link to={{ pathname: "/photos", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
                                     </div>
                                 </Nav>
                             </div>
@@ -147,7 +156,7 @@ class CompanyJobs extends Component {
                     <Container style={{ width:"80%" }}>
                         <Row>
                         <Col md="auto">
-                            <FormControl style={{ width: "110%", height: "40px" }} type="text" placeholder="Search Job Titles" />
+                            <FormControl style={{ width: "110%", height: "40px" }} type="text" placeholder="Search Job Titles" onChange={this.jobSearchTextChange}/>
                         </Col>
                         <Col md="auto">
                             <Button style={{ backgroundColor: "#1861bf", height: "40px" }} onClick={this.findJobs}>
@@ -156,8 +165,8 @@ class CompanyJobs extends Component {
                         </Col>
                         </Row>
                         </Container>
-                    
-                    {this.state.jobs.map((item) => {
+                    {this.state.jobs.length===0?<h4 style={{color:"gray", textAlign: "center", marginTop: "20px", marginBottom: "20px"}}>No Jobs To Display</h4>:
+                    this.state.jobs.map((item) => {
                         return <JobCard {...item} />
                     })}
                 </Container>

@@ -54,7 +54,7 @@ class Reviews extends Component {
     //   });
 
     this.getReviewsResults();
-
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios
       .get(BACKEND_URL + GET_COMPANY_DETAILS + "?companyId=" + company_id)
       .then((response) => {
@@ -66,7 +66,7 @@ class Reviews extends Component {
       .catch((error) => {
         console.log(error);
       });
-
+      axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
       axios
       .get(BACKEND_URL + GET_POSITIVE_REVIEW + "?companyId=" + company_id)
       .then((response) => {
@@ -77,7 +77,7 @@ class Reviews extends Component {
       .catch((error) => {
         console.log(error);
       });
-
+      axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
       axios
       .get(BACKEND_URL + GET_NEGATIVE_REVIEW + "?companyId=" + company_id)
       .then((response) => {
@@ -88,7 +88,7 @@ class Reviews extends Component {
       .catch((error) => {
         console.log(error);
       });
-
+      axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
       axios
       .get(BACKEND_URL + GET_REVIEW_AVERAGE + "?companyId=" + company_id)
       .then((response) => {
@@ -103,8 +103,10 @@ class Reviews extends Component {
 
   getReviewsResults() {
     console.log("in update page list");
-    const company_id = '5fb4884acf339e3da0d5c31e';
+    //const company_id = '5fb4884acf339e3da0d5c31e';
+    const company_id = this.props.location.state;
     const student_id = localStorage.getItem('mongoId');
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios.get(BACKEND_URL + GET_APPROVED_COMPANY_REVIEWS, {
         params: {
             companyId: company_id,
@@ -161,7 +163,7 @@ handleChange = (e) => {
                             <div>
                                 <Nav className="mr-auto">
                                     <div className="box-content right">
-                                        <Link to="/overview" style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
+                                    <Link to={{ pathname: "/overview", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
                                     </div>
                                     <div class="box-content right">
                                         <Link to={{ pathname: "/reviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
@@ -176,7 +178,7 @@ handleChange = (e) => {
                                         <Link to={{ pathname: "/interviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Interviews</Link>
                                     </div>
                                     <div class="box-content">
-                                        <Link to="/photos" style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
+                                        <Link to={{ pathname: "/photos", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
                                     </div>
                                 </Nav>
                             </div>

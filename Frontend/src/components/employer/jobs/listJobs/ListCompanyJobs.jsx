@@ -18,6 +18,7 @@ class ListCompanyJobs extends Component {
         this.updatePageList()
     }
     updatePageList() {
+        Axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         Axios.get(`${BACKEND_URL}${JOB_ROUTE}${GET_COMPANY_JOBS}`, {
             params: {
                 companyId: localStorage.getItem('mongoId'),

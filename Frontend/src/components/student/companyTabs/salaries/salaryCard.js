@@ -9,6 +9,7 @@ export default class SalaryCard extends Component {
   render = () => {
     //const avgsalary = this.props.baseSalary + 3.4*this.props.bonuses;
     console.log(this.props);
+    const avgpay = (this.props.avg).toFixed(2);
     return (
       <div>
         <Container
@@ -23,14 +24,14 @@ export default class SalaryCard extends Component {
             </Row>
             <Row>
               <Col md="4">
-                <p>Avg. Total Pay: ${this.props.avg}/yr</p>
-              </Col>
-              {/* <Col md="4">
-                <p>Base Pay: ${this.props.baseSalary}/yr</p>
+                <p>Avg. Total Pay: ${avgpay}/yr</p>
               </Col>
               <Col md="4">
-                <p>Additional Pay: ${this.props.bonuses}/yr</p>
-              </Col> */}
+                <p>Minimum Pay: ${this.props.min}/yr</p>
+              </Col>
+              <Col md="4">
+                <p>Maximum Pay: ${this.props.max}/yr</p>
+              </Col>
             </Row>
           </Col>
         </Container>

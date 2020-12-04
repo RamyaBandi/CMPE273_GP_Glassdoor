@@ -29,6 +29,7 @@ class SalariesTab extends Component {
         this.setState({
             salaryData : []
         })
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_SEARCH_SALARY, {
             params: {
                 searchParameter: this.props.location.state.detail,

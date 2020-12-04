@@ -22,6 +22,7 @@ class resumeUpdate extends Component {
         //console.log(localStorage.getItem('mongoId'))
         let student_id=localStorage.getItem('mongoId')
         //axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(`${routeConstants.BACKEND_URL}/student${routeConstants.GET_STUDENT_RESUMES}`,
         {
             params: {
@@ -55,6 +56,7 @@ class resumeUpdate extends Component {
       formData.append('fileName',this.state.selectedFile.name)
 
       console.log(formData)
+      axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
       axios
           .post(
               `${routeConstants.BACKEND_URL}/student${routeConstants.POST_RESUME_UPLOAD}`,

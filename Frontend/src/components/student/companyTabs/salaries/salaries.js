@@ -36,7 +36,7 @@ class Salaries extends Component {
     //   .catch((error) => {
     //     console.log(error);
     //   });
-
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
       axios
       .get(BACKEND_URL + GET_COMPANY_DETAILS + "?companyId=" + company_id)
       .then((response) => {
@@ -69,6 +69,7 @@ handleChange = (e) => {
 
 async getSalaryResults(){
   const company_id = this.props.location.state;
+  axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
   await axios.get(BACKEND_URL + GET_SALARY_AVERAGES, {
       params: {
         companyId: company_id,
@@ -106,7 +107,7 @@ async getSalaryResults(){
                             <div>
                                 <Nav className="mr-auto">
                                     <div className="box-content right">
-                                        <Link to="/overview" style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
+                                        <Link to={{ pathname: "/overview", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
                                     </div>
                                     <div class="box-content right">
                                         <Link to={{ pathname: "/reviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
@@ -121,7 +122,7 @@ async getSalaryResults(){
                                         <Link to={{ pathname: "/interviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Interviews</Link>
                                     </div>
                                     <div class="box-content">
-                                        <Link to="/photos" style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
+                                        <Link to={{ pathname: "/photos", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
                                     </div>
                                 </Nav>
                             </div>

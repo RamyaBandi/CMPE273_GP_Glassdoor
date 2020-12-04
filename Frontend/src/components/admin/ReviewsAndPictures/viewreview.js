@@ -16,6 +16,7 @@ export default class Viewreview extends Component {
         //const reviewId = '5fb3d516cc8f5284a4ec2fab';
         const reviewId = this.props.location.state;
         console.log(reviewId);
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios
           .get(BACKEND_URL + GET_REVIEW_DETAILS + "?reviewId=" + reviewId)
           .then((response) => {

@@ -28,6 +28,7 @@ class TopViewedCompanies extends Component {
 
     async getTopViewedCompanies() {
         console.log("Date", this.state.Date)
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         await axios.get(BACKEND_URL + GET_TOP_COMPANY_VIEWS, {
             params: {
                 date: this.state.Date,

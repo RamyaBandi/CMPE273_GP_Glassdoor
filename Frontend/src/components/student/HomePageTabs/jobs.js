@@ -39,6 +39,7 @@ class JobsTab extends Component {
         this.setState({
             jobsData : []
         })
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         await axios.get(BACKEND_URL + GET_SEARCH_JOBS, {
             params: {
                 searchParameter: this.props.location.state.detail,

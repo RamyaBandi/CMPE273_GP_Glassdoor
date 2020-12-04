@@ -15,6 +15,7 @@ class topReviewedCompanies extends Component {
     // Top 5 company based on average rating
 
     componentDidMount() {
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_TOP_AVERAGE_RATED_COMPANIES)
             .then(response => {
                 console.log("Status Code : ", response.status);

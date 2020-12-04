@@ -35,7 +35,7 @@ class StudentUpdateProfile extends Component {
         //console.log(this.props)
         //console.log(localStorage.getItem('mongoId'))
         let student_id = localStorage.getItem('mongoId')
-        axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(`${routeConstants.BACKEND_URL}/student${routeConstants.GET_STUDENT_SIGNUP}`,
             {
                 params: {
@@ -90,8 +90,8 @@ class StudentUpdateProfile extends Component {
             studentId: localStorage.getItem('mongoId')
         };
         console.log(req)
-        axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
-
+        //   axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios
             .put(`${routeConstants.BACKEND_URL}/student${routeConstants.PUT_STUDENT_SIGNUP}`, req)
             .then((res) => {
@@ -115,7 +115,7 @@ class StudentUpdateProfile extends Component {
         formData.append("file", this.state.selectedFile);
         formData.append('studentId', this.state._id)
 
-
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios
             .post(
                 `${routeConstants.BACKEND_URL}/image${routeConstants.POST_IMAGE_STUDENT_PROFILE}`,

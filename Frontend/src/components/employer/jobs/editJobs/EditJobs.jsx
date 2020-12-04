@@ -44,6 +44,7 @@ class EditJobs extends Component {
         //     data.remote = false;
         // }
         console.log(data);
+        Axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         Axios.put(`${routeConstants.BACKEND_URL}${routeConstants.JOB_ROUTE}${routeConstants.PUT_COMPANY_JOB}`, data).then((res) => {
             console.log(res);
             window.alert("Job Updated Successfully")

@@ -34,6 +34,7 @@ export default class CompanyProfilePage extends Component {
         //     )
 
         //axios to get approved
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         await axios.get(BACKEND_URL + GET_COMPANY_REVIEWS_ADMIN + '?companyId=' + this.props.match.params.id + '&approvalstatus=Approved')
             .then(response => {
                 this.setState({ companyName:this.props.location.state, approvedReviews: response.data.reviews });
@@ -44,6 +45,7 @@ export default class CompanyProfilePage extends Component {
             })
 
         //axios to get rejected
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         await axios.get(BACKEND_URL + GET_COMPANY_REVIEWS_ADMIN + '?companyId=' + this.props.match.params.id + '&approvalstatus=Rejected')
             .then(response => {
                 this.setState({ rejectedReviews: response.data.reviews });

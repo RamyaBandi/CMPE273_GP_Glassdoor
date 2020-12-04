@@ -16,6 +16,7 @@ class ResumeList extends Component {
             studentId: this.props.resumeitem.studentId
             }
         }
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios
             .delete(`${routeConstants.BACKEND_URL}/student${routeConstants.DELETE_STUDENT_RESUME}`, req)
             .then((res) => {
@@ -58,6 +59,7 @@ class ResumeList extends Component {
             resumeId: this.props.resumeitem._id,
             studentId: this.props.resumeitem.studentId
         }
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios
             .put(`${routeConstants.BACKEND_URL}/student${routeConstants.PUT_PRIMARY_RESUME}`, req)
             .then((res) => {
