@@ -18,7 +18,7 @@ const {
 
 module.exports.jobsHomePage = async (req, res) => {
     //Salary needs to be present, most rated
-    kafka.make_request('jobshomepage', 'All Jobs Data', function (err, results) {
+    kafka.make_request('jobshomepage', req.query, function (err, results) {
         console.log('in result');
         console.log(results);
         if (err) {

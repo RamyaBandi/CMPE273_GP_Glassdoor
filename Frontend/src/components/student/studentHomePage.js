@@ -17,9 +17,11 @@ class studentHomePage extends Component {
             isLoading: true,
             jobsData: [],
             originaljobsData: [],
+            page: 1,
+            limit: 30,
             offset: 0,
             data: [],
-            perPage: 5,
+            perPage: 30,
             currentPage: 0,
             salaryRange: "Salary Range",
             location: "Location",
@@ -184,30 +186,34 @@ class studentHomePage extends Component {
 
     // Function to handle change in data when a different page is clicked
 
-    handlePageClick = (e) => {
-        const selectedPage = e.selected;
-        const offset = selectedPage * this.state.perPage;
+    handlePageClick = (data) => {
 
-        this.setState({
-            currentPage: selectedPage,
-            offset: offset
-        }, () => {
+        let selected = data.selected + 1;
+        // let offset = Math.ceil(selected * this.props.perPage);
+        console.log(data)
+        this.setState({ page: selected }, () => {
+            this.getJobSearchResults()
             this.receivedData()
-        });
+        })
     }
 
     // Initial function to get the jobs result from the backend
 
     async getJobSearchResults() {
         axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
-        await axios.get(BACKEND_URL + GET_STUDENTS_JOBS_HOMEPAGE,
-        )
+        await axios.get(BACKEND_URL + GET_STUDENTS_JOBS_HOMEPAGE,{
+            params: {
+                // searchParameter: "Test Company",
+                page: this.state.page,
+                limit: this.state.limit
+            }})
             .then(response => {
                 console.log("Status Code : ", response.status);
                 if (response.status === 200) {
                     console.log("Jobs Data", response.data)
                     this.setState({
-                        jobsData: response.data,
+                        jobsData: response.data.companies,
+                        totalPages: response.data.totalPages,
                         isLoading: false
                     })
                 }
@@ -290,7 +296,7 @@ class studentHomePage extends Component {
                     nextLabel={">>"}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
+                    pageCount={this.state.totalPages}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
                     onPageChange={this.handlePageClick}

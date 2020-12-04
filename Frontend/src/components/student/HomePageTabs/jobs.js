@@ -53,7 +53,7 @@ class JobsTab extends Component {
             <div class="card tabs-card" key={i} style={{ width: "50%", left: "25%", right: "25%", height: "350px" }}>
                 <div class="card-body">
                     <div style={{ width: "100%" }}>
-                        <div style={{ width: "30%", float: "left" }}>
+                        <div style={{ width: "100%", float: "left" }}>
                             <div style={{ display: "flex", justifyContent: "normal" }}>
                                 <Link to={{
                                     pathname: "/overview",
@@ -68,9 +68,6 @@ class JobsTab extends Component {
                             }}
                                 style={{ "width": "250%" }}>{job.jobTitle}</Link></h6>
                             <p class="companyLocation"> {job.streetAddress},{job.city}, {job.state}, {job.zip}</p>
-                        </div>
-                        <div style={{ width: "40%", float: "right" }}>
-                            <button class="companySite"> Visit Website</button>
                         </div>
                     </div>
                     <div class="companyInsights">

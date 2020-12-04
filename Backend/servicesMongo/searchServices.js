@@ -44,9 +44,16 @@ module.exports.jobSearch = async (req, res) => {
                 }
             }]).exec();
 
-
-        let averageRating = await Reviews.aggregate([
-            { $group: { _id: data.companyId, averageRating: { $avg: "$overallRating" } } }]).exec();
+            let averageRating = await Reviews.aggregate([
+                { $match: { companyId: data.companyId} },
+                {
+                    $group: {
+                        _id: "$companyId",
+                        averageRating: { "$avg": "$overallRating" }
+                    }
+                }]).exec();
+        // let averageRating = await Reviews.aggregate([
+        //     { $group: { _id: data.companyId, averageRating: { $avg: "$overallRating" } } }]).exec();
 
 
         products._id = companyResults[0]._id;
@@ -94,9 +101,18 @@ module.exports.companySearch = async (req, res) => {
                 }
             }]).exec();
 
+    // let averageRating = await Reviews.aggregate([
+    //     { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(req.query.limit * 1).skip((req.query.page - 1) * req.query.limit).exec();
+    // console.log("Average Rating", averageRating)
+
     let averageRating = await Reviews.aggregate([
-        { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(req.query.limit * 1).skip((req.query.page - 1) * req.query.limit).exec();
-    console.log("Average Rating", averageRating)
+        { $match: { companyId: companyResults[0]._id} },
+        {
+            $group: {
+                _id: "$companyId",
+                averageRating: { "$avg": "$overallRating" }
+            }
+        }]).exec();
     
 
     if(averageRating === undefined || averageRating.length == 0){
@@ -132,10 +148,17 @@ module.exports.salarySearch = async (req, res) => {
 
             console.log("Company results", companyResults[0])
 
-    let averageRating = await Reviews.aggregate([
-        { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(req.query.limit * 1).exec();
+    // let averageRating = await Reviews.aggregate([
+    //     { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(req.query.limit * 1).exec();
     
-
+        let averageRating = await Reviews.aggregate([
+            { $match: { companyId: companyResults[0]._id} },
+            {
+                $group: {
+                    _id: "$companyId",
+                    averageRating: { "$avg": "$overallRating" }
+                }
+            }]).exec();
 
     console.log("Average Rating", averageRating)
 
@@ -194,9 +217,18 @@ module.exports.interviewSearch = async (req, res) => {
                 }
             }]).limit(req.query.limit * 1).skip((req.query.page - 1) * req.query.limit).exec();
 
+    // let averageRating = await Reviews.aggregate([
+    //     { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).exec();
+    // console.log("Average Rating", averageRating)
+
     let averageRating = await Reviews.aggregate([
-        { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).exec();
-    console.log("Average Rating", averageRating)
+        { $match: { companyId: companyResults[0]._id} },
+        {
+            $group: {
+                _id: "$companyId",
+                averageRating: { "$avg": "$overallRating" }
+            }
+        }]).exec();
 
     let datasets = await Promise.all(companyResults[0].interviews.map(async (data) => {
         let products = {};

@@ -40,8 +40,10 @@ module.exports = {
     GET_INTERVIEW_SEARCH: "/search/interviewsearch",
 
     //Student Jobs Home Page
-
+    JOBS_HOMEPAGE : "/jobshome",
     GET_JOBS_HOMEPAGE: "/jobshomepage",
+    GET_JOBS_LOCATION: "/jobslocation",
+    GET_JOBS_TYPE : "/jobstype",
 
 
 
