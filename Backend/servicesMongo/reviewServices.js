@@ -200,20 +200,23 @@ module.exports.getStudentReviews = (req, res) => {
     console.log("Inside Student Reviews GET service");
     console.log(req.query)
     let data = req.query
-    let reviews = Student.find({ _id: data.studentId }).select('companyReviews').populate('companyReviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
+    let reviews = Student.find({ _id: data.studentId })
+        .select('companyReviews')
+        .populate('companyReviews')
+        .limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
 
-        if (err) {
-            console.log(err);
-            //res.setHeader(CONTENT_TYPE, APP_JSON);
-            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
-        }
-        else {
-            // console.log(JSON.stringify(result));
-            //res.setHeader(CONTENT_TYPE, APP_JSON);
-            console.log("Reviews fetched Successfully")
-            res.status(RES_SUCCESS).send(result);
-        }
-    })
+            if (err) {
+                console.log(err);
+                //res.setHeader(CONTENT_TYPE, APP_JSON);
+                res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+            }
+            else {
+                // console.log(JSON.stringify(result));
+                //res.setHeader(CONTENT_TYPE, APP_JSON);
+                console.log("Reviews fetched Successfully")
+                res.status(RES_SUCCESS).send(result);
+            }
+        })
 }
 
 module.exports.getMostPositiveReview = async (req, res) => {

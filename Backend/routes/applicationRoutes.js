@@ -11,12 +11,14 @@ if (process.env.KAFKA_SWITCH === 'true') {
     applicationRouter.route(POST_APPLICATION).post(checkAuth, applicationKafkaServices.postApplication);
     applicationRouter.route(GET_APPLICATIONS_JOBID).get(checkAuth, applicationServices.getApplicationsByJobId);
     applicationRouter.route(PUT_APPLICATION).put(checkAuth, applicationKafkaServices.putApplications);
+    applicationRouter.route(GET_APPLICATIONS_STUDENTID).get(checkAuth, applicationKafkaServices.getApplicationsByStudentId);
 
 }
 else {
     applicationRouter.route(POST_APPLICATION).post(checkAuth, applicationServices.postApplication);
     applicationRouter.route(GET_APPLICATIONS_JOBID).get(checkAuth, applicationServices.getApplicationsByJobId);
     applicationRouter.route(PUT_APPLICATION).put(checkAuth, applicationServices.putApplications);
+    applicationRouter.route(GET_APPLICATIONS_STUDENTID).get(checkAuth, applicationServices.getApplicationsByStudentId);
 
 }
 
