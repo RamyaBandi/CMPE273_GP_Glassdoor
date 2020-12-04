@@ -17,6 +17,7 @@ class reviewCard extends Component {
       companyId: this.props.reviewitem.companyId,
       featuredId: this.props.reviewitem._id
     }
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios
       .put(`${routeConstants.BACKEND_URL}/company${routeConstants.PUT_FEATURED_REVIEWS}`, req)
       .then((res) => {
@@ -44,6 +45,7 @@ class reviewCard extends Component {
       reviewId: this.props.reviewitem._id,
       reply: this.state.reply
     }
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios
       .put(`${routeConstants.BACKEND_URL}/review${routeConstants.PUT_COMPANY_REPLY}`, req)
       .then((res) => {

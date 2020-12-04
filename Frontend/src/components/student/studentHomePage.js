@@ -57,7 +57,7 @@ class studentHomePage extends Component {
         console.log("Data", this.state.jobsData)
         const slice = this.state.jobsData.slice(this.state.offset, this.state.offset + this.state.perPage)
         const postData = slice.map((job, i) => <React.Fragment>
-            <div class="card" key={i} style={{ width: "60%", left: "25%", right: "25%", height: "200px" }}>
+            <div class="card tabs-card" key={i} style={{ width: "55%", left: "25%", right: "25%", height: "200px" }}>
                 <div class="card-body">
                     <div style={{ width: "100%" }}>
                         <div style={{ width: "60%", float: "left" }}>
@@ -191,6 +191,7 @@ class studentHomePage extends Component {
     // Initial function to get the jobs result from the backend
 
     async getJobSearchResults() {
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         await axios.get(BACKEND_URL + GET_STUDENTS_JOBS_HOMEPAGE,
         )
             .then(response => {
@@ -203,7 +204,7 @@ class studentHomePage extends Component {
                 }
             })
             .catch(error => {
-                console.log(error.response.data.msg)
+                console.log("Error")
             })
     }
 

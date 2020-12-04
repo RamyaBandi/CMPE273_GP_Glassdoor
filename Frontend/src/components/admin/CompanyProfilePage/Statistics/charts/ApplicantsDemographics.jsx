@@ -19,7 +19,7 @@ class ApplicantDemographics extends Component {
 
     }
     componentDidMount = async () => {
-       
+        Axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         await Axios.get(`${BACKEND_URL}${STATISTICS_ROUTE}${GET_STATISTICS_APPLICANT_DEMOGRAPHICS}`, {
             params: {
                 companyId: this.props.companyId

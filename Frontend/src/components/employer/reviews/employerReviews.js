@@ -20,8 +20,9 @@ class EmployerReview extends Component {
     }
 
     updatePageList() {
-        //let company_id = localStorage.getItem('mongoId')
-        let company_id="5fb4884acf339e3da0d5c31e"
+        let company_id = localStorage.getItem('mongoId')
+        //let company_id="5fb4884acf339e3da0d5c31e"
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(`${routeConstants.BACKEND_URL}${routeConstants.GET_COMPANY_REVIEWS}`,
             {
                 params: {
@@ -85,7 +86,7 @@ class EmployerReview extends Component {
         // console.log(this.state)
     };
     render() {
-         console.log(this.state.reviews.length)
+       //  console.log(this.state.reviews.length)
         let reviews = [];
         if (this.state.reviews && this.state.reviews.length > 0) {
             this.state.reviews.map((review) => {

@@ -145,9 +145,6 @@ module.exports.updateStudentResume = async (req, res) => {
     let filename = `studentresume_${Date.now()}.pdf`;
     let pathname = '/cmpe273images/'
     let userRequestObject = req.body;
-
-
-
     try {
 
         const storage = multer.diskStorage({
@@ -226,20 +223,13 @@ module.exports.getStudentResumes =async (req, res) => {
     console.log(req.query)
     try {
     let data = req.query
-    let studentDetails = await Resumes.find({studentId: data.studentId}).exec();
-    //let studentde=await Resumes.find({studentId: data.studentId}).exec();
+    let studentDetails = await Resumes.find({studentId: data.studentId}).exec();   
     const count = await Resumes.countDocuments({studentId: data.studentId });
-    //console.log("count" + count);
     console.log(studentDetails)
-    //console.log(studentde)
     res.status(RES_SUCCESS).send(studentDetails);
     }
     catch {
-        // if (err) {
-        //     console.log(err);
-        //     //res.setHeader(CONTENT_TYPE, APP_JSON);
-        //     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
-        // }
+     console.log("in catch block")
     }   
     
 }
@@ -301,8 +291,6 @@ module.exports.getRatingsCount =async (req, res) => {
     console.log(req.query)
     try {
     let data = req.query
-    
-
     const studentreviews = await Reviews.find({studentId: data.studentId }).exec();
     const count = await Reviews.countDocuments({studentId: data.studentId });
     console.log("count" + count);
@@ -312,11 +300,7 @@ module.exports.getRatingsCount =async (req, res) => {
     res.status(RES_SUCCESS).send(studentreviews);
     }
     catch {
-        // if (err) {
-        //     console.log(err);
-        //     //res.setHeader(CONTENT_TYPE, APP_JSON);
-        //     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
-        // }
+        console.log("in catch")
     }   
     
 }
@@ -328,19 +312,13 @@ module.exports.getPhotosUploaded =async (req, res) => {
     try {
     let data = req.query
     let PhotoDetails = await Photos.find({studentId: data.studentId}).exec();
-    //let studentde=await Resumes.find({studentId: data.studentId}).exec();
     const count = await Photos.countDocuments({studentId: data.studentId });
-    //console.log("count" + count);
     console.log(PhotoDetails)
-    //console.log(studentde)
+
     res.status(RES_SUCCESS).send(PhotoDetails);
     }
     catch {
-        // if (err) {
-        //     console.log(err);
-        //     //res.setHeader(CONTENT_TYPE, APP_JSON);
-        //     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
-        // }
+     console.log("in catch")
     }   
     
 }

@@ -40,6 +40,7 @@ module.exports.postStudentReview = (req, res) => {
 }
 
 module.exports.getCompanyReviews = (req, res) => {
+	console.log("in get company reviews")
 	// console.log("req.body"+JSON.stringify(req.query))
 	data = {
 		api: "GET_COMPANY_REVIEWS",
@@ -245,6 +246,27 @@ module.exports.getApprovedCompanyReviews = (req, res) => {
 	data = {
 		api: "GET_APPROVED_COMPANY_REVIEWS",
 		body: req.query
+	}
+	kafka.make_request('reviews', data, function (err, results) {
+		// console.log('in result');
+		// console.log(results);
+		if (err) {
+			// console.log("In error");
+			res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+		} else {
+			// console.log("In else");
+			res.status(RES_SUCCESS).send(JSON.stringify(results));
+		}
+
+	});
+}
+
+
+module.exports.postReplyFromCompany = (req, res) => {
+	// console.log("req.body"+JSON.stringify(req.query))
+	data = {
+		api: "PUT_COMPANY_REPLY",
+		body: req.body
 	}
 	kafka.make_request('reviews', data, function (err, results) {
 		// console.log('in result');

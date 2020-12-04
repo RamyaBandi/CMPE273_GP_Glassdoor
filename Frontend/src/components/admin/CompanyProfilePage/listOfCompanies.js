@@ -21,6 +21,7 @@ export default class ListOfCompanies extends Component {
     }
 
     findCompanies = () => {
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_BY_COMPANYNAME_SEARCH_ADMIN + '?companyName=')
             .then(response => {
                 console.log(response.data);

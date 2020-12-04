@@ -15,6 +15,7 @@ class TotalAcceptedReviews extends Component {
     // Top 5 students based on total accepted reviews made
 
     componentDidMount() {
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_TOP_STUDENTS_ON_RATING )
             .then(response => {
                 console.log("Status Code : ", response.status);
@@ -26,7 +27,7 @@ class TotalAcceptedReviews extends Component {
                 }
             })
             .catch(error => {
-                console.log(error.response.data.msg)
+                console.log("Error")
             })
     }
     render() {

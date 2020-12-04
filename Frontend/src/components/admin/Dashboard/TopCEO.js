@@ -15,6 +15,7 @@ class TopCeo extends Component {
     // Top 10 CEO’s based on rating.
 
     componentDidMount() {
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_TOP_CEO_RATING )
             .then(response => {
                 console.log("Status Code : ", response.status);
@@ -26,7 +27,7 @@ class TopCeo extends Component {
                 }
             })
             .catch(error => {
-                console.log(error.response.data.msg)
+                console.log("Error")
             })
     }
     render() {
@@ -52,7 +53,7 @@ class TopCeo extends Component {
                 colors : ['#0caa41'],
                 chartArea: { width: '70%', height: '80%' },
                 hAxis: {
-                    // title: 'CEO Rating',
+                    title: 'Ratings',
                     minValue: 0,
                 },
                 //   vAxis: {

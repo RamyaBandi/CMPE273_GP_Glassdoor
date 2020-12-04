@@ -61,6 +61,7 @@ class AdminReviews extends Component {
     }
 
     async getReviewsResults(){
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         await axios.get(BACKEND_URL + GET_ALL_REVIEWS, {
             params: {
                 page : this.state.page,

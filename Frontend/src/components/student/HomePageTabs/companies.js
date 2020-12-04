@@ -24,6 +24,10 @@ class CompaniesTab extends Component {
         // }
     }
     getCompanySearchResults() {
+        this.setState({
+            companyData : []
+        })
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_SEARCH_COMPANY, {
             params: {
                 searchParameter: this.props.location.state.detail,
@@ -42,7 +46,7 @@ class CompaniesTab extends Component {
                 }
             })
             .catch(error => {
-                console.log(error.response.data.msg)
+                console.log("Error")
             })
     }
 
@@ -56,10 +60,12 @@ class CompaniesTab extends Component {
     }
     render() {
         let company = this.state.companyData
+        console.log("Company", company)
         return (
-            <div class="body">
+            <div class="student-tabs-body">
                 <React.Fragment>
-                    <div class="card" style={{ width: "50%", left: "25%", right: "25%", height: "500px" }}>
+                {company &&
+                    <div class="card tabs-card" style={{ width: "50%", left: "25%", right: "25%", height: "500px" }}>
                         <img class="card-img-top" src={default_pic} alt="Card image cap" />
                         <div class="card-body">
                             <div style={{ width: "100%" }}>
@@ -89,6 +95,7 @@ class CompaniesTab extends Component {
                             </div>
                         </div>
                     </div>
+                                    }
                 </React.Fragment>
                 <ReactPaginate
                     previousLabel={"<<"}
