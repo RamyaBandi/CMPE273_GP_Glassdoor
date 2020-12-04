@@ -11,7 +11,7 @@ class Parent extends React.Component {
     images: [],
     newImages: {},
     limit: 10,
-    page:1,
+    page: 1,
     totalPages: 0,
     redirect: null,
     files: {
@@ -23,7 +23,7 @@ class Parent extends React.Component {
     // const studentId = '5fb48df63d242fa0842343f3';
     // const companyId = '5fb4aefe6b61ea46245d5621';
     const studentId = localStorage.getItem('mongoId');
-    const companyId=localStorage.getItem('companyId');
+    const companyId = localStorage.getItem('companyId');
     // axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     // axios.get(BACKEND_URL + GET_COMPANY_PHOTOS + '?companyId=' + companyId + '&studentId=' + studentId)
     //   .then(response => {
@@ -46,22 +46,30 @@ class Parent extends React.Component {
         console.log(error);
       }
       )
+    this.getResults()
   }
 
   handlePageClick = (e) => {
     this.setState({
-        page: e.selected + 1,
+      page: e.selected + 1,
     }, () => {
-        this.getResults()
+      this.getResults()
     });
     console.log("Page number", e.selected)
-}
+  }
 
-async getResults() {
-  const studentId = localStorage.getItem('mongoId');
-    const companyId=localStorage.getItem('companyId');
+  async getResults() {
+    const studentId = localStorage.getItem('mongoId');
+    const companyId = localStorage.getItem('companyId');
     axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
-    axios.get(BACKEND_URL + GET_COMPANY_PHOTOS + '?companyId=' + companyId + '&studentId=' + studentId)
+    axios.get(BACKEND_URL + GET_COMPANY_PHOTOS, {
+      params: {
+        companyId: companyId,
+        studentId: studentId,
+        page: this.state.page,
+        limit: this.state.limit
+      }
+    })
       .then(response => {
         console.log(response);
         this.setState({ images: response.data.formattedPhotos });
@@ -69,13 +77,13 @@ async getResults() {
       .catch((error) => {
         console.log(error);
       }
-     )
-}
+      )
+  }
 
-handleChange = (e) => {
-  let { value, id } = e.target;
-  this.setState({ [id]: value }, () => this.getResults());
-};
+  handleChange = (e) => {
+    let { value, id } = e.target;
+    this.setState({ [id]: value }, () => this.getResults());
+  };
 
   setnewImages = (images) => {
     this.setState({ newImages: images })
@@ -98,7 +106,7 @@ handleChange = (e) => {
       formData.append(i + 1, fileArray[i]);
     }
     axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
-    axios.post(BACKEND_URL + POST_COMPANY_PHOTOS + '?id=' + this.props.location.state+ '&studentId=' + localStorage.getItem('mongoId'), formData)
+    axios.post(BACKEND_URL + POST_COMPANY_PHOTOS + '?id=' + this.props.location.state + '&studentId=' + localStorage.getItem('mongoId'), formData)
       .then(response => {
         const studentId = localStorage.getItem('mongoId');
         const companyId = this.props.location.state;
@@ -129,7 +137,7 @@ handleChange = (e) => {
       });
     }
     console.log(allImages)
-    this.setState({  newImages: {} })
+    this.setState({ newImages: {} })
   }
 
   render = () => {
@@ -137,6 +145,18 @@ handleChange = (e) => {
     return (
       <div>
         <ImageGallery companyName={this.state.companyDetails.companyName} data={this.state.images} setnewImages={this.setnewImages} newImages={this.state.newImages} saveImages={this.saveImages} />
+        <ReactPaginate
+          previousLabel={"<<"}
+          nextLabel={">>"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={this.state.totalPages}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={this.handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"} />
       </div>
     )
   }
