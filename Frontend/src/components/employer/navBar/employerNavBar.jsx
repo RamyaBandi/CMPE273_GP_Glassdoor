@@ -46,11 +46,11 @@ class EmployerNavBar extends React.Component {
                                             <i className="fas fa-briefcase"> Jobs</i></Link>
                                         {/* <a className="nav-link navTab" href="#"></a> */}
                                     </li>
-                                    <li className="nav-item navWidth">
+                                    {/* <li className="nav-item navWidth">
                                         <Link to='/employer/candidates' className="nav-link navTab">
                                             <i className="far fa-building"> Candidates</i></Link>
-                                        {/* <a className="nav-link navTab" href="#"></a> */}
-                                    </li>
+                                        {/* <a className="nav-link navTab" href="#"></a> 
+                                    </li> */}
                                     <li className="nav-item navWidth">
                                         <Link to='/employer/analytics' className="nav-link navTab">
                                             <i className="far fa-comment-dots">Analytics</i></Link>

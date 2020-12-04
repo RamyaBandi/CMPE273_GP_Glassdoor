@@ -12,9 +12,9 @@ class EmployerHomePage extends Component {
                         <div className="sq zoom">
                             <h4 ><a href="/employer/jobs" className="Glasslink">Jobs</a></h4>
                         </div>
-                        <div className="sq zoom">
+                        {/* <div className="sq zoom">
                             <h4 >  <a href="/employer/candidates" className="Glasslink">Candidates</a></h4>
-                        </div>
+                        </div> */}
                         <div className="sq zoom">
                             <h4>  <a className="Glasslink" href="/company/profile">Employer Profile</a></h4>
                         </div>

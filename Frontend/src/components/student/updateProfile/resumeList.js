@@ -16,6 +16,7 @@ class ResumeList extends Component {
             studentId: this.props.resumeitem.studentId
             }
         }
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios
             .delete(`${routeConstants.BACKEND_URL}/student${routeConstants.DELETE_STUDENT_RESUME}`, req)
             .then((res) => {
@@ -58,6 +59,7 @@ class ResumeList extends Component {
             resumeId: this.props.resumeitem._id,
             studentId: this.props.resumeitem.studentId
         }
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios
             .put(`${routeConstants.BACKEND_URL}/student${routeConstants.PUT_PRIMARY_RESUME}`, req)
             .then((res) => {
@@ -85,10 +87,11 @@ class ResumeList extends Component {
             <div class="card-body">
               <h5 class="card-title">{resumedetails.uploadFileName}</h5>
         <p class="card-text">Date:{uploaddate}<br></br>Time:{uploadtime}</p>
-       
-        <button class="btn btn-success" onClick={this.handledownload}><i class="fa fa-download"></i> Download</button>
+       <Link to="/https://cmpe273glassdoor.s3.us-west-1.amazonaws.com/cmpe273images/studentresume/11.22toastmaster14%20%281%29.pdf" replace download>
+        <button class="btn btn-success"><i class="fa fa-download"></i> Download</button>
+        </Link>
     
-              <button href="#" class="btn btn-success" onClick={this.handledelete}>Delete</button>
+              <button href="" class="btn btn-success" onClick={this.handledelete}>Delete</button>
               <br></br>
               <br></br>
               <button href="#" class="btn btn-success" onClick={this.handleprimaryresume}>Make it primary resume!!</button>

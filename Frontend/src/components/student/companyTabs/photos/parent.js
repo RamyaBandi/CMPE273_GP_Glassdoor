@@ -59,8 +59,9 @@ class Parent extends React.Component {
 
 
   componentDidMount = () => {
-    const studentId = localStorage.getItem('mongoId');
-    const companyId = this.props.location.state;
+    const studentId = '5fb48df63d242fa0842343f3';
+    const companyId = '5fb4aefe6b61ea46245d5621';
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios.get(BACKEND_URL + GET_COMPANY_PHOTOS + '?companyId=' + companyId + '&studentId=' + studentId)
       .then(response => {
         console.log(response);
@@ -103,11 +104,13 @@ class Parent extends React.Component {
     for (var i = 0; i < fileArray.length; i++) {
       formData.append(i + 1, fileArray[i]);
     }
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios.post(BACKEND_URL + POST_COMPANY_PHOTOS + '?id=' + this.props.location.state+ '&studentId=' + localStorage.getItem('mongoId'), formData)
       .then(response => {
         const studentId = localStorage.getItem('mongoId');
         const companyId = this.props.location.state;
         console.log()
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_PHOTOS + '?companyId=' + companyId + '&studentId=' + studentId)
           .then(response => {
             console.log(response)

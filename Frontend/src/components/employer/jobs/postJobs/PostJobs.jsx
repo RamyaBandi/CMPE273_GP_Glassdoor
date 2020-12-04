@@ -36,6 +36,7 @@ class PostJobs extends Component {
             data.remote = false;
         }
         console.log(data);
+        Axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         Axios.post(`${routeConstants.BACKEND_URL}${routeConstants.JOB_ROUTE}${routeConstants.POST_COMPANY_JOB}`, data).then((res) => {
             console.log(res);
             window.alert("Job created Successfully")

@@ -34,6 +34,7 @@ export default class CompanyOverview extends Component {
         //const companyId = '5fb4aefe6b61ea46245d5621';
         const companyId = this.props.location.state.companyId;
         console.log("Fetched company Id", companyId)
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
             .then(response => {
                 this.setState({ companyDetails: response.data[0] });
@@ -46,7 +47,7 @@ export default class CompanyOverview extends Component {
                 console.log(error);
             }
             )
-
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_POSITIVE_REVIEW + "?companyId=" + companyId)
             .then((response) => {
                 //console.log("positive review");
@@ -56,7 +57,7 @@ export default class CompanyOverview extends Component {
             .catch((error) => {
                 console.log(error);
             });
-
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_NEGATIVE_REVIEW + "?companyId=" + companyId)
             .then((response) => {
                 //console.log("negative review");
@@ -66,7 +67,7 @@ export default class CompanyOverview extends Component {
             .catch((error) => {
                 console.log(error);
             });
-
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_REVIEW_AVERAGE + "?companyId=" + companyId)
             .then((response) => {
                 //console.log("review average");
@@ -119,6 +120,7 @@ export default class CompanyOverview extends Component {
 
     async getResults() {
         const companyId = '5fbd383a20ebc710c11cad02';
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + companyId, {
             params: {
                 page: this.state.page,

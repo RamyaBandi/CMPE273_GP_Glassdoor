@@ -1,5 +1,6 @@
 const { response } = require('express');
 const con = require('../config/mongoConnection');
+const ObjectId = require('mongoose').Types.ObjectId;
 const {
     CONTENT_TYPE,
     APP_JSON,
@@ -107,6 +108,38 @@ module.exports.getStudentSalaries = (req, res) => {
             //res.setHeader(CONTENT_TYPE, APP_JSON);
             console.log("Salaries fetched Successfully")
             res.status(RES_SUCCESS).send(result);
+        }
+    })
+}
+
+module.exports.getSalaryAverages = (req, res) => {
+
+    console.log("Inside Student Salaries GET service");
+    console.log(req.query)
+    let data = req.query
+    Salaries
+    .aggregate([
+        { $match: { companyId: new ObjectId(data.companyId)} },
+        { $group: { _id: "$jobTitle", 
+                    avg: { "$avg": "$baseSalary" },
+                    min: { "$min": "$baseSalary" } ,
+                    max: { "$max": "$baseSalary" } }}
+    ])
+    .exec((err, salaries) => {
+        if (err) {
+            console.log("Error fetching Salaries")
+            console.log(err);
+            //res.setHeader(CONTENT_TYPE, APP_JSON);
+            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
+        }
+        else {
+            // const salaryranges = {
+            //     _id: salaries.
+            // }
+            console.log("Salary averages calculated Successfully");
+            console.log(salaries);
+            res.status(RES_SUCCESS).end(JSON.stringify(salaries));
+
         }
     })
 }

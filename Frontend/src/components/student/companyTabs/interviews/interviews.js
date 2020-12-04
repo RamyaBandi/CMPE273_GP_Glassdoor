@@ -40,7 +40,7 @@ class Interviews extends Component {
     //   .catch((error) => {
     //     console.log(error);
     //   });
-
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios
       .get(BACKEND_URL + GET_COMPANY_DETAILS + "?companyId=" + company_id)
       .then((response) => {
@@ -53,6 +53,7 @@ class Interviews extends Component {
         console.log(error);
       });
 
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios
       .get(
         BACKEND_URL +
@@ -91,6 +92,7 @@ class Interviews extends Component {
 
   async getInterviewResults(){
     const company_id = this.props.location.state;
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     await axios.get(BACKEND_URL + GET_COMPANY_INTERVIEWS, {
         params: {
           companyId: company_id,
@@ -132,12 +134,7 @@ class Interviews extends Component {
               <div>
                 <Nav className="mr-auto">
                   <div className="box-content right">
-                    <Link
-                      to="/overview"
-                      style={{ textDecoration: "none", color: "#1861bf" }}
-                    >
-                      Overview
-                    </Link>
+                  <Link to={{ pathname: "/overview", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
                   </div>
                   <div class="box-content right">
                     <Link
@@ -184,12 +181,7 @@ class Interviews extends Component {
                     </Link>
                   </div>
                   <div class="box-content">
-                    <Link
-                      to="/photos"
-                      style={{ textDecoration: "none", color: "#1861bf" }}
-                    >
-                      Photos
-                    </Link>
+                  <Link to={{ pathname: "/photos", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
                   </div>
                 </Nav>
               </div>

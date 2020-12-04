@@ -35,6 +35,7 @@ export default class JobApplication extends Component {
         console.log('In componentDidMount in application');
         const jobId = this.props.location.state;
         console.log(jobId);
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         await axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOB_BY_JOBID + '?jobId=' + jobId)
             .then(response => {
                 this.setState({ jobDetails: response.data.jobs[0] });
@@ -45,6 +46,7 @@ export default class JobApplication extends Component {
             }
             )
         const companyId = this.state.jobDetails.companyId;
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
             .then(response => {
                 this.setState({ companyDetails: response.data[0] });
@@ -101,12 +103,15 @@ export default class JobApplication extends Component {
             .then(response => {
                 //redirect
                 window.alert('Applied successfully');
+                this.props.history.push('/student/applications')
             })
             .catch((error) => {
                 console.log(error.response.data);
                 window.alert(error.response.data);
             }
-        )
+            )
+
+
     }
     increaseResumeProgressPercentage = async () => {
         for (let i = 1; i <= 100; i++) {

@@ -14,6 +14,7 @@ class adminAnalytics extends Component {
 
     componentDidMount() {
         console.log("backend url for reviews", BACKEND_URL + GET_REVIEWS_PER_DAY)
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_REVIEWS_PER_DAY)
             .then(response => {
                 console.log("Status Code : ", response.status);
@@ -25,7 +26,7 @@ class adminAnalytics extends Component {
                 }
             })
             .catch(error => {
-                console.log(error.response.data.msg)
+                console.log("Error")
             })
     }
     render() {

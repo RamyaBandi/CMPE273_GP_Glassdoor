@@ -7,8 +7,9 @@ import Axios from "axios";
 export default class SalaryCard extends Component {
   
   render = () => {
-    const avgsalary = this.props.baseSalary + 3.4*this.props.bonuses;
-    console.log(this.props.salaries);
+    //const avgsalary = this.props.baseSalary + 3.4*this.props.bonuses;
+    console.log(this.props);
+    const avgpay = (this.props.avg).toFixed(2);
     return (
       <div>
         <Container
@@ -18,18 +19,18 @@ export default class SalaryCard extends Component {
           <Col>
             <Row>
               <p style={{ color: "#3f76cc", fontSize: "22px" }}>
-                <b>"{this.props.jobTitle}"</b>
+                <b>"{this.props._id}"</b>
               </p>
             </Row>
             <Row>
               <Col md="4">
-                <p>Avg. Total Pay: ${avgsalary}/yr</p>
+                <p>Avg. Total Pay: ${avgpay}/yr</p>
               </Col>
               <Col md="4">
-                <p>Base Pay: ${this.props.baseSalary}/yr</p>
+                <p>Minimum Pay: ${this.props.min}/yr</p>
               </Col>
               <Col md="4">
-                <p>Additional Pay: ${this.props.bonuses}/yr</p>
+                <p>Maximum Pay: ${this.props.max}/yr</p>
               </Col>
             </Row>
           </Col>

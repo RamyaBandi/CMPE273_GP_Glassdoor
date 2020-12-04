@@ -22,7 +22,8 @@ class StudentGallery extends Component {
         //console.log(localStorage.getItem('mongoId'))
         let student_id=localStorage.getItem('mongoId')
         //let student_id="5fb48df63d242fa0842343f3"
-        axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
+        // axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(`${routeConstants.BACKEND_URL}/student${routeConstants.GET_PHOTOS_UPLOADED}`,
         {
             params: {
@@ -63,7 +64,7 @@ class StudentGallery extends Component {
         return (
 <div class="row">
 <div class="col-3">
-<nav class ="navbar bg-dark">
+<nav class ="navbar bg-light">
 <ul class ="nav navbar-nav">
 <li class ="nav-item">
 <a class ="nav-link" href="/student/profile">My Details</a>

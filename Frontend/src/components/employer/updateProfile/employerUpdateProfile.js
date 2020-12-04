@@ -38,7 +38,8 @@ class employerUpdateProfile extends Component {
         //console.log(this.props)
         //console.log(localStorage.getItem('mongoId'))
         let company_id=localStorage.getItem('mongoId')
-        axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
+        // axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(`${routeConstants.BACKEND_URL}/company${routeConstants.GET_COMPANY_SIGNUP}`,
         {
             params: {
@@ -92,7 +93,8 @@ class employerUpdateProfile extends Component {
                 companyId: localStorage.getItem('mongoId')
             };
             console.log(req)
-            axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
+            // axios.defaults.headers.common['Authorization'] = this.props.jwtToken;
+            axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     
             axios
                 .put(`${routeConstants.BACKEND_URL}/company${routeConstants.PUT_COMPANY_SIGNUP}`, req)
@@ -117,6 +119,7 @@ class employerUpdateProfile extends Component {
             formData.append('file', this.state.selectedFile);
             formData.append('companyId', this.state._id)
             console.log(formData)
+            axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
             axios
                 .post(
                     `${routeConstants.BACKEND_URL}/image${routeConstants.POST_IMAGE_USER_PROFILE}`,

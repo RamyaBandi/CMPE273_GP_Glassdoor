@@ -43,9 +43,9 @@ async function handle_request(msg, callback) {
                                 companyName: 1,
                                 headquarters: 1,
                                 website: 1,
-                                NumberOfReviews: { $size: "$reviews" },
-                                // salaryReviews:  { $size: "$salaries" },
-                                // interviewReviews: { $size: "$interviews" }
+                                NumberOfReviews: { $size: { "$ifNull": ["$reviews", []] } },
+                                salaryReviews: { $size: { "$ifNull": ["$salaries", []] } },
+                                interviewReviews: { $size: { "$ifNull": ["$interviews", []] } }
                             }
                         }]).exec();
 
@@ -81,19 +81,19 @@ async function handle_request(msg, callback) {
         case "GET_COMPANY_SEARCH": {
 
             let companyResults = await
-            Company.aggregate([
-                { $match: { companyName: msg.body.searchParameter } },
-                {
-                    $project: {
-                        _id: 1,
-                        companyName: 1,
-                        headquarters: 1,
-                        website: 1,
-                        NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
-                        salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
-                        interviewReviews: "$interviews" ? { $size: "$interviews" } : null
-                    }
-                }]).exec();
+                Company.aggregate([
+                    { $match: { companyName: msg.body.searchParameter } },
+                    {
+                        $project: {
+                            _id: 1,
+                            companyName: 1,
+                            headquarters: 1,
+                            website: 1,
+                            NumberOfReviews: { $size: { "$ifNull": ["$reviews", []] } },
+                            salaryReviews: { $size: { "$ifNull": ["$salaries", []] } },
+                            interviewReviews: { $size: { "$ifNull": ["$interviews", []] } }
+                        }
+                    }]).exec();
 
             let averageRating = await Reviews.aggregate([
                 { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(msg.body.limit * 1).skip((msg.body.page - 1) * msg.body.limit).exec();
@@ -108,20 +108,20 @@ async function handle_request(msg, callback) {
 
         case "GET_SALARY_SEARCH": {
             let companyResults = await
-            Company.aggregate([
-                { $match: { companyName: msg.body.searchParameter } },
-                {
-                    $project: {
-                        _id: 1,
-                        companyName: 1,
-                        headquarters: 1,
-                        website: 1,
-                        salaries: 1,
-                        NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
-                        salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
-                        interviewReviews: "$interviews" ? { $size: "$interviews" } : null
-                    }
-                }]).exec();
+                Company.aggregate([
+                    { $match: { companyName: msg.body.searchParameter } },
+                    {
+                        $project: {
+                            _id: 1,
+                            companyName: 1,
+                            headquarters: 1,
+                            website: 1,
+                            salaries: 1,
+                            NumberOfReviews: { $size: { "$ifNull": ["$reviews", []] } },
+                            salaryReviews: { $size: { "$ifNull": ["$salaries", []] } },
+                            interviewReviews: { $size: { "$ifNull": ["$interviews", []] } }
+                        }
+                    }]).exec();
 
             let averageRating = await Reviews.aggregate([
                 { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(msg.body.limit * 1).skip((msg.body.page - 1) * msg.body.limit).exec();
@@ -131,45 +131,46 @@ async function handle_request(msg, callback) {
                 let products = {};
 
                 let last = await Salaries.find({ _id: data }, { jobTitle: 1, baseSalary: 1 })
+                if (typeof last[0] !== "undefined") {
+                    products._id = companyResults[0]._id;
+                    products.companyName = companyResults[0].companyName
+                    products.headquarters = companyResults[0].headquarters
+                    products.website = companyResults[0].website
+                    products.NumberOfReviews = companyResults[0].NumberOfReviews
+                    products.salaryReviews = companyResults[0].salaryReviews
+                    products.interviewReviews = companyResults[0].interviewReviews
+                    products.averageRating = Math.round(averageRating[0].averageRating * Math.pow(10, 2)) / Math.pow(10, 2);
+                    products.jobTitle = last[0].jobTitle;
+                    products.baseSalary = last[0].baseSalary;
 
-                products._id = companyResults[0]._id;
-                products.companyName = companyResults[0].companyName
-                products.headquarters = companyResults[0].headquarters
-                products.website = companyResults[0].website
-                products.NumberOfReviews = companyResults[0].NumberOfReviews
-                products.salaryReviews = companyResults[0].salaryReviews
-                products.interviewReviews = companyResults[0].interviewReviews
-                products.averageRating = Math.round(averageRating[0].averageRating * Math.pow(10, 2)) / Math.pow(10, 2);
-                products.jobTitle = last[0].jobTitle;
-                products.baseSalary = last[0].baseSalary;
 
-
-                return products;
+                    return products;
+                }
             }));
 
             console.log("Outside salaries", datasets)
 
 
             // res.status(RES_SUCCESS).end(JSON.stringify(datasets));
-            callback(null,datasets)
+            callback(null, datasets)
         }
 
         case "GET_INTERVIEW_SEARCH": {
             let companyResults = await
-            Company.aggregate([
-                { $match: { companyName: msg.body.searchParameter } },
-                {
-                    $project: {
-                        _id: 1,
-                        companyName: 1,
-                        headquarters: 1,
-                        website: 1,
-                        interviews: 1,
-                        NumberOfReviews: "$reviews" ? { $size: "$reviews" } : null,
-                        salaryReviews: "$salaries" ? { $size: "$salaries" } : null,
-                        interviewReviews: "$interviews" ? { $size: "$interviews" } : null
-                    }
-                }]).exec();
+                Company.aggregate([
+                    { $match: { companyName: msg.body.searchParameter } },
+                    {
+                        $project: {
+                            _id: 1,
+                            companyName: 1,
+                            headquarters: 1,
+                            website: 1,
+                            interviews: 1,
+                            NumberOfReviews: { $size: { "$ifNull": ["$reviews", []] } },
+                            salaryReviews: { $size: { "$ifNull": ["$salaries", []] } },
+                            interviewReviews: { $size: { "$ifNull": ["$interviews", []] } }
+                        }
+                    }]).exec();
 
             let averageRating = await Reviews.aggregate([
                 { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(msg.body.limit * 1).skip((msg.body.page - 1) * msg.body.limit).exec();
@@ -180,23 +181,27 @@ async function handle_request(msg, callback) {
 
                 let last = await Interviews.find({ _id: data }, { jobTitle: 1, description: 1 })
                 console.log("Last", last)
+                if (typeof last[0] !== "undefined") {
+                    products._id = companyResults[0]._id;
+                    products.companyName = companyResults[0].companyName
+                    products.headquarters = companyResults[0].headquarters
+                    products.website = companyResults[0].website
+                    products.NumberOfReviews = companyResults[0].NumberOfReviews
+                    products.salaryReviews = companyResults[0].salaryReviews
+                    products.interviewReviews = companyResults[0].interviewReviews
+                    products.averageRating = Math.round(averageRating[0].averageRating * Math.pow(10, 2)) / Math.pow(10, 2);
+                    products.jobTitle = last[0].jobTitle;
+                    products.description = last[0].description;
 
-                products._id = companyResults[0]._id;
-                products.companyName = companyResults[0].companyName
-                products.headquarters = companyResults[0].headquarters
-                products.website = companyResults[0].website
-                products.NumberOfReviews = companyResults[0].NumberOfReviews
-                products.salaryReviews = companyResults[0].salaryReviews
-                products.interviewReviews = companyResults[0].interviewReviews
-                products.averageRating = Math.round(averageRating[0].averageRating * Math.pow(10, 2)) / Math.pow(10, 2);
-                products.jobTitle = last[0].jobTitle;
-                products.description = last[0].description;
 
-
-                return products;
+                    return products;
+                }
             }));
 
             console.log("Outside salaries", datasets)
+            datasets = await datasets.filter(company => {
+                return company
+            })
 
 
             // res.status(RES_SUCCESS).end(JSON.stringify(datasets));
