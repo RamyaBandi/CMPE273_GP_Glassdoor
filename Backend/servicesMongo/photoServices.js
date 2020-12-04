@@ -198,7 +198,7 @@ module.exports.putPhotoApprove = (req, res) => {
     console.log("Inside Approve Photo PUT service");
     console.log("req body" + JSON.stringify(req.body));
     let data = req.body
-    Photos.findByIdAndUpdate(data.photoId, { approvalstatus: "Approved" }, (err, result) => {
+    Photos.findByIdAndUpdate(data.photoId, { approvalStatus: "Approved" }, (err, result) => {
         if (err) {
             console.log("Error updating photo" + err)
             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
@@ -214,7 +214,7 @@ module.exports.putPhotoReject = (req, res) => {
     console.log("Inside Reject Photo PUT service");
     console.log("req body" + JSON.stringify(req.body));
     let data = req.body
-    Photos.findByIdAndUpdate(data.photoId, { approvalstatus: "Rejected" }, (err, result) => {
+    Photos.findByIdAndUpdate(data.photoId, { approvalStatus: "Rejected" }, (err, result) => {
         if (err) {
             console.log("Error updating photo" + err)
             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
