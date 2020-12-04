@@ -28,6 +28,7 @@ class AdminReviews extends Component {
       cart2:         {},
       page : 1,
       limit : 10,
+      totalPages : 0,
       redirect: null,
     };
     this.handlePageClick = this.handlePageClick.bind(this)

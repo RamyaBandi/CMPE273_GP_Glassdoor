@@ -445,23 +445,41 @@ module.exports.getApprovedCompanyReviews = async (req, res) => {
     try {
         //data.page = 1;
         //data.limit = 10;
-        const reviews = await Reviews.find({
-            $or:
-                [{ companyId: new ObjectId(data.companyId), approvalstatus: 'Approved' },
-                { studentId: new ObjectId(data.studentId), approvalstatus: 'Under Review' }]
-        }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
-    
-    
+        // const reviews = await Reviews.find({
+        //     $or:
+        //         [{ companyId: new ObjectId(data.companyId), approvalstatus: 'Approved' },
+        //         { studentId: new ObjectId(data.studentId), approvalstatus: 'Under Review' }]
+        // }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+        
+        const allreviews = await Reviews.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();   
         const count = await Reviews.countDocuments({ companyId: data.companyId });
-        //console.log("count" + count);
-        //console.log(reviews)
+        let reviews=[]
+        for(let i of allreviews){
+            if(i.approvalStatus==="Rejected"){
+                continue;
+            }
+            else if (i.approvalStatus==="Under Review"){
+                
+                if (i.studentId.toString()===data.studentId){
+                    reviews.push(
+                        i
+                    )
+                    
+                }
+            }else{
+                reviews.push(
+                    i
+                )
+                
+            }
+        }
         const result = ({
             reviews,
             totalPages: Math.ceil(count / data.limit),
             currentPage: data.page
         });
     
-        console.log("Reviews fetched Successfully from DB - page not 1 or redis off")
+        console.log("Reviews fetched Successfully ")
         res.status(RES_SUCCESS).send(result);
     }
     catch {
