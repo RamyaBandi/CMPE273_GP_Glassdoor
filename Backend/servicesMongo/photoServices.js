@@ -122,41 +122,42 @@ module.exports.postCompanyPhotos = async (req, res) => {
 module.exports.getCompanyPhotos = async (req, res) => {
     
     const studentId=req.query.studentId;
-    console.log(studentId)
+    console.log(req.query)
     let data = req.query;
     try {
         // data.page = 1;
         // data.limit = 20;
-        const photos = await Photos.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+        const photos = await Photos.find({ companyId: data.companyId ,approvalStatus:{$in:['Approved','Under Review']}})
+        .limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
         const count = await Photos.countDocuments({ companyId: data.companyId });
-        let formattedPhotos=[]
-        for(let i of photos){
-            if(i.approvalStatus==="Rejected"){
-                continue;
-            }
-            else if (i.approvalStatus==="Under Review"){
+        // let formattedPhotos=[]
+        // for(let i of photos){
+        //     if(i.approvalStatus==="Rejected"){
+        //         continue;
+        //     }
+        //     else if (i.approvalStatus==="Under Review"){
                 
-                if (i.studentId.toString()===studentId){
-                    //console.log("***********")
-                    formattedPhotos.push({
-                        id:formattedPhotos.length,
-                        image:i.photoURL,
-                        name:i._id,
-                        approvalStatus:i.approvalStatus
-                    })
-                }
-            }else{
-                formattedPhotos.push({
-                    id:formattedPhotos.length,
-                    image:i.photoURL,
-                    name:i._id,
-                    approvalStatus:i.approvalStatus
-                })
-            }
-        }
+        //         if (i.studentId.toString()===studentId){
+        //             //console.log("***********")
+        //             formattedPhotos.push({
+        //                 id:formattedPhotos.length,
+        //                 image:i.photoURL,
+        //                 name:i._id,
+        //                 approvalStatus:i.approvalStatus
+        //             })
+        //         }
+        //     }else{
+        //         formattedPhotos.push({
+        //             id:formattedPhotos.length,
+        //             image:i.photoURL,
+        //             name:i._id,
+        //             approvalStatus:i.approvalStatus
+        //         })
+        //     }
+        // }
         const result = ({
-            formattedPhotos,
-            totalPages: Math.ceil(count / data.limit),
+            formattedPhotos:photos,
+            totalPages: Math.ceil(photos.length / data.limit),
             currentPage: data.page
         });
         console.log("Company photos fetched successfully from DB");
