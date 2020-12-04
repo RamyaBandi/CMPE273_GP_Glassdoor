@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const crop = {
     unit: '%',
-    aspect: 4 / 3,
+    aspect: 4 / 4,
     width: '100'
 };
 

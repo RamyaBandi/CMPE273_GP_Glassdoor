@@ -12,6 +12,7 @@ class JobsTab extends Component {
         super();
         this.state = {
             jobsData: [],
+            isLoading : true,
             page : 1,
             limit : 10
         }
@@ -37,7 +38,8 @@ class JobsTab extends Component {
 
     async getJobSearchResults(){
         this.setState({
-            jobsData : []
+            jobsData : [],
+            isLoading : false
         })
         axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         await axios.get(BACKEND_URL + GET_SEARCH_JOBS, {
@@ -66,7 +68,7 @@ class JobsTab extends Component {
         return (
             <div class="student-tabs-body">
 
-                {this.state.jobsData.map((job, i) => {
+                {this.state.isLoading ? <h6 style={{textAlign: "center" ,color:"#0caa41"}}> Loading......</h6> : this.state.jobsData.map((job, i) => {
                     return <React.Fragment>
                         <div class="card tabs-card" key={i} style={{ width: "50%", left: "25%", right: "25%", height: "350px" }}>
                             <div class="card-body">

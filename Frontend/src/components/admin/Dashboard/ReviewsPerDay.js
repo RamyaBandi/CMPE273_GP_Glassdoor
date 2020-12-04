@@ -9,6 +9,7 @@ class adminAnalytics extends Component {
         super()
         this.state = {
             reviewsPerDay: [],
+            isLoading : true
         }
     }
 
@@ -21,7 +22,8 @@ class adminAnalytics extends Component {
                 if (response.status === 200) {
                     console.log("Number of reviews per day", response.data)
                     this.setState({
-                        reviewsPerDay: response.data
+                        reviewsPerDay: response.data,
+                        isLoading : false
                     })
                 }
             })
@@ -38,7 +40,7 @@ class adminAnalytics extends Component {
         return (
             <div>
             <h6 class = "chartHeading">Number of reviews per day</h6>
-            <Chart
+            {this.state.isLoading ? <h6 style={{textAlign: "center" ,color:"#0caa41"}}> Loading......</h6> :<Chart
             // width={400}
             // height={250}
             chartType="ColumnChart"
@@ -62,7 +64,7 @@ class adminAnalytics extends Component {
               },
             }}
             legendToggle
-          />
+          /> }
             </div>
 
         )

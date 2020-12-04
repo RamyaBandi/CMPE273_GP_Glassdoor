@@ -107,7 +107,7 @@ class resumeUpdate extends Component {
         return ( 
 <div class="row">
 <div class="col-3">
-<nav class ="navbar bg-dark">
+<nav class ="navbar bg-light">
 <ul class ="nav navbar-nav">
 <li class ="nav-item">
 <a class ="nav-link" href="/student/profile">My Details</a>

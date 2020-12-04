@@ -91,6 +91,7 @@ class StudentNavBar extends React.Component {
                                 </td>
                                 <td style={{ width: "75%" }} >
                                     <form class="form-inline">
+
                                         <input class="inputSearch" style={{ width: "30%", marginLeft: "15px" }} name="searchParameter" onChange={this.handleChange} type="search" placeholder="Search" aria-label="Search" />
                                         <select class="inputSearch" value={this.state.selectedOption} style={{ width: "10%", marginLeft: "15px" }} onChange={this.handleCategoryChange} id="cars">
                                             <option name="jobs" value="jobs">Jobs</option>
@@ -105,7 +106,6 @@ class StudentNavBar extends React.Component {
                                 <td  >
                                     <button type="button" class="btn btn-success" onClick={this.handleLogout} title="Log Out">Logout</button>
 
-
                                 </td>
                             </tr>
                         </table>
@@ -118,34 +118,34 @@ class StudentNavBar extends React.Component {
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav navbar2">
                                 <li class="nav-item navWidth">
-                                    <Link to={{
-                                        pathname: '/jobstab',
-                                        search: '?query=abc',
-                                        state: { detail: "" }
-                                    }}
-                                        class="nav-link navTab">
+
+                                    <Link to= "/studenthomepage"
+                                    class="nav-link navTab">
+
                                         <i class="fas fa-briefcase"> Jobs</i></Link>
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
                                 <li class="nav-item navWidth">
-                                    <Link to='/companiestab'
+
+                                    <Link to="/studenthomepage" 
+
                                         class="nav-link navTab">
                                         <i class="far fa-building"> Companies</i></Link>
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
                                 <li class="nav-item navWidth">
-                                    <Link to='/interviewstab' class="nav-link navTab">
+                                    <Link to="/studenthomepage" class="nav-link navTab">
                                         <i class="far fa-comment-dots">Interviews</i></Link>
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
                                 <li class="nav-item navWidth">
-                                    <Link to='/salariestab' class="nav-link navTab">
+                                    <Link to="/studenthomepage" class="nav-link navTab">
                                         <i class="fas fa-money-check-alt">Salaries</i></Link>
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
                                 <li class="nav-item navWidth">
                                     <Link to='/student/profile' class="nav-link navTab">
-                                        <i class="fas fa-money-check-alt">Profile</i></Link>
+                                        <i class="fas fa-user">Profile</i></Link>
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
                             </ul>

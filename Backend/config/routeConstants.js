@@ -7,6 +7,12 @@ module.exports = {
     POST_REGISTER: '/register',
     FETCH_CUSTOMERINPUT: '/validationinput',
 
+    // Student Home Page Tabs Routes
+    STUDENT_TABS_ROUTE : '/studenttab',
+    GET_COMPANY_HOMETAB : '/companytab',
+    GET_SALARY_HOMETAB : '/salarytab',
+    GET_INTERVIEW_HOMETAB : '/interviewtab',
+
     //Student Routes
     STUDENT_ROUTE: "/student",
     POST_STUDENT_SIGNUP: "/student/profile",

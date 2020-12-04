@@ -62,7 +62,7 @@ class loggedInNav extends React.Component {
                                 </td>
                                 <td style={{ width: "10%", marginLeft: "0%" }} >
 
-                                    <button className="fas fa-user-circle" id="logOut" style={{ color: "grey" }} onClick={this.handleLogout} title="Log Out"></button>
+                                    <button className="fas fa-user-circle" id="logOut" style={{ color: "grey" }} onClick={this.handleLogout} title="Log Out"><p style={{fontSize: "15px"}}>Log Out</p></button>
                                 </td>
                             </tr>
                         </table>
@@ -86,12 +86,12 @@ class loggedInNav extends React.Component {
                                 </li>
                                 <li class="nav-item navWidth">
                                     <Link to='/adminreviews' class="nav-link navTab">
-                                        <i class="far fa-comment-dots">Reviews</i></Link>
+                                        <i class="far fa-address-card">Reviews</i></Link>
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
                                 <li class="nav-item navWidth">
                                     <Link to='/adminphotos' class="nav-link navTab">
-                                        <i class="far fa-comment-dots">Photos</i></Link>
+                                        <i class="far fa-id-badge">Photos</i></Link>
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
                             </ul>

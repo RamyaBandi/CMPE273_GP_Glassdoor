@@ -67,7 +67,8 @@ class ApplicationCard extends Component {
 
                             </select>
                         </div>
-                        <p className="card-text">Resume : {data.resume}</p>
+                        <p className="card-text">Resume :        <a target="_blank" href={data.resumeUrl} replace download> Download</a>
+</p>
 
                         <button className="btn btn-success" onClick={this.handleClick}>Update Status</button>
                     </div>

@@ -28,6 +28,7 @@ class AdminReviews extends Component {
       cart2:         {},
       page : 1,
       limit : 10,
+      totalPages : 0,
       redirect: null,
     };
     this.handlePageClick = this.handlePageClick.bind(this)
@@ -134,9 +135,10 @@ class AdminReviews extends Component {
                     .then(response => {
                         console.log("Review approved successfully");
                         window.location.reload();
-                        window.alert("Approved!"); 
+                        //window.alert("Approved!"); 
                     }) 
         }
+        window.alert("Approved!");  
         //window.location.reload();
         // this.setState({cart: {}, cart2: {}});
                      
@@ -151,9 +153,10 @@ class AdminReviews extends Component {
                     .then(response => {
                         console.log("Review rejected successfully");
                         window.location.reload();
-                        window.alert("Rejected!");     
+                        //window.alert("Rejected!");     
                     })  
-        }  
+        }
+        window.alert("Rejected!");   
                   
       };
 

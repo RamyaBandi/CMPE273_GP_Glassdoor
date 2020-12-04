@@ -9,6 +9,7 @@ class topReviewedCompanies extends Component {
         super()
         this.state = {
             topReviewedCompanies: [],
+            isLoading : true
         }
     }
 
@@ -21,7 +22,8 @@ class topReviewedCompanies extends Component {
                 if (response.status === 200) {
                     console.log("Top 5 most reviewed company", response.data)
                     this.setState({
-                        topReviewedCompanies: response.data
+                        topReviewedCompanies: response.data,
+                        isLoading : false
                     })
                 }
             })
@@ -38,7 +40,7 @@ class topReviewedCompanies extends Component {
         return (
             <div>
             <h6 class = "chartHeading">Top 5 most reviewed company</h6>
-            <Chart
+            {this.state.isLoading ? <h6 style={{textAlign: "center" ,color:"#0caa41"}}> Loading......</h6> :<Chart
             // width={300}
             // height={400}
             chartType="BarChart"
@@ -62,7 +64,7 @@ class topReviewedCompanies extends Component {
             //   },
             }}
             legendToggle
-          />
+          />}
             </div>
 
         )
