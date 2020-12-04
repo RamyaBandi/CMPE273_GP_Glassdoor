@@ -18,6 +18,7 @@ export default class CompanyOverview extends Component {
             reviews: [],
             limit: 10,
             page: 1,
+            totalPages: 0,
             positiveReviews: {},
             negativeReviews: {},
             redirect: null
@@ -32,7 +33,10 @@ export default class CompanyOverview extends Component {
 
     componentDidMount() {
         //const companyId = '5fb4aefe6b61ea46245d5621';
-        const companyId = this.props.location.state.companyId;
+        // let companyId = this.props.location.state.companyId;
+        // localStorage.setItem('companyId',companyId)
+         const companyId=localStorage.getItem('companyId')
+
         console.log("Fetched company Id", companyId)
         axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
@@ -119,7 +123,7 @@ export default class CompanyOverview extends Component {
     }
 
     async getResults() {
-        const companyId = '5fbd383a20ebc710c11cad02';
+        const companyId = localStorage.getItem('companyId');
         axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_REVIEWS + "?companyId=" + companyId, {
             params: {
@@ -130,7 +134,7 @@ export default class CompanyOverview extends Component {
             .then((response) => {
                 console.log(response.data);
                 console.log(response.data.reviews);
-                this.setState({ reviews: response.data.reviews });
+                this.setState({ reviews: response.data.reviews, totalPages: response.data.totalPages });
             })
             .catch((error) => {
                 console.log(error);
@@ -144,7 +148,9 @@ export default class CompanyOverview extends Component {
     };
 
     render = () => {
-        const companyId = this.state.companyDetails._id;
+        // const companyId = this.state.companyDetails._id;
+        const companyId=localStorage.getItem('companyId')
+
         console.log(this.state.companyDetails);
         return (
             <div style={{ backgroundColor: "#eaeaea" }}>
@@ -257,8 +263,21 @@ export default class CompanyOverview extends Component {
                 </Container>
                 <Container style={{ marginTop: "20px", width: "70%", backgroundColor: "white" }} className="block-example border">
                     <Row style={{ height: "50px", marginTop: "20px" }}>
-                        <Col>
+                        <Col style={{display:"flex" , justifyContent:"space-between"}}>
                             <h5>Company Reviews</h5>
+                            <div className="input-group"
+                        style={{ width: "200px", justifyContent: "space-around" }}
+                    >
+                        <div className="input-group-prepend">
+                            <label  >Page Limit </label>
+                        </div>
+                        <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
                         </Col>
                     </Row>
                     <Container className="block-example border" style={{ marginTop: "20px", width: "80%",padding:"20px" }}>
@@ -469,27 +488,13 @@ export default class CompanyOverview extends Component {
                         nextLabel={">>"}
                         breakLabel={"..."}
                         breakClassName={"break-me"}
-                        pageCount={this.state.pageCount}
+                        pageCount={this.state.totalPages}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={5}
                         onPageChange={this.handlePageClick}
                         containerClassName={"pagination"}
                         subContainerClassName={"pages pagination"}
                         activeClassName={"active"} />
-
-                    <div className="input-group"
-                        style={{ width: "200px", justifyContent: "space-around" }}
-                    >
-                        <div className="input-group-prepend">
-                            <label  >Page Limit </label>
-                        </div>
-                        <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
                 </Container>
             </div>
         )

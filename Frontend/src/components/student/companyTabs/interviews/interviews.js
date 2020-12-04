@@ -31,7 +31,7 @@ class Interviews extends Component {
   componentDidMount() {
     //const company_id = "5fb4884acf339e3da0d5c31e";
     this.getInterviewResults();
-    const company_id = this.props.location.state;
+    const company_id = localStorage.getItem('companyId');
     console.log(company_id);
     // axios
     //   .get(BACKEND_URL + GET_COMPANY_INTERVIEWS + "?companyId=" + company_id)

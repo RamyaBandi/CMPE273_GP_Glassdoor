@@ -64,18 +64,19 @@ class studentHomePage extends Component {
             <div class="card tabs-card" key={i} style={{ width: "55%", left: "25%", right: "25%", height: "200px" }}>
                 <div class="card-body">
                     <div style={{ width: "100%" }}>
-                        <div style={{ width: "100%", float: "left" }}>
-                            <div style={{ width: "100%"}}>
-                                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                    <Link to={{
-                                        pathname: "/overview",
-                                        search: '?query=abc',
-                                        state: { companyId: job._id }
-                                    }}
-                                        class="companyName"><b>{job.companyName}</b></Link>
-                                    <p class="companyRating">{job.averageRating}<i class="fas fa-star"></i></p>
-                                    <p class="companyName"> <b>Job Type: </b>{job.industry}</p>
-                                </div>
+
+                        <div style={{ width: "60%", float: "left" }}>
+                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                <Link to={{
+                                    pathname: "/overview",
+                                    search: '?query=abc',
+                                    state: { companyId: job._id }
+                                }}
+                                onClick={()=>{localStorage.setItem('companyId',job._id)}}
+                                    class="companyName">{job.companyName}</Link>
+                                <p class="companyRating">{job.averageRating}<i class="fas fa-star"></i></p>
+                                <p class="companyName"> Job Type: {job.industry}</p>
+
                             </div>
                             <h6>Job Title: <Link to={{
                                 pathname: "/jobApplication",

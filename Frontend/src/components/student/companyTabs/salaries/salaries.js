@@ -22,7 +22,7 @@ class Salaries extends Component {
     };
   }
   componentDidMount() {
-    const company_id = this.props.location.state;
+    const company_id = localStorage.getItem('companyId');
     //const {data} = this.props.location.state;
     console.log(company_id);
     this.getSalaryResults();

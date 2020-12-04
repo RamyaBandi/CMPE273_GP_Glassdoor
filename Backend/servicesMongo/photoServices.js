@@ -137,7 +137,7 @@ module.exports.getCompanyPhotos = async (req, res) => {
             else if (i.approvalStatus==="Under Review"){
                 
                 if (i.studentId.toString()===studentId){
-                    console.log("***********")
+                    //console.log("***********")
                     formattedPhotos.push({
                         id:formattedPhotos.length,
                         image:i.photoURL,
