@@ -12,6 +12,7 @@ class CompaniesTab extends Component {
         super();
         this.state = {
             companyData: [],
+            isLoading : true,
             page: 1,
             limit: 10
         }
@@ -41,7 +42,8 @@ class CompaniesTab extends Component {
                 if (response.status === 200) {
                     console.log("Company Data", response.data)
                     this.setState({
-                        companyData: response.data
+                        companyData: response.data,
+                        isLoading: false
                     })
                 }
             })
@@ -64,7 +66,7 @@ class CompaniesTab extends Component {
         return (
             <div class="student-tabs-body">
                 <React.Fragment>
-                {company &&
+                {this.state.isLoading ? <h6 style={{textAlign: "center" ,color:"#0caa41"}}> Loading......</h6> :
                     <div class="card tabs-card" style={{ width: "50%", left: "25%", right: "25%", height: "500px" }}>
                         <img class="card-img-top" src={default_pic} alt="Card image cap" />
                         <div class="card-body">

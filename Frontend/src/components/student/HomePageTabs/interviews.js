@@ -11,6 +11,7 @@ class InterviewsTab extends Component {
         super();
         this.state = {
             interviewData: [],
+            isLoading : true,
             page: 1,
             limit: 10
         }
@@ -40,7 +41,8 @@ class InterviewsTab extends Component {
                 if (response.status === 200) {
                     console.log("Company Data", response.data)
                     this.setState({
-                        interviewData: response.data
+                        interviewData: response.data,
+                        isLoading : false
                     })
                 }
             })
@@ -62,7 +64,7 @@ class InterviewsTab extends Component {
         return (
             <div class="student-tabs-body">
             <React.Fragment>
-                { this.state.interviewData ? this.state.interviewData.map((interview, i) => {
+            {this.state.isLoading ? <h6 style={{textAlign: "center" ,color:"#0caa41"}}> Loading......</h6> :this.state.interviewData.map((interview, i) => {
                     return <div class="card tabs-card" style={{ width: "50%", left: "25%", right: "25%", height: "400px" }}>
                         <div class="card-body">
                             <div style={{ width: "100%" }}>
@@ -92,7 +94,7 @@ class InterviewsTab extends Component {
                             </div>
                         </div>
                     </div>
-                }): <h6 style={{textAlign: "center"}}>Loading..............</h6>}
+                })}
                 </React.Fragment>
                 <ReactPaginate
                 previousLabel={"<<"}

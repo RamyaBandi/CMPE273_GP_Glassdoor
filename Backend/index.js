@@ -25,6 +25,7 @@ app.use(cors({ origin: `${routeConstants.FRONTEND_URL}`, credentials: true }));
 const validateroutes = require('./routes/inputValidationRoute');
 const registerRoutes = require('./routes/registerRoute');
 const loginRoutes = require('./routes/loginRoute');
+const tabroutes = require('./routes/HomePageTabsRoutes');
 const searchRoutes = require('./routes/searchRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const companyRoutes = require('./routes/companyRoutes');
@@ -66,6 +67,7 @@ app.use('/validateroute', validateroutes)
 app.use('/registerroute', registerRoutes);
 app.use('/loginroute', loginRoutes);
 app.use(routeConstants.GET_SEARCH_RESULTS, searchRoutes);
+app.use(routeConstants.STUDENT_TABS_ROUTE, tabroutes);
 app.use(routeConstants.REVIEW_ROUTE, reviewRoutes);
 app.use(routeConstants.COMPANY_ROUTE, companyRoutes);
 app.use(routeConstants.STUDENT_ROUTE, studentRoutes);

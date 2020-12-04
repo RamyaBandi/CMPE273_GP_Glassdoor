@@ -48,22 +48,22 @@ class EmployerNavBar extends React.Component {
                                     </li>
                                     <li className="nav-item navWidth">
                                         <Link to='/employer/candidates' className="nav-link navTab">
-                                            <i className="far fa-building"> Candidates</i></Link>
+                                            <i className="fas fa-users"> Candidates</i></Link>
                                         {/* <a className="nav-link navTab" href="#"></a> */}
                                     </li>
                                     <li className="nav-item navWidth">
                                         <Link to='/employer/analytics' className="nav-link navTab">
-                                            <i className="far fa-comment-dots">Analytics</i></Link>
+                                            <i className="far fa-chart-bar">Analytics</i></Link>
                                         {/* <a className="nav-link navTab" href="#"></a> */}
                                     </li>
                                     <li className="nav-item navWidth">
                                         <Link to='/company/profile' className="nav-link navTab">
-                                            <i className="fas fa-money-check-alt">Profile</i></Link>
+                                            <i className="fas fa-chalkboard-teacher">Profile</i></Link>
                                         {/* <a className="nav-link navTab" href="#"></a> */}
                                     </li>
                                     <li className="nav-item navWidth">
                                         <Link to='/employer/reviews' className="nav-link navTab">
-                                            <i className="fas fa-money-check-alt">Reviews</i></Link>
+                                            <i className="far fa-address-card">Reviews</i></Link>
                                         {/* <a className="nav-link navTab" href="#"></a> */}
                                     </li>
                                 </ul>

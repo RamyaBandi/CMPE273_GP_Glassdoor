@@ -9,6 +9,7 @@ class TopCeo extends Component {
         super()
         this.state = {
             topCeo : [],
+            isLoading : true
         }
     }
 
@@ -22,7 +23,8 @@ class TopCeo extends Component {
                 if (response.status === 200) {
                     console.log("Top 10 CEO’s based on rating", response.data)
                     this.setState({
-                        topCeo: response.data
+                        topCeo: response.data,
+                        isLoading : false
                     })
                 }
             })
@@ -38,7 +40,7 @@ class TopCeo extends Component {
         return (
             <div>
             <h6 class = "chartHeading">Top 10 CEO’s based on rating.</h6>
-            <Chart
+            {this.state.isLoading ? <h6 style={{textAlign: "center" ,color:"#0caa41"}}> Loading......</h6> :<Chart
             // width={300}
             // height={400}
             chartType="BarChart"
@@ -62,7 +64,7 @@ class TopCeo extends Component {
                 //   },
             }}
             legendToggle
-        />
+        />}
             </div>
 
         )

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Tabs.css'
 import { Link } from 'react-router-dom';
 import { BACKEND_URL, GET_SEARCH_SALARY } from '../../../config/routeConstants'
+import CurrencyFormat from 'react-currency-format';
 import axios from 'axios'
 import ReactPaginate from 'react-paginate';
 import './Paginate.css'
@@ -11,6 +12,7 @@ class SalariesTab extends Component {
         super();
         this.state = {
             salaryData: [],
+            isLoading : true,
             page: 1,
             limit: 10
         }
@@ -42,7 +44,8 @@ class SalariesTab extends Component {
                 if (response.status === 200) {
                     console.log("Company Data", response.data)
                     this.setState({
-                        salaryData: response.data
+                        salaryData: response.data,
+                        isLoading : false
                     })
                 }
             })
@@ -64,7 +67,7 @@ class SalariesTab extends Component {
         return (
             <div class="student-tabs-body">
             <React.Fragment>
-                {this.state.salaryData.map((salary, i) => {
+                {this.state.isLoading ? <h6 style={{textAlign: "center" ,color:"#0caa41"}}> Loading......</h6> :this.state.salaryData.map((salary, i) => {
                     return <div class="card tabs-card" key={i} style={{ width: "50%", left: "25%", right: "25%", height: "400px" }}>
                         <div class="card-body">
                             <div style={{ width: "100%" }}>
@@ -74,7 +77,7 @@ class SalariesTab extends Component {
                                         <p class="companyRating"> {salary.averageRating} <i class="fas fa-star"></i></p>
                                     </div>
                                     <h6 style={{"width": "250%"}}> Job: {salary.jobTitle}</h6>
-                                    <h6 style={{"width": "250%"}}> Base Salary: {salary.baseSalary}</h6>
+                                    <h6 style={{"width": "250%"}}> Base Salary: <CurrencyFormat value={salary.baseSalary} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h6>
                                     <p class="companyLocation">Headquarters:  {salary.headquarters} </p>
                                 </div>
                                 <div style={{ width: "40%", float: "right" }}>

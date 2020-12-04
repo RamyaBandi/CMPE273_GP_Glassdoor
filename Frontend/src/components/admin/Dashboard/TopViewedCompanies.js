@@ -10,6 +10,7 @@ class TopViewedCompanies extends Component {
         this.state = {
             Date: null,
             topViewedCompanies: [],
+            isLoading : true
         }
         this.handledChange = this.handledChange.bind(this)
         this.getTopViewedCompanies = this.getTopViewedCompanies.bind(this)
@@ -39,7 +40,8 @@ class TopViewedCompanies extends Component {
                 if (response.status === 200) {
                     console.log("Top 10 Viewed Companies’s based on rating", response.data)
                     this.setState({
-                        topViewedCompanies: response.data
+                        topViewedCompanies: response.data,
+                        isLoading : false
                     })
                 }
             })

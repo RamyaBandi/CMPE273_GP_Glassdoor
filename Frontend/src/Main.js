@@ -8,6 +8,7 @@ import LandingPageDesc from './components/landingPage/landingPageDescription'
 import Register from './components/Registration_Login/Registration'
 import Login from './components/Registration_Login/Login'
 import StudentHomePage from './components/student/studentHomePage'
+import CompanyHomePage from './components/student/companiesHomePage'
 import SalariesTab from './components/student/HomePageTabs/salaries'
 import CompaniesTab from './components/student/HomePageTabs/companies'
 import InterviewsTab from './components/student/HomePageTabs/interviews'
@@ -59,6 +60,7 @@ class Main extends Component {
                     <Route exact path="/register" render={props => <Register {...props} />} />
                     <Route exact path="/login" render={props => <Login {...props} />} />
                     <Route exact path="/studenthomepage" render={props => <StudentHomePage {...props} />} />
+                    <Route exact path="/companyhomepage" render={props => <CompanyHomePage {...props} />} />
                     <Route exact path="/jobstab" render={props => <JobsTab {...props} />} />
                     <Route exact path="/companiestab" render={props => <CompaniesTab {...props} />} />
                     <Route exact path="/salariestab" render={props => <SalariesTab {...props} />} />

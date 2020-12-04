@@ -34,7 +34,7 @@ export default class JobApplication extends Component {
     componentDidMount = async () => {
         console.log('In componentDidMount in application');
         const jobId = this.props.location.state;
-        console.log(jobId);
+        console.log("Job Id", jobId);
         axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         await axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOB_BY_JOBID + '?jobId=' + jobId)
             .then(response => {
@@ -49,7 +49,9 @@ export default class JobApplication extends Component {
         axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
             .then(response => {
-                this.setState({ companyDetails: response.data[0] });
+                this.setState({ 
+                    companyDetails: response.data[0],
+                 });
                 console.log("In componentDidMount");
                 console.log(response.data[0]);
                 console.log(this.state.companyDetails);
@@ -98,7 +100,7 @@ if(this.state.uploadedCoverLetter){
 }
     
 //axios
-
+axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
 axios.post(`${BACKEND_URL}${APPLICATION_ROUTE}${POST_APPLICATION}?studentId=${data.studentId}&jobId=${data.jobId}&resumeUploaded=${data.resumeUploaded}&coverLetterUploaded=${data.coverLetterUploaded}`,mediaForm)
 .then(response => {
     //redirect

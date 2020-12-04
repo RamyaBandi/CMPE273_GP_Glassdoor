@@ -9,6 +9,7 @@ class TotalAcceptedReviews extends Component {
         super()
         this.state = {
             totalAcceptedReviews : [],
+            isLoading : true
         }
     }
 
@@ -22,7 +23,8 @@ class TotalAcceptedReviews extends Component {
                 if (response.status === 200) {
                     console.log("Top 5 students based on total accepted reviews made", response.data)
                     this.setState({
-                        totalAcceptedReviews: response.data
+                        totalAcceptedReviews: response.data,
+                        isLoading : false
                     })
                 }
             })
@@ -38,7 +40,7 @@ class TotalAcceptedReviews extends Component {
         return (
             <div>
             <h6 class = "chartHeading">Top 5 students based on total accepted reviews made</h6>
-            <Chart
+            {this.state.isLoading ? <h6 style={{textAlign: "center" ,color:"#0caa41"}}> Loading......</h6> :<Chart
             // width={300}
             // height={400}
             chartType="BarChart"
@@ -62,7 +64,7 @@ class TotalAcceptedReviews extends Component {
                 //   },
             }}
             legendToggle
-        />
+        />}
             </div>
 
         )
