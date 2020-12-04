@@ -3,7 +3,7 @@ const Company = require('../models/Company');
 const Jobs = require('../models/Jobs');
 async function handle_request(msg, callback) {
 
-	console.log("Inside Company Services ->kafka backend");
+	console.log("Inside Job Services ->kafka backend");
 	console.log(msg);
 	switch (msg.api) {
 		case "POST_COMPANY_JOB":

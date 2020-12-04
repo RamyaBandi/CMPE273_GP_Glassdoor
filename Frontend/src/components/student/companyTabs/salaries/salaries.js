@@ -17,6 +17,7 @@ class Salaries extends Component {
       salaries: [],
       page : 1,
       limit : 10,
+      totalPages : 0,
       redirect: null,
     };
   }
@@ -107,7 +108,7 @@ async getSalaryResults(){
                             <div>
                                 <Nav className="mr-auto">
                                     <div className="box-content right">
-                                        <Link to="/overview" style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
+                                        <Link to={{ pathname: "/overview", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Overview</Link>
                                     </div>
                                     <div class="box-content right">
                                         <Link to={{ pathname: "/reviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Reviews</Link>
@@ -122,7 +123,7 @@ async getSalaryResults(){
                                         <Link to={{ pathname: "/interviews", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Interviews</Link>
                                     </div>
                                     <div class="box-content">
-                                        <Link to="/photos" style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
+                                        <Link to={{ pathname: "/photos", state: this.state.companyDetails._id }} style={{ textDecoration: 'none', color: '#1861bf' }}>Photos</Link>
                                     </div>
                                 </Nav>
                             </div>

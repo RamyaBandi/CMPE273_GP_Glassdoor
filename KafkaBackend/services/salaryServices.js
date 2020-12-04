@@ -122,7 +122,9 @@ async function handle_request(msg, callback) {
     .aggregate([
         { $match: { companyId: new ObjectId(data.companyId)} },
         { $group: { _id: "$jobTitle", 
-                    avg: { "$avg": "$baseSalary" } } }
+        avg: { "$avg": "$baseSalary" },
+        min: { "$min": "$baseSalary" } ,
+        max: { "$max": "$baseSalary" } }}
     ])
     .exec((err, salaries) => {
         if (err) {

@@ -50,11 +50,12 @@ const uploadFile = (buffer, name, type) => {
 module.exports.postCompanyPhotos = async (req, res) => {
     console.log("Inside Photos POST service");
     const id = req.query.id;
+    const studentId = req.query.studentId;
     //console.log(req.query)
     const form = new multiparty.Form();
     //find count
 
-    const count = await Photos.countDocuments({ companyId: id });
+    const count = await Photos.countDocuments({ companyId: id, studentId: studentId });
     console.log(count);
     form.parse(req, async (error, fields, files) => {
         if (error) throw new Error(error);
@@ -69,10 +70,11 @@ module.exports.postCompanyPhotos = async (req, res) => {
                 const fileName = `companyPhotos/${id}/${(parseInt(fieldName)+count).toString()}`;
                 console.log(fileName)
                 const data = await uploadFile(buffer, fileName, type);
+                console.log(data.Location)
                 //insert into db
                 let inData = req.body;
                 let photos = Photos({
-                    studentId: '5fb48df63d242fa0842343f3',
+                    studentId: studentId,
                     companyId: id,
                     photoURL:data.Location ,
                     approvalStatus: 'Under Review',
@@ -135,6 +137,7 @@ module.exports.getCompanyPhotos = async (req, res) => {
             else if (i.approvalStatus==="Under Review"){
                 
                 if (i.studentId.toString()===studentId){
+                    console.log("***********")
                     formattedPhotos.push({
                         id:formattedPhotos.length,
                         image:i.photoURL,
@@ -198,7 +201,7 @@ module.exports.putPhotoApprove = (req, res) => {
     console.log("Inside Approve Photo PUT service");
     console.log("req body" + JSON.stringify(req.body));
     let data = req.body
-    Photos.findByIdAndUpdate(data.photoId, { approvalstatus: "Approved" }, (err, result) => {
+    Photos.findByIdAndUpdate(data.photoId, { approvalStatus: "Approved" }, (err, result) => {
         if (err) {
             console.log("Error updating photo" + err)
             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
@@ -214,7 +217,7 @@ module.exports.putPhotoReject = (req, res) => {
     console.log("Inside Reject Photo PUT service");
     console.log("req body" + JSON.stringify(req.body));
     let data = req.body
-    Photos.findByIdAndUpdate(data.photoId, { approvalstatus: "Rejected" }, (err, result) => {
+    Photos.findByIdAndUpdate(data.photoId, { approvalStatus: "Rejected" }, (err, result) => {
         if (err) {
             console.log("Error updating photo" + err)
             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));

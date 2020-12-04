@@ -87,10 +87,11 @@ class ResumeList extends Component {
             <div class="card-body">
               <h5 class="card-title">{resumedetails.uploadFileName}</h5>
         <p class="card-text">Date:{uploaddate}<br></br>Time:{uploadtime}</p>
-       
-        <button class="btn btn-success" onClick={this.handledownload}><i class="fa fa-download"></i> Download</button>
+       <a target="_blank" href={resumedetails} replace download>
+        <button class="btn btn-success"><i class="fa fa-download"></i> Download</button>
+        </a>
     
-              <button href="#" class="btn btn-success" onClick={this.handledelete}>Delete</button>
+              <button href="" class="btn btn-success" onClick={this.handledelete}>Delete</button>
               <br></br>
               <br></br>
               <button href="#" class="btn btn-success" onClick={this.handleprimaryresume}>Make it primary resume!!</button>
