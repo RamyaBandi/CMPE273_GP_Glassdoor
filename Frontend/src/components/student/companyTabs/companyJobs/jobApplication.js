@@ -98,7 +98,7 @@ export default class JobApplication extends Component {
         }
 
         //axios
-
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.post(`${BACKEND_URL}${APPLICATION_ROUTE}${POST_APPLICATION}?studentId=${data.studentId}&jobId=${data.jobId}&resumeUploaded=${data.resumeUploaded}&coverLetterUploaded=${data.coverLetterUploaded}`, mediaForm)
             .then(response => {
                 //redirect

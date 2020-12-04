@@ -14,6 +14,9 @@ const crop = {
 export default class Tiles extends React.Component {
 
     state = {
+        limit: 10,
+        page: 1,
+        totalPages: 0,
         showModal: false
     }
 

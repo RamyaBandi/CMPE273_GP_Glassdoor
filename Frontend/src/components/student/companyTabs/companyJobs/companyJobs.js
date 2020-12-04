@@ -17,6 +17,7 @@ class CompanyJobs extends Component {
             jobs: [],
             limit: 10,
             page:1,
+            totalPages: 0,
             redirect: null,
             jobSearchText:""
         };
@@ -79,7 +80,8 @@ class CompanyJobs extends Component {
     }
 
     async getResults() {
-        const companyId = this.props.location.state;
+        // const companyId = this.props.location.state
+        const companyId=localStorage.getItem('companyId')
         axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + JOB_ROUTE + GET_COMPANY_JOBS + "?companyId=" + companyId, {
             params: {
@@ -88,7 +90,7 @@ class CompanyJobs extends Component {
             }
         })
             .then(response => {
-                this.setState({ jobs: response.data.jobs });
+                this.setState({ jobs: response.data.jobs, totalPages: response.data.totalPages });
             })
             .catch((error) => {
                 console.log(error);
@@ -149,8 +151,21 @@ class CompanyJobs extends Component {
                 </Container>
                 <Container style={{ marginTop: "20px", marginBottom: "20px", width: "70%", backgroundColor: "white" }} className="block-example border">
                     <Row style={{ marginTop: "10px" }}>
-                        <Col>
+                        <Col style={{display:"flex" , justifyContent:"space-between"}}>
                             <p style={{ fontSize: "20px" }}>{this.state.companyDetails.companyName} Jobs</p>
+                            <div className="input-group"
+                        style={{ width: "200px", justifyContent: "space-around" }}
+                    >
+                        <div className="input-group-prepend">
+                            <label  >Page Limit </label>
+                        </div>
+                        <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
                         </Col>
                     </Row>
                     <Container style={{ width:"80%" }}>
@@ -169,33 +184,20 @@ class CompanyJobs extends Component {
                     this.state.jobs.map((item) => {
                         return <JobCard {...item} />
                     })}
-                </Container>
-                <ReactPaginate
+                    <ReactPaginate
                         previousLabel={"<<"}
                         nextLabel={">>"}
                         breakLabel={"..."}
                         breakClassName={"break-me"}
-                        pageCount={this.state.pageCount}
+                        pageCount={this.state.totalPages}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={5}
                         onPageChange={this.handlePageClick}
                         containerClassName={"pagination"}
                         subContainerClassName={"pages pagination"}
                         activeClassName={"active"} />
-
-                    <div className="input-group"
-                        style={{ width: "200px", justifyContent: "space-around" }}
-                    >
-                        <div className="input-group-prepend">
-                            <label  >Page Limit </label>
-                        </div>
-                        <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
+                </Container>
+                
             </div>
         )
     }

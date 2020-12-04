@@ -67,6 +67,7 @@ class studentHomePage extends Component {
                                     search: '?query=abc',
                                     state: { companyId: job._id }
                                 }}
+                                onClick={()=>{localStorage.setItem('companyId',job._id)}}
                                     class="companyName">{job.companyName}</Link>
                                 <p class="companyRating">{job.averageRating}<i class="fas fa-star"></i></p>
                                 <p class="companyName"> Job Type: {job.industry}</p>
