@@ -103,7 +103,8 @@ class Reviews extends Component {
 
   getReviewsResults() {
     console.log("in update page list");
-    const company_id = '5fb4884acf339e3da0d5c31e';
+    //const company_id = '5fb4884acf339e3da0d5c31e';
+    const company_id = this.props.location.state;
     const student_id = localStorage.getItem('mongoId');
     axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios.get(BACKEND_URL + GET_APPROVED_COMPANY_REVIEWS, {
