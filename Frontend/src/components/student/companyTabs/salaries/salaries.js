@@ -17,6 +17,7 @@ class Salaries extends Component {
       salaries: [],
       page : 1,
       limit : 10,
+      totalPages : 0,
       redirect: null,
     };
   }
@@ -69,10 +70,13 @@ handleChange = (e) => {
 
 async getSalaryResults(){
   const company_id = this.props.location.state;
+  console.log(company_id);
   axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
   await axios.get(BACKEND_URL + GET_SALARY_AVERAGES, {
       params: {
         companyId: company_id,
+        page : this.state.page,
+        limit : this.state.limit
       }
   })
       .then(response => {

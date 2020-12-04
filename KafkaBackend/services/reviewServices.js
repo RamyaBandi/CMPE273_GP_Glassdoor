@@ -445,14 +445,28 @@ async function handle_request(msg, callback) {
         try {
           //data.page = 1;
           //data.limit = 10;
-          const reviews = await Reviews.find({
-              $or:
-                  [{ companyId: new ObjectId(data.companyId), approvalstatus: 'Approved' },
-                  { studentId: new ObjectId(data.studentId), approvalstatus: 'Under Review' }]
-          }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
-      
-      
-          const count = await Reviews.countDocuments({ companyId: data.companyId });
+          const allreviews = await Reviews.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();   
+        const count = await Reviews.countDocuments({ companyId: data.companyId });
+        let reviews=[]
+        for(let i of allreviews){
+            if(i.approvalStatus==="Rejected"){
+                continue;
+            }
+            else if (i.approvalStatus==="Under Review"){
+                
+                if (i.studentId.toString()===data.studentId){
+                    reviews.push(
+                        i
+                    )
+                    
+                }
+            }else{
+                reviews.push(
+                    i
+                )
+                
+            }
+        }
           //console.log("count" + count);
           //console.log(reviews)
           const result = ({

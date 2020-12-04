@@ -3,15 +3,18 @@ import './HomePageTabs/Tabs.css'
 import '../landingPage/loggedInNav.css'
 import axios from 'axios'
 import ReactPaginate from 'react-paginate';
+import CurrencyFormat from 'react-currency-format';
 import { Link } from 'react-router-dom';
 import { BACKEND_URL, GET_STUDENTS_JOBS_HOMEPAGE } from './../../config/routeConstants'
 import './HomePageTabs/Paginate.css'
+
 
 
 class studentHomePage extends Component {
     constructor() {
         super();
         this.state = {
+            isLoading: true,
             jobsData: [],
             originaljobsData: [],
             offset: 0,
@@ -56,10 +59,12 @@ class studentHomePage extends Component {
         let count = 0
         console.log("Data", this.state.jobsData)
         const slice = this.state.jobsData.slice(this.state.offset, this.state.offset + this.state.perPage)
+
         const postData = slice.map((job, i) => <React.Fragment>
             <div class="card tabs-card" key={i} style={{ width: "55%", left: "25%", right: "25%", height: "200px" }}>
                 <div class="card-body">
                     <div style={{ width: "100%" }}>
+
                         <div style={{ width: "60%", float: "left" }}>
                             <div style={{ display: "flex", justifyContent: "space-between" }}>
                                 <Link to={{
@@ -71,23 +76,27 @@ class studentHomePage extends Component {
                                     class="companyName">{job.companyName}</Link>
                                 <p class="companyRating">{job.averageRating}<i class="fas fa-star"></i></p>
                                 <p class="companyName"> Job Type: {job.industry}</p>
+
                             </div>
                             <h6>Job Title: <Link to={{
-                                pathname: "/overview",
+                                pathname: "/jobApplication",
                                 search: '?query=abc',
-                                state: { jobId: job.jobId }
+                                state: job.jobId
                             }}
-                            style={{ "width": "250%" }}>{job.jobTitle}</Link></h6>
+                                style={{ "width": "250%" }}>{job.jobTitle}</Link></h6>
+
                             {/*<h6 style={{ "width": "250%" }}> Job Title: {job.jobTitle}</h6>*/}
+                            <div style={{ width: "100%"}}>
                             <div style={{ "display": "flex", "justifyContent": "space-between" }}>
                                 <p>Ratings: {job.mostRated}</p>
                                 <p>Date Posted: {this.formatDate(job.postedDate)}</p>
-                                <p> Base Salary: {job.averageSalary}</p>
+                                <p> Base Salary: <CurrencyFormat value={job.averageSalary} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>
+                            </div>
                             </div>
                             <p class="companyLocation"> Location: {job.streetAddress},{job.city}, {job.state}, {job.zip}</p>
                         </div>
                         <div style={{ width: "40%", float: "right" }}>
-                            <button class="companySite"> Visit Website</button>
+                            
                         </div>
                     </div>
                     <div>
@@ -200,7 +209,8 @@ class studentHomePage extends Component {
                 if (response.status === 200) {
                     console.log("Jobs Data", response.data)
                     this.setState({
-                        jobsData: response.data
+                        jobsData: response.data,
+                        isLoading: false
                     })
                 }
             })
@@ -211,21 +221,23 @@ class studentHomePage extends Component {
 
     //Filter the jobs based on the most recent date
 
-    async getDateBasedJobResults() {
+    getDateBasedJobResults = (event) => {
+        event.preventDefault();
         this.setState({
             jobsData: this.state.originaljobsData
-        }, ()=>{
-            this.receivedData();
+        }, () => {
+            return this.receivedData();
         })
     }
 
     //Filter the jobs based on the most Rated Job
 
-    async getRatingsBasedJobResults() {
+    getRatingsBasedJobResults = (event) => {
+        event.preventDefault();
         this.setState({
             jobsData: this.state.originaljobsData.sort(function (a, b) { return b.mostRated - a.mostRated; })
         }, () => {
-            this.receivedData()
+            return this.receivedData()
         })
     }
 
@@ -251,9 +263,9 @@ class studentHomePage extends Component {
                 <h4 style={{ "textAlign": "center", "lineHeight": "50px" }}>Jobs Home Page</h4>
                 <div style={{ "textAlign": "center", lineHeight: "50px", paddingBottom: "25px" }}>
                     <form>
-                        <button onClick={() => this.getDateBasedJobResults()} class="inputSearch" style={{ width: "10%", marginLeft: "15px", backgroundColor: "white" }} > Most Recent Jobs </button>
-                        <button onClick={() => this.getRatingsBasedJobResults()} class="inputSearch" style={{ width: "10%", marginLeft: "15px", backgroundColor: "white" }}> Most Rated Jobs </button>
-                        <select class="inputSearch" name="salaryRange" value={this.state.salaryRange} style={{ width: "12%", marginLeft: "15px" }} onChange={this.handleCategoryChange} id="cars">
+                        <button type="submit" onClick={this.getDateBasedJobResults} class="inputSearch" style={{ width: "12%", marginLeft: "15px", backgroundColor: "white" }} > Most Recent Jobs </button>
+                        <button type="submit" onClick={this.getRatingsBasedJobResults} class="inputSearch" style={{ width: "12%", marginLeft: "15px", backgroundColor: "white" }}> Most Rated Jobs </button>
+                        <select class="inputSearch" name="salaryRange" value={this.state.salaryRange} style={{ width: "15%", marginLeft: "15px" }} onChange={this.handleCategoryChange} id="cars">
                             <option name="salaryRange" >Salary Range</option>
                             {this.state.salaryFilter.map(salary => {
                                 return <option name="salaryRange" value={salary}>{salary}</option>
@@ -261,21 +273,20 @@ class studentHomePage extends Component {
 
                         </select>
                         <select class="inputSearch" name="location" value={this.state.location} style={{ width: "12%", marginLeft: "15px" }} onChange={this.handleCategoryChange} id="cars">
-                            <option name="salaryRange" >Location</option>
+                            <option name="location" >Location</option>
                             {this.state.locationFilter && this.state.locationFilter.map(location => {
                                 return <option name="location" value={location}>{location}</option>
                             })}
                         </select>
                         <select class="inputSearch" name="jobType" value={this.state.jobType} style={{ width: "12%", marginLeft: "15px" }} onChange={this.handleCategoryChange} id="cars">
-                            <option name="salaryRange" >Job Type</option>
+                            <option name="jobType" >Job Type</option>
                             {this.state.jobTypeFilter && this.state.jobTypeFilter.map(jobType => {
                                 return <option name="jobType" value={jobType}>{jobType}</option>
                             })}
                         </select>
                     </form>
                 </div>
-                {this.state.postData}
-
+                {this.state.isLoading ? <h5 style={{ textAlign: "center", color: " #0caa41" }}>Loading...........</h5> : this.state.postData}
                 <ReactPaginate
                     previousLabel={"<<"}
                     nextLabel={">>"}
@@ -289,6 +300,7 @@ class studentHomePage extends Component {
                     subContainerClassName={"pages pagination"}
                     activeClassName={"active"} />
             </div>
+
         )
     }
 }

@@ -87,9 +87,9 @@ class ResumeList extends Component {
             <div class="card-body">
               <h5 class="card-title">{resumedetails.uploadFileName}</h5>
         <p class="card-text">Date:{uploaddate}<br></br>Time:{uploadtime}</p>
-       <Link to="/https://cmpe273glassdoor.s3.us-west-1.amazonaws.com/cmpe273images/studentresume/11.22toastmaster14%20%281%29.pdf" replace download>
+       <a target="_blank" href={resumedetails} replace download>
         <button class="btn btn-success"><i class="fa fa-download"></i> Download</button>
-        </Link>
+        </a>
     
               <button href="" class="btn btn-success" onClick={this.handledelete}>Delete</button>
               <br></br>

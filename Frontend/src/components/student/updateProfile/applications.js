@@ -16,6 +16,8 @@ class Applications extends Component {
 
     }
     updatePageList() {
+        Axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
+        // console.log(`${BACKEND_URL}${APPLICATION_ROUTE}${GET_APPLICATIONS_STUDENTID}`)
         Axios.get(`${BACKEND_URL}${APPLICATION_ROUTE}${GET_APPLICATIONS_STUDENTID}`, {
             params: {
                 studentId: localStorage.getItem('mongoId'),

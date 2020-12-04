@@ -43,7 +43,7 @@
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    font-size: 12px;
+    font-size: 18px;
     font-weight: 700;
     top: -2px;
     padding-top: 2.5px;
@@ -52,7 +52,7 @@
 }
 
 .companyName{
-    font-size: 15px;
+    font-size: 18px;
     color: #404040;
     line-height: 1.33;
      padding-right: 10px;
@@ -62,7 +62,7 @@
 
 }
 .companyLocation{
-    font-size: 12px;
+    font-size: 15px;
     line-height: 20px;
     color: #858c94;
     font-family: 'Lato', sans-serif;
