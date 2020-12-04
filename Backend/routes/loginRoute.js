@@ -7,7 +7,7 @@ const { POST_LOGIN } = require('../config/routeConstants');
 
 if (process.env.KAFKA_SWITCH === 'true') {
 
-        loginRouter.route(POST_LOGIN).post(loginKafkaServices.login);
+        loginRouter.route(POST_LOGIN).post(loginServices.login);
 }
 else {
     loginRouter.route(POST_LOGIN).post(loginServices.login);
