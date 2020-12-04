@@ -124,6 +124,7 @@ module.exports.getCompanyReviews = async (req, res) => {
                     Reviews.find({ companyId: data.companyId, approvalstatus: "Approved" })
                         .limit(data.limit * 1)
                         .skip((data.page - 1) * data.limit)
+                        .populate({ path: 'studentId', model: 'Student', select: 'studentName' })
                         .exec(async (error, reviews) => {
 
                             if (error) {
@@ -168,7 +169,7 @@ module.exports.getCompanyReviews = async (req, res) => {
 
 
             //approvalstatus: "Approved"
-            const reviews = await Reviews.find({ companyId: data.companyId, approvalstatus: "Approved"}).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
+            const reviews = await Reviews.find({ companyId: data.companyId, approvalstatus: "Approved"}).limit(data.limit * 1).skip((data.page - 1) * data.limit).populate({ path: 'studentId', model: 'Student', select: 'studentName' }).exec();
             //const reviews = await Reviews.find({ companyId: data.companyId }).exec();
 
             const count = await Reviews.countDocuments({ companyId: data.companyId, approvalstatus: "Approved"});
