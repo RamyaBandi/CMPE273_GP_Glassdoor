@@ -76,17 +76,17 @@ function handle_request(msg, callback) {
 		case "GET_COMPANY_DETAILS":
 			{
 				let data = msg.body
-				let companyDetails = Company.find({ _id: data.companyId }).exec((err, result) => {
+				// let companyDetails = Company.find({ _id: data.companyId }).exec((err, result) => {
 
-					if (err) {
-						callback(err, 'Error')
-					}
-					else {
-						console.log("Company Details fetched Successfully");
-						console.log(result);
-						callback(null, result)
-					}
-				})
+				// 	if (err) {
+				// 		callback(err, 'Error')
+				// 	}
+				// 	else {
+				// 		console.log("Company Details fetched Successfully");
+				// 		console.log(result);
+				// 		callback(null, result)
+				// 	}
+				// })
 				break;
 			}
 		case "GET_COMPANY_SIGNUP":

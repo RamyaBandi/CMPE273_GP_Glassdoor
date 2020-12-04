@@ -69,7 +69,7 @@ handleChange = (e) => {
 };
 
 async getSalaryResults(){
-  const company_id = this.props.location.state;
+  const company_id = localStorage.getItem('companyId')
   console.log(company_id);
   axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
   await axios.get(BACKEND_URL + GET_SALARY_AVERAGES, {
@@ -91,7 +91,7 @@ async getSalaryResults(){
           }
       })
       .catch(error => {
-          console.log(error.response.data.msg)
+          console.log(error)
       })
 }
 

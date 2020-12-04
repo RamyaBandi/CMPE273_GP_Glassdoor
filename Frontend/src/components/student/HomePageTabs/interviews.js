@@ -73,7 +73,7 @@ class InterviewsTab extends Component {
                                 pathname: "/overview",
                                 state: { companyId: interview._id }
                             }}
-                                class="companyName">{interview.companyName}</Link>
+                            onClick={()=>{localStorage.setItem('companyId',interview._id)}} class="companyName">{interview.companyName}</Link>
                                 <p class="companyRating"> {interview.averageRating} <i class="fas fa-star"></i></p>
                             </div>
                             <p class="companyLocation"> {interview.headquarters}</p>

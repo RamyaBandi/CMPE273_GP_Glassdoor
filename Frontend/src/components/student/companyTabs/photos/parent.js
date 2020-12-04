@@ -105,12 +105,13 @@ class Parent extends React.Component {
     for (var i = 0; i < fileArray.length; i++) {
       formData.append(i + 1, fileArray[i]);
     }
+    console.log("in post company")
     axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios.post(BACKEND_URL + POST_COMPANY_PHOTOS + '?id=' + this.props.location.state + '&studentId=' + localStorage.getItem('mongoId'), formData)
       .then(response => {
         const studentId = localStorage.getItem('mongoId');
         const companyId = this.props.location.state;
-        console.log()
+        console.log(this.props)
         axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_COMPANY_PHOTOS + '?companyId=' + companyId + '&studentId=' + studentId)
           .then(response => {

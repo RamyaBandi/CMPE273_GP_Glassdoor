@@ -78,7 +78,7 @@ class CompaniesTab extends Component {
                                                 pathname: "/overview",
                                                 state: { companyId: company._id }
                                             }}
-                                                class="companyName">{company.companyName}</Link>
+                                            onClick={()=>{localStorage.setItem('companyId',company._id)}} class="companyName">{company.companyName}</Link>
                                             <p class="companyRating"> {company.averageRating} <i class="fas fa-star"></i></p>
                                         </div>
                                         <p class="companyLocation"> <b>Headquarters: </b> {company.headquarters}</p>

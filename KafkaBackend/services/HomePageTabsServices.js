@@ -15,7 +15,7 @@ const Company = require('../models/Company');
 const Reviews = require('../models/Reviews');
 
 
-function handle_request(msg, callback) {
+async function handle_request(msg, callback) {
     console.log("Page limit",req.query.limit )
     console.log("Page Number",req.query.page )
     let companyResults = await

@@ -7,9 +7,9 @@ const { GET_ALL_COMPANIES_ADMIN, GET_COMPANY_BY_COMPANYNAME_ADMIN, GET_COMPANY_R
 
 // console.log(process.env.KAFKA_SWITCH);
 if (process.env.KAFKA_SWITCH === 'true') {
-    adminCompanyProfileRouter.route(GET_ALL_COMPANIES_ADMIN).get(checkAuth, adminCompanyProfileKafkaServices.getAllCompanies);
-    adminCompanyProfileRouter.route(GET_COMPANY_BY_COMPANYNAME_ADMIN).get(checkAuth, adminCompanyProfileKafkaServices.getCompanyByCompanyName);
-    adminCompanyProfileRouter.route(GET_COMPANY_REVIEWS_ADMIN).get(checkAuth, adminCompanyProfileKafkaServices.getCompanyReviews);
+    adminCompanyProfileRouter.route(GET_ALL_COMPANIES_ADMIN).get(checkAuth, adminCompanyProfileServices.getAllCompanies);
+    adminCompanyProfileRouter.route(GET_COMPANY_BY_COMPANYNAME_ADMIN).get(checkAuth, adminCompanyProfileServices.getCompanyByCompanyName);
+    adminCompanyProfileRouter.route(GET_COMPANY_REVIEWS_ADMIN).get(checkAuth, adminCompanyProfileServices.getCompanyReviews);
 }
 else {
     adminCompanyProfileRouter.route(GET_ALL_COMPANIES_ADMIN).get(checkAuth, adminCompanyProfileServices.getAllCompanies);
