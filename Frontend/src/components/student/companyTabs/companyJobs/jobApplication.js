@@ -103,12 +103,15 @@ export default class JobApplication extends Component {
             .then(response => {
                 //redirect
                 window.alert('Applied successfully');
+                this.props.history.push('/student/applications')
             })
             .catch((error) => {
                 console.log(error.response.data);
                 window.alert(error.response.data);
             }
-        )
+            )
+
+
     }
     increaseResumeProgressPercentage = async () => {
         for (let i = 1; i <= 100; i++) {
