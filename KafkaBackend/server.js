@@ -21,7 +21,6 @@ const student=require('./services/studentServices')
 
 const salaries = require('./services/salaryServices')
 const interviews = require('./services/interviewServices')
-const photos = require('./services/photoServices')
 //const adminCompanyProfile = require('./services/adminCompanyProfileServices')
 
 

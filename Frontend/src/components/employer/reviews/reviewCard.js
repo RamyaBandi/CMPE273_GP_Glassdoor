@@ -68,9 +68,12 @@ class reviewCard extends Component {
       var replytime = this.props.reviewitem.replyTimeStamp.split('T')[0]
       //console.log(replytime)
     }
-
+    //console.log(localStorage.getItem("role"))
     let replyVar
-    if (localStorage.getItem("role") === "company") {
+    let companyVar=<div>
+    <p>Company Name:{review.companyId.companyName}</p>
+  </div>
+    if (localStorage.getItem("role") === 'employer') {
       replyVar = <div>
         <MDBCardBody>
           <div className="social-meta">
@@ -94,6 +97,9 @@ class reviewCard extends Component {
         <MDBInput far icon="comment" name="reply" onChange={this.replyinput} hint="Add Comment..." />
         <button class="btn btn-success" onClick={this.submithandle}>Reply</button>
       </div>
+    companyVar=<div>
+    <p>StudentName:{review.studentId.studentName}</p>
+  </div>
     }
     return (
       <MDBRow>
@@ -133,12 +139,12 @@ class reviewCard extends Component {
                     }}
                     style={{ color: "black" }}
                   >Title: {review.headline} </Link></h3>
-                <p>Company Name:{review.companyId.companyName}</p>
+                {companyVar}
                 <p>Description: {review.description} </p>
               </div>
             </MDBCardBody>
 
-
+{replyVar}
           </MDBCard>
         </MDBCol>
       </MDBRow>
