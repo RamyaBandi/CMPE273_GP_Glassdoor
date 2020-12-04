@@ -1,27 +1,27 @@
 const mongoose = require("mongoose");
 const Company = require('../models/Company');
-const Review = require('../models/Review');
+const Review = require('../models/Reviews');
 
 function handle_request(msg, callback) {
     console.log("Inside Admin Company Profile Services -> kafka backend");
     console.log(msg);
     switch (msg.api) {
-        case "GET_ALL_COMPANIES_ADMIN":
-            {
-                let data = msg.body;
-                let companies = Company.find().exec((err, result) => {
+        // case "GET_ALL_COMPANIES_ADMIN":
+        //     {
+        //         let data = msg.body;
+        //         let companies = Company.find().exec((err, result) => {
 
-                    if (err) {
-                        callback(err, 'Error')
-                    }
-                    else {
-                        console.log("Companies fetched successfully");
-                        console.log(result);
-                        callback(null, result)
-                    }
-                })
-                break;
-            }
+        //             if (err) {
+        //                 callback(err, 'Error')
+        //             }
+        //             else {
+        //                 console.log("Companies fetched successfully");
+        //                 console.log(result);
+        //                 callback(null, result)
+        //             }
+        //         })
+        //         break;
+        //     }
         case "GET_COMPANY_BY_COMPANYNAME_ADMIN":
             {
                 let data = msg.body;
