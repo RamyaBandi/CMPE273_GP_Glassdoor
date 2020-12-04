@@ -8,13 +8,13 @@ const { GET_JOB_SEARCH, GET_COMPANY_SEARCH, GET_SALARY_SEARCH, GET_INTERVIEW_SEA
 
 
 if (process.env.KAFKA_SWITCH === 'true') {
-    searchRouter.route(GET_JOB_SEARCH).get(checkAuth, searchKafkaServices.jobSearch);
+    searchRouter.route(GET_JOB_SEARCH).get(checkAuth, searchServices.jobSearch);
+    
+    searchRouter.route(GET_COMPANY_SEARCH).get(checkAuth, searchServices.companySearch);
 
-    searchRouter.route(GET_COMPANY_SEARCH).get(checkAuth, searchKafkaServices.companySearch);
+    searchRouter.route(GET_SALARY_SEARCH).get(checkAuth, searchServices.salarySearch);
 
-    searchRouter.route(GET_SALARY_SEARCH).get(checkAuth, searchKafkaServices.salarySearch);
-
-    searchRouter.route(GET_INTERVIEW_SEARCH).get(checkAuth, searchKafkaServices.interviewSearch);
+    searchRouter.route(GET_INTERVIEW_SEARCH).get(checkAuth, searchServices.interviewSearch);
 }
 else {
     searchRouter.route(GET_JOB_SEARCH).get(checkAuth, searchServices.jobSearch);

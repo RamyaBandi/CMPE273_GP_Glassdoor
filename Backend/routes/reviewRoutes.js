@@ -18,8 +18,8 @@ if (process.env.KAFKA_SWITCH === 'true') {
     reviewRouter.route(GET_COMPANY_REVIEWS).get(checkAuth, reviewKafkaServices.getCompanyReviews);
     reviewRouter.route(GET_STUDENT_REVIEWS).get(checkAuth, reviewKafkaServices.getStudentReviews);
     reviewRouter.route(PUT_COMPANY_REVIEW_HELPFUL).put(checkAuth, reviewKafkaServices.updateReviewHelpfulCount);
-    reviewRouter.route(GET_POSITIVE_REVIEW).get(checkAuth, reviewKafkaServices.getMostPositiveReview);
-    reviewRouter.route(GET_NEGATIVE_REVIEW).get(checkAuth, reviewKafkaServices.getMostNegativeReview);
+    reviewRouter.route(GET_POSITIVE_REVIEW).get(checkAuth, reviewServices.getMostPositiveReview);
+    reviewRouter.route(GET_NEGATIVE_REVIEW).get(checkAuth, reviewServices.getMostNegativeReview);
     reviewRouter.route(PUT_COMPANY_REPLY).put(checkAuth, reviewKafkaServices.postReplyFromCompany);
     reviewRouter.route(GET_REVIEW_AVERAGE).get(checkAuth, reviewKafkaServices.getReviewAverage);
     reviewRouter.route(PUT_REVIEW_APPROVE).put(checkAuth, reviewKafkaServices.putReviewApprove);

@@ -15,12 +15,12 @@ if (process.env.KAFKA_SWITCH === 'true') {
   
     jobRouter.route(POST_COMPANY_JOB).post(checkAuth, jobKafkaServices.postCompanyJob);
     jobRouter.route(PUT_COMPANY_JOB).put(checkAuth, jobKafkaServices.updateCompanyJob);
-    jobRouter.route(GET_COMPANY_JOBS).get(checkAuth, jobKafkaServices.getCompanyJobs);
-    jobRouter.route(GET_ALL_JOBS).get(checkAuth, jobKafkaServices.getAllJobs);
-    jobRouter.route(GET_COMPANY_JOBS_BY_JOBTITLE_OR_CITY).get(checkAuth, jobKafkaServices.getCompanyJobsByJobTitleOrCity);
-    jobRouter.route(GET_COMPANY_JOBS_BY_JOBTITLE).get(checkAuth, jobKafkaServices.getCompanyJobsByJobTitle);
-    jobRouter.route(GET_COMPANY_JOBS_BY_CITY).get(checkAuth, jobKafkaServices.getCompanyJobsByCity);
-    jobRouter.route(GET_COMPANY_JOB_BY_JOBID).get(checkAuth, jobKafkaServices.getCompanyJobsByJobId);
+    jobRouter.route(GET_COMPANY_JOBS).get(checkAuth, jobServices.getCompanyJobs);
+    jobRouter.route(GET_ALL_JOBS).get(checkAuth, jobServices.getAllJobs);
+    jobRouter.route(GET_COMPANY_JOBS_BY_JOBTITLE_OR_CITY).get(checkAuth, jobServices.getCompanyJobsByJobTitleOrCity);
+    jobRouter.route(GET_COMPANY_JOBS_BY_JOBTITLE).get(checkAuth, jobServices.getCompanyJobsByJobTitle);
+    jobRouter.route(GET_COMPANY_JOBS_BY_CITY).get(checkAuth, jobServices.getCompanyJobsByCity);
+    jobRouter.route(GET_COMPANY_JOB_BY_JOBID).get(checkAuth, jobServices.getCompanyJobsByJobId);
 }
 else {
     jobRouter.route(POST_COMPANY_JOB).post(jobServices.postCompanyJob);

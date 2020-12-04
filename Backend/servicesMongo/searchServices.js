@@ -24,7 +24,7 @@ module.exports.jobSearch = async (req, res) => {
     console.log("Search",req.query.page)
     console.log("Search",req.query.limit)
     let jobsData = await Jobs.find({ jobTitle: { '$regex': req.query.searchParameter, '$options': 'i' } }, 
-    { 'companyId': 1, 'jobTitle': 1, 'streetAddress':1, 'city' : 1, 'state':1, 'zip' : 1}).limit(req.query.limit * 1).skip((req.query.page - 1) * req.query.limit);
+    { '_id':1,'companyId': 1, 'jobTitle': 1, 'streetAddress':1, 'city' : 1, 'state':1, 'zip' : 1}).limit(req.query.limit * 1).skip((req.query.page - 1) * req.query.limit);
     console.log("Jobs Data", jobsData)
 
     let datasets = await Promise.all(jobsData.map(async (data) => {
@@ -34,7 +34,7 @@ module.exports.jobSearch = async (req, res) => {
             { $match: { _id: data.companyId } },
             {
                 $project: {
-                    _id: 1,
+                    
                     companyName: 1,
                     headquarters: 1,
                     website: 1,
@@ -56,7 +56,7 @@ module.exports.jobSearch = async (req, res) => {
         //     { $group: { _id: data.companyId, averageRating: { $avg: "$overallRating" } } }]).exec();
 
 
-        products._id = companyResults[0]._id;
+        products._id = data._id;
         products.companyName = companyResults[0].companyName
         products.headquarters = companyResults[0].headquarters
         products.website = companyResults[0].website
@@ -144,7 +144,7 @@ module.exports.salarySearch = async (req, res) => {
                     salaryReviews: { $size: { "$ifNull": [ "$salaries", [] ] } },
                     interviewReviews: { $size: { "$ifNull": [ "$interviews", [] ] } }
                 }
-            }]).skip((req.query.page - 1) * req.query.limit).exec();
+            }]).exec();
 
             console.log("Company results", companyResults[0])
 
@@ -215,7 +215,7 @@ module.exports.interviewSearch = async (req, res) => {
                     salaryReviews: { $size: { "$ifNull": [ "$salaries", [] ] } },
                     interviewReviews: { $size: { "$ifNull": [ "$interviews", [] ] } }
                 }
-            }]).limit(req.query.limit * 1).skip((req.query.page - 1) * req.query.limit).exec();
+            }]).exec();
 
     // let averageRating = await Reviews.aggregate([
     //     { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).exec();

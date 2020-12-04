@@ -8,10 +8,10 @@ const { POST_STUDENT_SALARY, GET_COMPANY_SALARIES, GET_STUDENT_SALARIES, GET_SAL
 
 // console.log(process.env.KAFKA_SWITCH)
 if (process.env.KAFKA_SWITCH === 'true') {
-    salaryRouter.route(POST_STUDENT_SALARY).post(checkAuth, salaryKafkaServices.postStudentSalary);
-    salaryRouter.route(GET_COMPANY_SALARIES).get(checkAuth, salaryKafkaServices.getCompanySalaries);
-    salaryRouter.route(GET_STUDENT_SALARIES).get(checkAuth, salaryKafkaServices.getStudentSalaries);
-    salaryRouter.route(GET_SALARY_AVERAGES).get(checkAuth, salaryKafkaServices.getSalaryAverages);
+    salaryRouter.route(POST_STUDENT_SALARY).post(checkAuth, salaryServices.postStudentSalary);
+    salaryRouter.route(GET_COMPANY_SALARIES).get(checkAuth, salaryServices.getCompanySalaries);
+    salaryRouter.route(GET_STUDENT_SALARIES).get(checkAuth, salaryServices.getStudentSalaries);
+    salaryRouter.route(GET_SALARY_AVERAGES).get(checkAuth, salaryServices.getSalaryAverages);
 }
 else {
     salaryRouter.route(POST_STUDENT_SALARY).post(checkAuth, salaryServices.postStudentSalary);

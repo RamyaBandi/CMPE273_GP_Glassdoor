@@ -39,30 +39,30 @@ module.exports.reviewsperday = async (req, res) => {
 
 module.exports.topreviewedcompanies= async (req, res) => {
     let gettopreviewedcompanies = await Reviews.aggregate([
-        {"$group" : {_id: {"company_id":"$company_id"}, count:{$sum:1}}},
+        {"$group" : {_id: {"companyId":"$companyId"}, count:{$sum:1}}},
         // {"$group" :{"company_id":"$company_id"}, count:{$sum:1}},
         { "$sort": { count: -1 } },
         { "$limit": 5 },
     ]).exec();
     // console.log(gettopreviewedcompanies[0]._id.company_id)
     
-    gettopreviewedcompanies = gettopreviewedcompanies.filter(company => company._id.company_id !== null)
+    gettopreviewedcompanies = gettopreviewedcompanies.filter(company => company._id.companyId !== null)
     console.log("After filter", gettopreviewedcompanies)
 
     let datasets = await Promise.all(gettopreviewedcompanies.map(async (data) => {
         let products = {};
         console.log("Data",data)
-        console.log("Data",data._id.company_id)
+        console.log("Data",data._id.companyId)
         let getcompanydata = await Company.aggregate([
             
-            { $match: { _id: data._id.company_id } },
+            { $match: { _id: data._id.companyId } },
             {
                 $project: {
                     _id: 1,
                     companyName: 1,
                 }
             }]).exec();
-            products.companyId = data._id.company_id;
+            products.companyId = data._id.companyId;
             products.companyName = getcompanydata[0].companyName;
             products.noOfReviews = data.count;
 
@@ -75,30 +75,30 @@ module.exports.topreviewedcompanies= async (req, res) => {
 
 module.exports.averageratedcompanies = async (req, res) => {
     let gettopaverageratedcompanies = await Reviews.aggregate([
-        {"$group" : {_id: {"company_id":"$company_id"}, averageRating:{$avg: "$overallRating"}}},
+        {"$group" : {_id: {"companyId":"$companyId"}, averageRating:{$avg: "$overallRating"}}},
         // {"$group" :{"company_id":"$company_id"}, count:{$sum:1}},
         { "$sort": { averageRating: -1 } },
         { "$limit": 5 },
     ]).exec();
     // console.log(gettopaverageratedcompanies[0]._id.company_id)
     
-    gettopaverageratedcompanies = gettopaverageratedcompanies.filter(company => company._id.company_id !== null)
+    gettopaverageratedcompanies = gettopaverageratedcompanies.filter(company => company._id.companyId !== null)
     console.log("After filter", gettopaverageratedcompanies)
 
     let datasets = await Promise.all(gettopaverageratedcompanies.map(async (data) => {
         let products = {};
         console.log("Data",data)
-        console.log("Data",data._id.company_id)
+        console.log("Data",data._id.companyId)
         let getcompanydata = await Company.aggregate([
             
-            { $match: { _id: data._id.company_id } },
+            { $match: { _id: data._id.companyId } },
             {
                 $project: {
                     _id: 1,
                     companyName: 1,
                 }
             }]).exec();
-            products.companyId = data._id.company_id;
+            products.companyId = data._id.companyId;
             products.companyName = getcompanydata[0].companyName;
             products.avgRating = Math.round(data.averageRating*Math.pow(10, 2)) / Math.pow(10, 2);
             
@@ -111,14 +111,14 @@ module.exports.averageratedcompanies = async (req, res) => {
 
 module.exports.topstudentratings = async (req, res) => {
     let getTopStudentratings = await Reviews.aggregate([
-        {"$group" : {_id: {"student_id":"$student_id"}, count:{$sum:1}}},
+        {"$group" : {_id: {"studentId":"$studentId"}, count:{$sum:1}}},
         // {"$group" :{"company_id":"$company_id"}, count:{$sum:1}},
         { "$sort": { count: -1 } },
         { "$limit": 5 },
     ]).exec();
     // console.log(getTopStudentratings[0]._id.company_id)
     
-    getTopStudentratings = getTopStudentratings.filter(student => student._id.student_id !== null)
+    getTopStudentratings = getTopStudentratings.filter(student => student._id.studentId !== null)
     console.log("After filter", getTopStudentratings)
 
     let datasets = await Promise.all(getTopStudentratings.map(async (data) => {
@@ -126,14 +126,14 @@ module.exports.topstudentratings = async (req, res) => {
         console.log("Data",data)
         let getStudentData = await Students.aggregate([
             
-            { $match: { _id: data._id.student_id } },
+            { $match: { _id: data._id.studentId } },
             {
                 $project: {
                     _id: 1,
                     studentName: 1,
                 }
             }]).exec();
-            products.studentId = data._id.student_id;
+            products.studentId = data._id.studentId;
             products.studentName = getStudentData[0].studentName;
             products.noOfReviews = data.count;
 
@@ -149,23 +149,23 @@ module.exports.topceorating= async (req, res) => {
     // ,"companyName":"$companyName"
     let getTopCeo = await Reviews.aggregate([
         
-        {"$group" : {_id: {"company_id":"$company_id"}, averageCeoRating:{$avg: "$ceoRating"}}},
+        {"$group" : {_id: {"companyId":"$companyId"}, averageCeoRating:{$avg: "$ceoRating"}}},
         // {"$group" :{"company_id":"$company_id"}, count:{$sum:1}},
         { "$sort": { count: 1 } },
         { "$limit": 10 },
     ]).exec();
     // console.log(getTopCeo[0]._id.company_id)
     
-    getTopCeo = getTopCeo.filter(company => company._id.company_id !== null)
+    getTopCeo = getTopCeo.filter(company => company._id.companyId !== null)
     console.log("After filter", getTopCeo)
 
     let datasets = await Promise.all(getTopCeo.map(async (data) => {
         let products = {};
         console.log("Data",data)
-        console.log("Data",data._id.company_id)
+        console.log("Data",data._id.companyId)
         let getcompanydata = await Company.aggregate([
             
-            { $match: { _id: data._id.company_id } },
+            { $match: { _id: data._id.companyId } },
             {
                 $project: {
                     _id: 1,
@@ -173,7 +173,7 @@ module.exports.topceorating= async (req, res) => {
                     ceoName : 1
                 }
             }]).exec();
-            products.companyId = data._id.company_id;
+            products.companyId = data._id.companyId;
             products.companyName = getcompanydata[0].companyName;
             products.ceoName = getcompanydata[0].ceoName;
             products.averageCeoRating = data.averageCeoRating;

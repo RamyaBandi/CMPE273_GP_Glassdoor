@@ -49,7 +49,7 @@ export default class CompanyOverview extends Component {
                 // Capture number of times a company is viewed
 
                 let views = {
-                    companyId: this.props.location.state.companyId,
+                    companyId: localStorage.getItem('companyId'),
                     companyName: this.state.companyDetails.companyName
                 }
                 console.log("Views", views)

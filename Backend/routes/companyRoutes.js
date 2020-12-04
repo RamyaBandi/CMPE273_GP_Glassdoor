@@ -8,7 +8,7 @@ const {
 if (process.env.KAFKA_SWITCH === 'true') {
 	companyRouter.route(PUT_COMPANY_SIGNUP).put(checkAuth, companykafkaServices.updateCompanyProfile);
 	companyRouter.route(POST_COMPANY_SIGNUP).post(checkAuth, companykafkaServices.createCompanyProfile);
-	companyRouter.route(GET_COMPANY_DETAILS).get(checkAuth, companykafkaServices.getCompanyProfile);
+	companyRouter.route(GET_COMPANY_DETAILS).get(checkAuth, companyServices.getCompanyProfile);
 	companyRouter.route(GET_COMPANY_SIGNUP).get(checkAuth, companykafkaServices.getUpdatedCompanyProfile);
 	companyRouter.route(POST_COMPANYVIEWS).post(checkAuth, companykafkaServices.postCompanyView)
 	companyRouter.route(PUT_FEATURED_REVIEWS).put(checkAuth, companykafkaServices.updateCompanyFeatured)

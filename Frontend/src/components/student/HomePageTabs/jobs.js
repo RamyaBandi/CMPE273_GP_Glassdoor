@@ -59,13 +59,15 @@ class JobsTab extends Component {
                                     pathname: "/overview",
                                     state: { companyId: job._id }
                                 }}
-                                    class="companyName">{job.companyName}</Link>
+                                
+                                class="companyName">{job.companyName}</Link>
                                 <p class="companyRating">{job.averageRating}<i class="fas fa-star"></i></p>
                             </div>
                             <h6>Job Title: <Link to={{
                                 pathname: "/jobApplication",
                                 state: job.jobId
                             }}
+                            onClick={()=>{localStorage.setItem('jobId',job._id)}} 
                                 style={{ "width": "250%" }}>{job.jobTitle}</Link></h6>
                             <p class="companyLocation"> {job.streetAddress},{job.city}, {job.state}, {job.zip}</p>
                         </div>

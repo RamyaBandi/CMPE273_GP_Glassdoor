@@ -47,11 +47,6 @@ class EmployerNavBar extends React.Component {
                                         {/* <a className="nav-link navTab" href="#"></a> */}
                                     </li>
                                     <li className="nav-item navWidth">
-                                        <Link to='/employer/candidates' className="nav-link navTab">
-                                            <i className="fas fa-users"> Candidates</i></Link>
-                                        {/* <a className="nav-link navTab" href="#"></a> */}
-                                    </li>
-                                    <li className="nav-item navWidth">
                                         <Link to='/employer/analytics' className="nav-link navTab">
                                             <i className="far fa-chart-bar">Analytics</i></Link>
                                         {/* <a className="nav-link navTab" href="#"></a> */}

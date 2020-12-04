@@ -92,7 +92,7 @@ class Interviews extends Component {
   };
 
   async getInterviewResults(){
-    const company_id = this.props.location.state;
+    const company_id = localStorage.getItem('companyId')
     axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     await axios.get(BACKEND_URL + GET_COMPANY_INTERVIEWS, {
         params: {

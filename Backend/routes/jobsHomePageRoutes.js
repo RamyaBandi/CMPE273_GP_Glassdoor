@@ -8,7 +8,7 @@ const { GET_JOBS_HOMEPAGE, GET_JOBS_LOCATION, GET_JOBS_TYPE} = require('../confi
 if (process.env.KAFKA_SWITCH === 'true') {
     // console.log("in kafka service")
 
-    jobsRouter.route(GET_JOBS_HOMEPAGE).get(checkAuth, jobsHomeKafkaServices.jobsHomePage);
+    jobsRouter.route(GET_JOBS_HOMEPAGE).get(checkAuth, jobsServices.jobsHomePage);
 }
 else {
     jobsRouter.route(GET_JOBS_HOMEPAGE).get(checkAuth, jobsServices.jobsHomePage);
