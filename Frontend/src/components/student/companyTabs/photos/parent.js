@@ -70,18 +70,18 @@ class Parent extends React.Component {
       .catch((error) => {
         console.log(error);
       }
-    )
+      )
     axios.get(BACKEND_URL + GET_COMPANY_DETAILS + '?companyId=' + companyId)
-            .then(response => {
-                this.setState({ companyDetails: response.data[0] });
-                console.log("In componentDidMount");
-                console.log("Company details", response.data[0]);
-                console.log(this.state.companyDetails);
-            })
-            .catch((error) => {
-                console.log(error);
-            }
-            )
+      .then(response => {
+        this.setState({ companyDetails: response.data[0] });
+        console.log("In componentDidMount");
+        console.log("Company details", response.data[0]);
+        console.log(this.state.companyDetails);
+      })
+      .catch((error) => {
+        console.log(error);
+      }
+      )
   }
 
   setnewImages = (images) => {
@@ -104,6 +104,7 @@ class Parent extends React.Component {
     for (var i = 0; i < fileArray.length; i++) {
       formData.append(i + 1, fileArray[i]);
     }
+
     axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
     axios.post(BACKEND_URL + POST_COMPANY_PHOTOS + '?id=5fb4aefe6b61ea46245d5621',formData)
       .then(response => {
@@ -123,8 +124,6 @@ class Parent extends React.Component {
         console.log(error);
       }
       )
-
-
 
     let allImages = [...this.state.images]
 
