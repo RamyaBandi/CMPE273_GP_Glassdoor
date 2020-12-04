@@ -14,6 +14,9 @@ const crop = {
 export default class Tiles extends React.Component {
 
     state = {
+        limit: 10,
+        page: 1,
+        totalPages: 0,
         showModal: false
     }
 
@@ -140,7 +143,7 @@ export default class Tiles extends React.Component {
                             })}
                         </div>
                     </Row>
-                    <Row >
+                    {/* <Row >
                         <Col md="12" >
 
 
@@ -155,7 +158,7 @@ export default class Tiles extends React.Component {
                                 <Pagination.Next />
                             </Pagination>
                         </Col>
-                    </Row>
+                    </Row> */}
                 </Container>
             </div>
         );
@@ -209,6 +212,7 @@ class Tile extends React.Component {
     }
 
     render() {
+        // console.log(this.props)
         let tileStyle = {};
         if (this.state.open) {
             tileStyle = {
@@ -236,7 +240,7 @@ class Tile extends React.Component {
                     onMouseEnter={this._mouseEnter}
                     onMouseLeave={this._mouseLeave}
                     onClick={this._clickHandler}
-                    src={this.props.data.image}
+                    src={this.props.data.photoURL}
                     alt={this.props.data.name}
                     style={tileStyle}
                 />

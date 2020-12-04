@@ -31,7 +31,7 @@ class Interviews extends Component {
   componentDidMount() {
     //const company_id = "5fb4884acf339e3da0d5c31e";
     this.getInterviewResults();
-    const company_id = this.props.location.state;
+    const company_id = localStorage.getItem('companyId');
     console.log(company_id);
     // axios
     //   .get(BACKEND_URL + GET_COMPANY_INTERVIEWS + "?companyId=" + company_id)
@@ -102,11 +102,12 @@ class Interviews extends Component {
         }
     })
         .then(response => {
-            console.log("Status Code : ", response.status);
+            console.log(response);
             if (response.status === 200) {
                 console.log("Interviews Data", response.data)
                 this.setState({
-                    interviews: response.data.interviews
+                    interviews: response.data.interviews,
+                    totalPages: response.data.totalPages
                 })
             }
         })
@@ -229,7 +230,7 @@ class Interviews extends Component {
             ]}
             options={{
               title: "Interview Experience Statistics",
-              pieHole: 0.7,
+              pieHole: 0.5,
             }}
             rootProps={{ "data-testid": "3" }}
           />
@@ -248,7 +249,7 @@ class Interviews extends Component {
             ]}
             options={{
               title: "Offer Status Statistics",
-              pieHole: 0.7,
+              pieHole: 0.5,
             }}
             rootProps={{ "data-testid": "3" }}
           />
@@ -268,14 +269,26 @@ class Interviews extends Component {
             ]}
             options={{
               title: "Interview Difficulty Statistics",
-              pieHole: 0.7,
+              pieHole: 0.5,
             }}
             rootProps={{ "data-testid": "3" }}
           />
         </Col>
         </Row>
         </Container>
-
+        <div className="input-group"
+                            style={{ width: "200px", float: "right" }}
+                        >
+                            <div className="input-group-prepend">
+                                <label  >Page Limit </label>
+                            </div>
+                            <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+        </div>
         <Row>
           <Container style={{ marginBottom: "30px" }}>
             {this.state.interviews.map((item) => {
@@ -288,7 +301,7 @@ class Interviews extends Component {
                     nextLabel={">>"}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
+                    pageCount={this.state.totalPages}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
                     onPageChange={this.handlePageClick}
@@ -296,19 +309,7 @@ class Interviews extends Component {
                     subContainerClassName={"pages pagination"}
                     activeClassName={"active"} />
 
-        <div className="input-group"
-                            style={{ width: "200px", justifyContent: "space-around" }}
-                        >
-                            <div className="input-group-prepend">
-                                <label  >Page Limit </label>
-                            </div>
-                            <select className="custom-select" value={this.state.limit} onChange={this.handleChange} id="limit">
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-        </div>
+        
       </div>
     );
   };

@@ -15,6 +15,7 @@ export default class ListOfCompanies extends Component {
             filteredCompanies: [],
             page: 1,
             limit: 10,
+            totalPages: 0,
             redirect: null
         }
         
@@ -57,6 +58,7 @@ export default class ListOfCompanies extends Component {
     }
 
     async getResults() {
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         await axios.get(BACKEND_URL + GET_ALL_COMPANIES_ADMIN, {
             params: {
                 page : this.state.page,
@@ -65,7 +67,7 @@ export default class ListOfCompanies extends Component {
         })
             .then(response => {
                 //console.log(response.data);
-                this.setState({ companies: response.data.companies, filteredCompanies: response.data.companies });
+                this.setState({ companies: response.data.companies, filteredCompanies: response.data.companies, totalPages: response.data.totalPages });
                 console.log(this.state.companies);
             })
             .catch((error) => {

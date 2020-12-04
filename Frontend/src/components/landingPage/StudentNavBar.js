@@ -1,17 +1,17 @@
 import React from 'react';
-import { Link,withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 // import '../../App.css'
 import './loggedInNav.css'
 import glassdoor_font from '../../images/glassdoor_font.PNG'
 var FontAwesome = require('react-fontawesome');
 
 class StudentNavBar extends React.Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
-            searchParameter : '',
-            selectedOption : "jobs",
-            searchLocation : ''
+            searchParameter: '',
+            selectedOption: "jobs",
+            searchLocation: ''
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleCategoryChange = this.handleCategoryChange.bind(this)
@@ -19,32 +19,32 @@ class StudentNavBar extends React.Component {
         this.handleLogout = this.handleLogout.bind(this)
     }
 
-    handleLogout(event){
+    handleLogout(event) {
         event.preventDefault();
         localStorage.clear();
         this.props.history.push('/')
     }
 
-    handleChange(event){
+    handleChange(event) {
         event.preventDefault()
         this.setState({
-            searchParameter : event.target.value
+            searchParameter: event.target.value
         })
-       
+
     }
 
-    handleCategoryChange(event){
+    handleCategoryChange(event) {
         event.preventDefault();
         this.setState({
-            selectedOption : event.target.value
+            selectedOption: event.target.value
         })
 
     }
 
-    submitSearch(event){
+    submitSearch(event) {
         console.log("Previos", this.state.previousSearchParameter)
         console.log("Category", this.state.selectedOption)
-        console.log("Parameter", this.state.searchParameter )
+        console.log("Parameter", this.state.searchParameter)
         event.preventDefault();
         if(this.state.searchParameter ===  undefined || this.state.searchParameter === null || this.state.searchParameter === ""){
             this.props.history.replace('/companyhomepage');
@@ -53,26 +53,27 @@ class StudentNavBar extends React.Component {
             this.props.history.replace({
                 pathname: '/jobstab',
                 state: {
-                    detail: this.state.searchParameter }
-                });
+                    detail: this.state.searchParameter
+                }
+            });
         }
-        else if(this.state.selectedOption === "companies"){
+        else if (this.state.selectedOption === "companies") {
             this.props.history.replace({
                 pathname: '/companiestab',
                 state: { detail: this.state.searchParameter }
-                });
+            });
         }
-        else if(this.state.selectedOption === "salaries"){
+        else if (this.state.selectedOption === "salaries") {
             this.props.history.replace({
                 pathname: '/salariestab',
                 state: { detail: this.state.searchParameter }
-                });
+            });
         }
-        else if(this.state.selectedOption === "interviews"){
+        else if (this.state.selectedOption === "interviews") {
             this.props.history.replace({
                 pathname: '/interviewstab',
                 state: { detail: this.state.searchParameter }
-                });
+            });
         }
         window.location.reload()
     }
@@ -89,20 +90,21 @@ class StudentNavBar extends React.Component {
                                 </td>
                                 <td style={{ width: "75%" }} >
                                     <form class="form-inline">
-                                        <input class="inputSearch" style={{ width: "30%", marginLeft: "10%" }}  name = "searchParameter" onChange= {this.handleChange} type="search" placeholder="Search" aria-label="Search" />
-                                        <select class="inputSearch" value = {this.state.selectedOption} style={{ width: "30%", marginLeft: "15px" }} onChange= {this.handleCategoryChange} id="cars">
-                                            <option name = "jobs" value="jobs">Jobs</option>
-                                            <option name = "companies" value="companies">Companies</option>
-                                            <option name = "salaries" value="salaries">Salaries</option>
-                                            <option name = "interviews" value="interviews">Interviews</option>
+
+                                        <input class="inputSearch" style={{ width: "30%", marginLeft: "15px" }} name="searchParameter" onChange={this.handleChange} type="search" placeholder="Search" aria-label="Search" />
+                                        <select class="inputSearch" value={this.state.selectedOption} style={{ width: "10%", marginLeft: "15px" }} onChange={this.handleCategoryChange} id="cars">
+                                            <option name="jobs" value="jobs">Jobs</option>
+                                            <option name="companies" value="companies">Companies</option>
+                                            <option name="salaries" value="salaries">Salaries</option>
+                                            <option name="interviews" value="interviews">Interviews</option>
                                         </select>
-                                        {/*<input class="inputSearch" style={{ width: "30%", marginLeft: "15px" }} name = "searchLocation" onChange= {this.handleChange} type="search" placeholder="location" aria-label="Search" />*/}
-                                        <button class="submitSearch" style={{ marginLeft: "15px" }}  onClick={this.submitSearch} type="submit">Search</button>
+                                        <input class="inputSearch" style={{ width: "30%", marginLeft: "15px" }} name="searchLocation" onChange={this.handleChange} type="search" placeholder="location" aria-label="Search" />
+                                        <button class="submitSearch" style={{ marginLeft: "15px" }} onClick={this.submitSearch} type="submit">Search</button>
                                     </form>
                                 </td>
-                                <td style={{ width: "20%", marginLeft: "0%" }} >
+                                <td  >
+                                    <button type="button" class="btn btn-success" onClick={this.handleLogout} title="Log Out">Logout</button>
 
-                                    <button className="fas fa-user-circle" id="logOut" onClick={this.handleLogout} style={{ color: "grey" }} title="Log Out"><p style={{fontSize: "15px"}}>Log Out</p></button>
                                 </td>
                             </tr>
                         </table>
@@ -115,13 +117,15 @@ class StudentNavBar extends React.Component {
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav navbar2">
                                 <li class="nav-item navWidth">
+
                                     <Link to= "/studenthomepage"
                                     class="nav-link navTab">
+
                                         <i class="fas fa-briefcase"> Jobs</i></Link>
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
                                 <li class="nav-item navWidth">
-                                    <Link to="/companyhomepage" 
+                                    <Link to="/companyhomepage"
                                         class="nav-link navTab">
                                         <i class="far fa-building"> Companies</i></Link>
                                     <a class="nav-link navTab" href="#"></a>
