@@ -64,7 +64,6 @@ class JobsTab extends Component {
                             </div>
                             <h6>Job Title: <Link to={{
                                 pathname: "/jobApplication",
-                                search: '?query=abc',
                                 state: job.jobId
                             }}
                                 style={{ "width": "250%" }}>{job.jobTitle}</Link></h6>
