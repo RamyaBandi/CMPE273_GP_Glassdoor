@@ -185,12 +185,12 @@ module.exports.getCompanyReviews = async (req, res) => {
             console.log(result)
             res.status(RES_SUCCESS).send(result);
         }
-        catch {
+        catch (err) {
             // if (err) {
             //     console.log(err);
             //     //res.setHeader(CONTENT_TYPE, APP_JSON);
             //     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
-           // }
+            // }
         }
     }
 
@@ -202,20 +202,23 @@ module.exports.getStudentReviews = (req, res) => {
     console.log("Inside Student Reviews GET service");
     console.log(req.query)
     let data = req.query
-    let reviews = Student.find({ _id: data.studentId }).select('companyReviews').populate('companyReviews').limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
+    let reviews = Student.find({ _id: data.studentId })
+        .select('companyReviews')
+        .populate('companyReviews')
+        .limit(data.limit * 1).skip((data.page - 1) * data.limit).exec((err, result) => {
 
-        if (err) {
-            console.log(err);
-            //res.setHeader(CONTENT_TYPE, APP_JSON);
-            res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
-        }
-        else {
-            // console.log(JSON.stringify(result));
-            //res.setHeader(CONTENT_TYPE, APP_JSON);
-            console.log("Reviews fetched Successfully")
-            res.status(RES_SUCCESS).send(result);
-        }
-    })
+            if (err) {
+                console.log(err);
+                //res.setHeader(CONTENT_TYPE, APP_JSON);
+                res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
+            }
+            else {
+                // console.log(JSON.stringify(result));
+                //res.setHeader(CONTENT_TYPE, APP_JSON);
+                console.log("Reviews fetched Successfully")
+                res.status(RES_SUCCESS).send(result);
+            }
+        })
 }
 
 module.exports.getMostPositiveReview = async (req, res) => {
@@ -238,7 +241,7 @@ module.exports.getMostPositiveReview = async (req, res) => {
             });
             res.status(RES_SUCCESS).send(result2);
         }
-        catch {
+        catch (err) {
             if (err) {
                 console.log(err);
                 //res.setHeader(CONTENT_TYPE, APP_JSON);
@@ -246,7 +249,7 @@ module.exports.getMostPositiveReview = async (req, res) => {
             }
         }
     }
-    catch {
+    catch (err) {
         if (err) {
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
@@ -275,7 +278,7 @@ module.exports.getMostNegativeReview = async (req, res) => {
             });
             res.status(RES_SUCCESS).send(result2);
         }
-        catch {
+        catch (err) {
             if (err) {
                 console.log(err);
                 //res.setHeader(CONTENT_TYPE, APP_JSON);
@@ -283,7 +286,7 @@ module.exports.getMostNegativeReview = async (req, res) => {
             }
         }
     }
-    catch {
+    catch (err) {
         if (err) {
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
@@ -347,7 +350,7 @@ module.exports.getReviewAverage = async (req, res) => {
         res.status(RES_SUCCESS).send(result);
         console.log(avgReviews[0].averageRecommendedRating.toFixed(2));
     }
-    catch {
+    catch (err) {
         if (err) {
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
@@ -445,13 +448,9 @@ module.exports.getApprovedCompanyReviews = async (req, res) => {
     try {
         //data.page = 1;
         //data.limit = 10;
-        // const reviews = await Reviews.find({
-        //     $or:
-        //         [{ companyId: new ObjectId(data.companyId), approvalstatus: 'Approved' },
-        //         { studentId: new ObjectId(data.studentId), approvalstatus: 'Under Review' }]
-        // }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
-        
+
         const allreviews = await Reviews.find({ companyId: data.companyId }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();   
+
         const count = await Reviews.countDocuments({ companyId: data.companyId });
         let reviews=[]
         for(let i of allreviews){
@@ -478,8 +477,9 @@ module.exports.getApprovedCompanyReviews = async (req, res) => {
             totalPages: Math.ceil(count / data.limit),
             currentPage: data.page
         });
-    
+
         console.log("Reviews fetched Successfully ")
+
         res.status(RES_SUCCESS).send(result);
     }
     catch {
@@ -488,7 +488,7 @@ module.exports.getApprovedCompanyReviews = async (req, res) => {
             //res.setHeader(CONTENT_TYPE, APP_JSON);
             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
         }
-    }  
+    }
 
 }
 

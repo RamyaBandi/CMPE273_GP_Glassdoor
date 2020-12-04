@@ -12,8 +12,8 @@ const {
 } = require("../config/routeConstants");
 const Student = require('../models/Student');
 const Resumes = require('../models/Resumes')
-const Reviews=require('../models/Reviews')
-const Photos=require('../models/Photos')
+const Reviews = require('../models/Reviews')
+const Photos = require('../models/Photos')
 const multer = require('multer');
 //const kafka = require('../kafka/client')
 const uploadToS3 = require('./uploadToS3');
@@ -99,10 +99,10 @@ module.exports.updateStudentDemographics = (req, res) => {
     console.log("req body" + JSON.stringify(req.body));
     let data = req.body
     let demographics_update = {
-        race:data.race,
-        gender:data.gender,
-        disability:data.disability,
-        veteranStatus:data.veteranStatus,
+        race: data.race,
+        gender: data.gender,
+        disability: data.disability,
+        veteranStatus: data.veteranStatus,
     }
     Student.findByIdAndUpdate(data.studentId, demographics_update, (err, result) => {
         if (err) {
@@ -170,7 +170,7 @@ module.exports.updateStudentResume = async (req, res) => {
                 return res.status(500);
             }
             console.log("S3 upload")
-            S3.fileupload(process.env.AWS_S3_BUCKET_NAME,"cmpe273images/studentresume", req.file).then((url) => {
+            S3.fileupload(process.env.AWS_S3_BUCKET_NAME, "cmpe273images/studentresume", req.file).then((url) => {
                 console.log(url)
                 console.log(req.body)
                 let resume_details = Resumes({
@@ -199,12 +199,12 @@ module.exports.updateStudentResume = async (req, res) => {
 
                     }
                 })
-               
-                    
 
-                
 
-               
+
+
+
+
             })
 
 
@@ -217,24 +217,24 @@ module.exports.updateStudentResume = async (req, res) => {
 
 }
 
-module.exports.getStudentResumes =async (req, res) => {
+module.exports.getStudentResumes = async (req, res) => {
 
     console.log("Inside Student Resumes GET service");
     console.log(req.query)
     try {
-    let data = req.query
-    let studentDetails = await Resumes.find({studentId: data.studentId}).exec();   
-    const count = await Resumes.countDocuments({studentId: data.studentId });
-    console.log(studentDetails)
-    res.status(RES_SUCCESS).send(studentDetails);
+        let data = req.query
+        let studentDetails = await Resumes.find({ studentId: data.studentId }).exec();
+        const count = await Resumes.countDocuments({ studentId: data.studentId });
+        console.log(studentDetails)
+        res.status(RES_SUCCESS).send(studentDetails);
     }
     catch {
-     console.log("in catch block")
-    }   
-    
+        console.log("in catch block")
+    }
+
 }
 
-module.exports.updatePrimaryResume =async (req, res) => {
+module.exports.updatePrimaryResume = async (req, res) => {
 
     console.log("Inside Student Primary Resume UPDATE service");
     console.log(req.body)
@@ -252,10 +252,10 @@ module.exports.updatePrimaryResume =async (req, res) => {
             res.status(200).end(JSON.stringify(result))
         }
     })
-    
+
 }
 
-module.exports.deleteStudentResume =async (req, res) => {
+module.exports.deleteStudentResume = async (req, res) => {
 
     console.log("Inside Student Resume DELETE service");
     console.log(req.query)
@@ -270,57 +270,59 @@ module.exports.deleteStudentResume =async (req, res) => {
         }
         else {
             console.log("Update student jobPreference : " + JSON.stringify(result))
-            Student.updateOne( {_id: data.studentId}, { $pullAll: {resumes: [data.resumeId] } },(error,result)=>{
-                if(error){
+            Student.updateOne({ _id: data.studentId }, { $pullAll: { resumes: [data.resumeId] } }, (error, result) => {
+                if (error) {
                     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(error));
                 }
-                else{
+                else {
                     res.status(200).end(JSON.stringify(result))
                 }
-            } )
-            
-            
+            })
+
+
         }
     })
-    
+
 }
 
-module.exports.getRatingsCount =async (req, res) => {
+module.exports.getRatingsCount = async (req, res) => {
 
     console.log("Inside Student Ratings and Reviews Count GET service");
     console.log(req.query)
     try {
-    let data = req.query
-    const studentreviews = await Reviews.find({studentId: data.studentId }).exec();
-    const count = await Reviews.countDocuments({studentId: data.studentId });
-    console.log("count" + count);
-    console.log(studentreviews)
-    //let value= toString(count)
+        let data = req.query
+        const studentreviews = await Reviews.find({ studentId: data.studentId })
+            .populate({ path: 'companyId', model: 'Company', select: 'companyName' })
+            .exec();
+        const count = await Reviews.countDocuments({ studentId: data.studentId });
+        console.log("count" + count);
+        console.log(studentreviews)
+        //let value= toString(count)
 
-    res.status(RES_SUCCESS).send(studentreviews);
+        res.status(RES_SUCCESS).send(studentreviews);
     }
     catch {
         console.log("in catch")
-    }   
-    
+    }
+
 }
 
-module.exports.getPhotosUploaded =async (req, res) => {
+module.exports.getPhotosUploaded = async (req, res) => {
 
     console.log("Inside Student Photos GET service");
     console.log(req.query)
     try {
-    let data = req.query
-    let PhotoDetails = await Photos.find({studentId: data.studentId}).exec();
-    const count = await Photos.countDocuments({studentId: data.studentId });
-    console.log(PhotoDetails)
+        let data = req.query
+        let PhotoDetails = await Photos.find({ studentId: data.studentId }).exec();
+        const count = await Photos.countDocuments({ studentId: data.studentId });
+        console.log(PhotoDetails)
 
-    res.status(RES_SUCCESS).send(PhotoDetails);
+        res.status(RES_SUCCESS).send(PhotoDetails);
     }
     catch {
-     console.log("in catch")
-    }   
-    
+        console.log("in catch")
+    }
+
 }
 
 
