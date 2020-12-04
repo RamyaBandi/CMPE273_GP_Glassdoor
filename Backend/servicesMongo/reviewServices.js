@@ -183,12 +183,12 @@ module.exports.getCompanyReviews = async (req, res) => {
             console.log("Reviews fetched Successfully from DB - page not 1 or redis off")
             res.status(RES_SUCCESS).send(result);
         }
-        catch {
+        catch (err) {
             // if (err) {
             //     console.log(err);
             //     //res.setHeader(CONTENT_TYPE, APP_JSON);
             //     res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
-           // }
+            // }
         }
     }
 
@@ -236,7 +236,7 @@ module.exports.getMostPositiveReview = async (req, res) => {
             });
             res.status(RES_SUCCESS).send(result2);
         }
-        catch {
+        catch (err) {
             if (err) {
                 console.log(err);
                 //res.setHeader(CONTENT_TYPE, APP_JSON);
@@ -244,7 +244,7 @@ module.exports.getMostPositiveReview = async (req, res) => {
             }
         }
     }
-    catch {
+    catch (err) {
         if (err) {
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
@@ -273,7 +273,7 @@ module.exports.getMostNegativeReview = async (req, res) => {
             });
             res.status(RES_SUCCESS).send(result2);
         }
-        catch {
+        catch (err) {
             if (err) {
                 console.log(err);
                 //res.setHeader(CONTENT_TYPE, APP_JSON);
@@ -281,7 +281,7 @@ module.exports.getMostNegativeReview = async (req, res) => {
             }
         }
     }
-    catch {
+    catch (err) {
         if (err) {
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
@@ -345,7 +345,7 @@ module.exports.getReviewAverage = async (req, res) => {
         res.status(RES_SUCCESS).send(result);
         console.log(avgReviews[0].averageRecommendedRating.toFixed(2));
     }
-    catch {
+    catch (err) {
         if (err) {
             console.log(err);
             //res.setHeader(CONTENT_TYPE, APP_JSON);
@@ -448,8 +448,8 @@ module.exports.getApprovedCompanyReviews = async (req, res) => {
                 [{ companyId: new ObjectId(data.companyId), approvalstatus: 'Approved' },
                 { studentId: new ObjectId(data.studentId), approvalstatus: 'Under Review' }]
         }).limit(data.limit * 1).skip((data.page - 1) * data.limit).exec();
-    
-    
+
+
         const count = await Reviews.countDocuments({ companyId: data.companyId });
         //console.log("count" + count);
         //console.log(reviews)
@@ -458,7 +458,7 @@ module.exports.getApprovedCompanyReviews = async (req, res) => {
             totalPages: Math.ceil(count / data.limit),
             currentPage: data.page
         });
-    
+
         console.log("Reviews fetched Successfully from DB - page not 1 or redis off")
         res.status(RES_SUCCESS).send(result);
     }
@@ -468,7 +468,7 @@ module.exports.getApprovedCompanyReviews = async (req, res) => {
             //res.setHeader(CONTENT_TYPE, APP_JSON);
             res.status(RES_INTERNAL_SERVER_ERROR).end(JSON.stringify(err));
         }
-    }  
+    }
 
 }
 
