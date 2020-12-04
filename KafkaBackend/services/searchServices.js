@@ -73,6 +73,9 @@ async function handle_request(msg, callback) {
                 }));
 
                 console.log("Outside jobs", datasets)
+                datasets = await datasets.filter(company => {
+                    return company
+                })
                 // res.status(RES_SUCCESS).end(JSON.stringify(datasets));
                 callback(null, datasets)
             }
@@ -147,6 +150,9 @@ async function handle_request(msg, callback) {
                     return products;
                 }
             }));
+            datasets = await datasets.filter(company => {
+                return company
+            })
 
             console.log("Outside salaries", datasets)
 

@@ -49,7 +49,6 @@ class StudentNavBar extends React.Component {
         if(this.state.selectedOption === "jobs"){
             this.props.history.replace({
                 pathname: '/jobstab',
-                search: '?query=abc',
                 state: {
                     detail: this.state.searchParameter }
                 });
@@ -57,21 +56,18 @@ class StudentNavBar extends React.Component {
         else if(this.state.selectedOption === "companies"){
             this.props.history.replace({
                 pathname: '/companiestab',
-                search: '?query=abc',
                 state: { detail: this.state.searchParameter }
                 });
         }
         else if(this.state.selectedOption === "salaries"){
             this.props.history.replace({
                 pathname: '/salariestab',
-                search: '?query=abc',
                 state: { detail: this.state.searchParameter }
                 });
         }
         else if(this.state.selectedOption === "interviews"){
             this.props.history.replace({
                 pathname: '/interviewstab',
-                search: '?query=abc',
                 state: { detail: this.state.searchParameter }
                 });
         }

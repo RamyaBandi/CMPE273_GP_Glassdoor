@@ -12,7 +12,7 @@ class CompaniesTab extends Component {
         super();
         this.state = {
             companyData: [],
-            isLoading : true,
+            isLoading: true,
             page: 1,
             limit: 10
         }
@@ -21,12 +21,12 @@ class CompaniesTab extends Component {
     }
     componentDidMount() {
         // if (this.props.location.state.detail) {
-            this.getCompanySearchResults()
+        this.getCompanySearchResults()
         // }
     }
     getCompanySearchResults() {
         this.setState({
-            companyData : []
+            companyData: []
         })
         axios.defaults.headers.common['authorization'] = localStorage.getItem('token')
         axios.get(BACKEND_URL + GET_SEARCH_COMPANY, {
@@ -65,41 +65,42 @@ class CompaniesTab extends Component {
         console.log("Company", company)
         return (
             <div class="student-tabs-body">
+                <h5 style = {{textAlign : "center"}}> Company Search Results</h5>
                 <React.Fragment>
-                {this.state.isLoading ? <h6 style={{textAlign: "center" ,color:"#0caa41"}}> Loading......</h6> :
-                    <div class="card tabs-card" style={{ width: "50%", left: "25%", right: "25%", height: "500px" }}>
-                        <img class="card-img-top" src={default_pic} alt="Card image cap" />
-                        <div class="card-body">
-                            <div style={{ width: "100%" }}>
-                                <div style={{ width: "30%", float: "left" }}>
-                                    <div style={{ display: "flex", justifyContent: "normal" }}>
-                                    <Link to= {{
-                                        pathname: "/overview",
-                                        search: '?query=abc',
-                                        state: { companyId: company._id }
-                                        }}
-                                    class="companyName">{company.companyName}</Link>
-                                        <p class="companyRating"> {company.averageRating} <i class="fas fa-star"></i></p>
+                    {this.state.isLoading ? <h6 style={{ textAlign: "center", color: "#0caa41" }}> Loading......</h6> :
+                        <div class="card tabs-card" style={{ width: "50%", left: "25%", right: "25%", height: "300px" }}>
+                            {/*<img class="card-img-top" src={default_pic} alt="Card image cap" />*/}
+                            <div class="card-body">
+                                <div style={{ width: "100%" }}>
+                                    <div style={{ width: "30%", float: "left" }}>
+                                        <div style={{ display: "flex", justifyContent: "normal" }}>
+                                            <Link to={{
+                                                pathname: "/overview",
+                                                search: '?query=abc',
+                                                state: { companyId: company._id }
+                                            }}
+                                                class="companyName">{company.companyName}</Link>
+                                            <p class="companyRating"> {company.averageRating} <i class="fas fa-star"></i></p>
+                                        </div>
+                                        <p class="companyLocation"> <b>Headquarters: </b> {company.headquarters}</p>
                                     </div>
-                                    <p class="companyLocation"> {company.headquarters}</p>
+                                    <div style={{ width: "40%", float: "right" }}>
+                                        <button class="companySite"><Link to="{company.website}">Visit Website</Link></button>
+                                    </div>
                                 </div>
-                                <div style={{ width: "40%", float: "right" }}>
-                                    <button class="companySite"><Link to="{company.website}">Visit Website</Link></button>
-                                </div>
-                            </div>
-                            <div class="companyInsights">
-                                <div class="insights">
-                                    <p class="insightHeading">Job & Company Insights</p>
-                                    <p class="card-text"><p class="companyReviewsHeading"> No. of reviews:</p><p class="companyReviewsContent"> {company.NumberOfReviews} </p></p>
-                                    <p class="card-text"><p class="companyReviewsHeading"> No. of Salary reviews:</p><p class="companyReviewsContent"> {company.salaryReviews}</p></p>
-                                    <p class="card-text"><p class="companyReviewsHeading"> No. of Interview reviews: </p><p class="companyReviewsContent"> {company.interviewReviews} </p></p>
+                                <div class="companyInsights">
+                                    <div class="insights">
+                                        <p class="insightHeading">Job & Company Insights</p>
+                                        <p class="card-text"><p class="companyReviewsHeading"> No. of reviews:</p><p class="companyReviewsContent"> {company.NumberOfReviews} </p></p>
+                                        <p class="card-text"><p class="companyReviewsHeading"> No. of Salary reviews:</p><p class="companyReviewsContent"> {company.salaryReviews}</p></p>
+                                        <p class="card-text"><p class="companyReviewsHeading"> No. of Interview reviews: </p><p class="companyReviewsContent"> {company.interviewReviews} </p></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                                    }
+                    }
                 </React.Fragment>
-                <ReactPaginate
+                {/*<ReactPaginate
                     previousLabel={"<<"}
                     nextLabel={">>"}
                     breakLabel={"..."}
@@ -110,7 +111,7 @@ class CompaniesTab extends Component {
                     onPageChange={this.handlePageClick}
                     containerClassName={"pagination"}
                     subContainerClassName={"pages pagination"}
-                    activeClassName={"active"} />
+                activeClassName={"active"} /> */}
             </div>
         )
 
