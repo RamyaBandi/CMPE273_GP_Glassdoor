@@ -124,7 +124,7 @@ module.exports.getSalaryAverages = (req, res) => {
                     avg: { "$avg": "$baseSalary" },
                     min: { "$min": "$baseSalary" } ,
                     max: { "$max": "$baseSalary" } }}
-    ])
+    ]).limit(data.limit * 1).skip((data.page - 1) * data.limit)
     .exec((err, salaries) => {
         if (err) {
             console.log("Error fetching Salaries")

@@ -13,7 +13,7 @@ const adminanalytics = require('./services/adminDashboardServices')
 const companyStatistics = require('./services/companyStatisticsServices')
 const jobs = require('./services/jobServices')
 const applications = require('./services/applicationServices')
-const photos = require('./services/photoServices')
+//const photos = require('./services/photoServices')
 //const adminCompanyProfile = require('./services/adminCompanyProfileServices')
 
 const images= require('./services/imageServices')

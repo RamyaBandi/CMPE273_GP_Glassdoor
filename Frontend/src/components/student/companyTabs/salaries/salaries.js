@@ -75,6 +75,8 @@ async getSalaryResults(){
   await axios.get(BACKEND_URL + GET_SALARY_AVERAGES, {
       params: {
         companyId: company_id,
+        page : this.state.page,
+        limit : this.state.limit
       }
   })
       .then(response => {
