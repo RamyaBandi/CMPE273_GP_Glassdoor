@@ -85,6 +85,7 @@ module.exports = {
     //Student Jobs Home Page
 
     GET_STUDENTS_JOBS_HOMEPAGE: "/jobshomepage/jobshomepage",
+    GET_COMPANY_HOMETAB : '/studenttab/companytab',
 
 
     //Student SignUp

@@ -46,7 +46,10 @@ class StudentNavBar extends React.Component {
         console.log("Category", this.state.selectedOption)
         console.log("Parameter", this.state.searchParameter )
         event.preventDefault();
-        if(this.state.selectedOption === "jobs"){
+        if(this.state.searchParameter ===  undefined || this.state.searchParameter === null || this.state.searchParameter === ""){
+            this.props.history.replace('/companyhomepage');
+        }
+        else if(this.state.selectedOption === "jobs"){
             this.props.history.replace({
                 pathname: '/jobstab',
                 state: {
@@ -118,7 +121,7 @@ class StudentNavBar extends React.Component {
                                     <a class="nav-link navTab" href="#"></a>
                                 </li>
                                 <li class="nav-item navWidth">
-                                    <Link to="/studenthomepage" 
+                                    <Link to="/companyhomepage" 
                                         class="nav-link navTab">
                                         <i class="far fa-building"> Companies</i></Link>
                                     <a class="nav-link navTab" href="#"></a>

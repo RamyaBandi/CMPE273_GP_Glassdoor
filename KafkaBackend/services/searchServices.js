@@ -61,7 +61,12 @@ async function handle_request(msg, callback) {
                     products.NumberOfReviews = companyResults[0].NumberOfReviews
                     products.salaryReviews = companyResults[0].salaryReviews
                     products.interviewReviews = companyResults[0].interviewReviews
-                    products.averageRating = Math.round(averageRating[0].averageRating * Math.pow(10, 2)) / Math.pow(10, 2);
+                    if(averageRating === undefined || averageRating.length == 0){
+                        products.averageRating = 0;
+                    }
+                    else{
+                        products.averageRating = Math.round(averageRating[0].averageRating*Math.pow(10, 2)) / Math.pow(10, 2);
+                    }
                     products.jobTitle = data.jobTitle;
                     products.streetAddress = data.streetAddress;
                     products.city = data.city;
@@ -101,8 +106,12 @@ async function handle_request(msg, callback) {
             let averageRating = await Reviews.aggregate([
                 { $group: { _id: companyResults[0]._id, averageRating: { $avg: "$overallRating" } } }]).limit(msg.body.limit * 1).skip((msg.body.page - 1) * msg.body.limit).exec();
             console.log("Average Rating", averageRating)
-
-            companyResults[0].averageRating = Math.round(averageRating[0].averageRating * Math.pow(10, 2)) / Math.pow(10, 2);
+            if(averageRating === undefined || averageRating.length == 0){
+                companyResults[0].averageRating = 0;
+            }
+            else{
+                companyResults[0].averageRating = Math.round(averageRating[0].averageRating*Math.pow(10, 2)) / Math.pow(10, 2);
+            }
 
             // res.status(RES_SUCCESS).end(JSON.stringify(companyResults[0]));
             callback(null, companyResults[0])
@@ -142,7 +151,12 @@ async function handle_request(msg, callback) {
                     products.NumberOfReviews = companyResults[0].NumberOfReviews
                     products.salaryReviews = companyResults[0].salaryReviews
                     products.interviewReviews = companyResults[0].interviewReviews
-                    products.averageRating = Math.round(averageRating[0].averageRating * Math.pow(10, 2)) / Math.pow(10, 2);
+                    if(averageRating === undefined || averageRating.length == 0){
+                        products.averageRating = 0;
+                    }
+                    else{
+                        products.averageRating = Math.round(averageRating[0].averageRating*Math.pow(10, 2)) / Math.pow(10, 2);
+                    }
                     products.jobTitle = last[0].jobTitle;
                     products.baseSalary = last[0].baseSalary;
 
@@ -195,7 +209,12 @@ async function handle_request(msg, callback) {
                     products.NumberOfReviews = companyResults[0].NumberOfReviews
                     products.salaryReviews = companyResults[0].salaryReviews
                     products.interviewReviews = companyResults[0].interviewReviews
-                    products.averageRating = Math.round(averageRating[0].averageRating * Math.pow(10, 2)) / Math.pow(10, 2);
+                    if(averageRating === undefined || averageRating.length == 0){
+                        products.averageRating = 0;
+                    }
+                    else{
+                        products.averageRating = Math.round(averageRating[0].averageRating*Math.pow(10, 2)) / Math.pow(10, 2);
+                    }
                     products.jobTitle = last[0].jobTitle;
                     products.description = last[0].description;
 

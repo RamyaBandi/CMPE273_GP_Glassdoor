@@ -15,7 +15,7 @@ const Company = require('../models/Company');
 const Reviews = require('../models/Reviews');
 
 
-module.exports.companyHomePage = async (req, res) => {
+function handle_request(msg, callback) {
     console.log("Page limit",req.query.limit )
     console.log("Page Number",req.query.page )
     let companyResults = await
@@ -67,7 +67,7 @@ module.exports.companyHomePage = async (req, res) => {
     })
     console.log("Outside salaries", datasets)
 
-
-    res.status(RES_SUCCESS).end(JSON.stringify(datasets));
+    callback(null, datasets)
+    // res.status(RES_SUCCESS).end(JSON.stringify(datasets));
 }
 
