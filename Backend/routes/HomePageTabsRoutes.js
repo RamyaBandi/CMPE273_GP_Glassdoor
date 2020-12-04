@@ -9,15 +9,16 @@ const { GET_COMPANY_HOMETAB, GET_SALARY_HOMETAB, GET_INTERVIEW_HOMETAB } = requi
 
 if (process.env.KAFKA_SWITCH === 'true') {
 
-    homeTabsRouter.route(GET_COMPANY_HOMETAB).get( homeTabsServices.companyHomePage);
-
+    
+    homeTabsRouter.route(GET_COMPANY_HOMETAB).get( homeTabKafkaServices .companyHomePage);
     // homeTabsRouter.route(GET_SALARY_HOMETAB).get( homeTabsServices.salaryHomePage );
 
     // homeTabsRouter.route(GET_INTERVIEW_HOMETAB).get( homeTabsServices.interviewHomePage);
 }
 else {
+    homeTabsRouter.route(GET_COMPANY_HOMETAB).get( homeTabsServices.companyHomePage);
     
-    homeTabsRouter.route(GET_COMPANY_HOMETAB).get( homeTabKafkaServices .companyHomePage);
+   
 
     // homeTabsRouter.route(GET_SALARY_HOMETAB).get( homeTabsServices.salaryHomePage );
 
