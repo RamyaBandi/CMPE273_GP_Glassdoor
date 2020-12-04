@@ -229,7 +229,7 @@ class Interviews extends Component {
             ]}
             options={{
               title: "Interview Experience Statistics",
-              pieHole: 0.7,
+              pieHole: 0.5,
             }}
             rootProps={{ "data-testid": "3" }}
           />
@@ -248,7 +248,7 @@ class Interviews extends Component {
             ]}
             options={{
               title: "Offer Status Statistics",
-              pieHole: 0.7,
+              pieHole: 0.5,
             }}
             rootProps={{ "data-testid": "3" }}
           />
@@ -268,7 +268,7 @@ class Interviews extends Component {
             ]}
             options={{
               title: "Interview Difficulty Statistics",
-              pieHole: 0.7,
+              pieHole: 0.5,
             }}
             rootProps={{ "data-testid": "3" }}
           />
